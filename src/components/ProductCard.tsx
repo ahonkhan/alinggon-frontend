@@ -1,0 +1,87 @@
+"use client";
+
+import { ShoppingCart, Zap } from "lucide-react";
+import Link from "next/link";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/context/ToastContext";
+
+interface ProductCardProps {
+    id: string;
+    name: string;
+    price: number;
+    originalPrice?: number;
+    discount?: string;
+    image: string;
+    category: string;
+}
+
+export default function ProductCard(props: ProductCardProps) {
+    const { id, name, price, originalPrice, discount, image } = props;
+    const { addToCart } = useCart();
+    const { showToast } = useToast();
+    const productHref = `/product/${id}`;
+
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // @ts-ignore
+        addToCart(props);
+        showToast("Added to bag", "success");
+    };
+
+    const handleOrderNow = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // @ts-ignore
+        addToCart(props);
+        showToast("Ready for checkout", "success");
+    };
+
+    return (
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full relative overflow-hidden">
+            <Link href={productHref} className="relative w-full aspect-[4/5] overflow-hidden bg-gray-50 block">
+                {discount && (
+                    <span className="absolute top-2 left-2 bg-red-400 text-white text-[10px] font-bold px-2 py-1 rounded-sm shadow-sm z-10">
+                        {discount}
+                    </span>
+                )}
+                <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-500">
+                    <img
+                        src={image}
+                        alt={name}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            </Link>
+            <div className="p-3 flex flex-col flex-1">
+                <h3 className="text-sm font-normal text-gray-800 line-clamp-2 mb-2 leading-snug group-hover:text-red-400 transition-colors">
+                    <Link href={productHref}>{name}</Link>
+                </h3>
+                <div className="mt-auto">
+                    <div className="flex items-baseline gap-2 mb-3">
+                        <span className="text-red-400 font-semibold">৳ {price.toLocaleString()}</span>
+                        {originalPrice && (
+                            <span className="text-gray-400 text-xs line-through decoration-gray-400">
+                                ৳ {originalPrice.toLocaleString()}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleOrderNow}
+                            className="flex-1 bg-red-400 hover:bg-red-500 text-white text-[10px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
+                        >
+                            <Zap className="w-3 h-3" /> Order Now
+                        </button>
+                        <button
+                            onClick={handleAddToCart}
+                            className="w-9 h-9 flex items-center justify-center border border-red-200 text-red-400 rounded hover:bg-red-50 transition-all active:scale-95"
+                        >
+                            <ShoppingCart className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
