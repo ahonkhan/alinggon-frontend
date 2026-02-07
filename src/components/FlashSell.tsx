@@ -29,7 +29,7 @@ export default function FlashSell() {
     const flashProducts = products.slice(0, 4);
 
     return (
-        <section className="max-w-7xl mx-auto px-4 py-8">
+        <section className="max-w-[1440px] mx-auto px-4 py-8">
             <div className="bg-white border-2 border-red-500 rounded-2xl p-6 shadow-sm overflow-hidden relative">
                 <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 opacity-5">
                     <Zap className="w-64 h-64 text-red-500" />

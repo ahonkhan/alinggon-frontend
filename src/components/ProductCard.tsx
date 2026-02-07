@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Zap } from "lucide-react";
+import { ShoppingCart, Zap, Heart, ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
@@ -39,7 +39,8 @@ export default function ProductCard(props: ProductCardProps) {
 
     return (
         <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group flex flex-col h-full relative overflow-hidden">
-            <Link href={productHref} className="relative w-full aspect-[4/5] overflow-hidden bg-gray-50 block">
+            {/* Aspect Ratio 4/3 for shorter images */}
+            <Link href={productHref} className="relative w-full aspect-[4/3] overflow-hidden bg-gray-50 block">
                 {discount && (
                     <span className="absolute top-2 left-2 bg-red-400 text-white text-[10px] font-bold px-2 py-1 rounded-sm shadow-sm z-10">
                         {discount}
@@ -52,9 +53,34 @@ export default function ProductCard(props: ProductCardProps) {
                         className="w-full h-full object-cover"
                     />
                 </div>
+
+                {/* Hover Actions Overlay */}
+                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[1px]">
+                    <button
+                        onClick={handleAddToCart}
+                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        title="Add to Cart"
+                    >
+                        <ShoppingCart className="w-4 h-4" />
+                    </button>
+                    <button
+                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        title="Add to Wishlist"
+                        onClick={(e) => { e.preventDefault(); showToast("Added to wishlist", "success"); }}
+                    >
+                        <Heart className="w-4 h-4" />
+                    </button>
+                    <button
+                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        title="Compare"
+                        onClick={(e) => { e.preventDefault(); showToast("Added to compare", "success"); }}
+                    >
+                        <ArrowLeftRight className="w-4 h-4" />
+                    </button>
+                </div>
             </Link>
             <div className="p-3 flex flex-col flex-1">
-                <h3 className="text-sm font-normal text-gray-800 line-clamp-2 mb-2 leading-snug group-hover:text-red-400 transition-colors">
+                <h3 className="text-sm font-normal text-gray-800 line-clamp-2 mb-2 leading-snug group-hover:text-red-400 transition-colors h-10 overflow-hidden">
                     <Link href={productHref}>{name}</Link>
                 </h3>
                 <div className="mt-auto">

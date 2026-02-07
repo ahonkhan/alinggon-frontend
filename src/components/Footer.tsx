@@ -16,7 +16,7 @@ export default function Footer() {
         <footer className="bg-slate-950 text-gray-400 font-not-not-sans-serif">
             {/* Top Value Prop */}
             <div className="border-b border-white/5 bg-slate-900/50">
-                <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <div className="max-w-[1440px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
                     <ValueProp icon={ShieldCheck} title="Authentic Objects" desc="101% verified premium products." />
                     <ValueProp icon={Truck} title="Swift Logistics" desc="Express delivery to your destination." />
                     <ValueProp icon={RefreshCcw} title="Seamless Exchange" desc="30-day hassle-free return window." />
@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
 
             {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-4 py-20">
+            <div className="max-w-[1440px] mx-auto px-4 py-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-8">
                     {/* About & Branding */}
                     <div className="lg:col-span-4 space-y-10">
@@ -96,7 +96,7 @@ export default function Footer() {
 
             {/* Copyright Utility Bar */}
             <div className="border-t border-white/5 bg-slate-950">
-                <div className="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="max-w-[1440px] mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-8">
                     <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/20">
                         © 2026 Alinggon Complex • Engineered by <span className="text-red-400/50">Rangpur IT</span>
                     </p>

@@ -8,6 +8,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { ToastProvider } from "@/context/ToastContext";
 import CartDrawer from "@/components/CartDrawer";
+import FloatingActionButtons from "@/components/FloatingActionButtons";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
               </main>
               <Footer />
               <CartDrawer />
+              <FloatingActionButtons />
             </CartProvider>
           </AuthProvider>
         </ToastProvider>
