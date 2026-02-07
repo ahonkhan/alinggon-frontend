@@ -47,7 +47,7 @@ export default function Header() {
         <div className="w-full">
             {/* Top Bar */}
             <div className="bg-slate-900 text-white text-[10px] font-black py-2 hidden md:block uppercase tracking-widest border-b border-white/5">
-                <div className="max-w-[1440px] mx-auto px-4 flex justify-between items-center">
+                <div className="max-w-[1600px] mx-auto px-4 flex justify-between items-center">
                     <div className="flex items-center space-x-6">
                         <span className="opacity-40">Welcome to Alinggon Prime</span>
                         <span className="flex items-center gap-2 hover:text-red-400 cursor-pointer transition-colors">
@@ -69,8 +69,8 @@ export default function Header() {
             </div>
 
             {/* Main Header */}
-            <header className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-                <div className="max-w-[1440px] mx-auto px-4 py-4 md:py-6 flex items-center justify-between gap-8">
+            <header className="bg-white border-b border-gray-100 z-50">
+                <div className="max-w-[1600px] mx-auto px-4 py-4 md:py-6 flex items-center justify-between gap-8">
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => setIsMobileMenuOpen(true)}

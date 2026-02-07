@@ -14,7 +14,7 @@ export default function Navbar() {
 
     return (
         <nav className="bg-red-400 text-white shadow-sm hidden lg:block border-t border-white/10 uppercase tracking-[0.15em]">
-            <div className="max-w-[1440px] mx-auto px-4">
+            <div className="max-w-[1600px] mx-auto px-4">
                 <ul className="flex items-center justify-center space-x-6 text-[10px] font-black py-3">
                     {navItems.map((item) => (
                         <li key={item.label} className="flex items-center gap-1 cursor-pointer text-white hover:text-red-50 transition-colors">

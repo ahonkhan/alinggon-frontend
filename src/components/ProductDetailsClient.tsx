@@ -38,13 +38,39 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 {/* Left: Gallery */}
                 <div className="lg:col-span-5 space-y-4">
-                    <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm relative group overflow-hidden">
+                    <div
+                        className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm relative group overflow-hidden cursor-crosshair"
+                        onMouseMove={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const x = ((e.clientX - rect.left) / rect.width) * 100;
+                            const y = ((e.clientY - rect.top) / rect.height) * 100;
+                            const magnifier = e.currentTarget.querySelector('.magnifier-overlay') as HTMLElement;
+                            if (magnifier) {
+                                magnifier.style.display = 'block';
+                                magnifier.style.backgroundPosition = `${x}% ${y}%`;
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            const magnifier = e.currentTarget.querySelector('.magnifier-overlay') as HTMLElement;
+                            if (magnifier) magnifier.style.display = 'none';
+                        }}
+                    >
                         {product.discount && (
                             <span className="absolute top-4 left-4 bg-red-400 text-white text-xs font-bold px-2 py-1 rounded z-10 shadow-sm">
                                 {product.discount}
                             </span>
                         )}
                         <img src={selectedImage} className="w-full h-auto object-cover rounded-lg group-hover:scale-105 transition-transform duration-700" alt={product.name} />
+
+                        {/* Magnifier Overlay */}
+                        <div
+                            className="magnifier-overlay absolute inset-0 z-20 pointer-events-none border-2 border-red-400/20 rounded-lg shadow-2xl transition-opacity hidden"
+                            style={{
+                                backgroundImage: `url(${selectedImage})`,
+                                backgroundSize: '250%',
+                                backgroundRepeat: 'no-repeat'
+                            }}
+                        ></div>
                     </div>
                     <div className="grid grid-cols-4 gap-4">
                         {product.gallery.map((img, i) => (

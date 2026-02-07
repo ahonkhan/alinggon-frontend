@@ -8,6 +8,7 @@ import VideoSection from "@/components/VideoSection";
 import AdsSection from "@/components/AdsSection";
 import ProductCard from "@/components/ProductCard";
 import FlashSell from "@/components/FlashSell";
+import TopBrands from "@/components/TopBrands";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -28,15 +29,15 @@ export default function Home() {
   return (
     <div className="pb-12 bg-gray-50/50">
       {/* Hero Section */}
-      <div className="max-w-[1440px] mx-auto px-4 py-8">
+      <div className="max-w-[1600px] mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Sidebar Categories - 3 Columns */}
-          <div className="hidden lg:block lg:col-span-3 h-[500px]">
+          {/* Sidebar Categories - 2 Columns */}
+          <div className="hidden lg:block lg:col-span-2 h-[500px]">
             <CategorySidebar />
           </div>
 
-          {/* Main Slider - 6 Columns */}
-          <div className="col-span-1 lg:col-span-6 h-[500px]">
+          {/* Main Slider - 8 Columns */}
+          <div className="col-span-1 lg:col-span-8 h-[500px]">
             <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-slate-900 shadow-2xl group">
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
               <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
@@ -49,8 +50,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Video Section - 3 Columns */}
-          <div className="col-span-1 lg:col-span-3 h-[500px]">
+          {/* Video Section - 2 Columns */}
+          <div className="col-span-1 lg:col-span-2 h-[500px]">
             <VideoSection />
           </div>
         </div>
@@ -60,7 +61,7 @@ export default function Home() {
       <AdsSection />
 
       {/* Explore Collections Slider */}
-      <section className="max-w-[1440px] mx-auto px-4 py-8">
+      <section className="max-w-[1600px] mx-auto px-4 py-8">
         <div className="flex flex-col items-center mb-10 text-center space-y-4">
           <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Curated Picks</span>
           <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">
@@ -107,27 +108,28 @@ export default function Home() {
       <ProductSlider title="Hot Deals" products={products} />
 
       {/* Trust Signal Banner */}
-      <section className="max-w-[1440px] mx-auto px-4 pb-20 pt-10">
-        <div className="bg-slate-900 rounded-[3rem] p-12 md:p-20 relative overflow-hidden group">
+      <section className="max-w-[1600px] mx-auto px-4 pb-12 pt-6">
+        <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-96 h-96 bg-red-400/10 rounded-full blur-3xl -mr-48 -mt-48 transition-transform group-hover:scale-110 duration-1000"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="max-w-xl space-y-6 text-center md:text-left">
-              <h3 className="text-3xl md:text-5xl font-black text-white leading-none uppercase tracking-tighter">Your Trust is Our<br /><span className="text-red-400">Core Engine.</span></h3>
-              <p className="text-white/50 text-xs md:text-sm font-medium uppercase tracking-[0.1em] leading-relaxed">Experience a seamless flow from choosing your object to safe delivery at your authenticated destination.</p>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-xl space-y-4 text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl font-black text-white leading-tight uppercase tracking-tighter">Your Trust is Our<br /><span className="text-red-400">Core Engine.</span></h3>
+              <p className="text-white/50 text-[10px] md:text-xs font-medium uppercase tracking-[0.1em] leading-relaxed">Experience a seamless flow from choosing your object to safe delivery at your authenticated destination.</p>
             </div>
             <div className="flex gap-4">
-              <div className="p-8 bg-white/5 border border-white/10 rounded-[2rem] text-center space-y-2 backdrop-blur-md">
-                <p className="text-3xl font-black text-white tracking-tighter">100%</p>
+              <div className="p-6 bg-white/5 border border-white/10 rounded-[1.5rem] text-center space-y-2 backdrop-blur-md min-w-[120px]">
+                <p className="text-2xl font-black text-white tracking-tighter">100%</p>
                 <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">Authentic</p>
               </div>
-              <div className="p-8 bg-white/5 border border-white/10 rounded-[2rem] text-center space-y-2 backdrop-blur-md">
-                <p className="text-3xl font-black text-white tracking-tighter">24/7</p>
+              <div className="p-6 bg-white/5 border border-white/10 rounded-[1.5rem] text-center space-y-2 backdrop-blur-md min-w-[120px]">
+                <p className="text-2xl font-black text-white tracking-tighter">24/7</p>
                 <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">Support</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <TopBrands />
     </div>
   );
 }

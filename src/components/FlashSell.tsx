@@ -25,11 +25,11 @@ export default function FlashSell() {
         return () => clearInterval(timer);
     }, []);
 
-    // Filter products for flash sale (using first 4 for now)
-    const flashProducts = products.slice(0, 4);
+    // Filter products for flash sale (using first 5 for now)
+    const flashProducts = products.slice(0, 5);
 
     return (
-        <section className="max-w-[1440px] mx-auto px-4 py-8">
+        <section className="max-w-[1600px] mx-auto px-4 py-8">
             <div className="bg-white border-2 border-red-500 rounded-2xl p-6 shadow-sm overflow-hidden relative">
                 <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 opacity-5">
                     <Zap className="w-64 h-64 text-red-500" />
@@ -58,7 +58,7 @@ export default function FlashSell() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
+                <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 relative z-10">
                     {flashProducts.map((product) => (
                         <ProductCard key={product.id} {...product} />
                     ))}

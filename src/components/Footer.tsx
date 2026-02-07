@@ -14,20 +14,13 @@ export default function Footer() {
 
     return (
         <footer className="bg-slate-950 text-gray-400 font-not-not-sans-serif">
-            {/* Top Value Prop */}
-            <div className="border-b border-white/5 bg-slate-900/50">
-                <div className="max-w-[1440px] mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
-                    <ValueProp icon={ShieldCheck} title="Authentic Objects" desc="101% verified premium products." />
-                    <ValueProp icon={Truck} title="Swift Logistics" desc="Express delivery to your destination." />
-                    <ValueProp icon={RefreshCcw} title="Seamless Exchange" desc="30-day hassle-free return window." />
-                </div>
-            </div>
+
 
             {/* Main Footer Content */}
-            <div className="max-w-[1440px] mx-auto px-4 py-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-8">
+            <div className="max-w-[1600px] mx-auto px-4 py-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
                     {/* About & Branding */}
-                    <div className="lg:col-span-4 space-y-10">
+                    <div className="lg:col-span-4 space-y-6">
                         <div className="flex items-center gap-3">
                             <div className="bg-red-400 text-white p-2 rounded-xl shadow-lg shadow-red-500/10">
                                 <ShoppingBag className="w-6 h-6" />
@@ -46,7 +39,7 @@ export default function Footer() {
                     </div>
 
                     {/* Navigation Columns */}
-                    <div className="lg:col-span-2 space-y-8">
+                    <div className="lg:col-span-2 space-y-4">
                         <h4 className="text-white text-[10px] font-black uppercase tracking-[0.3em] border-l-2 border-red-400 pl-4">Platform</h4>
                         <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest leading-none">
                             <li><NavLink href="/shop">Master Catalog</NavLink></li>
@@ -57,7 +50,7 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    <div className="lg:col-span-2 space-y-8">
+                    <div className="lg:col-span-2 space-y-4">
                         <h4 className="text-white text-[10px] font-black uppercase tracking-[0.3em] border-l-2 border-slate-700 pl-4">Directives</h4>
                         <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest leading-none">
                             <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
@@ -69,8 +62,8 @@ export default function Footer() {
                     </div>
 
                     {/* Newsletter & Contact */}
-                    <div className="lg:col-span-4 space-y-10">
-                        <div className="bg-white/5 rounded-[2.5rem] p-8 border border-white/5 space-y-6">
+                    <div className="lg:col-span-4 space-y-6">
+                        <div className="bg-white/5 rounded-[2rem] p-6 border border-white/5 space-y-4">
                             <h4 className="text-white text-xs font-black uppercase tracking-widest">Global Newsletter</h4>
                             <p className="text-[10px] uppercase font-bold text-white/20 tracking-widest">Get prioritized for limited stock drops.</p>
                             <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -96,7 +89,7 @@ export default function Footer() {
 
             {/* Copyright Utility Bar */}
             <div className="border-t border-white/5 bg-slate-950">
-                <div className="max-w-[1440px] mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="max-w-[1600px] mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
                     <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/20">
                         © 2026 Alinggon Complex • Engineered by <span className="text-red-400/50">Rangpur IT</span>
                     </p>

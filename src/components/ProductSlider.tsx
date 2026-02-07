@@ -20,7 +20,7 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
     const nextRef = useRef(null);
 
     return (
-        <section className="max-w-[1440px] mx-auto px-4 py-8">
+        <section className="max-w-[1600px] mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-3">
                     <div className="w-1 h-6 bg-red-400 rounded-full"></div>
@@ -57,7 +57,7 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
                 slidesPerView={2}
                 breakpoints={{
                     640: { slidesPerView: 3 },
-                    1024: { slidesPerView: 5 },
+                    1024: { slidesPerView: 6 },
                 }}
                 autoplay={{
                     delay: 5000,

@@ -28,8 +28,10 @@ export default function RootLayout({
         <ToastProvider>
           <AuthProvider>
             <CartProvider>
-              <Header />
-              <Navbar />
+              <div className="sticky top-0 z-[100] w-full shadow-sm">
+                <Header />
+                <Navbar />
+              </div>
               <main className="flex-grow">
                 {children}
               </main>
