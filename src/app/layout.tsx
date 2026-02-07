@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
@@ -28,6 +29,7 @@ export default function RootLayout({
         <ToastProvider>
           <AuthProvider>
             <CartProvider>
+              <TopBar />
               <div className="sticky top-0 z-[100] w-full shadow-sm">
                 <Header />
                 <Navbar />

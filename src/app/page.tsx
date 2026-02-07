@@ -9,6 +9,7 @@ import AdsSection from "@/components/AdsSection";
 import ProductCard from "@/components/ProductCard";
 import FlashSell from "@/components/FlashSell";
 import TopBrands from "@/components/TopBrands";
+import PromoModal from "@/components/PromoModal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -130,6 +131,7 @@ export default function Home() {
         </div>
       </section>
       <TopBrands />
+      <PromoModal />
     </div>
   );
 }
