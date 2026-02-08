@@ -7,6 +7,7 @@ import ProductSlider from "@/components/ProductSlider";
 import VideoSection from "@/components/VideoSection";
 import AdsSection from "@/components/AdsSection";
 import ProductCard from "@/components/ProductCard";
+import CustomerRatings from "@/components/CustomerRatings";
 import FlashSell from "@/components/FlashSell";
 import TopBrands from "@/components/TopBrands";
 import PromoModal from "@/components/PromoModal";
@@ -33,13 +34,13 @@ export default function Home() {
       <div className="max-w-[1600px] mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Sidebar Categories - 2 Columns */}
-          <div className="hidden lg:block lg:col-span-2 h-[500px]">
+          <div className="hidden lg:block lg:col-span-2 h-[380px]">
             <CategorySidebar />
           </div>
 
           {/* Main Slider - 8 Columns */}
-          <div className="col-span-1 lg:col-span-8 h-[500px]">
-            <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-slate-900 shadow-2xl group">
+          <div className="col-span-1 lg:col-span-8 h-[380px]">
+            <div className="relative w-full h-full rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
               <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
                 <span className="bg-red-400 text-white text-[10px] font-black px-4 py-1.5 rounded-full w-fit mb-6 shadow-xl shadow-red-400/20 uppercase tracking-[0.2em] border border-red-300">New Collection '26</span>
@@ -52,14 +53,16 @@ export default function Home() {
           </div>
 
           {/* Video Section - 2 Columns */}
-          <div className="col-span-1 lg:col-span-2 h-[500px]">
+          <div className="col-span-1 lg:col-span-2 h-auto lg:h-[380px]">
             <VideoSection />
           </div>
         </div>
       </div>
 
       {/* Ads Section */}
-      <AdsSection />
+      <div className="border-t border-gray-100">
+        <AdsSection />
+      </div>
 
       {/* Explore Collections Slider */}
       <section className="max-w-[1600px] mx-auto px-4 py-8">
@@ -72,11 +75,12 @@ export default function Home() {
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={20}
-          slidesPerView={2}
+          slidesPerView={3}
           breakpoints={{
             640: { slidesPerView: 3 },
             768: { slidesPerView: 4 },
             1024: { slidesPerView: 6 },
+            1280: { slidesPerView: 8 },
           }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           className="!pb-12"
@@ -109,27 +113,28 @@ export default function Home() {
       <ProductSlider title="Hot Deals" products={products} />
 
       {/* Trust Signal Banner */}
-      <section className="max-w-[1600px] mx-auto px-4 pb-12 pt-6">
-        <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-red-400/10 rounded-full blur-3xl -mr-48 -mt-48 transition-transform group-hover:scale-110 duration-1000"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="max-w-xl space-y-4 text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-black text-white leading-tight uppercase tracking-tighter">Your Trust is Our<br /><span className="text-red-400">Core Engine.</span></h3>
-              <p className="text-white/50 text-[10px] md:text-xs font-medium uppercase tracking-[0.1em] leading-relaxed">Experience a seamless flow from choosing your object to safe delivery at your authenticated destination.</p>
+      <section className="max-w-[1600px] mx-auto px-4 pb-8 pt-4">
+        <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 relative overflow-hidden group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-red-400/10 rounded-full blur-3xl -mr-32 -mt-32 transition-transform group-hover:scale-110 duration-1000"></div>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-xl space-y-2 text-center md:text-left">
+              <h3 className="text-xl md:text-2xl font-black text-white leading-tight uppercase tracking-tighter">Your Trust, <span className="text-red-400">Our Core.</span></h3>
+              <p className="text-white/50 text-[10px] md:text-[11px] font-medium uppercase tracking-[0.1em]">Seamless flow from choice to destination.</p>
             </div>
-            <div className="flex gap-4">
-              <div className="p-6 bg-white/5 border border-white/10 rounded-[1.5rem] text-center space-y-2 backdrop-blur-md min-w-[120px]">
-                <p className="text-2xl font-black text-white tracking-tighter">100%</p>
-                <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">Authentic</p>
+            <div className="flex gap-3">
+              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl text-center space-y-1 backdrop-blur-md min-w-[100px]">
+                <p className="text-xl font-black text-white tracking-tighter">100%</p>
+                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest">Authentic</p>
               </div>
-              <div className="p-6 bg-white/5 border border-white/10 rounded-[1.5rem] text-center space-y-2 backdrop-blur-md min-w-[120px]">
-                <p className="text-2xl font-black text-white tracking-tighter">24/7</p>
-                <p className="text-[10px] font-black text-red-400 uppercase tracking-widest">Support</p>
+              <div className="p-4 bg-white/5 border border-white/10 rounded-2xl text-center space-y-1 backdrop-blur-md min-w-[100px]">
+                <p className="text-xl font-black text-white tracking-tighter">24/7</p>
+                <p className="text-[9px] font-black text-red-400 uppercase tracking-widest">Support</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <CustomerRatings />
       <TopBrands />
       <PromoModal />
     </div>

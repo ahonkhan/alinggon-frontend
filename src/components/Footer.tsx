@@ -31,10 +31,10 @@ export default function Footer() {
                             Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.
                         </p>
                         <div className="flex items-center gap-4">
-                            <SocialIcon icon={Facebook} />
-                            <SocialIcon icon={Twitter} />
-                            <SocialIcon icon={Instagram} />
-                            <SocialIcon icon={Youtube} />
+                            <SocialIcon icon={Facebook} url="https://www.facebook.com/profile.php?id=100019453901281" />
+                            <SocialIcon icon={Twitter} url="#" />
+                            <SocialIcon icon={Instagram} url="#" />
+                            <SocialIcon icon={Youtube} url="https://www.youtube.com/channel/UCeOgawwdUJmIAXBh4T-LWtw" />
                         </div>
                     </div>
 
@@ -43,6 +43,7 @@ export default function Footer() {
                         <h4 className="text-white text-[10px] font-black uppercase tracking-[0.3em] border-l-2 border-red-400 pl-4">Platform</h4>
                         <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest leading-none">
                             <li><NavLink href="/shop">Master Catalog</NavLink></li>
+                            <li><NavLink href="/about">About Admin</NavLink></li>
                             <li><NavLink href="/orders">Order Vault</NavLink></li>
                             <li><NavLink href="/track-order">Live Tracking</NavLink></li>
                             <li><NavLink href="/profile">Identity Profile</NavLink></li>
@@ -80,8 +81,8 @@ export default function Footer() {
                         </div>
 
                         <div className="flex flex-col gap-6 pl-2">
-                            <ContactItem icon={MapPin} label="Operating Base" value="Uttara, Sector 07, Dhaka" />
-                            <ContactItem icon={Phone} label="Priority Line" value="+880 1568 324268" />
+                            <ContactItem icon={MapPin} label="Operating Base" value="Mirpur 02, Dhaka" />
+                            <ContactItem icon={Phone} label="Priority Line" value="+97336781645" />
                         </div>
                     </div>
                 </div>
@@ -91,7 +92,7 @@ export default function Footer() {
             <div className="border-t border-white/5 bg-slate-950">
                 <div className="max-w-[1600px] mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
                     <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/20">
-                        © 2026 Alinggon Complex • Engineered by <span className="text-red-400/50">Rangpur IT</span>
+                        © 2026 Alinggon Shop • Engineered by <span className="text-red-400/50">Rangpur IT</span>
                     </p>
                     <div className="flex items-center gap-6">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uU-E1bF5B8-L9R_Lq8_Y8yG7y-N0G-W-Yg&s" className="h-6 filter grayscale invert opacity-20 hover:opacity-100 transition-opacity cursor-pointer" alt="SSL Commerz" />
@@ -128,9 +129,9 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
     );
 }
 
-function SocialIcon({ icon: Icon }: any) {
+function SocialIcon({ icon: Icon, url }: { icon: any, url: string }) {
     return (
-        <a href="#" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/5 text-white/40 hover:bg-red-400 hover:text-white transition-all transform hover:-translate-y-1">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/5 text-white/40 hover:bg-red-400 hover:text-white transition-all transform hover:-translate-y-1">
             <Icon className="w-4 h-4" />
         </a>
     );

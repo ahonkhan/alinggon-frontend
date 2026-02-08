@@ -2,6 +2,7 @@
 
 import { ShoppingCart, Zap, Heart, ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 
@@ -19,6 +20,7 @@ export default function ProductCard(props: ProductCardProps) {
     const { id, name, price, originalPrice, discount, image } = props;
     const { addToCart } = useCart();
     const { showToast } = useToast();
+    const router = useRouter();
     const productHref = `/product/${id}`;
 
     const handleAddToCart = (e: React.MouseEvent) => {
@@ -33,8 +35,8 @@ export default function ProductCard(props: ProductCardProps) {
         e.preventDefault();
         e.stopPropagation();
         // @ts-ignore
-        addToCart(props);
-        showToast("Ready for checkout", "success");
+        addToCart(props, 1, false);
+        router.push("/checkout");
     };
 
     return (
@@ -54,28 +56,28 @@ export default function ProductCard(props: ProductCardProps) {
                     />
                 </div>
 
-                {/* Hover Actions Overlay */}
-                <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 backdrop-blur-[1px]">
+                {/* Hover Actions - Vertical on the right */}
+                <div className="absolute top-2 right-2 flex flex-col gap-2 z-20 opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300">
                     <button
                         onClick={handleAddToCart}
-                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        className="w-8 h-8 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all shadow-lg border border-gray-100"
                         title="Add to Cart"
                     >
-                        <ShoppingCart className="w-4 h-4" />
+                        <ShoppingCart className="w-3.5 h-3.5" />
                     </button>
                     <button
-                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        className="w-8 h-8 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all shadow-lg border border-gray-100"
                         title="Add to Wishlist"
                         onClick={(e) => { e.preventDefault(); showToast("Added to wishlist", "success"); }}
                     >
-                        <Heart className="w-4 h-4" />
+                        <Heart className="w-3.5 h-3.5" />
                     </button>
                     <button
-                        className="w-9 h-9 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all transform hover:scale-110 shadow-lg border border-gray-100"
+                        className="w-8 h-8 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-400 hover:text-white transition-all shadow-lg border border-gray-100"
                         title="Compare"
                         onClick={(e) => { e.preventDefault(); showToast("Added to compare", "success"); }}
                     >
-                        <ArrowLeftRight className="w-4 h-4" />
+                        <ArrowLeftRight className="w-3.5 h-3.5" />
                     </button>
                 </div>
             </Link>

@@ -10,12 +10,12 @@ export default function TopBar() {
                 <div className="flex items-center space-x-6">
                     <span className="opacity-40">Welcome to Alinggon Prime</span>
                     <span className="flex items-center gap-2 hover:text-red-400 cursor-pointer transition-colors">
-                        <Mail className="w-3 h-3 text-red-400" /> contact@alinggon.com
+                        <Mail className="w-3 h-3 text-red-400" /> alinggonshop@gmail.com
                     </span>
                 </div>
                 <div className="flex items-center space-x-6">
                     <span className="flex items-center gap-2 hover:text-red-400 cursor-pointer transition-colors">
-                        <Phone className="w-3 h-3 text-red-400" /> +8801821772211
+                        <Phone className="w-3 h-3 text-red-400" /> +97336781645
                     </span>
                     <Link
                         href="/track-order"

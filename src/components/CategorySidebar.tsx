@@ -9,7 +9,7 @@ const categories = [
     {
         id: 1,
         name: "Electronics",
-        icon: "https://images.unsplash.com/photo-1498049381961-a5819ad00cf3?auto=format&fit=crop&q=80&w=50",
+        icon: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=50",
         subcategories: [
             {
                 name: "Smartphones",
@@ -70,7 +70,7 @@ const categories = [
     {
         id: 4,
         name: "Beauty & Health",
-        icon: "https://images.unsplash.com/photo-1596462502278-27bfdd403348?auto=format&fit=crop&q=80&w=50",
+        icon: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&q=80&w=50",
         subcategories: [
             {
                 name: "Makeup",
@@ -136,7 +136,7 @@ export default function CategorySidebar() {
                 <h3 className="text-xs font-black text-slate-900 uppercase tracking-widest leading-none">Main Categories</h3>
             </div>
 
-            <div className="overflow-y-auto no-scrollbar flex-1 py-2 custom-scrollbar">
+            <div className="overflow-y-auto flex-1 py-2 custom-scrollbar">
                 {categories.map((category) => (
                     <div
                         key={category.id}
@@ -182,16 +182,18 @@ export default function CategorySidebar() {
             </div>
             <style jsx>{`
                 .custom-scrollbar::-webkit-scrollbar {
-                    width: 4px;
+                    width: 5px;
                 }
                 .custom-scrollbar::-webkit-scrollbar-track {
-                    background: transparent;
+                    background: #f8fafc;
+                    border-radius: 0 0 2rem 0;
                 }
                 .custom-scrollbar::-webkit-scrollbar-thumb {
-                    background-color: #f1f5f9;
+                    background-color: #e2e8f0;
                     border-radius: 20px;
+                    border: 1px solid #f8fafc;
                 }
-                .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
                     background-color: #cbd5e1;
                 }
             `}</style>

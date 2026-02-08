@@ -10,6 +10,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { ToastProvider } from "@/context/ToastContext";
 import CartDrawer from "@/components/CartDrawer";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
+import BottomNav from "@/components/BottomNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,12 +35,13 @@ export default function RootLayout({
                 <Header />
                 <Navbar />
               </div>
-              <main className="flex-grow">
+              <main className="flex-grow pb-24 lg:pb-0">
                 {children}
               </main>
               <Footer />
               <CartDrawer />
               <FloatingActionButtons />
+              <BottomNav />
             </CartProvider>
           </AuthProvider>
         </ToastProvider>

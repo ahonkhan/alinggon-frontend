@@ -9,7 +9,7 @@ interface CartItem extends Product {
 
 interface CartContextType {
     cart: CartItem[];
-    addToCart: (product: Product, quantity?: number) => void;
+    addToCart: (product: Product, quantity?: number, openDrawer?: boolean) => void;
     removeFromCart: (productId: string) => void;
     updateQuantity: (productId: string, quantity: number) => void;
     clearCart: () => void;
@@ -47,7 +47,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     }, [cart, isInitialized]);
 
-    const addToCart = (product: Product, quantity: number = 1) => {
+    const addToCart = (product: Product, quantity: number = 1, openDrawer: boolean = true) => {
         setCart((prev) => {
             const existing = prev.find((item) => item.id === product.id);
             if (existing) {
@@ -57,7 +57,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...prev, { ...product, quantity }];
         });
-        setIsCartOpen(true);
+        if (openDrawer) {
+            setIsCartOpen(true);
+        }
     };
 
     const removeFromCart = (productId: string) => {

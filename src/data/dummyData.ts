@@ -20,7 +20,7 @@ export const products: Product[] = [
         price: 1090,
         originalPrice: 1590,
         discount: "BEST OFFER",
-        image: "https://sc04.alicdn.com/kf/H55a43588f00045e7834a366e6097d8e87.jpg",
+        image: "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=600",
         category: "Bundle",
         brand: "Alinggon Exclusive",
         stock: 50,
@@ -30,6 +30,28 @@ export const products: Product[] = [
     },
     {
         id: "1",
+        name: "Hand Fan cute handheld mini fan",
+        price: 500,
+        originalPrice: 700,
+        discount: "-25% Off!",
+        image: "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=400",
+        category: "Gadget",
+        brand: "Next Gadget",
+        stock: 120,
+        description: "Stay cool anywhere with this ultra-portable, rechargeable mini fan. Features three speed settings and a long-lasting battery.",
+        specs: [
+            { label: "Material", value: "Premium Plastic" },
+            { label: "Battery", value: "2000mAh" },
+            { label: "Charging", value: "USB-C" }
+        ],
+        gallery: [
+            "https://images.unsplash.com/photo-1570158268183-d296b2892211?auto=format&fit=crop&q=80&w=600",
+            "https://sc04.alicdn.com/kf/H55a43588f00045e7834a366e6097d8e87.jpg",
+            "https://sc04.alicdn.com/kf/Hb55a73095304416194db4f2e912e750bu.jpg"
+        ]
+    },
+     {
+        id: "112xx",
         name: "Hand Fan cute handheld mini fan",
         price: 500,
         originalPrice: 700,

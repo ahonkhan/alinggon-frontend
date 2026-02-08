@@ -31,13 +31,13 @@ export default function AdsSection() {
     ];
 
     return (
-        <section className="max-w-[1600px] mx-auto px-4 py-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="max-w-[1600px] mx-auto px-4 ">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {ads.map((ad) => (
                     <Link
                         key={ad.id}
                         href={ad.link}
-                        className="group overflow-hidden rounded-[2rem] relative aspect-[4/3] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
+                        className="group overflow-hidden rounded-lg relative h-[150px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <img

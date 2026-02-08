@@ -255,21 +255,6 @@ export default function Checkout() {
                         </div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-red-400 to-red-500 rounded-3xl p-8 text-white shadow-2xl flex items-center gap-6 group overflow-hidden relative">
-                        <div className="absolute -right-4 -bottom-4 opacity-10 transform scale-150 rotate-12 group-hover:scale-175 transition-transform">
-                            <Gift className="w-32 h-32" />
-                        </div>
-                        <div className="bg-white/20 p-4 rounded-2xl group-hover:bg-white/30 transition-colors shadow-xl">
-                            <Gift className="w-10 h-10" />
-                        </div>
-                        <div>
-                            <h4 className="font-black text-lg tracking-tighter uppercase leading-none mb-1">Flash Promo!</h4>
-                            <p className="text-[10px] text-white/80 font-bold uppercase tracking-widest">Free delivery on orders above ৳2000</p>
-                            <div className="w-48 bg-white/20 h-2 rounded-full mt-4 overflow-hidden border border-white/10 shadow-inner">
-                                <div className="h-full bg-white w-[60%] animate-pulse"></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>

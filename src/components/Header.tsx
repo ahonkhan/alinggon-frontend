@@ -77,7 +77,7 @@ export default function Header() {
                                     }}
                                     onFocus={() => setShowSuggestions(true)}
                                     placeholder="Search your desire object..."
-                                    className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:outline-none focus:border-red-400 text-sm font-black text-slate-800 transition-all shadow-inner"
+                                    className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-red-400 focus:bg-white focus:outline-none focus:border-red-400 text-sm font-black text-slate-800 transition-all shadow-inner"
                                 />
                                 {searchQuery && (
                                     <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-red-400 transition-colors">
@@ -130,7 +130,7 @@ export default function Header() {
                     <div className="flex items-center gap-6 flex-shrink-0">
                         <div className="hidden lg:flex flex-col items-end leading-tight text-right text-slate-900 mr-2">
                             <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Global Support</span>
-                            <span className="text-sm font-black tracking-tighter">01568-324268</span>
+                            <span className="text-sm font-black tracking-tighter">+97336781645</span>
                         </div>
 
                         <div className="flex items-center gap-2 md:gap-4">

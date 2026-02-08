@@ -13,7 +13,7 @@ export default function CartDrawer() {
         <div className="fixed inset-0 z-[100] flex justify-end">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+                className="absolute inset-0 bg-slate-900/60 transition-opacity"
                 onClick={closeCart}
             />
 
