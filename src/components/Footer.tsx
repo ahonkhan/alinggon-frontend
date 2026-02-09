@@ -27,9 +27,25 @@ export default function Footer() {
                             </div>
                             <span className="text-2xl font-black text-white tracking-tighter uppercase">Alinggon</span>
                         </div>
-                        <p className="text-sm leading-loose max-w-sm uppercase font-bold text-white/30 tracking-tight">
+                        <p className="text-sm leading-loose max-w-sm uppercase font-bold text-white/50 tracking-tight">
                             Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.
                         </p>
+                        <div className="space-y-4 pt-4 border-t border-white/5">
+                            <div className="space-y-1">
+                                <h5 className="text-sm font-black text-white uppercase tracking-tighter">Your Trust, <span className="text-red-400">Our Core.</span></h5>
+                                <p className="text-white/40 text-[9px] uppercase font-black tracking-widest leading-none">Seamless flow from choice to destination.</p>
+                            </div>
+                            <div className="flex gap-4">
+                                <div className="space-y-1">
+                                    <p className="text-lg font-black text-white tracking-tighter leading-none">100%</p>
+                                    <p className="text-[8px] font-black text-red-400 uppercase tracking-widest">Authentic</p>
+                                </div>
+                                <div className="space-y-1 border-l border-white/10 pl-4">
+                                    <p className="text-lg font-black text-white tracking-tighter leading-none">24/7</p>
+                                    <p className="text-[8px] font-black text-red-400 uppercase tracking-widest">Support</p>
+                                </div>
+                            </div>
+                        </div>
                         <div className="flex items-center gap-4">
                             <SocialIcon icon={Facebook} url="https://www.facebook.com/profile.php?id=100019453901281" />
                             <SocialIcon icon={Twitter} url="#" />
@@ -66,7 +82,7 @@ export default function Footer() {
                     <div className="lg:col-span-4 space-y-6">
                         <div className="bg-white/5 rounded-[2rem] p-6 border border-white/5 space-y-4">
                             <h4 className="text-white text-xs font-black uppercase tracking-widest">Global Newsletter</h4>
-                            <p className="text-[10px] uppercase font-bold text-white/20 tracking-widest">Get prioritized for limited stock drops.</p>
+                            <p className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Get prioritized for limited stock drops.</p>
                             <form onSubmit={handleSubscribe} className="flex gap-2">
                                 <input
                                     type="email"
@@ -91,7 +107,7 @@ export default function Footer() {
             {/* Copyright Utility Bar */}
             <div className="border-t border-white/5 bg-slate-950">
                 <div className="max-w-[1600px] mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/20">
+                    <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40">
                         © 2026 Alinggon Shop • Engineered by <span className="text-red-400/50">Rangpur IT</span>
                     </p>
                     <div className="flex items-center gap-6">
@@ -142,8 +158,8 @@ function ContactItem({ icon: Icon, label, value }: any) {
         <div className="flex gap-4">
             <div className="text-red-400/50 mt-1"><Icon className="w-4 h-4" /></div>
             <div>
-                <p className="text-[8px] font-black uppercase text-white/10 tracking-[0.2em] mb-1">{label}</p>
-                <p className="text-xs font-black text-white/60 tracking-tight">{value}</p>
+                <p className="text-[8px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">{label}</p>
+                <p className="text-xs font-black text-white/70 tracking-tight">{value}</p>
             </div>
         </div>
     );

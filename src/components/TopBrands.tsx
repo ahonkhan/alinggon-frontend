@@ -17,7 +17,7 @@ export default function TopBrands() {
     ];
 
     return (
-        <section className="py-12 bg-white border-t border-gray-100">
+        <section className="pb-12 pt-6 bg-white border-t border-gray-100">
             <div className="max-w-[1600px] mx-auto px-4">
                 <div className="flex flex-col items-center mb-8 text-center space-y-2">
                     <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Official Partners</span>

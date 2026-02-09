@@ -24,20 +24,24 @@ export default function AdsSection() {
         },
         {
             id: 4,
-            image: "https://images.unsplash.com/photo-1556906781-9a412961d289?auto=format&fit=crop&q=80&w=600",
+            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600",
             link: "/shop?category=Home",
             alt: "Home Decor"
         }
     ];
 
     return (
-        <section className="max-w-[1600px] mx-auto px-4 ">
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="max-w-[1600px] mx-auto px-4 py-8">
+            <div className="flex flex-col items-center mb-6 text-center space-y-2 lg:hidden">
+                <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Special Offers</span>
+                <h3 className="text-xl font-black tracking-tighter uppercase text-slate-900">Featured Deals</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
                 {ads.map((ad) => (
                     <Link
                         key={ad.id}
                         href={ad.link}
-                        className="group overflow-hidden rounded-lg relative h-[150px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
+                        className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <img

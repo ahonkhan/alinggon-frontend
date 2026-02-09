@@ -2,7 +2,7 @@
 
 export default function VideoSection() {
     return (
-        <div className="flex flex-row lg:flex-col gap-4 lg:gap-6 h-full">
+        <div className="flex flex-col gap-6 h-full">
             {/* Video 1 - How to Order */}
             <div className="flex flex-col gap-1 lg:gap-2 flex-1 min-w-0">
                 <div className="flex items-center justify-center gap-2">
