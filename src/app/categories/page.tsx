@@ -83,12 +83,12 @@ export default function CategoriesPage() {
                 </div>
 
                 {/* Grid */}
-                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-6 lg:gap-8">
+                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-3 sm:gap-6 lg:gap-8">
                     {categoriesData.map((category, index) => (
                         <Link
                             key={index}
                             href={category.href}
-                            className="group relative block aspect-[3/4] overflow-hidden rounded-2xl md:rounded-[3rem] bg-slate-900 shadow-xl shadow-slate-200/50"
+                            className="group relative block h-[200px] overflow-hidden rounded-2xl md:rounded-[3rem] bg-slate-900 shadow-xl shadow-slate-200/50"
                         >
                             {/* Background Image with Zoom */}
                             <img

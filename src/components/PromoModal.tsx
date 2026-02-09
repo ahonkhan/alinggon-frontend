@@ -15,7 +15,7 @@ export default function PromoModal() {
         // Auto-close after 30 seconds
         const autoCloseTimeout = setTimeout(() => {
             setIsOpen(false);
-        }, 31000); // 30s + 1s delay
+        }, 310000000); // 30s + 1s delay
 
         return () => {
             clearTimeout(showTimeout);
@@ -37,7 +37,7 @@ export default function PromoModal() {
                 </button>
 
                 {/* Ads Image */}
-                <div className="relative aspect-[4/5] md:aspect-video w-full">
+                <div className="relative h-[200px] md:h-[300px] w-full">
                     <img
                         src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=1200"
                         alt="Promotional Offer"

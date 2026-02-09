@@ -160,7 +160,7 @@ function ShopContent() {
                                     className="text-red-400 text-sm font-black hover:underline mt-4">Reset Filters</button>
                             </div>
                         ) : (
-                            <div className={`grid gap-6 ${viewMode === "grid" ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-3" : "grid-cols-1"}`}>
+                            <div className={`grid gap-2 ${viewMode === "grid" ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-4 " : "grid-cols-1"}`}>
                                 {filteredProducts.map(product => (
                                     <ProductCard key={product.id} {...product} />
                                 ))}
