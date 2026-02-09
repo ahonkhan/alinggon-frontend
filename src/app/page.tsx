@@ -108,9 +108,13 @@ export default function Home() {
       {/* Product Sliders */}
       <ProductSlider title="12 Months Product" products={products} />
 
-      <ProductSlider title="New Arrival" products={[...products].reverse()} />
+      <ProductSlider title="Alinggon  New Arrival" products={[...products].reverse()} />
 
-      <ProductSlider title="Hot Deals" products={products} />
+      <ProductSlider title="Our Special Offers" products={products} />
+
+
+      <ProductSlider title="Today's Deals" products={products} />
+
 
       <CustomerRatings />
       <TopBrands />

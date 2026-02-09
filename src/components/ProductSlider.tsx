@@ -23,7 +23,7 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
         <section className="max-w-[1600px] mx-auto px-4 py-4">
             <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-3">
-                    <div className="w-1 h-6 bg-red-400 rounded-full"></div>
+                    {/* <div className="w-1 h-6 bg-red-400 rounded-full"></div> */}
                     <h2 className="text-xl md:text-2xl font-black tracking-tighter text-slate-900 uppercase">{title}</h2>
                 </div>
                 <div className="flex items-center gap-4">

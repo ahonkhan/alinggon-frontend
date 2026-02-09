@@ -56,8 +56,8 @@ export default function Footer() {
 
                     {/* Navigation Columns */}
                     <div className="lg:col-span-2 space-y-4">
-                        <h4 className="text-white text-[10px] font-black uppercase tracking-[0.3em] border-l-2 border-red-400 pl-4">Platform</h4>
-                        <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest leading-none">
+                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">Platform</h4>
+                        <ul className="space-y-4 pt-8 text-[12px] font-black uppercase tracking-widest leading-none">
                             <li><NavLink href="/shop">Master Catalog</NavLink></li>
                             <li><NavLink href="/about">About Admin</NavLink></li>
                             <li><NavLink href="/orders">Order Vault</NavLink></li>
@@ -65,24 +65,34 @@ export default function Footer() {
                             <li><NavLink href="/profile">Identity Profile</NavLink></li>
                             <li><NavLink href="/wishlist">Saved Items</NavLink></li>
                         </ul>
+
+                        <div className="space-y-1">
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter">Your dream website <span className="text-red-400">available here.</span></h5>
+                        </div>
                     </div>
 
                     <div className="lg:col-span-2 space-y-4">
-                        <h4 className="text-white text-[10px] font-black uppercase tracking-[0.3em] border-l-2 border-slate-700 pl-4">Directives</h4>
-                        <ul className="space-y-4 text-[11px] font-black uppercase tracking-widest leading-none">
+                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">Directives</h4>
+                        <ul className="space-y-4 text-[12px] pt-8 font-black uppercase tracking-widest leading-none">
                             <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
                             <li><NavLink href="/terms">Terms of Access</NavLink></li>
                             <li><NavLink href="/returns">Return Logic</NavLink></li>
                             <li><NavLink href="#">Shipping Grid</NavLink></li>
                             <li><NavLink href="#">Refund Policy</NavLink></li>
+                            <li><NavLink href="/returns">Customer Ratings</NavLink></li>
+
                         </ul>
+
+                        <div className="space-y-1">
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter">We have also available <span className="text-red-400">Domain & Hosting.</span></h5>
+                        </div>
                     </div>
 
                     {/* Newsletter & Contact */}
                     <div className="lg:col-span-4 space-y-6">
-                        <div className="bg-white/5 rounded-[2rem] p-6 border border-white/5 space-y-4">
-                            <h4 className="text-white text-xs font-black uppercase tracking-widest">Global Newsletter</h4>
-                            <p className="text-[10px] uppercase font-bold text-white/40 tracking-widest">Get prioritized for limited stock drops.</p>
+                        <div className="bg-white/5 rounded-[2rem]  border border-white/5 space-y-4">
+                            <h4 className="text-white text-[15px] font-black uppercase tracking-widest">Global Newsletter</h4>
+                            <p className="text-[12px] uppercase font-bold text-white/70 tracking-widest">Get prioritized for limited stock drops.</p>
                             <form onSubmit={handleSubscribe} className="flex gap-2">
                                 <input
                                     type="email"
