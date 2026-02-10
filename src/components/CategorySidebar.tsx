@@ -2,6 +2,7 @@
 
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 // Mock data for categories with subcategories
@@ -148,7 +149,13 @@ export default function CategorySidebar() {
                             href={`/shop?category=${category.name}`}
                             className="flex items-center gap-4 px-6 py-3.5 hover:bg-gray-50 transition-colors relative"
                         >
-                            <img src={category.icon} alt={category.name} className="w-6 h-6 object-contain rounded-full bg-gray-50 p-0.5 border border-gray-100" />
+                            <Image
+                                src={category.icon}
+                                alt={category.name}
+                                width={24}
+                                height={24}
+                                className="object-contain rounded-full bg-gray-50 p-0.5 border border-gray-100"
+                            />
                             <span className="flex-1 text-xs font-bold text-slate-700 group-hover:text-red-500 uppercase tracking-wide">{category.name}</span>
                             {category.subcategories && category.subcategories.length > 0 && (
                                 <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover:text-red-400" />
@@ -161,7 +168,13 @@ export default function CategorySidebar() {
                                 {category.subcategories.map((sub, idx) => (
                                     <div key={idx} className="space-y-3">
                                         <div className="flex items-center gap-3 mb-2">
-                                            <img src={sub.image} alt={sub.name} className="w-12 h-12 rounded-lg object-cover border border-gray-100" />
+                                            <Image
+                                                src={sub.image}
+                                                alt={sub.name}
+                                                width={48}
+                                                height={48}
+                                                className="rounded-lg object-cover border border-gray-100"
+                                            />
                                             <h4 className="text-sm font-black text-slate-900 uppercase tracking-wide">{sub.name}</h4>
                                         </div>
                                         <ul className="space-y-2 pl-2 border-l-2 border-gray-50">

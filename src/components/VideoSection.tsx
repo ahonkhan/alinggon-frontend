@@ -1,5 +1,7 @@
 "use client";
 
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+
 export default function VideoSection() {
     return (
         <div className="flex flex-row md:flex-col gap-6 h-full">
@@ -12,17 +14,12 @@ export default function VideoSection() {
                     </span>
                 </div>
                 <div className="relative aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg shadow-slate-200 border border-gray-100 group w-full flex-1">
-                    <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=BygL4lQ3Z8q0_H-s"
-                        title="কিভাবে অর্ডার করবেন"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                        className="absolute inset-0 w-full h-full"
-                    ></iframe>
+                    <div className="relative aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg shadow-slate-200 border border-gray-100 group w-full flex-1">
+                        <YouTubeEmbed
+                            id="dQw4w9WgXcQ"
+                            title="কিভাবে অর্ডার করবেন"
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -35,17 +32,12 @@ export default function VideoSection() {
                     </span>
                 </div>
                 <div className="relative aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg shadow-slate-200 border border-gray-100 group w-full flex-1">
-                    <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/LXb3EKWsInQ?si=A5X3b2C1d4e5f6g7"
-                        title="কাস্টমারদের রিভিও দেখুন"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allowFullScreen
-                        className="absolute inset-0 w-full h-full"
-                    ></iframe>
+                    <div className="relative aspect-video rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg shadow-slate-200 border border-gray-100 group w-full flex-1">
+                        <YouTubeEmbed
+                            id="LXb3EKWsInQ"
+                            title="কাস্টমারদের রিভিও দেখুন"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
 
 import { ShoppingCart, Zap, Heart, ArrowLeftRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
@@ -49,10 +50,12 @@ export default function ProductCard(props: ProductCardProps) {
                     </span>
                 )}
                 <div className="w-full h-full relative group-hover:scale-105 transition-transform duration-500">
-                    <img
+                    <Image
                         src={image}
                         alt={name}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover"
                     />
                 </div>
 

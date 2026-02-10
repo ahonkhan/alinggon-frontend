@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AdsSection() {
     const ads = [
@@ -44,10 +45,12 @@ export default function AdsSection() {
                         className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                        <img
+                        <Image
                             src={ad.image}
                             alt={ad.alt}
-                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            fill
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
+                            className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity">
                             <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">

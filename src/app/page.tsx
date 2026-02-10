@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { products } from "@/data/dummyData";
 import CategorySidebar from "@/components/CategorySidebar";
 import ProductSlider from "@/components/ProductSlider";
@@ -48,7 +49,13 @@ export default function Home() {
                 <p className="text-xs md:text-sm font-medium opacity-60 mb-8 leading-relaxed uppercase tracking-widest text-balance">Premium curated products for the modern lifestyle explorer.</p>
                 <Link href="/shop" className="w-fit bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-400 hover:text-white transition-all shadow-2xl shadow-white/5 active:scale-95">Discover Shop</Link>
               </div>
-              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1600" className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-[10000ms] group-hover:scale-110" alt="Banner visual" />
+              <Image
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1600"
+                alt="Banner visual"
+                fill
+                priority
+                className="object-cover opacity-60 transition-transform duration-[10000ms] group-hover:scale-110"
+              />
             </div>
           </div>
 
@@ -92,7 +99,13 @@ export default function Home() {
                 <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-100/50 overflow-hidden aspect-square mb-4 relative group-hover:shadow-red-100 transition-all p-2">
                   <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
                     <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                    <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.label} />
+                    <Image
+                      src={item.image}
+                      alt={item.label}
+                      fill
+                      sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
                   </div>
                 </div>
                 <h3 className="text-center text-xs font-black text-slate-500 tracking-widest uppercase group-hover:text-red-400 transition-colors">{item.label}</h3>
