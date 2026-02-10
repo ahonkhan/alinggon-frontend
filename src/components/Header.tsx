@@ -51,16 +51,17 @@ export default function Header() {
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => setIsMobileMenuOpen(true)}
+                            aria-label="Open menu"
                             className="p-2 -ml-2 text-slate-900 lg:hidden hover:bg-red-50 hover:text-red-500 rounded-xl transition-all"
                         >
                             <Menu className="w-6 h-6" />
                         </button>
 
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-                            <div className="bg-red-400 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">
+                            <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">
                                 <ShoppingBag className="w-6 h-6" />
                             </div>
-                            <span className="text-2xl font-black tracking-tighter text-slate-900 group-hover:text-red-400 transition-colors">Alinggon</span>
+                            <span className="text-2xl font-black tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">Alinggon</span>
                         </Link>
                     </div>
 
@@ -77,15 +78,23 @@ export default function Header() {
                                     }}
                                     onFocus={() => setShowSuggestions(true)}
                                     placeholder="Search your desire object..."
-                                    className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-red-400 focus:bg-white focus:outline-none focus:border-red-400 text-sm font-black text-slate-800 transition-all shadow-inner"
+                                    className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-red-600 focus:bg-white focus:outline-none focus:border-red-600 text-sm font-black text-slate-800 transition-all shadow-inner"
                                 />
                                 {searchQuery && (
-                                    <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-red-400 transition-colors">
+                                    <button
+                                        onClick={() => setSearchQuery("")}
+                                        aria-label="Clear search"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-red-600 transition-colors"
+                                    >
                                         <X className="w-4 h-4" />
                                     </button>
                                 )}
                             </div>
-                            <button type="submit" className="ml-3 h-12 px-6 bg-slate-900 hover:bg-red-400 text-white rounded-2xl transition-all shadow-xl shadow-slate-100 flex items-center justify-center group active:scale-95">
+                            <button
+                                type="submit"
+                                aria-label="Search"
+                                className="ml-3 h-12 px-6 bg-slate-900 hover:bg-red-600 text-white rounded-2xl transition-all shadow-xl shadow-slate-100 flex items-center justify-center group active:scale-95"
+                            >
                                 <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
                             </button>
                         </form>
@@ -109,16 +118,16 @@ export default function Header() {
                                             </div>
                                             <div className="flex-1">
                                                 <h4 className="text-xs font-black text-slate-800 line-clamp-1 group-hover:text-red-500 transition-colors">{p.name}</h4>
-                                                <p className="text-[10px] font-black text-red-400 mt-1 font-sans">৳ {p.price}</p>
+                                                <p className="text-[10px] font-black text-red-600 mt-1 font-sans">৳ {p.price}</p>
                                             </div>
-                                            <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-red-400 group-hover:translate-x-1 transition-all" />
+                                            <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                                         </Link>
                                     ))}
                                 </div>
                                 <Link
                                     href={`/search?q=${searchQuery}`}
                                     onClick={() => setShowSuggestions(false)}
-                                    className="block w-full text-center py-4 bg-gray-50 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-red-400 transition-all font-sans"
+                                    className="block w-full text-center py-4 bg-gray-50 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
                                 >
                                     View all search results
                                 </Link>
@@ -134,87 +143,92 @@ export default function Header() {
                         </div>
 
                         <div className="flex items-center gap-2 md:gap-4">
-                            <Link href="/wishlist" className="relative p-2.5 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all hidden sm:block">
+                            <Link href="/wishlist" aria-label="Wishlist" className="relative p-2.5 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all hidden sm:block">
                                 <Heart className="w-6 h-6 stroke-[1.8]" />
                             </Link>
 
-                            <button
-                                onClick={openCart}
-                                className="relative p-2.5 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all flex flex-col items-center group"
+                            onClick={openCart}
+                            aria-label="Cart"
+                            className="relative p-2.5 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all flex flex-col items-center group"
                             >
-                                <div className="relative">
-                                    <ShoppingCart className="w-6 h-6 stroke-[1.8]" />
-                                    <span className="absolute -top-2 -right-2 bg-red-400 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border-2 border-white shadow-xl animate-pulse">
-                                        {cartCount}
-                                    </span>
-                                </div>
-                            </button>
+                            <div className="relative">
+                                <ShoppingCart className="w-6 h-6 stroke-[1.8]" />
+                                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border-2 border-white shadow-xl animate-pulse">
+                                    {cartCount}
+                                </span>
+                            </div>
+                        </button>
 
-                            {user ? (
-                                <div className="hidden md:flex items-center gap-4 ml-2">
-                                    <Link href="/profile" className="flex items-center gap-3 group bg-gray-50 pl-4 pr-1.5 py-1.5 rounded-2xl border border-gray-100 hover:bg-white hover:border-red-100 transition-all shadow-sm">
-                                        <div className="text-right leading-none">
-                                            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
-                                            <p className="text-xs font-black text-slate-900 group-hover:text-red-500 transition-colors uppercase tracking-tight">{user.name.split(' ')[0]}</p>
-                                        </div>
-                                        <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center group-hover:bg-red-400 transition-colors shadow-lg">
-                                            <User className="w-5 h-5 text-white" />
-                                        </div>
-                                    </Link>
-                                    <button
-                                        onClick={() => {
-                                            logout();
-                                            router.push("/");
-                                        }}
-                                        className="p-2 text-gray-300 hover:text-red-500 transition-colors"
-                                        title="Sign Out"
-                                    >
-                                        <LogOut className="w-5 h-5" />
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className="hidden md:flex items-center gap-3 ml-2">
-                                    <Link href="/login" className="text-[10px] font-black text-slate-900 uppercase tracking-widest hover:text-red-400 transition-colors">
-                                        Log In
-                                    </Link>
-                                    <Link
-                                        href="/register"
-                                        className="px-6 py-3 bg-red-400 hover:bg-slate-900 text-white text-[10px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95"
-                                    >
-                                        Establish Account
-                                    </Link>
-                                </div>
-                            )}
+                        {user ? (
+                            <div className="hidden md:flex items-center gap-4 ml-2">
+                                <Link href="/profile" aria-label="Profile" className="flex items-center gap-3 group bg-gray-50 pl-4 pr-1.5 py-1.5 rounded-2xl border border-gray-100 hover:bg-white hover:border-red-100 transition-all shadow-sm">
+                                    <div className="text-right leading-none">
+                                        <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
+                                        <p className="text-xs font-black text-slate-900 group-hover:text-red-500 transition-colors uppercase tracking-tight">{user.name.split(' ')[0]}</p>
+                                    </div>
+                                    <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center group-hover:bg-red-600 transition-colors shadow-lg">
+                                        <User className="w-5 h-5 text-white" />
+                                    </div>
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                        router.push("/");
+                                    }}
+                                    aria-label="Sign out"
+                                    className="p-2 text-gray-300 hover:text-red-500 transition-colors"
+                                    title="Sign Out"
+                                >
+                                    <LogOut className="w-5 h-5" />
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="hidden md:flex items-center gap-3 ml-2">
+                                <Link href="/login" className="text-[10px] font-black text-slate-900 uppercase tracking-widest hover:text-red-600 transition-colors">
+                                    Log In
+                                </Link>
+                                <Link
+                                    href="/register"
+                                    className="px-6 py-3 bg-red-600 hover:bg-slate-900 text-white text-[10px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95"
+                                >
+                                    Establish Account
+                                </Link>
+                            </div>
+                        )}
 
-                            <Link href="/profile" className="md:hidden p-2.5 text-slate-600 hover:bg-red-50 hover:text-red-500 rounded-xl transition-all">
-                                <User className="w-6 h-6 stroke-[1.8]" />
-                            </Link>
-                        </div>
+                        <Link href="/profile" aria-label="Profile" className="md:hidden p-2.5 text-slate-600 hover:bg-red-50 hover:text-red-500 rounded-xl transition-all">
+                            <User className="w-6 h-6 stroke-[1.8]" />
+                        </Link>
                     </div>
                 </div>
-
-                {/* Mobile Search */}
-                <div className="md:hidden px-4 pb-5 pt-1">
-                    <form onSubmit={handleSearch} className="flex items-center w-full group relative">
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search..."
-                            className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:outline-none focus:border-red-400 text-sm font-black transition-all shadow-inner"
-                        />
-                        <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-red-400 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-all">
-                            <Search className="w-4 h-4" />
-                        </button>
-                    </form>
-                </div>
-            </header>
-
-            {/* Mobile Menu Component */}
-            <MobileMenu
-                isOpen={isMobileMenuOpen}
-                onClose={() => setIsMobileMenuOpen(false)}
-            />
         </div>
+
+                {/* Mobile Search */ }
+    <div className="md:hidden px-4 pb-5 pt-1">
+        <form onSubmit={handleSearch} className="flex items-center w-full group relative">
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search..."
+                className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:outline-none focus:border-red-600 text-sm font-black transition-all shadow-inner"
+            />
+            <button
+                type="submit"
+                aria-label="Search"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-red-600 text-white rounded-xl flex items-center justify-center shadow-lg active:scale-90 transition-all"
+            >
+                <Search className="w-4 h-4" />
+            </button>
+        </form>
+    </div>
+            </header >
+
+        {/* Mobile Menu Component */ }
+        < MobileMenu
+    isOpen = { isMobileMenuOpen }
+    onClose = {() => setIsMobileMenuOpen(false)
+}
+            />
+        </div >
     );
 }

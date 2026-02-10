@@ -34,6 +34,7 @@ export default function FloatingActionButtons() {
             {showScrollTop && (
                 <button
                     onClick={scrollToTop}
+                    aria-label="Scroll to top"
                     className="w-10 h-10 bg-slate-900 hover:bg-black text-white rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-110 pointer-events-auto active:scale-95 animate-in slide-in-from-bottom duration-300 mb-2"
                 >
                     <ArrowUp className="w-5 h-5" />
@@ -46,12 +47,13 @@ export default function FloatingActionButtons() {
                     <div className="bg-white px-4 py-3 rounded-2xl shadow-xl border border-red-100 flex items-center gap-3 animate-in slide-in-from-right duration-500 relative group">
                         <div className="flex flex-col">
                             <span className="text-xs font-black text-slate-800 uppercase tracking-wide">
-                                <span className="text-red-500">৳500</span> কিনলে ফ্রি ডেলিভারি পাবেন!
+                                <span className="text-red-600">৳500</span> কিনলে ফ্রি ডেলিভারি পাবেন!
                             </span>
                         </div>
                         <button
                             onClick={() => setIsPromoDismissed(true)}
-                            className="text-gray-300 hover:text-red-400 transition-colors"
+                            aria-label="Dismiss promotion"
+                            className="text-gray-300 hover:text-red-600 transition-colors"
                         >
                             <X className="w-3 h-3" />
                         </button>
@@ -64,7 +66,8 @@ export default function FloatingActionButtons() {
                 {/* Floating Cart Button - Always Visible */}
                 <button
                     onClick={openCart}
-                    className="w-14 h-14 bg-red-400 hover:bg-red-500 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 relative active:scale-95 border-2 border-white/20"
+                    aria-label="Open Cart"
+                    className="w-14 h-14 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 relative active:scale-95 border-2 border-white/20"
                 >
                     <ShoppingCart className="w-6 h-6" />
                     <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[10px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">

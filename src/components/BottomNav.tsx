@@ -30,13 +30,14 @@ export default function BottomNav() {
                             <button
                                 key={item.label}
                                 onClick={item.onClick}
+                                aria-label={item.label}
                                 className="relative flex flex-col items-center gap-1 group transition-all"
                             >
-                                <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-400 text-white' : 'text-gray-400 group-hover:text-white'}`}>
+                                <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-600 text-white' : 'text-gray-400 group-hover:text-white'}`}>
                                     <Icon className="w-5 h-5" />
                                 </div>
                                 {item.badge > 0 && (
-                                    <span className="absolute top-1 right-1 w-4 h-4 bg-red-400 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">
+                                    <span className="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[9px] font-black rounded-full flex items-center justify-center border-2 border-slate-900 animate-pulse">
                                         {item.badge}
                                     </span>
                                 )}
@@ -48,13 +49,14 @@ export default function BottomNav() {
                         <Link
                             key={item.label}
                             href={item.href || "#"}
+                            aria-label={item.label}
                             className="relative flex flex-col items-center gap-1 group transition-all"
                         >
-                            <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-400 text-white' : 'text-gray-400 group-hover:text-white'}`}>
+                            <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-600 text-white' : 'text-gray-400 group-hover:text-white'}`}>
                                 <Icon className="w-5 h-5" />
                             </div>
                             {isActive && (
-                                <div className="absolute -bottom-1 w-1 h-1 bg-red-400 rounded-full" />
+                                <div className="absolute -bottom-1 w-1 h-1 bg-red-600 rounded-full" />
                             )}
                         </Link>
                     );

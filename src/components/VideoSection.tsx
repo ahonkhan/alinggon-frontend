@@ -8,7 +8,7 @@ export default function VideoSection() {
             {/* Video 1 - How to Order */}
             <div className="flex flex-col gap-1 lg:gap-2 flex-1 min-w-0">
                 <div className="flex items-center justify-center gap-2">
-                    <div className="w-1.5 h-4 lg:w-2 lg:h-5 bg-red-400 rounded-full"></div>
+                    <div className="w-1.5 h-4 lg:w-2 lg:h-5 bg-red-600 rounded-full"></div>
                     <span className="text-slate-900 text-sm lg:text-base font-black uppercase tracking-widest truncate">
                         কিভাবে অর্ডার করবেন
                     </span>
