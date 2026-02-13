@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "plus.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "sc04.alicdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "sc01.alicdn.com",
       }
     ],
   },
