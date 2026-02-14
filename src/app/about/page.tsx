@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
+import "swiper/css/pagination";
 import { ShieldCheck, Award, MessageCircle, Heart, Star, Gift, Sparkles } from "lucide-react";
 
 // Enhanced Festive Shapes for Congratulations
@@ -198,6 +199,14 @@ const FloatingElements = () => {
                 .animate-wobble-string {
                     animation: wobble-string 2s ease-in-out infinite;
                 }
+                .admin-swiper .swiper-pagination-bullet {
+                    background: white;
+                    opacity: 0.5;
+                }
+                .admin-swiper .swiper-pagination-bullet-active {
+                    background: #ef4444;
+                    opacity: 1;
+                }
             `}</style>
         </div>
     );
@@ -340,7 +349,7 @@ export default function AboutAdmin() {
                         {staffData.map((staff, index) => (
                             <div
                                 key={index}
-                                className={`flex flex-col border-gray-200 relative
+                                className={`flex flex-col border-gray-200 relative w-full max-w-[280px] md:max-w-none mx-auto
                                     ${index !== staffData.length - 1 ? 'lg:border-r' : ''}
                                     ${index % 2 === 0 ? 'md:border-r' : 'md:border-r-0 lg:border-r'}
                                     border-b md:border-b-0 hover:bg-red-50/10 transition-colors duration-300`}
@@ -360,30 +369,16 @@ export default function AboutAdmin() {
 
                                 </div>
 
-                                {/* Slider Section */}
+                                {/* Image Section */}
                                 <div className="w-full aspect-[4/5] overflow-hidden bg-gray-50 relative">
-                                    <Swiper
-                                        modules={[Autoplay, EffectFade]}
-                                        effect="fade"
-                                        autoplay={{ delay: 3500 + (index * 400), disableOnInteraction: false }}
-                                        loop={true}
-                                        className="w-full h-full"
-                                    >
-                                        {staff.images.map((img, idx) => (
-                                            <SwiperSlide key={idx}>
-                                                <div className="w-full h-full relative">
-                                                    <img
-                                                        src={img}
-                                                        alt={`${staff.role} portrait ${idx + 1}`}
-                                                        className="w-full h-full object-cover"
-                                                    />
-                                                    <div className="absolute inset-0 bg-black/30 pointer-events-none" />
-
-
-                                                </div>
-                                            </SwiperSlide>
-                                        ))}
-                                    </Swiper>
+                                    <div className="w-full h-full relative">
+                                        <img
+                                            src={staff.images[0]}
+                                            alt={`${staff.role} portrait`}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                                    </div>
 
                                     {/* Verification Badge */}
                                     <div className="absolute top-4 right-4 z-10 bg-white p-2 rounded-xl shadow-md border border-gray-200">
@@ -407,14 +402,27 @@ export default function AboutAdmin() {
                         <div className="flex flex-col lg:flex-row items-center gap-16">
                             {/* Admin Photo */}
                             <div className="w-full lg:w-1/2">
-                                <div className="relative mx-auto max-w-md lg:max-w-none">
+                                <div className="relative mx-auto max-w-2xl">
                                     <div className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-xl">
-                                        <img
-                                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800"
-                                            alt="Founder & Admin"
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <div className="absolute inset-x-0 bottom-0 p-8 text-center bg-black/40">
+                                        <Swiper
+                                            modules={[Autoplay, Pagination, EffectFade]}
+                                            effect="fade"
+                                            pagination={{ clickable: true }}
+                                            autoplay={{ delay: 4000, disableOnInteraction: false }}
+                                            loop={true}
+                                            className="w-full h-full admin-swiper"
+                                        >
+                                            {staffData[0].images.map((img, idx) => (
+                                                <SwiperSlide key={idx}>
+                                                    <img
+                                                        src={img}
+                                                        alt={`Founder & Admin portrait ${idx + 1}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </SwiperSlide>
+                                            ))}
+                                        </Swiper>
+                                        <div className="absolute inset-x-0 bottom-0 p-8 text-center bg-black/40 z-10">
                                             <p className="text-white text-2xl font-black uppercase tracking-widest leading-none mb-2">Founder & Admin</p>
                                         </div>
                                     </div>
@@ -434,20 +442,20 @@ export default function AboutAdmin() {
                                     </div>
 
                                     <p className="text-xl text-red-500 font-bold italic">
-                                        Thank you for your extraordinary leadership and dedication!
+                                        Greetings, love and congratulations to all my dear well-wishers.
                                     </p>
                                 </div>
 
-                                <div className="space-y-6 text-slate-600 font-medium bg-white/50 backdrop-blur-sm p-8 rounded-3xl border border-red-100">
+                                <div className="space-y-6 text-slate-600 font-medium bg-white/50  p-8 rounded-3xl border border-red-100">
                                     <p className="text-xl text-slate-900 font-bold leading-relaxed italic border-l-4 border-red-400 pl-6">
-                                        "Under your visionary leadership, we've built a trusted community of over 1 million members and facilitated 100,000+ successful transactions. Your dedication to authenticity and transparency has set new standards in digital commerce."
+                                        "We started our online e-commerce business in 2019... For almost seven long years, our platform has been running smoothly, properly and properly, as usual, with your prayers and efforts."
                                     </p>
                                     <p className="leading-relaxed">
-                                        Today, we celebrate your incredible journey of 10+ years of leadership excellence. Your unwavering commitment to our community, innovative vision, and tireless dedication have transformed Alinggon into a beacon of trust and quality in the digital marketplace.
+                                        We have faced many problems, but we have left everything behind and continue to work hard and sincerely, inshaAllah. We are hopeful that we will be able to provide good service through our website. We will know the customer's needs through reviews and promote them on time. Pay special attention to everyone, new and old. Visit our website from time to time for products and benefits like free delivery. Stay with us, your expectations are the challenge of our journey. Thank you.
                                     </p>
                                     <div className="grid grid-cols-3 gap-4 pt-4">
                                         <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
-                                            <p className="text-3xl font-black text-red-500">10+</p>
+                                            <p className="text-3xl font-black text-red-500">7+</p>
                                             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
                                         </div>
                                         <div className="space-y-1 text-center p-4 bg-pink-50 rounded-2xl">
@@ -585,6 +593,27 @@ export default function AboutAdmin() {
                                 </div>
                             </div>
                         ))}
+                    </div>
+
+                    {/* YouTube Video Section */}
+                    <div className="mt-24 max-w-4xl mx-auto px-4">
+                        <div className="text-center mb-8 space-y-4">
+                            <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
+                                Experience <span className="text-red-600">Alinggon</span>
+                            </h2>
+                            <p className="text-slate-500 font-medium">
+                                Watch our journey and learn more about how we serve our community.
+                            </p>
+                        </div>
+                        <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                            <iframe
+                                className="absolute inset-0 w-full h-full"
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                title="Alinggon Company Video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
                     </div>
 
                     {/* Bottom Celebration */}

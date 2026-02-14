@@ -210,7 +210,7 @@ export default function Header() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             placeholder="Search..."
-                            className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:outline-none focus:border-red-600 text-sm font-black transition-all shadow-inner"
+                            className="w-full h-12 pl-6 pr-12 rounded-2xl bg-gray-50 border-2  focus:bg-white focus:outline-none border-red-600 text-sm font-black transition-all shadow-inner"
                         />
                         <button
                             type="submit"

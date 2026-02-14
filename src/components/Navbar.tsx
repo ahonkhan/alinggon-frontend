@@ -17,8 +17,8 @@ export default function Navbar() {
             <div className="max-w-[1600px] mx-auto px-4">
                 <ul className="flex items-center justify-center space-x-6 text-[10px] font-black py-3">
                     {navItems.map((item) => (
-                        <li key={item.label} className="flex items-center gap-1 cursor-pointer text-white hover:text-red-50 transition-colors">
-                            <Link href={item.href} className="flex items-center gap-1">
+                        <li key={item.label} className="flex text-[13px] items-center gap-1 cursor-pointer text-white hover:text-red-50 transition-colors">
+                            <Link href={item.href} className="flex items-center gap-1 hover:text-black duration-300">
                                 {item.label}
                             </Link>
                         </li>

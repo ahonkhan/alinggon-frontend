@@ -31,7 +31,7 @@ export default function RootLayout({
           <AuthProvider>
             <CartProvider>
               <TopBar />
-              <div className="sticky top-0 z-[100] w-full shadow-sm">
+              <div className="sticky top-0 z-[200] w-full shadow-sm">
                 <Header />
                 <Navbar />
               </div>
