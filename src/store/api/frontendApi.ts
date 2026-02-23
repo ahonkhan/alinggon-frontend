@@ -69,8 +69,21 @@ export interface CategoriesResponse {
     data: CategoryData[];
 }
 
+export interface BrandData {
+    id: number;
+    name: string;
+    slug: string;
+    logo?: string;
+}
+
+export interface BrandsResponse {
+    success: boolean;
+    data: BrandData[];
+}
+
 // Ensure base URL matches the backend API
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
+// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
@@ -91,7 +104,10 @@ export const frontendApi = createApi({
         getCategories: builder.query<CategoriesResponse, void>({
             query: () => '/categories',
         }),
+        getBrands: builder.query<BrandsResponse, void>({
+            query: () => '/brands',
+        }),
     }),
 });
 
-export const { useGetFeaturedProductsQuery, useGetProductDetailsQuery, useGetProductsQuery, useGetCategoriesQuery } = frontendApi;
+export const { useGetFeaturedProductsQuery, useGetProductDetailsQuery, useGetProductsQuery, useGetCategoriesQuery, useGetBrandsQuery } = frontendApi;

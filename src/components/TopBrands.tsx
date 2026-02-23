@@ -3,18 +3,37 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import { useGetBrandsQuery } from "@/store/api/frontendApi";
+
+const getLogoUrl = (logo: string | undefined) => {
+    if (!logo) return '';
+    if (logo.startsWith('http')) return logo;
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:8000';
+    return `${baseUrl}/${logo}`;
+};
 
 export default function TopBrands() {
-    const brands = [
-        { name: "Samsung", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/2560px-Samsung_Logo.svg.png" },
-        { name: "Apple", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png" },
-        { name: "Nike", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png" },
-        { name: "Adidas", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/1200px-Adidas_Logo.svg.png" },
-        { name: "Sony", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Sony_logo.svg/2560px-Sony_logo.svg.png" },
-        { name: "LG", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/LG_logo_%282015%29.svg/2560px-LG_logo_%282015%29.svg.png" },
-        { name: "HP", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/HP_logo_2012.svg/1200px-HP_logo_2012.svg.png" },
-        { name: "Dell", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Dell_Logo.svg/1200px-Dell_Logo.svg.png" },
-    ];
+    const { data: brandsResponse, isLoading } = useGetBrandsQuery();
+
+    if (isLoading) {
+        return (
+            <section className="pb-12 bg-white">
+                <div className="max-w-[1600px] mx-auto px-4 flex justify-center items-center h-[150px]">
+                    <div className="animate-pulse flex space-x-8 overflow-hidden w-full justify-center">
+                        {[1, 2, 3, 4, 5, 6].map((i) => (
+                            <div key={i} className="w-24 h-12 bg-gray-200 rounded shrink-0"></div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    const brands = brandsResponse?.data || [];
+
+    if (brands.length === 0) {
+        return null;
+    }
 
     return (
         <section className="pb-12  bg-white ">
@@ -44,13 +63,17 @@ export default function TopBrands() {
                     className="flex items-center !ease-linear"
                 >
                     {brands.map((brand, index) => (
-                        <SwiperSlide key={index} className="flex items-center justify-center !transition-none">
-                            <div className="w-24 h-12 relative flex items-center justify-center grayscale opacity-30 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-                                <img
-                                    src={brand.logo}
-                                    alt={brand.name}
-                                    className="max-w-full max-h-full object-contain"
-                                />
+                        <SwiperSlide key={brand.id || index} className="flex items-center justify-center !transition-none">
+                            <div className="w-24 h-12 relative  flex items-center justify-center grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                                {brand.logo ? (
+                                    <img
+                                        src={getLogoUrl(brand.logo)}
+                                        alt={brand.name}
+                                        className="max-w-full max-h-full object-contain rounded-lg"
+                                    />
+                                ) : (
+                                    <span className="text-sm font-semibold">{brand.name}</span>
+                                )}
                             </div>
                         </SwiperSlide>
                     ))}

@@ -33,7 +33,7 @@ export default function Home() {
           </div>
 
           {/* Main Slider - 8 Columns */}
-          <div className="col-span-1 lg:col-span-8 h-[380px]">
+          <div className="col-span-1 lg:col-span-7 h-[380px]">
             <div className="relative w-full h-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
               <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
               <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
@@ -53,7 +53,7 @@ export default function Home() {
           </div>
 
           {/* Video Section - 2 Columns */}
-          <div className="col-span-1 px-4 md:px-0 lg:col-span-2 h-auto lg:h-[380px]">
+          <div className="col-span-1 px-4 md:px-0 lg:col-span-3 h-auto lg:h-[380px]">
             <VideoSection />
           </div>
         </div>
