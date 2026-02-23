@@ -8,6 +8,11 @@ export default function FloatingActionButtons() {
     const { openCart, cart } = useCart();
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isPromoDismissed, setIsPromoDismissed] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     // Toggle scroll top button visibility based on scroll
     useEffect(() => {
@@ -71,7 +76,7 @@ export default function FloatingActionButtons() {
                 >
                     <ShoppingCart className="w-6 h-6" />
                     <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[10px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
-                        {cart.length}
+                        {isMounted ? cart.length : 0}
                     </span>
                 </button>
             </div>

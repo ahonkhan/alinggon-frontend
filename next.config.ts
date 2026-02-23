@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
         hostname: "hoirqrkdgbmvpwutwuwj.supabase.co",
       },
       {
@@ -22,6 +26,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "sc01.alicdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "ui-avatars.com",
       }
     ],
   },

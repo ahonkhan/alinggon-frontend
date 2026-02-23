@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { products } from "@/data/dummyData";
 import CategorySidebar from "@/components/CategorySidebar";
 import ProductSlider from "@/components/ProductSlider";
 import VideoSection from "@/components/VideoSection";
@@ -16,18 +15,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useGetFeaturedProductsQuery, useGetCategoriesQuery, CategoryData } from "@/store/api/frontendApi";
 
 export default function Home() {
-  const collections = [
-    { label: "Gadget", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=300", tag: "Gadget" },
-    { label: "Food", image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80&w=300", tag: "Food" },
-    { label: "Mobile", image: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg", tag: "Mobile" },
-    { label: "Man", image: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg", tag: "Man" },
-    { label: "Women", image: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5bab247f-35d9-400d-a82b-fd87cfe913d2_1600w.webp", tag: "Women" },
-    { label: "Tshirt", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80&w=300", tag: "Tshirt" },
-    { label: "Organic", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e3?auto=format&fit=crop&q=80&w=300", tag: "Organic" },
-    { label: "Accessories", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&q=80&w=300", tag: "Accessories" },
-  ];
+  const { data: featuredData, isLoading } = useGetFeaturedProductsQuery();
+  const { data: catData, isLoading: catLoading } = useGetCategoriesQuery();
+  const categories = catData?.data || [];
 
   return (
     <div className="bg-gray-50/50">
@@ -79,55 +72,65 @@ export default function Home() {
             Explore Collections
           </h2>
         </div>
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={20}
-          slidesPerView={3}
-          breakpoints={{
-            640: { slidesPerView: 3 },
-            768: { slidesPerView: 4 },
-            1024: { slidesPerView: 6 },
-            1280: { slidesPerView: 8 },
-          }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-          className="!pb-12"
-          pagination={{ clickable: true }}
-        >
-          {collections.map((item) => (
-            <SwiperSlide key={item.label}>
-              <Link href={`/shop?category=${item.tag}`} className="group cursor-pointer block">
-                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-100/50 overflow-hidden aspect-square mb-4 relative group-hover:shadow-red-100 transition-all p-2">
-                  <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
-                    <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                    <Image
-                      src={item.image}
-                      alt={item.label}
-                      fill
-                      sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
-                      className="object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+        {catLoading ? (
+          <div className="flex gap-4 overflow-x-auto pb-12 opacity-50">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="min-w-[150px] aspect-square bg-white rounded-[2rem] animate-pulse rounded-2xl block border border-gray-100"></div>
+            ))}
+          </div>
+        ) : (
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={20}
+            slidesPerView={3}
+            breakpoints={{
+              640: { slidesPerView: 3 },
+              768: { slidesPerView: 4 },
+              1024: { slidesPerView: 6 },
+              1280: { slidesPerView: 8 },
+            }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            className="!pb-12"
+            pagination={{ clickable: true }}
+          >
+            {categories.map((item: CategoryData) => (
+              <SwiperSlide key={item.id}>
+                <Link href={`/shop?category=${item.slug}`} className="group cursor-pointer block">
+                  <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-100/50 overflow-hidden aspect-square mb-4 relative group-hover:shadow-red-100 transition-all p-2 flex items-center justify-center">
+                    <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative bg-gray-50 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                      {item.image ? (
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
+                          className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                      ) : (
+                        <span className="text-4xl font-black text-slate-200">{item.name.charAt(0)}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-center text-xs font-black text-slate-500 tracking-widest uppercase group-hover:text-red-600 transition-colors">{item.label}</h3>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                  <h3 className="text-center text-xs font-black text-slate-500 tracking-widest uppercase group-hover:text-red-600 transition-colors line-clamp-1 px-1">{item.name}</h3>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </section>
 
       {/* Flash Sell Section */}
-      <FlashSell />
+      {/* <FlashSell /> */}
 
       {/* Product Sliders */}
-      <ProductSlider title="12 Months Product" products={products} />
+      <ProductSlider title="12 Months Product" products={featuredData?.data.twelve_months_products || []} />
 
-      <ProductSlider title="Alinggon  New Arrival" products={[...products].reverse()} />
+      <ProductSlider title="Alinggon  New Arrival" products={featuredData?.data.new_arrivals || []} />
 
-      <ProductSlider title="Our Special Offers" products={products} />
+      <ProductSlider title="Our Special Offers" products={featuredData?.data.special_offers || []} />
 
-
-      <ProductSlider title="Today's Deals" products={products} />
-
+      <ProductSlider title="Today's Deals" products={featuredData?.data.todays_deals || []} />
 
       <CustomerRatings />
       <TopBrands />

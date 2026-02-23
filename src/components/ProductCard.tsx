@@ -9,6 +9,7 @@ import { useToast } from "@/context/ToastContext";
 
 interface ProductCardProps {
     id: string;
+    slug: string;
     name: string;
     price: number;
     originalPrice?: number;
@@ -18,11 +19,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard(props: ProductCardProps) {
-    const { id, name, price, originalPrice, discount, image } = props;
+    const { id, slug, name, price, originalPrice, discount, image } = props;
     const { addToCart } = useCart();
     const { showToast } = useToast();
     const router = useRouter();
-    const productHref = `/product/${id}`;
+    const productHref = `/product/${slug}`;
 
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();

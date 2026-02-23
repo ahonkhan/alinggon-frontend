@@ -10,7 +10,7 @@ export default function CartDrawer() {
     if (!isCartOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[100] flex justify-end">
+        <div className="fixed inset-0 z-[500] flex justify-end">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-slate-900/60 transition-opacity"

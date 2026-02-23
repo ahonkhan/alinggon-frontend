@@ -1,41 +1,36 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { ChevronLeft, ChevronRight, MessageCircle, Truck, RotateCcw, ShieldCheck, Headphones, SlidersHorizontal, LayoutGrid, List, ShoppingBag, Package } from "lucide-react";
+import { ChevronLeft, ChevronRight, MessageCircle, Truck, RotateCcw, ShieldCheck, Headphones, SlidersHorizontal, LayoutGrid, List, ShoppingBag, Package, Loader2 } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
-import { products, categories } from "@/data/dummyData";
-import { useState, useMemo, Suspense } from "react";
+import { useGetProductsQuery, useGetCategoriesQuery } from "@/store/api/frontendApi";
+import { useState, Suspense, useEffect } from "react";
 
 function ShopContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
+
+    // Read from URL
     const activeCategory = searchParams.get("category") || "All";
     const searchQuery = searchParams.get("q") || "";
     const sortOption = searchParams.get("sort") || "latest";
+    const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
     const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-    const filteredProducts = useMemo(() => {
-        let result = [...products];
+    // Fetch live data
+    const { data: catRes, isLoading: catLoading } = useGetCategoriesQuery();
+    const { data: prodRes, isLoading: prodLoading, isFetching } = useGetProductsQuery({
+        category: activeCategory,
+        q: searchQuery,
+        sort: sortOption,
+        page: currentPage.toString()
+    });
 
-        if (activeCategory !== "All") {
-            result = result.filter(p => p.category === activeCategory);
-        }
-
-        if (searchQuery) {
-            result = result.filter(p =>
-                p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                p.category.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-        }
-
-        // Sort
-        if (sortOption === "price-low") result.sort((a, b) => a.price - b.price);
-        if (sortOption === "price-high") result.sort((a, b) => b.price - a.price);
-
-        return result;
-    }, [activeCategory, searchQuery, sortOption]);
+    const categories = catRes?.data || [];
+    const products = prodRes?.data || [];
+    const meta = prodRes?.meta;
 
     const handleCategoryChange = (category: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -44,14 +39,25 @@ function ShopContent() {
         } else {
             params.set("category", category);
         }
+        params.delete("page"); // Reset to page 1
         router.push(`/shop?${params.toString()}`);
     };
 
     const handleSortChange = (sort: string) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set("sort", sort);
+        params.delete("page"); // Reset to page 1
         router.push(`/shop?${params.toString()}`);
     };
+
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("page", page.toString());
+        router.push(`/shop?${params.toString()}`);
+    };
+
+    const totalProductsCount = meta?.total || 0;
+    const totalCategoriesCount = categories.reduce((sum, cat) => sum + (cat.count || 0), 0);
 
     return (
         <div className="bg-gray-50 min-h-screen">
@@ -83,21 +89,27 @@ function ShopContent() {
                                 <LayoutGrid className="w-4 h-4 text-red-400" /> Collection Groups
                             </h3>
                             <ul className="space-y-2">
-                                <CategoryItem
-                                    label="All Products"
-                                    count={products.length}
-                                    isActive={activeCategory === "All"}
-                                    onClick={() => handleCategoryChange("All")}
-                                />
-                                {categories.map(cat => (
-                                    <CategoryItem
-                                        key={cat}
-                                        label={cat}
-                                        count={products.filter(p => p.category === cat).length}
-                                        isActive={activeCategory === cat}
-                                        onClick={() => handleCategoryChange(cat)}
-                                    />
-                                ))}
+                                {catLoading ? (
+                                    <div className="flex justify-center p-4"><Loader2 className="w-5 h-5 animate-spin text-red-300" /></div>
+                                ) : (
+                                    <>
+                                        <CategoryItem
+                                            label="All Products"
+                                            count={totalCategoriesCount}
+                                            isActive={activeCategory === "All"}
+                                            onClick={() => handleCategoryChange("All")}
+                                        />
+                                        {categories.map(cat => (
+                                            <CategoryItem
+                                                key={cat.id}
+                                                label={cat.name}
+                                                count={cat.count}
+                                                isActive={activeCategory === cat.slug || activeCategory === cat.name}
+                                                onClick={() => handleCategoryChange(cat.slug)}
+                                            />
+                                        ))}
+                                    </>
+                                )}
                             </ul>
                         </div>
 
@@ -118,7 +130,7 @@ function ShopContent() {
                         <div className="bg-white p-4 md:p-6 rounded-3xl border border-gray-100 shadow-xl shadow-slate-200/30 flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="flex items-center gap-6">
                                 <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
-                                    <span className="text-slate-900">{filteredProducts.length}</span> Objects Found
+                                    <span className="text-slate-900">{totalProductsCount}</span> Objects Found
                                 </span>
                                 <div className="h-4 w-px bg-gray-100"></div>
                                 <div className="flex gap-2">
@@ -149,7 +161,12 @@ function ShopContent() {
                         </div>
 
                         {/* Results */}
-                        {filteredProducts.length === 0 ? (
+                        {prodLoading || isFetching ? (
+                            <div className="bg-white rounded-[2.5rem] border border-gray-100 p-32 text-center shadow-inner flex flex-col items-center">
+                                <Loader2 className="w-12 h-12 text-red-400 animate-spin mb-4" />
+                                <p className="text-gray-400 font-bold uppercase text-xs tracking-widest">Applying filters...</p>
+                            </div>
+                        ) : products.length === 0 ? (
                             <div className="bg-white rounded-[2.5rem] border border-gray-100 p-20 text-center shadow-inner">
                                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <Package className="w-10 h-10 text-gray-200" />
@@ -161,20 +178,39 @@ function ShopContent() {
                             </div>
                         ) : (
                             <div className={`grid gap-2 ${viewMode === "grid" ? "grid-cols-2 md:grid-cols-3 xl:grid-cols-4 " : "grid-cols-1"}`}>
-                                {filteredProducts.map(product => (
+                                {products.map(product => (
                                     <ProductCard key={product.id} {...product} />
                                 ))}
                             </div>
                         )}
 
-                        {/* Pagination Placeholder */}
-                        {filteredProducts.length > 0 && (
+                        {/* Pagination */}
+                        {meta && meta.last_page > 1 && (
                             <div className="flex justify-center mt-16 py-8">
                                 <nav className="flex items-center gap-3">
-                                    <NavButton icon={ChevronLeft} />
-                                    <NavButton label="1" active />
-                                    <NavButton label="2" />
-                                    <NavButton icon={ChevronRight} />
+                                    <button
+                                        disabled={meta.current_page === 1}
+                                        onClick={() => handlePageChange(meta.current_page - 1)}
+                                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
+                                        <ChevronLeft className="w-5 h-5" />
+                                    </button>
+
+                                    {/* Simplified Pagination Pages */}
+                                    {Array.from({ length: meta.last_page }, (_, i) => i + 1).map(pageNum => (
+                                        <button
+                                            key={pageNum}
+                                            onClick={() => handlePageChange(pageNum)}
+                                            className={`w-12 h-12 flex items-center justify-center rounded-2xl font-black text-xs transition-all shadow-sm ${meta.current_page === pageNum ? "bg-red-400 text-white shadow-red-200/50 scale-110" : "bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100"}`}>
+                                            {pageNum}
+                                        </button>
+                                    ))}
+
+                                    <button
+                                        disabled={meta.current_page === meta.last_page}
+                                        onClick={() => handlePageChange(meta.current_page + 1)}
+                                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
+                                        <ChevronRight className="w-5 h-5" />
+                                    </button>
                                 </nav>
                             </div>
                         )}

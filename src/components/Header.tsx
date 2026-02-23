@@ -15,6 +15,7 @@ export default function Header() {
     const [searchQuery, setSearchQuery] = useState("");
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
     const router = useRouter();
     const searchRef = useRef<HTMLDivElement>(null);
 
@@ -34,6 +35,7 @@ export default function Header() {
     }, [searchQuery]);
 
     useEffect(() => {
+        setIsMounted(true);
         const handleClickOutside = (event: MouseEvent) => {
             if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
                 setShowSuggestions(false);
@@ -154,7 +156,7 @@ export default function Header() {
                                 <div className="relative">
                                     <ShoppingCart className="w-6 h-6 stroke-[1.8]" />
                                     <span className="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full border-2 border-white shadow-xl animate-pulse">
-                                        {cartCount}
+                                        {isMounted ? cartCount : 0}
                                     </span>
                                 </div>
                             </button>

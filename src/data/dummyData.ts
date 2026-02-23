@@ -1,5 +1,6 @@
 export interface Product {
     id: string;
+    slug: string;
     name: string;
     price: number;
     originalPrice?: number;
@@ -16,6 +17,7 @@ export interface Product {
 export const products: Product[] = [
     {
         id: "bundle-1",
+        slug: "bundle-1-slug",
         name: "৫ পিস প্রিমিয়াম কম্বো প্যাকেইজ (ঘড়ি, সানগ্লাস, মানিব্যাগ, বেল্ট, আতর)",
         price: 1090,
         originalPrice: 1590,
@@ -30,6 +32,7 @@ export const products: Product[] = [
     },
     {
         id: "1",
+        slug: "1-slug",
         name: "Hand Fan cute handheld mini fan",
         price: 500,
         originalPrice: 700,
@@ -52,6 +55,7 @@ export const products: Product[] = [
     },
      {
         id: "112xx",
+        slug: "112xx-slug",
         name: "Hand Fan cute handheld mini fan",
         price: 500,
         originalPrice: 700,
@@ -74,6 +78,7 @@ export const products: Product[] = [
     },
     {
         id: "2",
+        slug: "2-slug",
         name: "Lotto Slide Sandal for Men",
         price: 400,
         originalPrice: 800,
@@ -91,6 +96,7 @@ export const products: Product[] = [
     },
     {
         id: "3",
+        slug: "3-slug",
         name: "Colorful Golf Interactive Ball",
         price: 100,
         originalPrice: 200,
@@ -106,6 +112,7 @@ export const products: Product[] = [
     },
     {
         id: "4",
+        slug: "4-slug",
         name: "Adjustable Hand Grips Strength",
         price: 222,
         originalPrice: 333,
@@ -121,6 +128,7 @@ export const products: Product[] = [
     },
     {
         id: "5",
+        slug: "5-slug",
         name: "Smart Hand Fan cute handheld cooling Rechargeable",
         price: 300,
         originalPrice: 500,
@@ -142,6 +150,7 @@ export const products: Product[] = [
     },
     {
         id: "6",
+        slug: "6-slug",
         name: "Premium Leather Wallet for Men",
         price: 850,
         originalPrice: 1200,
@@ -159,6 +168,7 @@ export const products: Product[] = [
     },
     {
         id: "7",
+        slug: "7-slug",
         name: "Luxury Wrist Watch - Silver Edition",
         price: 2500,
         originalPrice: 3500,
@@ -176,6 +186,7 @@ export const products: Product[] = [
     },
     {
         id: "8",
+        slug: "8-slug",
         name: "Organic Honey Nut Mix",
         price: 650,
         originalPrice: 750,
@@ -192,6 +203,7 @@ export const products: Product[] = [
     },
     {
         id: "9",
+        slug: "9-slug",
         name: "Women's Designer Handbag",
         price: 1800,
         originalPrice: 2200,
@@ -209,6 +221,7 @@ export const products: Product[] = [
     },
     {
         id: "10",
+        slug: "10-slug",
         name: "Retro Pixel Art Mobile Skins",
         price: 250,
         originalPrice: 350,
