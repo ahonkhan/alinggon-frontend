@@ -50,7 +50,7 @@ export default function CategorySidebar() {
                                     alt={category.name}
                                     width={24}
                                     height={24}
-                                    className="object-contain rounded-full bg-gray-50 p-0.5 border border-gray-100 shadow-sm"
+                                    className="object-contain h-10 rounded-lg w-10 bg-gray-50  border border-gray-100 shadow-sm"
                                 />
                             ) : (
                                 <div className="w-6 h-6 rounded-full bg-red-50 flex items-center justify-center border border-red-100">

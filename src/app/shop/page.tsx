@@ -57,7 +57,7 @@ function ShopContent() {
     };
 
     const totalProductsCount = meta?.total || 0;
-    const totalCategoriesCount = categories.reduce((sum, cat) => sum + (cat.count || 0), 0);
+    const totalCategoriesCount = categories.reduce((sum, cat) => sum + Number(cat.count || 0), 0);
 
     return (
         <div className="bg-gray-50 min-h-screen">

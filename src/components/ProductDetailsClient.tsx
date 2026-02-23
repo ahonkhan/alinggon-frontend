@@ -217,7 +217,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     )}
 
                     <div className="flex flex-col sm:flex-row items-stretch gap-4">
-                        <div className="flex border-2 border-gray-50 rounded-2xl overflow-hidden h-14 bg-gray-50/50 shadow-inner">
+                        <div className="flex border-2 border-gray-200 rounded-2xl overflow-hidden h-14 bg-gray-50/50 shadow-inner">
                             <button
                                 onClick={() => setQuantity(q => Math.max(1, q - 1))}
                                 className="px-5 hover:bg-white text-slate-400 hover:text-red-500 transition-colors flex items-center justify-center active:scale-90"
@@ -318,7 +318,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="max-w-4xl space-y-6">
                                 <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tighter">{product.name}</h2>
-                                <p className="text-gray-500 text-base leading-relaxed whitespace-pre-line">{product.description}</p>
+                                <div
+                                    className="text-gray-500 text-base leading-relaxed prose prose-slate max-w-none"
+                                    dangerouslySetInnerHTML={{ __html: product.description }}
+                                />
                                 <div className="h-px bg-gray-50 w-full my-8" />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div className="bg-red-50/30 p-8 rounded-[2rem] border border-red-50">
