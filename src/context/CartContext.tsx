@@ -3,15 +3,18 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { Product } from "@/store/api/frontendApi";
 
-interface CartItem extends Product {
+export interface CartItem extends Product {
     quantity: number;
+    variation_combination_id?: string | number | null;
+    variation_details?: Record<string, string> | null;
+    cartItemId: string; // Unique ID for this specific variation in the cart
 }
 
 interface CartContextType {
     cart: CartItem[];
-    addToCart: (product: Product, quantity?: number, openDrawer?: boolean) => void;
-    removeFromCart: (productId: string) => void;
-    updateQuantity: (productId: string, quantity: number) => void;
+    addToCart: (product: Product, quantity?: number, variationId?: string | number | null, variationDetails?: Record<string, string> | null, openDrawer?: boolean) => void;
+    removeFromCart: (cartItemId: string) => void;
+    updateQuantity: (cartItemId: string, quantity: number) => void;
     clearCart: () => void;
     isCartOpen: boolean;
     openCart: () => void;
@@ -47,29 +50,49 @@ export function CartProvider({ children }: { children: ReactNode }) {
         }
     }, [cart, isInitialized]);
 
-    const addToCart = (product: Product, quantity: number = 1, openDrawer: boolean = true) => {
+    const addToCart = (
+        product: Product,
+        quantity: number = 1,
+        variationId: string | number | null = null,
+        variationDetails: Record<string, string> | null = null,
+        openDrawer: boolean = true
+    ) => {
+        const cartItemId = variationId ? `${product.id}-${variationId}` : `${product.id}`;
+
         setCart((prev) => {
-            const existing = prev.find((item) => item.id === product.id);
+            const existing = prev.find((item) => item.cartItemId === cartItemId);
             if (existing) {
                 return prev.map((item) =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + quantity } : item
+                    item.cartItemId === cartItemId ? { ...item, quantity: item.quantity + quantity } : item
                 );
             }
-            return [...prev, { ...product, quantity }];
+
+            // If it's a variation, the price might be different. 
+            // In a real app, we should pass the correct price here.
+            // For now, we assume the product object passed in already has the correct price for the variation.
+
+            return [...prev, {
+                ...product,
+                quantity,
+                variation_combination_id: variationId,
+                variation_details: variationDetails,
+                cartItemId
+            }];
         });
+
         if (openDrawer) {
             setIsCartOpen(true);
         }
     };
 
-    const removeFromCart = (productId: string) => {
-        setCart((prev) => prev.filter((item) => item.id !== productId));
+    const removeFromCart = (cartItemId: string) => {
+        setCart((prev) => prev.filter((item) => item.cartItemId !== cartItemId));
     };
 
-    const updateQuantity = (productId: string, quantity: number) => {
+    const updateQuantity = (cartItemId: string, quantity: number) => {
         setCart((prev) =>
             prev.map((item) =>
-                item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
+                item.cartItemId === cartItemId ? { ...item, quantity: Math.max(1, quantity) } : item
             )
         );
     };

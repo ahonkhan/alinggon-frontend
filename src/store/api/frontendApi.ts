@@ -87,7 +87,16 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangp
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
-    baseQuery: fetchBaseQuery({ baseUrl }),
+    baseQuery: fetchBaseQuery({
+        baseUrl,
+        prepareHeaders: (headers) => {
+            const token = typeof window !== 'undefined' ? localStorage.getItem('alinggon_token') : null;
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+            return headers;
+        },
+    }),
     endpoints: (builder) => ({
         getFeaturedProducts: builder.query<FeaturedProductsResponse, void>({
             query: () => '/featured-products',
@@ -107,7 +116,55 @@ export const frontendApi = createApi({
         getBrands: builder.query<BrandsResponse, void>({
             query: () => '/brands',
         }),
+        placeOrder: builder.mutation<any, any>({
+            query: (orderData) => ({
+                url: '/orders',
+                method: 'POST',
+                body: orderData,
+            }),
+        }),
+        getMyOrders: builder.query<any, void>({
+            query: () => '/orders/my-orders',
+        }),
+        getOrderDetails: builder.query<any, string>({
+            query: (orderNumber) => `/orders/${orderNumber}`,
+        }),
+        register: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/register',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        login: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/login',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        trackOrder: builder.query<any, { orderNumber?: string, phone: string }>({
+            query: ({ orderNumber, phone }) => {
+                let url = `/orders/track?phone=${phone}`;
+                if (orderNumber) url += `&order_number=${orderNumber}`;
+                return url;
+            },
+        }),
     }),
 });
 
-export const { useGetFeaturedProductsQuery, useGetProductDetailsQuery, useGetProductsQuery, useGetCategoriesQuery, useGetBrandsQuery } = frontendApi;
+
+export const {
+    useGetFeaturedProductsQuery,
+    useGetCategoriesQuery,
+    useGetProductDetailsQuery,
+    useGetProductsQuery,
+    useGetBrandsQuery,
+    usePlaceOrderMutation,
+    useGetMyOrdersQuery,
+    useGetOrderDetailsQuery,
+    useRegisterMutation,
+    useLoginMutation,
+    useTrackOrderQuery,
+    useLazyTrackOrderQuery,
+} = frontendApi;

@@ -83,12 +83,34 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     }, [activeCombination]);
 
     const handleAddToCart = () => {
-        addToCart(product, quantity);
+        const cartProduct = {
+            ...product,
+            price: displayPrice,
+            originalPrice: displayOriginalPrice,
+        };
+        addToCart(
+            cartProduct,
+            quantity,
+            activeCombination?.id,
+            activeCombination?.combination,
+            true
+        );
         showToast("Added to bag successfully", "success");
     };
 
     const handleBuyNow = () => {
-        addToCart(product, quantity);
+        const cartProduct = {
+            ...product,
+            price: displayPrice,
+            originalPrice: displayOriginalPrice,
+        };
+        addToCart(
+            cartProduct,
+            quantity,
+            activeCombination?.id,
+            activeCombination?.combination,
+            true
+        );
     };
 
     const relatedProducts: any[] = []; // Skipping related products for now
