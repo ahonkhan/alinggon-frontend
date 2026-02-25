@@ -1,6 +1,6 @@
 "use client";
 
-import { X, ChevronRight, Home, ShoppingBag, Truck } from "lucide-react";
+import { X, ChevronRight, Home, ShoppingBag, Truck, Zap } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useGetCategoriesQuery, CategoryData } from "@/store/api/frontendApi";
@@ -31,6 +31,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     const quickLinks = [
         { label: "Home", href: "/", icon: Home },
         { label: "Shop", href: "/shop", icon: ShoppingBag },
+        { label: "Flash Sale", href: "/flash-sale", icon: Zap },
         { label: "Track Order", href: "/track-order", icon: Truck },
     ];
 

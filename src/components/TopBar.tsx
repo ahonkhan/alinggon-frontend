@@ -3,9 +3,15 @@
 import { Mail, Phone, Truck, User, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
+import { useEffect, useState } from "react";
 
 export default function TopBar() {
     const { user, logout } = useAuth();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <div className="bg-slate-900 text-white text-[10px] font-black py-2 hidden md:block uppercase tracking-widest border-b border-white/5">
@@ -29,7 +35,7 @@ export default function TopBar() {
 
                     <div className="h-3 w-[1px] bg-white/10 mx-2"></div>
 
-                    {user ? (
+                    {mounted && (user ? (
                         <div className="flex items-center gap-4">
                             <span className="flex items-center gap-2 text-white">
                                 <User className="w-3 h-3 text-red-400" /> {user.name}
@@ -47,7 +53,7 @@ export default function TopBar() {
                             <span className="opacity-20">/</span>
                             <Link href="/register" className="hover:text-red-400 transition-colors">Register</Link>
                         </div>
-                    )}
+                    ))}
                 </div>
             </div>
         </div>

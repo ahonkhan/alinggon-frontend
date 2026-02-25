@@ -8,8 +8,8 @@ import VideoSection from "@/components/VideoSection";
 import AdsSection from "@/components/AdsSection";
 import ProductCard from "@/components/ProductCard";
 import CustomerRatings from "@/components/CustomerRatings";
-import FlashSell from "@/components/FlashSell";
 import TopBrands from "@/components/TopBrands";
+import FlashSaleSection from "@/components/FlashSaleSection";
 import PromoModal from "@/components/PromoModal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
@@ -120,8 +120,8 @@ export default function Home() {
         )}
       </section>
 
-      {/* Flash Sell Section */}
-      {/* <FlashSell /> */}
+      {/* Flash Sale Section */}
+      <FlashSaleSection />
 
       {/* Product Sliders */}
       <ProductSlider title="12 Months Product" products={featuredData?.data.twelve_months_products || []} />

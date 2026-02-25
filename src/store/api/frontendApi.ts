@@ -9,6 +9,47 @@ export interface Product {
     discount?: string;
     image: string;
     category: string;
+    reviews?: Review[];
+    related_products?: Product[];
+}
+
+export interface FlashSaleProduct {
+    id: number;
+    flash_sale_id: number;
+    product_id: number;
+    price: number;
+    quantity: number;
+    sold_count: number;
+    product_data: Product;
+}
+
+export interface FlashSale {
+    id: number;
+    name: string;
+    slug: string;
+    start_date: string;
+    end_date: string;
+    status: boolean;
+    image: string | null;
+    products: FlashSaleProduct[];
+}
+
+export interface Review {
+    id: number;
+    user_id: number;
+    product_id: number;
+    rating: number;
+    comment: string;
+    images?: string[];
+    status: 'pending' | 'approved' | 'rejected';
+    admin_reply?: string;
+    likes_count: number;
+    user?: {
+        id: number;
+        name: string;
+        profile_photo?: string;
+    };
+    created_at: string;
 }
 
 export interface FeaturedProductsResponse {
@@ -150,6 +191,28 @@ export const frontendApi = createApi({
                 return url;
             },
         }),
+        getProductReviews: builder.query<any, string>({
+            query: (productId) => `/products/${productId}/reviews`,
+        }),
+        submitReview: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/reviews',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        toggleLikeReview: builder.mutation<any, number>({
+            query: (reviewId) => ({
+                url: `/reviews/${reviewId}/like`,
+                method: 'POST',
+            }),
+        }),
+        getMyReviews: builder.query<any, void>({
+            query: () => '/my-reviews',
+        }),
+        getActiveFlashSale: builder.query<{ success: boolean; data: FlashSale }, void>({
+            query: () => '/flash-sale/active',
+        }),
     }),
 });
 
@@ -167,4 +230,9 @@ export const {
     useLoginMutation,
     useTrackOrderQuery,
     useLazyTrackOrderQuery,
+    useGetProductReviewsQuery,
+    useSubmitReviewMutation,
+    useToggleLikeReviewMutation,
+    useGetMyReviewsQuery,
+    useGetActiveFlashSaleQuery,
 } = frontendApi;

@@ -9,6 +9,7 @@ export default function Navbar() {
         { label: "About Admin", href: "/about" },
         { label: "Categories", href: "/categories" },
         { label: "Shop", href: "/shop" },
+        { label: "Flash Sale", href: "/flash-sale" },
         { label: "My Orders", href: "/orders" },
         { label: "Track Order", href: "/tracking" },
         { label: "Customer Review", href: "/reviews" },

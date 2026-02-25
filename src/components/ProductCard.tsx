@@ -16,6 +16,8 @@ interface ProductCardProps {
     discount?: string;
     image: string;
     category: string;
+    type?: string;
+    variations?: any[];
 }
 
 export default function ProductCard(props: ProductCardProps) {
@@ -28,6 +30,10 @@ export default function ProductCard(props: ProductCardProps) {
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
+        if (props.type === 'variable') {
+            router.push(productHref);
+            return;
+        }
         // @ts-ignore
         addToCart(props);
         showToast("Added to bag", "success");

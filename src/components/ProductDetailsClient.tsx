@@ -1,7 +1,8 @@
 import { useState, useMemo } from "react";
-import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Twitter, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Twitter, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart } from "lucide-react";
 import Link from "next/link";
-import { ProductDetailsResponse } from "@/store/api/frontendApi";
+import ProductCard from "./ProductCard";
+import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation } from "@/store/api/frontendApi";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -113,11 +114,35 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
         );
     };
 
-    const relatedProducts: any[] = []; // Skipping related products for now
+    const reviews = product.reviews || [];
+    const relatedProducts = product.related_products || [];
+
+    const [reviewForm, setReviewForm] = useState({
+        rating: 0,
+        comment: '',
+        images: [] as string[]
+    });
+
+    const [submitReview, { isLoading: isSubmitting }] = useSubmitReviewMutation();
+    const [toggleLike] = useToggleLikeReviewMutation();
+
+    const handleReviewSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await submitReview({
+                product_id: product.id,
+                ...reviewForm
+            }).unwrap();
+            showToast("Review submitted successfully! It will be visible after approval.", "success");
+            setReviewForm({ rating: 0, comment: '', images: [] });
+        } catch (err: any) {
+            showToast(err.data?.message || "Failed to submit review", "error");
+        }
+    };
 
     // Format gallery images
-    const galleryImages = product.gallery && product.gallery.length > 0
-        ? product.gallery.map(g => g.image_path.startsWith('http') ? g.image_path : `http://localhost:8000/storage/${g.image_path}`)
+    const galleryImages: string[] = product.gallery && product.gallery.length > 0
+        ? product.gallery.map((g: any) => g.image_path.startsWith('http') ? g.image_path : `http://localhost:8000/storage/${g.image_path}`)
         : [product.image];
 
     return (
@@ -312,8 +337,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 </div>
             </div>
 
+
+
             {/* Description & Feedback (FULL WIDTH TABS) */}
-            <div className="mt-16 bg-white rounded-[3rem] border border-gray-50 shadow-2xl shadow-slate-100/50 overflow-hidden">
+            <div className="mt-20 bg-white rounded-[3rem] border-2 border-slate-100 shadow-2xl shadow-slate-100/50 overflow-hidden">
                 <div className="border-b border-gray-50 px-10 pt-8 flex items-center gap-10 bg-gray-50/30">
                     <button
                         onClick={() => setActiveTab('description')}
@@ -331,7 +358,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         onClick={() => setActiveTab('reviews')}
                         className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'reviews' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
                     >
-                        Reviews
+                        Reviews ({reviews.length})
                     </button>
                 </div>
 
@@ -383,50 +410,117 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     {activeTab === 'reviews' && (
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                                {/* Current Opinions Section relocated here */}
                                 <div className="lg:col-span-7 space-y-8">
                                     <div className="flex items-center justify-between border-b border-gray-100 pb-6">
                                         <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Customer Feedbacks</h3>
-                                        <div className="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-xl text-yellow-600 font-black text-xs">
-                                            <Star className="w-4 h-4 fill-current" /> 5.0 Rating
-                                        </div>
+                                        {reviews.length > 0 && (
+                                            <div className="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-xl text-yellow-600 font-black text-xs">
+                                                <Star className="w-4 h-4 fill-current" /> {(reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)} Rating
+                                            </div>
+                                        )}
                                     </div>
 
                                     <div className="space-y-6">
-                                        {/* Mock Review */}
-                                        <div className="bg-gray-50/50 p-6 rounded-3xl border border-gray-100">
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-black text-xs uppercase">A</div>
-                                                <div>
-                                                    <div className="text-xs font-black text-slate-900 uppercase">Ahmed Khan</div>
-                                                    <div className="flex gap-0.5 text-yellow-400">
-                                                        {[1, 2, 3, 4, 5].map(s => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+                                        {reviews.length > 0 ? reviews.map((r) => (
+                                            <div key={r.id} className="bg-gray-50/50 p-8 rounded-[2.5rem] border-2 border-slate-100 group">
+                                                <div className="flex items-start justify-between mb-6">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-12 h-12 rounded-2xl bg-white shadow-lg overflow-hidden border border-gray-100 p-0.5">
+                                                            <img
+                                                                src={r.user?.profile_photo ? (r.user.profile_photo.startsWith('http') ? r.user.profile_photo : `http://localhost:8000/storage/${r.user.profile_photo}`) : `https://ui-avatars.com/api/?name=${r.user?.name}&background=random`}
+                                                                alt={r.user?.name}
+                                                                className="w-full h-full object-cover rounded-[14px]"
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <div className="text-sm font-black text-slate-900 uppercase tracking-tight">{r.user?.name}</div>
+                                                            <div className="flex gap-0.5 text-yellow-400 mt-1">
+                                                                {[...Array(5)].map((_, i) => <Star key={i} className={`w-3 h-3 ${i < r.rating ? 'fill-current' : 'text-gray-200'}`} />)}
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">{new Date(r.created_at).toLocaleDateString()}</span>
+                                                </div>
+                                                <p className="text-sm text-slate-600 leading-relaxed font-medium">"{r.comment}"</p>
+
+                                                {r.images && r.images.length > 0 && (
+                                                    <div className="flex gap-3 mt-6">
+                                                        {r.images.map((img, idx) => (
+                                                            <div key={idx} className="w-20 h-20 rounded-2xl overflow-hidden shadow-sm border border-white">
+                                                                <img src={img.startsWith('http') ? img : `http://localhost:8000/storage/${img}`} className="w-full h-full object-cover" />
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
+
+                                                {r.admin_reply && (
+                                                    <div className="mt-6 bg-white p-6 rounded-3xl border-2 border-red-100 shadow-sm relative overflow-hidden">
+                                                        <div className="absolute top-0 left-0 w-1 h-full bg-red-400" />
+                                                        <div className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                                            <ShieldCheck className="w-3.5 h-3.5" /> Admin Hub Reply
+                                                        </div>
+                                                        <p className="text-sm text-slate-600 font-bold leading-relaxed">{r.admin_reply}</p>
+                                                    </div>
+                                                )}
+
+                                                <div className="mt-6 pt-4 border-t border-gray-100 flex items-center gap-6">
+                                                    <button
+                                                        onClick={() => toggleLike(r.id)}
+                                                        className="flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors group/like"
+                                                    >
+                                                        <Heart className="w-4 h-4 group-hover/like:fill-red-500" />
+                                                        <span className="text-[10px] font-black uppercase tracking-widest">{r.likes_count} Helpful</span>
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <p className="text-sm text-gray-500 leading-relaxed italic">"Great quality product, exactly as described. The delivery was fast and the packaging was premium."</p>
-                                        </div>
+                                        )) : (
+                                            <div className="text-center py-20 bg-gray-50/30 rounded-[3rem] border-2 border-dashed border-gray-100">
+                                                <MessageCircle className="w-12 h-12 text-gray-200 mx-auto mb-4" />
+                                                <p className="text-sm font-black text-gray-400 uppercase tracking-widest">No reviews yet. Be the first to share!</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 
                                 <div className="lg:col-span-5">
-                                    <div className="bg-white p-8 rounded-[2rem] border-2 border-dashed border-gray-100">
-                                        <h3 className="font-bold text-gray-900 mb-6 text-sm uppercase tracking-widest text-center">এই পণ্য সম্পর্কে মতামত দিন</h3>
-                                        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); showToast("Comment submitted for review", "success"); }}>
-                                            <div className="flex justify-center gap-2 mb-6">
-                                                {[1, 2, 3, 4, 5].map(s => <button key={s} type="button" className="text-gray-200 hover:text-yellow-400 transition-colors"><Star className="w-8 h-8 fill-current" /></button>)}
+                                    <div className="bg-white p-10 rounded-[3rem] border-2 border-slate-200 sticky top-24">
+                                        <h3 className="font-black text-slate-900 mb-8 text-sm uppercase tracking-widest text-center border-b border-gray-50 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
+                                        <form className="space-y-6" onSubmit={handleReviewSubmit}>
+                                            <div className="flex justify-center gap-3 mb-8">
+                                                {[1, 2, 3, 4, 5].map(s => (
+                                                    <button
+                                                        key={s}
+                                                        type="button"
+                                                        onClick={() => setReviewForm(prev => ({ ...prev, rating: s }))}
+                                                        className={`transition-all hover:scale-110 active:scale-90 ${reviewForm.rating >= s ? 'text-yellow-400' : 'text-gray-100'}`}
+                                                    >
+                                                        <Star className={`w-10 h-10 ${reviewForm.rating >= s ? 'fill-current' : 'fill-gray-100'}`} />
+                                                    </button>
+                                                ))}
                                             </div>
-                                            <textarea placeholder="Write your review here..." className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-50 focus:border-red-400 h-32 transition-all resize-none font-medium" required></textarea>
+                                            <textarea
+                                                value={reviewForm.comment}
+                                                onChange={(e) => setReviewForm(prev => ({ ...prev, comment: e.target.value }))}
+                                                placeholder="আপনার মূল্যবান মন্তব্য লিখুন..."
+                                                className="w-full p-6 bg-gray-50 border-2 border-slate-200 rounded-[2rem] text-sm focus:outline-none focus:ring-4 focus:ring-red-50 focus:border-red-400 h-40 transition-all resize-none font-bold"
+                                                required
+                                            ></textarea>
 
                                             <div className="grid grid-cols-1 gap-4">
-                                                <div className="border-2 border-dashed border-gray-100 rounded-2xl p-6 text-center cursor-pointer hover:bg-red-50/30 hover:border-red-100 transition-all group">
-                                                    <ImageIcon className="w-8 h-8 text-gray-300 mx-auto mb-2 group-hover:text-red-400 transition-colors" />
-                                                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Attach Images</span>
+                                                <div className="border-2 border-slate-200 rounded-[2rem] p-8 text-center cursor-pointer hover:bg-red-50/30 hover:border-red-100 transition-all group relative overflow-hidden">
+                                                    <ImageIcon className="w-8 h-8 text-gray-200 mx-auto mb-2 group-hover:text-red-400 transition-all" />
+                                                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">ছবির অ্যালবাম যুক্ত করুন</span>
+                                                    <p className="text-[8px] text-gray-300 mt-2 uppercase">Max 5 photos, 2MB each</p>
                                                 </div>
-                                                <input type="text" placeholder="আপনার নাম *" className="w-full h-14 px-6 bg-gray-50 border border-gray-100 rounded-2xl text-sm focus:outline-none focus:ring-4 focus:ring-red-50 focus:border-red-400 font-bold" required />
                                             </div>
 
-                                            <button type="submit" className="w-full bg-red-400 hover:bg-red-500 text-white font-black py-5 rounded-2xl transition-all text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-red-100 active:scale-95">কমেন্ট সাবমিট করুন</button>
+                                            <button
+                                                type="submit"
+                                                disabled={isSubmitting}
+                                                className="w-full bg-slate-900 hover:bg-black disabled:opacity-50 text-white font-black py-6 rounded-[2rem] transition-all text-[11px] uppercase tracking-[0.3em] shadow-2xl shadow-slate-200 active:scale-95 flex items-center justify-center gap-3"
+                                            >
+                                                {isSubmitting ? "সাবমিট হচ্ছে..." : "কমেন্ট সাবমিট করুন"}
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -435,6 +529,39 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     )}
                 </div>
             </div>
+
+
+            {/* Related Products Slider */}
+            {relatedProducts.length > 0 && (
+                <div className="mt-20">
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Matching Trends</span>
+                            <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">Related Products</h2>
+                        </div>
+                    </div>
+                    <Swiper
+                        modules={[Navigation, Pagination]}
+                        spaceBetween={20}
+                        slidesPerView={1.2}
+                        breakpoints={{
+                            640: { slidesPerView: 2 },
+                            1024: { slidesPerView: 4 },
+                            1280: { slidesPerView: 5 },
+                        }}
+                        navigation
+                        className="!pb-12"
+                    >
+                        {relatedProducts.map((p: any) => (
+                            <SwiperSlide key={p.id}>
+                                <div className="h-full px-2">
+                                    <ProductCard {...p} />
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            )}
         </>
     );
 }

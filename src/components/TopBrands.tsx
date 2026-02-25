@@ -47,32 +47,31 @@ export default function TopBrands() {
 
                 <Swiper
                     modules={[Autoplay]}
-                    spaceBetween={50}
+                    spaceBetween={20}
                     slidesPerView={3}
-                    loop={true}
-                    speed={5000}
-                    autoplay={{
-                        delay: 0,
-                        disableOnInteraction: false,
-                    }}
                     breakpoints={{
                         640: { slidesPerView: 4 },
-                        768: { slidesPerView: 5 },
                         1024: { slidesPerView: 6 },
+                        1280: { slidesPerView: 8 },
                     }}
-                    className="flex items-center !ease-linear"
+                    autoplay={{
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    }}
+                    className="brand-swiper !py-10"
                 >
                     {brands.map((brand, index) => (
-                        <SwiperSlide key={brand.id || index} className="flex items-center justify-center !transition-none">
-                            <div className="w-24 h-12 relative  flex items-center justify-center grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                        <SwiperSlide key={brand.id || index}>
+                            <div className="bg-white rounded-3xl p-6 h-32 flex items-center justify-center border border-gray-100 hover:border-red-500 hover:shadow-2xl hover:shadow-red-50 transition-all group overflow-hidden relative">
+                                <div className="absolute inset-0 bg-red-50 opacity-0 group-hover:opacity-10 transition-opacity" />
                                 {brand.logo ? (
                                     <img
                                         src={getLogoUrl(brand.logo)}
                                         alt={brand.name}
-                                        className="max-w-full max-h-full object-contain rounded-lg"
+                                        className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 scale-110 group-hover:scale-125"
                                     />
                                 ) : (
-                                    <span className="text-sm font-semibold">{brand.name}</span>
+                                    <span className="text-sm font-black uppercase tracking-widest">{brand.name}</span>
                                 )}
                             </div>
                         </SwiperSlide>
