@@ -1,144 +1,192 @@
 "use client";
 
-import { Star, Quote, User } from "lucide-react";
-
-const reviews = [
-    {
-        id: 1,
-        name: "Ahsan Habib",
-        role: "Verified Buyer",
-        rating: 5,
-        comment: "The quality of the leather wallet is exceptional. It feels premium and the stitching is perfect. Highly recommended!",
-        date: "2 days ago",
-        avatar: "https://i.pravatar.cc/150?u=ahsan"
-    },
-    {
-        id: 2,
-        name: "Sadia Islam",
-        role: "Gold Member",
-        rating: 5,
-        comment: "Fast delivery and great customer support. I had an issue with my order and they resolved it within an hour. Amazing service!",
-        date: "1 week ago",
-        avatar: "https://i.pravatar.cc/150?u=sadia"
-    },
-    {
-        id: 3,
-        name: "Tanvir Ahmed",
-        role: "Tech Enthusiast",
-        rating: 4,
-        comment: "The smart fan is a game changer for the summer. It's quiet yet powerful. Wish the battery lasted a bit longer, but overall great.",
-        date: "2 weeks ago",
-        avatar: "https://i.pravatar.cc/150?u=tanvir"
-    },
-    {
-        id: 4,
-        name: "Nusrat Jahan",
-        role: "Regular Customer",
-        rating: 5,
-        comment: "I've been shopping from Alinggon for months now. Always authentic products and the packaging is very secure.",
-        date: "1 month ago",
-        avatar: "https://i.pravatar.cc/150?u=nusrat"
-    },
-    {
-        id: 5,
-        name: "Rakib Hasan",
-        role: "Verified Buyer",
-        rating: 5,
-        comment: "Excellent experience. The website is easy to use and the checkout process was smooth. Will definitely buy again.",
-        date: "1 month ago",
-        avatar: "https://i.pravatar.cc/150?u=rakib"
-    },
-    {
-        id: 6,
-        name: "Mousumi Akter",
-        role: "Premium Member",
-        rating: 5,
-        comment: "Love the curated collections! Everything I've bought so far has been of high quality. The delivery team is also very polite.",
-        date: "2 months ago",
-        avatar: "https://i.pravatar.cc/150?u=mousumi"
-    }
-];
+import { Star, Quote, CheckCircle2, Image as ImageIcon, X, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useGetSiteReviewsQuery } from "@/store/api/frontendApi";
 
 export default function ReviewsPage() {
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const { data: reviewsResponse, isLoading, isError } = useGetSiteReviewsQuery();
+
+    const reviews = reviewsResponse?.success ? reviewsResponse.data : [];
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now.getTime() - date.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return 'Yesterday';
+        if (diffDays < 7) return `${diffDays} days ago`;
+        if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
     return (
-        <div className="min-h-screen bg-gray-50/50 pt-10 pb-20">
-            <div className="max-w-[1600px] mx-auto px-4">
-                {/* Header */}
-                <div className="flex flex-col items-center mb-16 text-center space-y-4">
-                    <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Voices of Alinggon</span>
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tighter uppercase text-slate-900 leading-none">
-                        Customer <span className="text-red-400">Reviews.</span>
+        <div className="min-h-screen bg-[#fdfdfd] pt-10 pb-24">
+            {/* Enhanced Image Preview Modal */}
+            {selectedImage && (
+                <div
+                    className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-500 overflow-hidden"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <div className="absolute top-10 right-10 z-[100000]">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedImage(null);
+                            }}
+                            className="bg-white/10 hover:bg-red-500 hover:text-white text-white p-4 rounded-3xl backdrop-blur-2xl border border-white/20 transition-all active:scale-90 group shadow-2xl"
+                        >
+                            <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-500" />
+                        </button>
+                    </div>
+
+                    <div
+                        className="relative max-w-6xl w-full max-h-[85vh] flex items-center justify-center animate-in zoom-in-95 duration-500"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src={selectedImage}
+                            alt="Review Preview"
+                            className="max-w-full max-h-full rounded-[3rem] shadow-[0_40px_100px_-20px_rgba(0,0,0,0.5)] object-contain border-8 border-white/10"
+                        />
+                        <div className="absolute -inset-10 bg-red-600/10 rounded-[5rem] -z-10 blur-[100px] opacity-50"></div>
+                    </div>
+                </div>
+            )}
+
+
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+                {/* Header Section */}
+                <div className="flex flex-col items-center mb-16 md:mb-24 text-center space-y-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full border border-red-100 animate-bounce-slow">
+                        <CheckCircle2 className="w-3 h-3 text-red-500" />
+                        <span className="text-red-600 text-[10px] font-black uppercase tracking-widest">10,000+ Happy Explorers</span>
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 leading-[0.9] max-w-4xl">
+                        COMMUNITY <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">CHRONICLES.</span>
                     </h1>
-                    <p className="max-w-2xl text-slate-500 text-sm md:text-base font-medium leading-relaxed uppercase tracking-wide opacity-60">
-                        Join thousands of satisfied explorers who have elevated their lifestyle with our curated premium objects.
+                    <p className="max-w-xl text-slate-500 text-sm md:text-base font-medium leading-relaxed opacity-80 uppercase tracking-widest px-4 md:px-0">
+                        Real stories from real travelers who chose <span className="font-black text-slate-900">Alinggon</span> for their curated lifestyle needs.
                     </p>
                 </div>
 
-                {/* Stats Summary */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-xl shadow-slate-200/50 text-center space-y-2">
-                        <p className="text-5xl font-black text-slate-900 tracking-tighter">4.9</p>
-                        <div className="flex justify-center gap-1">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} className="w-4 h-4 fill-red-400 text-red-400" />
-                            ))}
-                        </div>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Average Rating</p>
+                {isLoading ? (
+                    <div className="flex flex-col items-center justify-center py-20 space-y-4">
+                        <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
+                        <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[10px]">Retrieving Stories...</p>
                     </div>
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-xl shadow-slate-200/50 text-center space-y-2">
-                        <p className="text-5xl font-black text-slate-900 tracking-tighter">12K+</p>
-                        <p className="text-[10px] font-black text-red-400 uppercase tracking-widest leading-none">Satisfied Clients</p>
-                        <p className="text-[8px] font-bold text-slate-300 uppercase tracking-tighter">Worldwide reach</p>
+                ) : isError ? (
+                    <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100">
+                        <p className="text-red-600 font-black uppercase tracking-widest text-sm">Failed to load chronicles.</p>
+                        <button onClick={() => window.location.reload()} className="mt-4 text-[10px] font-black underline uppercase text-red-400 tracking-widest hover:text-red-600">Try Again</button>
                     </div>
-                    <div className="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-xl shadow-slate-200/50 text-center space-y-2">
-                        <p className="text-5xl font-black text-slate-900 tracking-tighter">99%</p>
-                        <p className="text-[10px] font-black text-green-500 uppercase tracking-widest">Positive Feedback</p>
-                        <p className="text-[8px] font-bold text-slate-300 uppercase tracking-tighter">Verified transactions</p>
+                ) : reviews.length === 0 ? (
+                    <div className="text-center py-32 bg-slate-50 rounded-[3rem] border border-slate-100">
+                        <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-xs">No chronicles shared yet.</p>
                     </div>
-                </div>
+                ) : (
+                    /* Main Reviews Layout with Custom Scroll/Masonry Feel */
+                    <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 px-2 md:px-0">
+                        {reviews.map((review) => (
+                            <div key={review.id} className="break-inside-avoid bg-white rounded-[2rem] p-8 border border-slate-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] transition-all duration-500 group relative">
+                                {/* Verified Badge */}
+                                {review.is_verified && (
+                                    <div className="absolute top-8 right-8 flex items-center gap-1.5 px-3 py-1 bg-green-50 rounded-full border border-green-100">
+                                        <CheckCircle2 className="w-3 h-3 text-green-600" />
+                                        <span className="text-[9px] font-black text-green-700 uppercase tracking-tighter">Verified</span>
+                                    </div>
+                                )}
 
-                {/* Reviews Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {reviews.map((review) => (
-                        <div key={review.id} className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-xl shadow-slate-200/50 relative group hover:-translate-y-2 transition-all duration-500">
-                            <Quote className="absolute top-8 right-8 w-12 h-12 text-slate-50 opacity-[0.05] group-hover:text-red-400 group-hover:opacity-[0.1] transition-all" />
+                                <Quote className="absolute -bottom-4 -right-4 w-24 h-24 text-slate-50 opacity-[0.03] group-hover:text-red-50 group-hover:opacity-[1] transition-all" />
 
-                            <div className="flex gap-1 mb-6">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star
-                                        key={i}
-                                        className={`w-3 h-3 ${i < review.rating ? "fill-red-400 text-red-400" : "text-gray-200"}`}
-                                    />
-                                ))}
-                            </div>
-
-                            <p className="text-slate-600 text-[13px] leading-relaxed mb-8 font-medium italic">
-                                "{review.comment}"
-                            </p>
-
-                            <div className="flex items-center gap-4 pt-6 border-t border-gray-50 mt-auto">
-                                <div className="w-12 h-12 rounded-full overflow-hidden bg-slate-100 border-2 border-white shadow-md">
-                                    <img src={review.avatar} alt={review.name} className="w-full h-full object-cover" />
-                                </div>
-                                <div className="flex-1">
-                                    <h4 className="text-xs font-black text-slate-900 uppercase tracking-widest mb-1">{review.name}</h4>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-[9px] font-bold text-red-400 uppercase tracking-tighter bg-red-50 px-2 py-0.5 rounded-full">{review.role}</span>
-                                        <span className="text-[8px] font-bold text-slate-300 uppercase tracking-widest">{review.date}</span>
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 border-2 border-white shadow-xl group-hover:scale-105 transition-transform duration-500">
+                                        <img
+                                            src={review.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=random`}
+                                            alt={review.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-[13px] font-black text-slate-900 uppercase tracking-widest mb-0.5">{review.name}</h4>
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex">
+                                                {[...Array(5)].map((_, i) => (
+                                                    <Star
+                                                        key={i}
+                                                        className={`w-2.5 h-2.5 ${i < review.rating ? "fill-red-500 text-red-500" : "text-slate-100"}`}
+                                                    />
+                                                ))}
+                                            </div>
+                                            <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest">{formatDate(review.created_at)}</span>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-medium font-sans">
+                                    "{review.comment}"
+                                </p>
+
+                                {/* Review Images Grid */}
+                                {review.images && review.images.length > 0 && (
+                                    <div className={`grid ${review.images.length === 1 ? 'grid-cols-1' : 'grid-cols-2'} gap-3 mb-6 relative`}>
+                                        {review.images.map((img, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 cursor-zoom-in group/img"
+                                                onClick={() => setSelectedImage(img)}
+                                            >
+                                                <img
+                                                    src={img}
+                                                    alt={`Review ${idx}`}
+                                                    className="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-700"
+                                                />
+                                                <div className="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors flex items-center justify-center">
+                                                    <ImageIcon className="text-white w-6 h-6 opacity-0 group-hover/img:opacity-100 transition-opacity" />
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+                                    <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50/50 px-3 py-1 rounded-lg">
+                                        {review.role || "Verified Buyer"}
+                                    </span>
+                                    <button className="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors">Helpful?</button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Dynamic CTA Section */}
+                <div className="mt-32 relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-400 rounded-[3rem] -rotate-1 scale-105 opacity-5 blur-2xl"></div>
+                    <div className="bg-slate-900 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden group">
+                        <div className="absolute top-0 left-0 w-96 h-96 bg-red-600/10 rounded-full blur-[100px] -ml-48 -mt-48 transition-all duration-1000 group-hover:ml-0 group-hover:mt-0"></div>
+                        <div className="absolute bottom-0 right-0 w-96 h-96 bg-red-600/5 rounded-full blur-[100px] -mr-48 -mb-48 transition-all duration-1000 group-hover:mr-0 group-hover:mb-0"></div>
+
+                        <div className="relative z-10 space-y-8 max-w-2xl mx-auto">
+                            <div className="inline-block px-4 py-2 bg-white/5 rounded-full border border-white/10">
+                                <span className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em]">Become a Narrator</span>
+                            </div>
+                            <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
+                                YOUR STORY <span className="text-red-500 italic">MATTERS.</span>
+                            </h2>
+                            <p className="text-white/40 text-sm md:text-lg font-medium leading-relaxed uppercase tracking-wide">
+                                Join the Alinggon community and help fellow seekers discover their next favorite object.
+                            </p>
+                            <div className="pt-6">
+                                <button className="relative group/btn overflow-hidden bg-red-600 hover:bg-white text-white hover:text-slate-900 font-black text-[11px] uppercase tracking-[0.4em] px-12 py-5 rounded-full transition-all duration-500 shadow-[0_20px_40px_-10px_rgba(239,68,68,0.5)] active:scale-95">
+                                    <span className="relative z-10">Write Your Review</span>
+                                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>
+                                </button>
                             </div>
                         </div>
-                    ))}
-                </div>
-
-                {/* CTA */}
-                <div className="mt-20 text-center py-20 bg-slate-900 rounded-[4rem] relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-64 h-64 bg-red-400/10 rounded-full blur-3xl -ml-32 -mt-32"></div>
-                    <div className="relative z-10 space-y-6">
-                        <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">Share Your <span className="text-red-400">Experience.</span></h2>
-                        <p className="text-white/40 text-[10px] md:text-xs font-medium uppercase tracking-[0.2em]">Help other explorers find their perfect objects.</p>
-                        <button className="bg-red-400 hover:bg-white hover:text-slate-900 text-white font-black text-[10px] uppercase tracking-[0.2em] px-10 py-4 rounded-2xl transition-all shadow-2xl active:scale-95">Write a Review</button>
                     </div>
                 </div>
             </div>

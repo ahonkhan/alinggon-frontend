@@ -1,48 +1,43 @@
 "use client";
 
 import React from "react";
-import { Star, MessageCircle, User, Quote, ArrowRight } from "lucide-react";
+import { Star, Quote, CheckCircle2, Loader2 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
-const reviews = [
-    {
-        id: 1,
-        user: "Mustakim Ahmed",
-        rating: 5,
-        comment: "Excellent quality product and very fast delivery. Highly recommended!",
-        date: "2 days ago",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mustakim"
-    },
-    {
-        id: 2,
-        user: "Ayesha Siddiqua",
-        rating: 4,
-        comment: "The packaging was very professional. Product matches the description perfectly.",
-        date: "5 days ago",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ayesha"
-    },
-    {
-        id: 3,
-        user: "Rakibul Hasan",
-        rating: 5,
-        comment: "I've ordered multiple times and Alinggon never disappoints. Best service!",
-        date: "1 week ago",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Rakib"
-    },
-    {
-        id: 4,
-        user: "Ariful Islam",
-        rating: 5,
-        comment: "Really impressed with the collection. Everything is premium and authentic.",
-        date: "2 weeks ago",
-        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Arif"
-    }
-];
+import { useGetSiteReviewsQuery } from "@/store/api/frontendApi";
 
 export default function CustomerRatings() {
+    const { data: reviewsResponse, isLoading, isError } = useGetSiteReviewsQuery();
+    const reviews = reviewsResponse?.success ? reviewsResponse.data.slice(0, 8) : []; // Limit to 8 on home page
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diffTime = Math.abs(now.getTime() - date.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return 'Today';
+        if (diffDays === 1) return 'Yesterday';
+        if (diffDays < 7) return `${diffDays} days ago`;
+        if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    if (isLoading) {
+        return (
+            <div className="flex flex-col items-center justify-center py-20 space-y-4 bg-white">
+                <Loader2 className="w-10 h-10 text-red-500 animate-spin" />
+                <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[10px]">Loading Chronicles...</p>
+            </div>
+        );
+    }
+
+    if (isError || reviews.length === 0) {
+        return null; // Hide the section if there's an error or no reviews
+    }
+
     return (
         <section className="bg-white pt-6 relative overflow-hidden">
             <div className="max-w-[1600px] mx-auto px-4 relative">
@@ -71,7 +66,7 @@ export default function CustomerRatings() {
                 >
                     {reviews.map((review) => (
                         <SwiperSlide key={review.id}>
-                            <ReviewCard review={review} />
+                            <ReviewCard review={review} formatDate={formatDate} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -80,20 +75,27 @@ export default function CustomerRatings() {
     );
 }
 
-function ReviewCard({ review, className = "" }: { review: any; className?: string }) {
+function ReviewCard({ review, formatDate, className = "" }: { review: any; formatDate: (d: string) => string; className?: string }) {
     return (
         <div className={`bg-gray-50/50 p-6 rounded-[2rem] border border-gray-100 flex flex-col gap-4 relative group hover:bg-white hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500 h-full ${className}`}>
             <Quote className="absolute top-6 right-6 w-8 h-8 text-slate-100 group-hover:text-red-50 transition-colors" />
 
             <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-white shadow-md">
-                    <img src={review.avatar} alt={review.user} className="w-full h-full object-cover" />
+                <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-white shadow-md bg-slate-100">
+                    <img
+                        src={review.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=random`}
+                        alt={review.name}
+                        className="w-full h-full object-cover"
+                    />
                 </div>
                 <div>
-                    <h4 className="font-black text-slate-900 text-[11px] tracking-tight truncate uppercase">{review.user}</h4>
+                    <h4 className="font-black text-slate-900 text-[11px] tracking-tight truncate uppercase">{review.name}</h4>
                     <div className="flex items-center gap-0.5 text-yellow-400">
-                        {[...Array(review.rating)].map((_, i) => (
-                            <Star key={i} className="w-2.5 h-2.5 fill-current" />
+                        {[...Array(5)].map((_, i) => (
+                            <Star
+                                key={i}
+                                className={`w-2.5 h-2.5 ${i < review.rating ? "fill-current" : "text-slate-200"}`}
+                            />
                         ))}
                     </div>
                 </div>
@@ -104,21 +106,14 @@ function ReviewCard({ review, className = "" }: { review: any; className?: strin
             </p>
 
             <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{review.date}</span>
-                <div className="flex items-center gap-1 text-red-400">
-                    <ShieldCheck className="w-2.5 h-2.5" />
-                    <span className="text-[8px] font-black uppercase tracking-widest">Verified</span>
-                </div>
+                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{formatDate(review.created_at)}</span>
+                {review.is_verified && (
+                    <div className="flex items-center gap-1 text-red-400">
+                        <CheckCircle2 className="w-2.5 h-2.5" />
+                        <span className="text-[8px] font-black uppercase tracking-widest">Verified</span>
+                    </div>
+                )}
             </div>
         </div>
-    );
-}
-
-function ShieldCheck({ className }: { className?: string }) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-            <path d="m9 12 2 2 4-4" />
-        </svg>
     );
 }

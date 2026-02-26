@@ -79,14 +79,14 @@ export default function FlashSalePage() {
             {/* Banner Section */}
             <div className="bg-slate-900 overflow-hidden relative border-b-8 border-red-600">
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600/20 to-transparent pointer-events-none" />
-                <div className="max-w-[1600px] mx-auto px-4 py-20 relative">
+                <div className="max-w-[1600px] mx-auto px-4 py-5 relative">
                     <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
                         <div className="text-center lg:text-left">
                             <div className="inline-flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-full mb-6 animate-pulse">
                                 <Zap className="w-5 h-5 fill-current" />
                                 <span className="text-xs font-black uppercase tracking-widest">Hurry Up! Exclusive Offer</span>
                             </div>
-                            <h1 className="text-5xl lg:text-7xl font-black text-white uppercase tracking-tighter leading-tight mb-4">
+                            <h1 className="text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-tight mb-4">
                                 {flashSale.name}
                             </h1>
                             <p className="text-slate-400 text-lg uppercase tracking-widest font-black max-w-xl">

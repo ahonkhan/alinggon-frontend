@@ -13,6 +13,24 @@ export interface Product {
     related_products?: Product[];
 }
 
+export interface SiteReview {
+    id: number;
+    name: string;
+    role: string | null;
+    rating: number;
+    comment: string;
+    avatar: string | null;
+    images: string[] | null;
+    is_verified: boolean;
+    status: boolean;
+    created_at: string;
+}
+
+export interface SiteReviewsResponse {
+    success: boolean;
+    data: SiteReview[];
+}
+
 export interface FlashSaleProduct {
     id: number;
     flash_sale_id: number;
@@ -213,6 +231,9 @@ export const frontendApi = createApi({
         getActiveFlashSale: builder.query<{ success: boolean; data: FlashSale }, void>({
             query: () => '/flash-sale/active',
         }),
+        getSiteReviews: builder.query<SiteReviewsResponse, void>({
+            query: () => '/site-reviews',
+        }),
     }),
 });
 
@@ -235,4 +256,5 @@ export const {
     useToggleLikeReviewMutation,
     useGetMyReviewsQuery,
     useGetActiveFlashSaleQuery,
+    useGetSiteReviewsQuery,
 } = frontendApi;
