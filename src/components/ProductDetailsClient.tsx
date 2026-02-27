@@ -61,11 +61,13 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     }, [product.combinations, selectedVariations]);
 
     // Derived displays
-    const displayPrice = activeCombination?.offer_price
-        ? parseFloat(activeCombination.offer_price)
-        : (activeCombination?.regular_price ? parseFloat(activeCombination.regular_price) : product.price);
+    const displayPrice = activeCombination?.final_price
+        ? parseFloat(activeCombination.final_price)
+        : (activeCombination?.offer_price
+            ? parseFloat(activeCombination.offer_price)
+            : (activeCombination?.regular_price ? parseFloat(activeCombination.regular_price) : product.price));
 
-    const displayOriginalPrice = activeCombination?.offer_price && activeCombination?.regular_price && parseFloat(activeCombination.offer_price) < parseFloat(activeCombination.regular_price)
+    const displayOriginalPrice = activeCombination?.regular_price
         ? parseFloat(activeCombination.regular_price)
         : product.originalPrice;
 
