@@ -1,6 +1,6 @@
 "use client";
 
-import { X, ChevronRight, Home, ShoppingBag, Truck, Zap } from "lucide-react";
+import { X, ChevronRight, Home, ShoppingBag, Truck, Zap, Store } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useGetCategoriesQuery, CategoryData } from "@/store/api/frontendApi";
@@ -18,6 +18,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
     // Track which categories/subcategories are expanded in the accordion
     const [expandedIds, setExpandedIds] = useState<Record<number, boolean>>({});
+    const [activeTab, setActiveTab] = useState<"menu" | "categories">("menu");
 
     const toggleExpand = (e: React.MouseEvent, id: number) => {
         e.preventDefault();
@@ -28,11 +29,16 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         }));
     };
 
-    const quickLinks = [
-        { label: "Home", href: "/", icon: Home },
-        { label: "Shop", href: "/shop", icon: ShoppingBag },
-        { label: "Flash Sale", href: "/flash-sale", icon: Zap },
-        { label: "Track Order", href: "/track-order", icon: Truck },
+    const menuLinks = [
+        { label: "Home", href: "/" },
+        { label: "About Admin", href: "/about" },
+        { label: "Categories", href: "/categories" },
+        { label: "Shop", href: "/shop" },
+        { label: "Flash Sale", href: "/flash-sale" },
+        { label: "My Orders", href: "/orders" },
+        { label: "Track Order", href: "/tracking" },
+        { label: "Customer Review", href: "/reviews" },
+        { label: "Become a Vendor", href: "https://alinggon-admin.rangpurit.com/vendor/register", external: true },
     ];
 
     return (
@@ -61,30 +67,58 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     </button>
                 </div>
 
+                {/* Tabs */}
+                <div className="flex border-b border-gray-100 bg-gray-50/30">
+                    <button
+                        onClick={() => setActiveTab("menu")}
+                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "menu" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-400 hover:text-gray-600 border-b-[3px] border-transparent"}`}
+                    >
+                        Menu
+                    </button>
+                    <button
+                        onClick={() => setActiveTab("categories")}
+                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "categories" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-400 hover:text-gray-600 border-b-[3px] border-transparent"}`}
+                    >
+                        Categories
+                    </button>
+                </div>
+
                 {/* Links */}
                 <div className="flex-1 overflow-y-auto">
                     <div className="p-4 space-y-6">
-                        {/* Quick Links */}
-                        <div>
-                            <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 px-2">Navigation</h3>
-                            <div className="grid grid-cols-1 gap-2">
-                                {quickLinks.map((link) => (
-                                    <Link
-                                        key={link.label}
-                                        href={link.href}
-                                        onClick={onClose}
-                                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 text-sm font-bold text-slate-700 transition-all"
-                                    >
-                                        <link.icon className="w-4 h-4 text-red-400" />
-                                        {link.label}
-                                    </Link>
+                        {/* Menu Tab */}
+                        {activeTab === "menu" && (
+                            <div className="grid grid-cols-1 gap-1">
+                                {menuLinks.map((link) => (
+                                    link.external ? (
+                                        <a
+                                            key={link.label}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={onClose}
+                                            className="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-gray-50 text-[13px] font-bold text-slate-700 transition-all border-b border-gray-50 last:border-0"
+                                        >
+                                            {link.label}
+                                            <ChevronRight className="w-4 h-4 text-gray-300" />
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            key={link.label}
+                                            href={link.href}
+                                            onClick={onClose}
+                                            className="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-gray-50 text-[13px] font-bold text-slate-700 transition-all border-b border-gray-50 last:border-0"
+                                        >
+                                            {link.label}
+                                            <ChevronRight className="w-4 h-4 text-gray-300" />
+                                        </Link>
+                                    )
                                 ))}
                             </div>
-                        </div>
+                        )}
 
-                        {/* Categories */}
-                        <div>
-                            <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 px-2">Categories</h3>
+                        {/* Categories Tab */}
+                        {activeTab === "categories" && (
                             <div className="grid grid-cols-1 gap-1">
                                 {categories.map((cat: CategoryData) => (
                                     <div key={cat.id} className="flex flex-col">
@@ -156,7 +190,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
 

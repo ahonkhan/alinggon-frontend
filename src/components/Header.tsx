@@ -174,7 +174,7 @@ export default function Header() {
                                     </Link>
                                     <button
                                         onClick={() => {
-                                            router.push("/");
+                                            logout();
                                         }}
                                         aria-label="Sign out"
                                         className="p-2 text-gray-300 hover:text-red-500 transition-colors"
