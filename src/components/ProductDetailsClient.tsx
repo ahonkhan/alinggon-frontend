@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Twitter, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation } from "@/store/api/frontendApi";

@@ -1,8 +1,14 @@
 "use client";
 
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ShoppingBag, Twitter, Youtube, Send, ShieldCheck, Truck, RefreshCcw } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ShoppingBag, Youtube, Send, ShieldCheck, Truck, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/context/ToastContext";
+
+const XIcon = (props: any) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298l13.312 17.404z" />
+    </svg>
+);
 
 export default function Footer() {
     const { showToast } = useToast();
@@ -48,8 +54,8 @@ export default function Footer() {
                         </div>
                         <div className="flex items-center gap-4">
                             <SocialIcon icon={Facebook} url="https://www.facebook.com/profile.php?id=100019453901281" label="Facebook" />
-                            <SocialIcon icon={Twitter} url="#" label="Twitter" />
-                            <SocialIcon icon={Instagram} url="#" label="Instagram" />
+                            <SocialIcon icon={XIcon} url="https://www.x.com/Alinggon973" label="X (Twitter)" />
+                            <SocialIcon icon={Instagram} url="https://www.instagram.com/alinggonplatfrom" label="Instagram" />
                             <SocialIcon icon={Youtube} url="https://www.youtube.com/channel/UCeOgawwdUJmIAXBh4T-LWtw" label="Youtube" />
                         </div>
                     </div>
