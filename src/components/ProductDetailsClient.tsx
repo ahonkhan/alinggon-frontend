@@ -216,8 +216,20 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 <div className="lg:col-span-4 space-y-6">
                     <div>
                         <h1 className="text-2xl font-black text-gray-900 leading-tight uppercase tracking-tight">{product.name}</h1>
-                        <div className="flex items-center gap-2 mt-2">
-                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Category: <span className="text-red-500">{product.category}</span></span>
+                        <div className="flex flex-col gap-1 mt-2">
+                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                Category: <Link href={`/shop?category=${product.category}`} className="text-red-500 hover:underline">{product.category}</Link>
+                            </span>
+                            {product.brand && (
+                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    Brand: <Link href={`/shop?brand=${product.brand.slug || product.brand.id}`} className="text-red-500 hover:underline">{product.brand.name}</Link>
+                                </span>
+                            )}
+                            {product.vendor && (
+                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    Vendor: <Link href={`/shop?vendor=${product.vendor.shop_slug || product.vendor.id}`} className="text-red-500 hover:underline">{product.vendor.shop_name}</Link>
+                                </span>
+                            )}
                         </div>
                     </div>
 
@@ -310,9 +322,9 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                     {/* Call Support */}
                     <div className="flex flex-col md:flex-row gap-4">
-                        <a href="tel:+8801568324268" className="flex-1 bg-white border border-gray-100 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1">
+                        <a href="tel:+97336781645" className="flex-1 bg-white border border-gray-100 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1">
                             <div className="bg-green-500 text-white p-1.5 rounded-lg"><Phone className="w-4 h-4" /></div>
-                            +8801568324268
+                            +97336781645
                         </a>
                     </div>
                 </div>

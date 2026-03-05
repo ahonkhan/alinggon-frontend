@@ -66,7 +66,9 @@ export default function ReviewsPage() {
                         <span className="text-red-600 text-[10px] font-black uppercase tracking-widest">10,000+ Happy Explorers</span>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 leading-[0.9] max-w-4xl">
-                        COMMUNITY <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">CHRONICLES.</span>
+                        ALINGGON  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">CUSTOMER</span>
+                        <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">REVIEWS</span>
                     </h1>
                     <p className="max-w-xl text-slate-500 text-sm md:text-base font-medium leading-relaxed opacity-80 uppercase tracking-widest px-4 md:px-0">
                         Real stories from real travelers who chose <span className="font-black text-slate-900">Alinggon</span> for their curated lifestyle needs.

@@ -174,7 +174,7 @@ export default function LandingPage() {
             </footer>
 
             {/* Floating CTA */}
-            <a href="https://wa.me/8801568324268" className="fixed bottom-10 right-10 bg-green-500 p-5 rounded-[2rem] text-white shadow-2xl hover:bg-green-600 transition-all z-[60] hover:-translate-y-2 group">
+            <a href="https://wa.me/+97336781645" className="fixed bottom-10 right-10 bg-green-500 p-5 rounded-[2rem] text-white shadow-2xl hover:bg-green-600 transition-all z-[60] hover:-translate-y-2 group">
                 <MessageCircle className="w-8 h-8 fill-current" />
             </a>
         </div>

@@ -9,6 +9,10 @@ export interface Product {
     discount?: string;
     image: string;
     category: string;
+    brand_id?: number;
+    vendor_id?: number;
+    brand?: any;
+    vendor?: any;
     reviews?: Review[];
     related_products?: Product[];
 }
@@ -135,9 +139,81 @@ export interface BrandData {
     logo?: string;
 }
 
+export interface HomeContentResponse {
+    success: boolean;
+    data: {
+        banners: string[];
+        how_to_order: {
+            url: string | null;
+            type: 'youtube' | 'custom';
+        };
+        review_videos: {
+            type: 'youtube' | 'custom';
+            url: string;
+        }[];
+    };
+}
+
 export interface BrandsResponse {
     success: boolean;
     data: BrandData[];
+}
+
+export interface LeadershipTeamMember {
+    id: number;
+    role: string;
+    images: string[];
+    color: string;
+    bg: string;
+    order: number;
+    status: boolean;
+}
+
+export interface SocialNetwork {
+    id: number;
+    social_network_group_id: number;
+    name: string;
+    url: string | null;
+    image: string | null;
+    description: string | null;
+    order: number;
+    status: boolean;
+}
+
+export interface SocialNetworkGroup {
+    id: number;
+    name: string;
+    order: number;
+    status: boolean;
+    social_networks: SocialNetwork[];
+}
+
+export interface AboutInfoResponse {
+    success: boolean;
+    data: {
+        leadership_team: LeadershipTeamMember[];
+        social_network_groups: SocialNetworkGroup[];
+        admin_settings: {
+            admin_title?: string;
+            admin_greetings?: string;
+            admin_quote?: string;
+            admin_description?: string;
+            years_lead?: string;
+            community_size?: string;
+            dedication_hours?: string;
+            admin_images?: string[];
+            about_video_url?: string;
+            about_video_title?: string;
+            about_video_description?: string;
+            about_footer_text?: string;
+            bottom_stat1_label?: string;
+            bottom_stat1_value?: string;
+            bottom_stat2_label?: string;
+            bottom_stat2_value?: string;
+            bottom_stat3_label?: string;
+            bottom_stat3_value?: string;
+        };
+    };
 }
 
 // Ensure base URL matches the backend API
@@ -234,6 +310,12 @@ export const frontendApi = createApi({
         getSiteReviews: builder.query<SiteReviewsResponse, void>({
             query: () => '/site-reviews',
         }),
+        getHomeContent: builder.query<HomeContentResponse, void>({
+            query: () => '/home-content',
+        }),
+        getAboutInfo: builder.query<AboutInfoResponse, void>({
+            query: () => '/about-info',
+        }),
     }),
 });
 
@@ -257,4 +339,6 @@ export const {
     useGetMyReviewsQuery,
     useGetActiveFlashSaleQuery,
     useGetSiteReviewsQuery,
+    useGetHomeContentQuery,
+    useGetAboutInfoQuery,
 } = frontendApi;

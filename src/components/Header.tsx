@@ -7,7 +7,17 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useMemo, useEffect, useRef } from "react";
 import MobileMenu from "./MobileMenu";
-import { products } from "@/data/dummyData";
+import { useGetProductsQuery } from "@/store/api/frontendApi";
+
+// Simple debounce hook
+function useDebounce<T>(value: T, delay: number): T {
+    const [debouncedValue, setDebouncedValue] = useState<T>(value);
+    useEffect(() => {
+        const timer = setTimeout(() => setDebouncedValue(value), delay);
+        return () => clearTimeout(timer);
+    }, [value, delay]);
+    return debouncedValue;
+}
 
 export default function Header() {
     const { openCart, cartCount } = useCart();
@@ -19,20 +29,21 @@ export default function Header() {
     const router = useRouter();
     const searchRef = useRef<HTMLDivElement>(null);
 
+    const debouncedSearchQuery = useDebounce(searchQuery, 500);
+    const { data: searchResults, isFetching } = useGetProductsQuery(
+        { q: debouncedSearchQuery },
+        { skip: debouncedSearchQuery.length < 2 }
+    );
+
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
             setShowSuggestions(false);
-            router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+            router.push(`/shop?q=${encodeURIComponent(searchQuery)}`);
         }
     };
 
-    const suggestions = useMemo(() => {
-        if (!searchQuery.trim()) return [];
-        return products
-            .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
-            .slice(0, 5);
-    }, [searchQuery]);
+    const suggestions = searchResults?.data?.slice(0, 5) || [];
 
     useEffect(() => {
         setIsMounted(true);
@@ -111,7 +122,7 @@ export default function Header() {
                                     {suggestions.map(p => (
                                         <Link
                                             key={p.id}
-                                            href={`/product/${p.id}`}
+                                            href={`/product/${p.slug}`}
                                             onClick={() => setShowSuggestions(false)}
                                             className="flex items-center gap-4 px-6 py-4 hover:bg-red-50 transition-colors group"
                                         >
@@ -125,9 +136,12 @@ export default function Header() {
                                             <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                                         </Link>
                                     ))}
+                                    {isFetching && (
+                                        <div className="text-center py-4 text-xs font-bold text-gray-400">Loading...</div>
+                                    )}
                                 </div>
                                 <Link
-                                    href={`/search?q=${searchQuery}`}
+                                    href={`/shop?q=${searchQuery}`}
                                     onClick={() => setShowSuggestions(false)}
                                     className="block w-full text-center py-4 bg-gray-50 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
                                 >
@@ -139,10 +153,10 @@ export default function Header() {
 
                     {/* Actions */}
                     <div className="flex items-center gap-6 flex-shrink-0">
-                        <div className="hidden lg:flex flex-col items-end leading-tight text-right text-slate-900 mr-2">
-                            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Global Support</span>
-                            <span className="text-sm font-black tracking-tighter">+97336781645</span>
-                        </div>
+                        <a href="https://wa.me/+97336781645" target="_blank" rel="noopener noreferrer" className="hidden lg:flex flex-col items-end leading-tight text-right text-slate-900 mr-2 group">
+                            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest group-hover:text-green-500 transition-colors">Global Support</span>
+                            <span className="text-sm font-black tracking-tighter group-hover:text-green-600 transition-colors">+97336781645</span>
+                        </a>
 
                         <div className="flex items-center gap-2 md:gap-4">
                             <Link href="/wishlist" aria-label="Wishlist" className="relative p-2.5 text-slate-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all hidden sm:block">

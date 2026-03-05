@@ -44,7 +44,7 @@ export default function CustomerRatings() {
                 <div className="flex flex-col items-center mb-10 text-center space-y-4">
                     <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Customer Trust</span>
                     <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">
-                        Authentic Ratings
+                        Alinggon Customer Reviews
                     </h2>
                     <p className="text-slate-500 max-w-lg font-bold text-xs tracking-tight leading-relaxed uppercase">
                         Voices of our satisfied community members

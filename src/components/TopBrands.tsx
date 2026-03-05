@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import Link from "next/link";
 import "swiper/css";
 import { useGetBrandsQuery } from "@/store/api/frontendApi";
 
@@ -36,7 +37,7 @@ export default function TopBrands() {
     }
 
     return (
-        <section className="pb-12  bg-white ">
+        <section className="pb-12 pt-4  bg-white ">
             <div className="max-w-[1600px] mx-auto px-4">
                 <div className="flex flex-col items-center mb-8 text-center space-y-2">
                     <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Official Partners</span>
@@ -62,7 +63,10 @@ export default function TopBrands() {
                 >
                     {brands.map((brand, index) => (
                         <SwiperSlide key={brand.id || index}>
-                            <div className="bg-white rounded-3xl p-6 h-32 flex items-center justify-center border border-gray-100 hover:border-red-500 hover:shadow-2xl hover:shadow-red-50 transition-all group overflow-hidden relative">
+                            <Link
+                                href={`/shop?brand=${brand.slug || brand.id}`}
+                                className="bg-white rounded-3xl p-6 h-32 flex items-center justify-center border border-gray-100 hover:border-red-500 hover:shadow-2xl hover:shadow-red-50 transition-all group overflow-hidden relative block"
+                            >
                                 <div className="absolute inset-0 bg-red-50 opacity-0 group-hover:opacity-10 transition-opacity" />
                                 {brand.logo ? (
                                     <img
@@ -73,7 +77,7 @@ export default function TopBrands() {
                                 ) : (
                                     <span className="text-sm font-black uppercase tracking-widest">{brand.name}</span>
                                 )}
-                            </div>
+                            </Link>
                         </SwiperSlide>
                     ))}
                 </Swiper>
