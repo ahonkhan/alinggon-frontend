@@ -56,7 +56,7 @@ export default function Home() {
                           alt={`Banner ${index + 1}`}
                           fill
                           priority={index === 0}
-                          className="object-cover transition-transform duration-[10000ms] group-hover:scale-110"
+                          className="object-cover"
                         />
                       </div>
                     </SwiperSlide>
