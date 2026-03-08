@@ -29,15 +29,17 @@ export default function Home() {
       <div className="max-w-[1600px] mx-auto md:px-4 md:py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Sidebar Categories - 2 Columns */}
-          <div className="hidden lg:block lg:col-span-2 h-[380px]">
-            <CategorySidebar />
+          <div className="hidden lg:block lg:col-span-2 relative">
+            <div className="lg:absolute lg:inset-0">
+              <CategorySidebar />
+            </div>
           </div>
 
           {/* Main Slider - 7 Columns */}
-          <div className="col-span-1 lg:col-span-7 h-[380px]">
-            <div className="relative w-full h-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
+          <div className="col-span-1 lg:col-span-7">
+            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
               {homeLoading ? (
-                <div className="w-full h-full bg-slate-200 animate-pulse flex items-center justify-center">
+                <div className="w-full h-[380px] bg-slate-200 animate-pulse flex items-center justify-center">
                   <div className="w-12 h-12 border-4 border-slate-300 border-t-red-400 rounded-full animate-spin"></div>
                 </div>
               ) : banners.length > 0 ? (
@@ -46,24 +48,23 @@ export default function Home() {
                   slidesPerView={1}
                   autoplay={{ delay: 5000, disableOnInteraction: false }}
                   pagination={{ clickable: true }}
-                  className="h-full w-full"
+                  autoHeight={true}
+                  className="w-full"
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
-                      <div className="relative w-full h-full">
-                        <Image
+                      <div className="relative w-full">
+                        <img
                           src={banner}
                           alt={`Banner ${index + 1}`}
-                          fill
-                          priority={index === 0}
-                          className="object-cover"
+                          className="w-full h-auto object-cover"
                         />
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               ) : (
-                <>
+                <div className="h-[380px] relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
                   <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
                     <span className="bg-red-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full w-fit mb-6 shadow-xl shadow-red-600/20 uppercase tracking-[0.2em] border border-red-300">New Collection '26</span>
@@ -78,14 +79,16 @@ export default function Home() {
                     priority
                     className="object-cover opacity-60 transition-transform duration-[10000ms] group-hover:scale-110"
                   />
-                </>
+                </div>
               )}
             </div>
           </div>
 
           {/* Video Section - 2 Columns */}
-          <div className="col-span-1 px-4 md:px-0 lg:col-span-3 h-auto lg:h-[380px]">
-            <VideoSection />
+          <div className="col-span-1 px-4 md:px-0 lg:col-span-3 relative">
+            <div className="lg:absolute lg:inset-0">
+              <VideoSection />
+            </div>
           </div>
         </div>
       </div>
