@@ -180,6 +180,15 @@ export interface SocialNetwork {
     status: boolean;
 }
 
+export interface PersonalPicture {
+    id: number;
+    image_path: string;
+    is_locked: boolean;
+    password?: string;
+    order: number;
+    status: boolean;
+}
+
 export interface SocialNetworkGroup {
     id: number;
     name: string;
@@ -212,13 +221,16 @@ export interface AboutInfoResponse {
             bottom_stat2_value?: string;
             bottom_stat3_label?: string;
             bottom_stat3_value?: string;
+            admin_personal_pic_pass_mode?: 'single' | 'multiple';
+            admin_personal_pic_single_password?: string;
         };
+        personal_pictures: PersonalPicture[];
     };
 }
 
 // Ensure base URL matches the backend API
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
-// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
@@ -316,6 +328,13 @@ export const frontendApi = createApi({
         getAboutInfo: builder.query<AboutInfoResponse, void>({
             query: () => '/about-info',
         }),
+        verifyPersonalPicturePassword: builder.mutation<{ success: boolean; image_path?: string; message?: string }, { id: number; password: string }>({
+            query: (data) => ({
+                url: '/verify-personal-picture-password',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
@@ -341,4 +360,5 @@ export const {
     useGetSiteReviewsQuery,
     useGetHomeContentQuery,
     useGetAboutInfoQuery,
+    useVerifyPersonalPicturePasswordMutation,
 } = frontendApi;
