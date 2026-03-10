@@ -13,6 +13,7 @@ import FloatingActionButtons from "@/components/FloatingActionButtons";
 import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
+import { AdminGalleryModal } from "@/components/AdminGalleryModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-800 font-normal antialiased min-h-screen flex flex-col`}>
         <ReduxProvider>
+          <AdminGalleryModal />
           <ToastProvider>
             <AuthProvider>
               <CartProvider>
