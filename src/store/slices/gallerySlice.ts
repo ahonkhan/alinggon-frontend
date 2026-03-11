@@ -6,6 +6,7 @@ interface GalleryState {
     viewerIndex: number | null;
     passwordModalId: number | null;
     unlockedPictures: Record<number, string | undefined>;
+    isBulkUnlockMode: boolean;
 }
 
 const initialState: GalleryState = {
@@ -13,6 +14,7 @@ const initialState: GalleryState = {
     viewerIndex: null,
     passwordModalId: null,
     unlockedPictures: {},
+    isBulkUnlockMode: false,
 };
 
 const gallerySlice = createSlice({
@@ -37,6 +39,19 @@ const gallerySlice = createSlice({
         unlockPicture: (state, action: PayloadAction<{ id: number; imagePath: string }>) => {
             state.unlockedPictures[action.payload.id] = action.payload.imagePath;
         },
+        openBulkPasswordModal: (state) => {
+            state.isBulkUnlockMode = true;
+            state.passwordModalId = -1; // Special ID for bulk
+        },
+        unlockAllPictures: (state, action: PayloadAction<Record<number, string>>) => {
+            state.unlockedPictures = { ...state.unlockedPictures, ...action.payload };
+            state.isBulkUnlockMode = false;
+            state.passwordModalId = null;
+        },
+        resetBulkMode: (state) => {
+            state.isBulkUnlockMode = false;
+            state.passwordModalId = null;
+        }
     },
 });
 
@@ -47,6 +62,9 @@ export const {
     openPasswordModal,
     closePasswordModal,
     unlockPicture,
+    openBulkPasswordModal,
+    unlockAllPictures,
+    resetBulkMode
 } = gallerySlice.actions;
 
 export default gallerySlice.reducer;

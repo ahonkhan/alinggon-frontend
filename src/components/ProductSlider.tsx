@@ -27,7 +27,7 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
                     <h2 className="text-xl md:text-2xl font-black tracking-tighter text-slate-900 uppercase">{title}</h2>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Link href={link} className="hidden md:block text-[10px] font-black text-red-400 hover:text-slate-900 transition-colors uppercase tracking-widest">
+                    <Link href={link} className="hidden md:block text-[13px] font-black text-red-400 hover:text-slate-900 transition-colors uppercase tracking-widest">
                         View All
                     </Link>
                     <div className="flex gap-2">

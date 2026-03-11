@@ -47,18 +47,18 @@ export default function Profile() {
                             <div className="flex-1 space-y-8">
                                 <div className="space-y-2">
                                     <h1 className="text-4xl font-black text-slate-900 tracking-tighter">{user.name}</h1>
-                                    <p className="text-gray-400 font-bold uppercase text-[10px] tracking-[0.2em]">{user.email}</p>
+                                    <p className="text-gray-400 font-bold uppercase text-[13px] tracking-[0.2em]">{user.email}</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                                        <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                                             <Phone className="w-3 h-3 text-red-400" /> Phone Number
                                         </label>
                                         <p className="text-lg font-black text-slate-700 font-sans tracking-tight">{user.phone}</p>
                                     </div>
                                     <div className="space-y-4">
-                                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                                        <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                                             <MapPin className="w-3 h-3 text-red-400" /> Shipping Address
                                         </label>
                                         <button className="text-sm font-black text-red-400 hover:text-red-500 flex items-center gap-1 group">
@@ -87,7 +87,7 @@ export default function Profile() {
                             <div className="hidden md:block w-px h-48 bg-gray-100 self-center"></div>
 
                             <div className="w-full md:w-56 space-y-4">
-                                <h3 className="text-[10px] font-black text-slate-400 mb-6 uppercase tracking-widest text-center">Platform Status</h3>
+                                <h3 className="text-[13px] font-black text-slate-400 mb-6 uppercase tracking-widest text-center">Platform Status</h3>
                                 <MetricCard icon={Package} label="Total Orders" value="0" color="bg-blue-50 text-blue-500" />
                                 <MetricCard icon={CreditCard} label="Spent Amount" value="৳ 0" color="bg-green-50 text-green-500" />
                             </div>

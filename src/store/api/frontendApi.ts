@@ -151,6 +151,7 @@ export interface HomeContentResponse {
             type: 'youtube' | 'custom';
             url: string;
         }[];
+        logo: string | null;
     };
 }
 
@@ -230,7 +231,7 @@ export interface AboutInfoResponse {
 
 // Ensure base URL matches the backend API
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
-// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8001/api';
+// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
@@ -335,6 +336,13 @@ export const frontendApi = createApi({
                 body: data,
             }),
         }),
+        verifyBulkPersonalPicturesPassword: builder.mutation<{ success: boolean; unlocked_pictures: Record<number, string> }, { password: string }>({
+            query: (data) => ({
+                url: '/verify-bulk-personal-pictures-password',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
@@ -361,4 +369,5 @@ export const {
     useGetHomeContentQuery,
     useGetAboutInfoQuery,
     useVerifyPersonalPicturePasswordMutation,
+    useVerifyBulkPersonalPicturesPasswordMutation,
 } = frontendApi;

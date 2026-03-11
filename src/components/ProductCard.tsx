@@ -52,7 +52,7 @@ export default function ProductCard(props: ProductCardProps) {
             {/* Aspect Ratio 4/3 for shorter images */}
             <Link href={productHref} className="relative w-full aspect-[4/3] overflow-hidden bg-gray-50 block">
                 {discount && (
-                    <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-sm shadow-sm z-10">
+                    <span className="absolute top-2 left-2 bg-red-600 text-white text-[13px] font-bold px-2 py-1 rounded-sm shadow-sm z-10">
                         {discount}
                     </span>
                 )}
@@ -110,7 +110,7 @@ export default function ProductCard(props: ProductCardProps) {
                     <div className="flex gap-2">
                         <button
                             onClick={handleOrderNow}
-                            className="flex-1 bg-red-600 hover:bg-red-500 text-white text-[10px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
+                            className="flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
                         >
                             <Zap className="w-3 h-3" /> Order Now
                         </button>

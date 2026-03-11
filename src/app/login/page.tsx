@@ -40,14 +40,14 @@ export default function LoginPage() {
                     <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
                         Welcome <span className="text-red-500">Back</span>
                     </h1>
-                    <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mt-2">
+                    <p className="text-[13px] uppercase font-black tracking-widest text-slate-400 mt-2">
                         Sign in to manage your orders
                     </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Email or Phone</label>
+                        <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Email or Phone</label>
                         <div className="relative">
                             <input
                                 type="text"
@@ -64,7 +64,7 @@ export default function LoginPage() {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Password</label>
+                        <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Password</label>
                         <div className="relative">
                             <input
                                 type="password"
@@ -88,14 +88,14 @@ export default function LoginPage() {
                 </form>
 
                 <div className="mt-10 text-center">
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    <p className="text-[13px] font-black uppercase tracking-widest text-slate-400">
                         Don't have an account?{" "}
                         <Link href="/register" className="text-red-500 hover:underline">
                             Create Account
                         </Link>
                     </p>
                     <div className="mt-6 pt-6 border-t border-slate-50">
-                        <Link href="/tracking" className="text-[10px] font-black uppercase tracking-widest text-slate-900 flex items-center justify-center gap-2 group">
+                        <Link href="/tracking" className="text-[13px] font-black uppercase tracking-widest text-slate-900 flex items-center justify-center gap-2 group">
                             <span className="group-hover:text-red-500 transition-colors">Track Guest Order</span>
                             <AlertCircle className="w-3.5 h-3.5 text-red-500" />
                         </Link>

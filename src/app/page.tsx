@@ -67,7 +67,7 @@ export default function Home() {
                 <div className="h-[380px] relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
                   <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
-                    <span className="bg-red-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full w-fit mb-6 shadow-xl shadow-red-600/20 uppercase tracking-[0.2em] border border-red-300">New Collection '26</span>
+                    <span className="bg-red-600 text-white text-[13px] font-black px-4 py-1.5 rounded-full w-fit mb-6 shadow-xl shadow-red-600/20 uppercase tracking-[0.2em] border border-red-300">New Collection '26</span>
                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none uppercase">Elevate Your<br /><span className="text-red-600">Identity.</span></h1>
                     <p className="text-xs md:text-sm font-medium opacity-60 mb-8 leading-relaxed uppercase tracking-widest text-balance">Premium curated products for the modern lifestyle explorer.</p>
                     <Link href="/shop" className="w-fit bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white transition-all shadow-2xl shadow-white/5 active:scale-95">Discover Shop</Link>
@@ -101,7 +101,7 @@ export default function Home() {
       {/* Explore Collections Slider */}
       <section className="max-w-[1600px] mx-auto px-4 py-8">
         <div className="flex flex-col items-center mb-10 text-center space-y-4">
-          <span className="text-red-600 text-[10px] font-black uppercase tracking-[0.4em]">Curated Picks</span>
+          <span className="text-red-600 text-[13px] font-black uppercase tracking-[0.4em]">Curated Picks</span>
           <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">
             Explore Collections
           </h2>
@@ -173,7 +173,7 @@ export default function Home() {
             Top Categories
           </h2>
         </div>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8">
+        <div className="flex flex-wrap justify-start gap-4 md:gap-8">
           {categories.map((cat) => (
             <Link
               key={cat.id}

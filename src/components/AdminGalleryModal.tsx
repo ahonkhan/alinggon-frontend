@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import { Lock, Eye, ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
-import { useVerifyPersonalPicturePasswordMutation } from "@/store/api/frontendApi";
+import { useVerifyPersonalPicturePasswordMutation, useVerifyBulkPersonalPicturesPasswordMutation } from "@/store/api/frontendApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectFade } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store";
-import { closePasswordModal, closeViewer, openPasswordModal, openViewer, unlockPicture } from "@/store/slices/gallerySlice";
+import { closePasswordModal, closeViewer, openBulkPasswordModal, openPasswordModal, openViewer, unlockAllPictures, unlockPicture } from "@/store/slices/gallerySlice";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,27 +15,41 @@ import "swiper/css/effect-fade";
 
 export const AdminGalleryModal: React.FC = () => {
     const dispatch = useDispatch();
-    const { pictures, viewerIndex, passwordModalId, unlockedPictures } = useSelector((state: RootState) => state.gallery);
+    const { pictures, viewerIndex, passwordModalId, unlockedPictures, isBulkUnlockMode } = useSelector((state: RootState) => state.gallery);
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
     const [verifyPassword, { isLoading: isVerifying }] = useVerifyPersonalPicturePasswordMutation();
+    const [verifyBulkPassword, { isLoading: isBulkVerifying }] = useVerifyBulkPersonalPicturesPasswordMutation();
 
     const handleUnlock = async (e: React.FormEvent) => {
         e.preventDefault();
         if (passwordModalId === null) return;
 
         try {
-            const result = await verifyPassword({ id: passwordModalId, password }).unwrap();
-            if (result.success && result.image_path) {
-                dispatch(unlockPicture({ id: passwordModalId, imagePath: result.image_path }));
-                dispatch(closePasswordModal());
-                setPassword("");
-                setError("");
-                // Automatically open viewer for this picture
-                const index = pictures.findIndex(p => p.id === passwordModalId);
-                if (index !== -1) {
-                    dispatch(openViewer(index));
+            if (isBulkUnlockMode) {
+                const result = await verifyBulkPassword({ password }).unwrap();
+                if (result.success && result.unlocked_pictures) {
+                    dispatch(unlockAllPictures(result.unlocked_pictures));
+                    setPassword("");
+                    setError("");
+                    // Automatically open viewer for the first picture if not already viewing
+                    if (viewerIndex === null) {
+                        dispatch(openViewer(0));
+                    }
+                }
+            } else {
+                const result = await verifyPassword({ id: passwordModalId, password }).unwrap();
+                if (result.success && result.image_path) {
+                    dispatch(unlockPicture({ id: passwordModalId, imagePath: result.image_path }));
+                    dispatch(closePasswordModal());
+                    setPassword("");
+                    setError("");
+                    // Automatically open viewer for this picture
+                    const index = pictures.findIndex(p => p.id === passwordModalId);
+                    if (index !== -1) {
+                        dispatch(openViewer(index));
+                    }
                 }
             }
         } catch (err: any) {
@@ -83,10 +97,10 @@ export const AdminGalleryModal: React.FC = () => {
                                     </button>
                                     <button
                                         type="submit"
-                                        disabled={isVerifying || !password}
+                                        disabled={isVerifying || isBulkVerifying || !password}
                                         className="flex-[2] bg-red-500 text-white px-4 py-4 rounded-2xl font-black uppercase tracking-widest text-xs shadow-lg hover:shadow-red-500/30 active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
                                     >
-                                        {isVerifying ? <Loader2 className="w-4 h-4 animate-spin" /> : "Unlock Picture"}
+                                        {(isVerifying || isBulkVerifying) ? <Loader2 className="w-4 h-4 animate-spin" /> : (isBulkUnlockMode ? "Unlock All" : "Unlock Picture")}
                                     </button>
                                 </div>
                             </form>
@@ -117,7 +131,7 @@ export const AdminGalleryModal: React.FC = () => {
                                 const newPic = pictures[swiper.activeIndex];
                                 if (newPic.is_locked && !unlockedPictures[newPic.id]) {
                                     dispatch(closeViewer());
-                                    dispatch(openPasswordModal(newPic.id));
+                                    dispatch(openBulkPasswordModal());
                                 } else {
                                     dispatch(openViewer(swiper.activeIndex));
                                 }

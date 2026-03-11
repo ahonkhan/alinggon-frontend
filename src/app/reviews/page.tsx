@@ -63,7 +63,7 @@ export default function ReviewsPage() {
                 <div className="flex flex-col items-center mb-16 md:mb-24 text-center space-y-6">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-50 rounded-full border border-red-100 animate-bounce-slow">
                         <CheckCircle2 className="w-3 h-3 text-red-500" />
-                        <span className="text-red-600 text-[10px] font-black uppercase tracking-widest">10,000+ Happy Explorers</span>
+                        <span className="text-red-600 text-[13px] font-black uppercase tracking-widest">10,000+ Happy Explorers</span>
                     </div>
                     <h1 className="text-5xl md:text-7xl font-black tracking-tight text-slate-900 leading-[0.9] max-w-4xl">
                         ALINGGON  <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">CUSTOMER</span>
@@ -78,12 +78,12 @@ export default function ReviewsPage() {
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center py-20 space-y-4">
                         <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
-                        <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[10px]">Retrieving Stories...</p>
+                        <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[13px]">Retrieving Stories...</p>
                     </div>
                 ) : isError ? (
                     <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100">
                         <p className="text-red-600 font-black uppercase tracking-widest text-sm">Failed to load chronicles.</p>
-                        <button onClick={() => window.location.reload()} className="mt-4 text-[10px] font-black underline uppercase text-red-400 tracking-widest hover:text-red-600">Try Again</button>
+                        <button onClick={() => window.location.reload()} className="mt-4 text-[13px] font-black underline uppercase text-red-400 tracking-widest hover:text-red-600">Try Again</button>
                     </div>
                 ) : reviews.length === 0 ? (
                     <div className="text-center py-32 bg-slate-50 rounded-[3rem] border border-slate-100">
@@ -155,10 +155,10 @@ export default function ReviewsPage() {
                                 )}
 
                                 <div className="flex items-center justify-between pt-6 border-t border-slate-50">
-                                    <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50/50 px-3 py-1 rounded-lg">
+                                    <span className="text-[13px] font-black text-red-500 uppercase tracking-[0.2em] bg-red-50/50 px-3 py-1 rounded-lg">
                                         {review.role || "Verified Buyer"}
                                     </span>
-                                    <button className="text-[10px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors">Helpful?</button>
+                                    <button className="text-[13px] font-black text-slate-300 uppercase tracking-widest hover:text-red-500 transition-colors">Helpful?</button>
                                 </div>
                             </div>
                         ))}
@@ -174,7 +174,7 @@ export default function ReviewsPage() {
 
                         <div className="relative z-10 space-y-8 max-w-2xl mx-auto">
                             <div className="inline-block px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                                <span className="text-white/40 text-[10px] font-black uppercase tracking-[0.4em]">Become a Narrator</span>
+                                <span className="text-white/40 text-[13px] font-black uppercase tracking-[0.4em]">Become a Narrator</span>
                             </div>
                             <h2 className="text-4xl md:text-6xl font-black text-white leading-none tracking-tight">
                                 YOUR STORY <span className="text-red-500 italic">MATTERS.</span>

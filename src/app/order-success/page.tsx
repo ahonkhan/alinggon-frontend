@@ -25,7 +25,7 @@ function SuccessContent() {
                             <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase leading-none">
                                 Order <span className="text-green-500">Confirmed!</span>
                             </h1>
-                            <p className="text-gray-400 font-bold uppercase text-[10px] tracking-[0.2em]">
+                            <p className="text-gray-400 font-bold uppercase text-[13px] tracking-[0.2em]">
                                 Your transaction was successful
                             </p>
                         </div>
@@ -46,16 +46,16 @@ function SuccessContent() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Link href={`/orders/${orderId}`} className="flex items-center justify-center gap-3 bg-slate-900 text-white font-black py-5 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-red-400 transition-all active:scale-95 shadow-xl">
+                            <Link href={`/orders/${orderId}`} className="flex items-center justify-center gap-3 bg-slate-900 text-white font-black py-5 rounded-2xl text-[13px] uppercase tracking-widest hover:bg-red-400 transition-all active:scale-95 shadow-xl">
                                 <Package className="w-4 h-4" /> View Order details
                             </Link>
-                            <button className="flex items-center justify-center gap-3 border-2 border-slate-100 text-slate-500 font-black py-5 rounded-2xl text-[10px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
+                            <button className="flex items-center justify-center gap-3 border-2 border-slate-100 text-slate-500 font-black py-5 rounded-2xl text-[13px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
                                 <Download className="w-4 h-4" /> Download Invoice
                             </button>
                         </div>
 
                         <div className="pt-8">
-                            <Link href="/shop" className="inline-flex items-center gap-2 text-[10px] font-black text-red-400 hover:text-red-500 uppercase tracking-[0.2em] group">
+                            <Link href="/shop" className="inline-flex items-center gap-2 text-[13px] font-black text-red-400 hover:text-red-500 uppercase tracking-[0.2em] group">
                                 <ShoppingBag className="w-4 h-4" />
                                 Continue Shopping
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />

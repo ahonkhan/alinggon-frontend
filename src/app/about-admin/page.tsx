@@ -442,15 +442,15 @@ export default function AboutAdmin() {
                                     <div className="grid grid-cols-3 gap-4 pt-4">
                                         <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
                                             <p className="text-3xl font-black text-red-500">{admin_settings.years_lead}</p>
-                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
                                         </div>
                                         <div className="space-y-1 text-center p-4 bg-pink-50 rounded-2xl">
                                             <p className="text-3xl font-black text-pink-500">{admin_settings.community_size}</p>
-                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Community</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Community</p>
                                         </div>
                                         <div className="space-y-1 text-center p-4 bg-purple-50 rounded-2xl">
                                             <p className="text-3xl font-black text-purple-500">{admin_settings.dedication_hours}</p>
-                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Dedication</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Dedication</p>
                                         </div>
                                     </div>
                                 </div>
@@ -476,7 +476,7 @@ export default function AboutAdmin() {
                     {social_network_groups.map((group: any) => (
                         <section key={group.id}>
                             <div className="text-center mb-16 space-y-4">
-                                <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">
+                                <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-[13px] font-black uppercase tracking-widest">
                                     Connect with Us
                                 </div>
                                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase">
@@ -513,7 +513,7 @@ export default function AboutAdmin() {
                                             <h3 className="text-sm font-black text-slate-900">
                                                 {network.name}
                                             </h3>
-                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                                            <p className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mt-1">
                                                 {network.description || 'Official Network'}
                                             </p>
                                         </div>
@@ -537,7 +537,7 @@ export default function AboutAdmin() {
                                     <item.icon className="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</h4>
+                                    <h4 className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</h4>
                                     <p className="text-xl font-black text-slate-900 uppercase tracking-tighter">{item.value}</p>
                                 </div>
                             </div>

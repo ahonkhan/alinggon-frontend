@@ -34,7 +34,7 @@ export default function AdsSection() {
     return (
         <section className="max-w-[1600px] mx-auto px-4 py-8">
             <div className="flex flex-col items-center mb-6 text-center space-y-2 lg:hidden">
-                <span className="text-red-600 text-[10px] font-black uppercase tracking-[0.4em]">Special Offers</span>
+                <span className="text-red-600 text-[13px] font-black uppercase tracking-[0.4em]">Special Offers</span>
                 <h3 className="text-xl font-black tracking-tighter uppercase text-slate-900">Featured Deals</h3>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -53,7 +53,7 @@ export default function AdsSection() {
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg">
                                 Shop Now
                             </span>
                         </div>

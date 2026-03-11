@@ -40,7 +40,7 @@ export default function TrackingPage() {
                 <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-100 mb-10">
                     <form onSubmit={handleTrack} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Order Number (Optional)</label>
+                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Order Number (Optional)</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -54,7 +54,7 @@ export default function TrackingPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Phone Number</label>
+                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Phone Number</label>
                             <div className="relative">
                                 <input
                                     type="tel" required
@@ -87,7 +87,7 @@ export default function TrackingPage() {
                         <AlertCircle className="w-8 h-8 text-red-500 flex-shrink-0" />
                         <div>
                             <h4 className="text-xs font-black text-red-600 uppercase tracking-widest">No Order Found</h4>
-                            <p className="text-[10px] font-bold text-red-500/70 uppercase">Please check your phone number for accuracy.</p>
+                            <p className="text-[13px] font-bold text-red-500/70 uppercase">Please check your phone number for accuracy.</p>
                         </div>
                     </div>
                 )}
@@ -101,18 +101,18 @@ export default function TrackingPage() {
                                 <div>
                                     <h3 className="text-2xl font-black tracking-tighter uppercase mb-2">Order Tracking Results</h3>
                                     <div className="flex items-center gap-4 mt-2">
-                                        <span className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                        <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-400 uppercase tracking-widest">
                                             <Calendar className="w-3.5 h-3.5" />
                                             {new Date(data.order.created_at).toLocaleDateString()}
                                         </span>
-                                        <span className={`flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest ${statusConfig[data.order.order_status]?.color || 'text-white'}`}>
+                                        <span className={`flex items-center gap-1.5 text-[13px] font-black uppercase tracking-widest ${statusConfig[data.order.order_status]?.color || 'text-white'}`}>
                                             {statusConfig[data.order.order_status]?.label || data.order.order_status}
                                         </span>
                                     </div>
                                 </div>
                                 <Link
                                     href={`/orders/${data.order.order_number}`}
-                                    className="bg-white/10 hover:bg-red-500 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all backdrop-blur-md"
+                                    className="bg-white/10 hover:bg-red-500 px-6 py-3 rounded-2xl text-[13px] font-black uppercase tracking-widest transition-all backdrop-blur-md"
                                 >
                                     View Full Details
                                 </Link>
@@ -125,7 +125,7 @@ export default function TrackingPage() {
                                             <UserIcon className="w-4 h-4 text-red-400" />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Customer</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">Customer</p>
                                             <p className="text-xs font-black uppercase">{data.order.customer_name}</p>
                                         </div>
                                     </div>
@@ -134,13 +134,13 @@ export default function TrackingPage() {
                                             <MapPin className="w-4 h-4 text-red-400" />
                                         </div>
                                         <div>
-                                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Shipping Address</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">Shipping Address</p>
                                             <p className="text-xs font-bold text-slate-300 italic line-clamp-2">{data.order.shipping_address}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="bg-white/5 rounded-3xl p-6 border border-white/10">
-                                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Live Status</p>
+                                    <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-4">Live Status</p>
                                     <div className="flex items-center gap-4">
                                         <div className={`p-4 rounded-2xl ${statusConfig[data.order.order_status]?.bg || 'bg-white/10'}`}>
                                             {(() => {
@@ -150,7 +150,7 @@ export default function TrackingPage() {
                                         </div>
                                         <div>
                                             <h4 className="text-xl font-black uppercase tracking-tight">{statusConfig[data.order.order_status]?.label}</h4>
-                                            <p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">Updated: {new Date(data.order.updated_at).toLocaleTimeString()}</p>
+                                            <p className="text-[13px] font-bold text-slate-400 mt-1 uppercase">Updated: {new Date(data.order.updated_at).toLocaleTimeString()}</p>
                                         </div>
                                     </div>
                                 </div>

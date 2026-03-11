@@ -31,7 +31,7 @@ export default function CategoriesPage() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 text-red-400">
                             <LayoutGrid className="w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em]">Master Hierarchy</span>
+                            <span className="text-[13px] font-black uppercase tracking-[0.4em]">Master Hierarchy</span>
                         </div>
                         <h1 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-slate-900 leading-none">
                             All <span className="text-red-400">Categories.</span>
@@ -79,11 +79,11 @@ export default function CategoriesPage() {
 
                                 {/* Content */}
                                 <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-end z-30">
-                                    <span className="text-white/40 text-[7px] md:text-[10px] font-black uppercase tracking-[0.2em] mb-1 group-hover:text-red-400 transition-colors">
+                                    <span className="text-white/40 text-[7px] md:text-[13px] font-black uppercase tracking-[0.2em] mb-1 group-hover:text-red-400 transition-colors">
                                         {(category.count || 0)}+ Objects
                                     </span>
                                     <div className="flex items-center justify-between">
-                                        <h2 className="text-[10px] sm:text-base md:text-xl font-black text-white uppercase tracking-tighter leading-none group-hover:translate-x-1 transition-transform duration-500 line-clamp-1">
+                                        <h2 className="text-[13px] sm:text-base md:text-xl font-black text-white uppercase tracking-tighter leading-none group-hover:translate-x-1 transition-transform duration-500 line-clamp-1">
                                             {category.name}
                                         </h2>
                                         <div className="hidden md:flex w-8 h-8 flex-shrink-0 bg-white/10 rounded-full items-center justify-center border border-white/20 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-500 backdrop-blur-md">
@@ -115,7 +115,7 @@ function StatBox({ label, value }: { label: string; value: string }) {
     return (
         <div className="text-center space-y-2">
             <p className="text-4xl font-black text-slate-900 tracking-tighter">{value}</p>
-            <p className="text-[10px] font-black text-red-400 uppercase tracking-[0.3em] leading-none">{label}</p>
+            <p className="text-[13px] font-black text-red-400 uppercase tracking-[0.3em] leading-none">{label}</p>
         </div>
     );
 }

@@ -65,24 +65,24 @@ export default function OrderDetailsPage() {
                     <div>
                         <Link href="/" className="flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors mb-4 group">
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                            <span className="text-[10px] uppercase font-black tracking-widest leading-none mt-1">Back to Home</span>
+                            <span className="text-[13px] uppercase font-black tracking-widest leading-none mt-1">Back to Home</span>
                         </Link>
                         <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
                             Order <span className="text-red-500">#{order.order_number}</span>
                         </h1>
                         <div className="flex items-center gap-4 mt-2">
-                            <span className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-400 uppercase tracking-widest">
                                 <Calendar className="w-3.5 h-3.5" />
                                 {new Date(order.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                             </span>
-                            <span className={`flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest ${currentStatus.color}`}>
+                            <span className={`flex items-center gap-1.5 text-[13px] font-black uppercase tracking-widest ${currentStatus.color}`}>
                                 <currentStatus.icon className="w-3.5 h-3.5" />
                                 {currentStatus.label}
                             </span>
                         </div>
                     </div>
                     <div className="flex gap-3">
-                        <button className="bg-white border-2 border-slate-100 px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-600 hover:border-red-500 hover:text-red-500 transition-all shadow-sm">
+                        <button className="bg-white border-2 border-slate-100 px-6 py-3 rounded-2xl text-[13px] font-black uppercase tracking-widest text-slate-600 hover:border-red-500 hover:text-red-500 transition-all shadow-sm">
                             Print Invoice
                         </button>
                     </div>
@@ -119,7 +119,7 @@ export default function OrderDetailsPage() {
                                                 </div>
                                             )}
                                             <div className="mt-2 flex items-center justify-between">
-                                                <span className="text-[10px] font-bold text-slate-400">Qty: {item.quantity}</span>
+                                                <span className="text-[13px] font-bold text-slate-400">Qty: {item.quantity}</span>
                                                 <span className="text-xs font-black text-slate-900">৳ {item.unit_price}</span>
                                             </div>
                                         </div>
@@ -143,11 +143,11 @@ export default function OrderDetailsPage() {
                                             </div>
                                             <div>
                                                 <h4 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">{statusConfig[log.status]?.label || log.status}</h4>
-                                                <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">
+                                                <p className="text-[13px] text-slate-400 font-bold uppercase mt-1">
                                                     {new Date(log.created_at).toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}
                                                 </p>
                                                 {log.notes && (
-                                                    <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-[10px] font-medium text-slate-600 italic">
+                                                    <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-[13px] font-medium text-slate-600 italic">
                                                         "{log.notes}"
                                                     </div>
                                                 )}
@@ -161,10 +161,10 @@ export default function OrderDetailsPage() {
                                         </div>
                                         <div>
                                             <h4 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">Order Placed</h4>
-                                            <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">
+                                            <p className="text-[13px] text-slate-400 font-bold uppercase mt-1">
                                                 {new Date(order.created_at).toLocaleString()}
                                             </p>
-                                            <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-[10px] font-medium text-slate-600 italic">
+                                            <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-[13px] font-medium text-slate-600 italic">
                                                 Order was successfully placed and is pending verification.
                                             </div>
                                         </div>
@@ -178,18 +178,18 @@ export default function OrderDetailsPage() {
                     <div className="space-y-8">
                         {/* Order Summary */}
                         <div className="bg-slate-900 rounded-3xl p-6 shadow-xl text-white">
-                            <h3 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Order Summary</h3>
+                            <h3 className="text-[13px] font-black uppercase tracking-widest text-slate-400 mb-6">Order Summary</h3>
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center text-[10px] uppercase font-bold text-slate-400">
+                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-400">
                                     <span>Subtotal</span>
                                     <span className="text-white font-black font-sans tracking-tight text-sm">৳ {order.total_amount - order.shipping_cost}</span>
                                 </div>
-                                <div className="flex justify-between items-center text-[10px] uppercase font-bold text-slate-400">
+                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-400">
                                     <span>Shipping</span>
                                     <span className="text-white font-black font-sans tracking-tight text-sm">৳ {order.shipping_cost}</span>
                                 </div>
                                 <div className="pt-4 border-t border-slate-800 flex justify-between items-center">
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-red-400">Grand Total</span>
+                                    <span className="text-[13px] font-black uppercase tracking-widest text-red-400">Grand Total</span>
                                     <span className="text-2xl font-black font-sans tracking-tighter">৳ {order.total_amount}</span>
                                 </div>
                             </div>
@@ -209,10 +209,10 @@ export default function OrderDetailsPage() {
                             <div>
                                 <div className="flex items-center gap-2 mb-4">
                                     <User className="w-4 h-4 text-red-500" />
-                                    <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Customer</h3>
+                                    <h3 className="text-[13px] font-black text-slate-900 uppercase tracking-widest">Customer</h3>
                                 </div>
                                 <p className="text-[11px] font-black text-slate-800 uppercase">{order.customer_name}</p>
-                                <div className="flex items-center gap-1.5 mt-1 text-[10px] font-bold text-slate-400">
+                                <div className="flex items-center gap-1.5 mt-1 text-[13px] font-bold text-slate-400">
                                     <Phone className="w-3.5 h-3.5" />
                                     {order.customer_phone}
                                 </div>
@@ -220,7 +220,7 @@ export default function OrderDetailsPage() {
                             <div>
                                 <div className="flex items-center gap-2 mb-4">
                                     <MapPin className="w-4 h-4 text-red-500" />
-                                    <h3 className="text-[10px] font-black text-slate-900 uppercase tracking-widest">Shipping Address</h3>
+                                    <h3 className="text-[13px] font-black text-slate-900 uppercase tracking-widest">Shipping Address</h3>
                                 </div>
                                 <p className="text-[11px] font-bold text-slate-500 leading-relaxed italic">
                                     {order.shipping_address}
@@ -231,10 +231,10 @@ export default function OrderDetailsPage() {
                         {/* Help Card */}
                         <div className="bg-red-50 rounded-3xl p-6 border-2 border-red-100">
                             <h3 className="text-xs font-black text-red-600 uppercase tracking-widest mb-3">Need Help?</h3>
-                            <p className="text-[10px] font-bold text-red-500/70 mb-4 leading-relaxed uppercase">
+                            <p className="text-[13px] font-bold text-red-500/70 mb-4 leading-relaxed uppercase">
                                 Having issues with your order? Our support team is here to help 24/7.
                             </p>
-                            <button className="w-full bg-white border-2 border-red-200 py-3 rounded-2xl text-[10px] font-black text-red-500 uppercase tracking-widest hover:bg-red-500 hover:text-white hover:border-red-500 transition-all">
+                            <button className="w-full bg-white border-2 border-red-200 py-3 rounded-2xl text-[13px] font-black text-red-500 uppercase tracking-widest hover:bg-red-500 hover:text-white hover:border-red-500 transition-all">
                                 Chat with Support
                             </button>
                         </div>

@@ -25,7 +25,7 @@ function SearchResults() {
                 <div className="max-w-7xl mx-auto px-4">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                         <div>
-                            <nav className="flex items-center gap-2 text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
+                            <nav className="flex items-center gap-2 text-[13px] font-bold text-gray-400 uppercase tracking-widest mb-4">
                                 <Link href="/" className="hover:text-red-400 transition-colors">Home</Link>
                                 <span>/</span>
                                 <span className="text-gray-900">Search Results</span>

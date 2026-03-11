@@ -90,7 +90,7 @@ export default function Checkout() {
                                 <ShoppingBag className="w-5 h-5 text-red-400" />
                                 <h3 className="font-bold text-sm uppercase tracking-widest">Items in Bag</h3>
                             </div>
-                            <span className="bg-white/10 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">
+                            <span className="bg-white/10 text-white text-[13px] font-black px-3 py-1 rounded-full uppercase">
                                 {cart.length} Products
                             </span>
                         </div>
@@ -173,7 +173,7 @@ export default function Checkout() {
                                     </div>
                                     <div>
                                         <span className="text-sm font-black text-slate-800 uppercase tracking-tighter">Cash on Delivery</span>
-                                        <p className="text-[10px] text-gray-400 font-bold uppercase mt-0.5">Pay after you receive your items</p>
+                                        <p className="text-[13px] text-gray-400 font-bold uppercase mt-0.5">Pay after you receive your items</p>
                                     </div>
                                 </label>
                             </div>
@@ -191,7 +191,7 @@ export default function Checkout() {
                         <div className="p-8 space-y-6">
                             <div className="space-y-4">
                                 <div className="space-y-1">
-                                    <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 px-1">Customer Information</label>
+                                    <label className="block text-[13px] font-black text-gray-400 uppercase tracking-widest mb-1.5 px-1">Customer Information</label>
                                     <div className="relative">
                                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                                         <input
@@ -243,7 +243,7 @@ export default function Checkout() {
                                 </div>
 
                                 <div className="space-y-3 pt-2">
-                                    <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Delivery Zone</h4>
+                                    <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest px-1">Delivery Zone</h4>
                                     <div className="flex flex-col gap-3">
                                         <label className={`flex items-center justify-between p-4 bg-gray-50 border-2 rounded-2xl cursor-pointer transition-all font-sans ${shippingZone === "inside" ? 'border-red-400 bg-white' : 'border-transparent hover:border-gray-200'}`}>
                                             <div className="flex items-center gap-3">

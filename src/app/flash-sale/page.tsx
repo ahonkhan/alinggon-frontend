@@ -68,7 +68,7 @@ export default function FlashSalePage() {
             {/* Breadcrumb */}
             <div className="bg-gray-50 border-b border-gray-100">
                 <div className="max-w-[1600px] mx-auto px-4 py-4">
-                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    <div className="flex items-center gap-2 text-[13px] font-black uppercase tracking-widest text-slate-400">
                         <Link href="/" className="hover:text-red-500 transition-colors">Home</Link>
                         <ChevronRight className="w-3 h-3" />
                         <span className="text-red-600">Flash Sale</span>
@@ -97,7 +97,7 @@ export default function FlashSalePage() {
                         {/* Countdown Large */}
                         <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[4rem] shadow-2xl">
                             <div className="flex flex-col items-center">
-                                <span className="text-[10px] font-black text-red-500 uppercase tracking-[0.3em] mb-8 flex items-center gap-2">
+                                <span className="text-[13px] font-black text-red-500 uppercase tracking-[0.3em] mb-8 flex items-center gap-2">
                                     <Clock className="w-4 h-4" /> Flash Sale Ends In
                                 </span>
                                 <div className="flex gap-4 md:gap-8">
@@ -111,7 +111,7 @@ export default function FlashSalePage() {
                                             <div className="bg-white/10 border-2 border-white/20 group-hover:border-red-500 w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-3xl transition-all duration-500">
                                                 <span className="text-2xl md:text-5xl font-black text-white tracking-tighter">{item.value.toString().padStart(2, '0')}</span>
                                             </div>
-                                            <span className="text-[10px] font-black uppercase text-slate-500 mt-4 tracking-widest group-hover:text-red-500 transition-colors">{item.label}</span>
+                                            <span className="text-[13px] font-black uppercase text-slate-500 mt-4 tracking-widest group-hover:text-red-500 transition-colors">{item.label}</span>
                                         </div>
                                     ))}
                                 </div>

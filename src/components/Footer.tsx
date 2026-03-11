@@ -3,6 +3,7 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ShoppingBag, Youtube, Send, ShieldCheck, Truck, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/context/ToastContext";
+import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 const XIcon = (props: any) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -12,6 +13,8 @@ const XIcon = (props: any) => (
 
 export default function Footer() {
     const { showToast } = useToast();
+    const { data: homeContent } = useGetHomeContentQuery();
+    const logoUrl = homeContent?.data?.logo;
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,10 +31,16 @@ export default function Footer() {
                     {/* About & Branding */}
                     <div className="lg:col-span-4 space-y-6">
                         <div className="flex items-center gap-3">
-                            <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-500/10">
-                                <ShoppingBag className="w-6 h-6" />
-                            </div>
-                            <span className="text-2xl font-black text-white tracking-tighter uppercase">Alinggon</span>
+                            {logoUrl ? (
+                                <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
+                            ) : (
+                                <>
+                                    <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-500/10">
+                                        <ShoppingBag className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-2xl font-black text-white tracking-tighter uppercase">Alinggon</span>
+                                </>
+                            )}
                         </div>
                         <p className="text-sm leading-loose max-w-sm uppercase font-bold text-white/50 tracking-tight">
                             Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.
@@ -148,7 +157,7 @@ function ValueProp({ icon: Icon, title, desc }: any) {
                 <Icon className="w-6 h-6" />
             </div>
             <h5 className="text-xs font-black text-white uppercase tracking-widest">{title}</h5>
-            <p className="text-[10px] font-bold text-white/20 uppercase tracking-tighter leading-relaxed">{desc}</p>
+            <p className="text-[13px] font-bold text-white/20 uppercase tracking-tighter leading-relaxed">{desc}</p>
         </div>
     );
 }

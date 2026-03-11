@@ -48,10 +48,10 @@ export default function LandingPage() {
                         <span className="text-xl font-black tracking-tighter text-slate-900">Alinggon</span>
                     </Link>
                     <div className="flex items-center gap-4">
-                        <a href="tel:01568324268" className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-[10px] font-black hover:bg-red-400 transition-all uppercase tracking-widest shadow-lg active:scale-95">
+                        <a href="tel:01568324268" className="hidden md:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-full text-[13px] font-black hover:bg-red-400 transition-all uppercase tracking-widest shadow-lg active:scale-95">
                             <PhoneCall className="w-3.5 h-3.5" /> কল করুন
                         </a>
-                        <button onClick={handleOrderBundle} className="flex items-center gap-2 px-6 py-2.5 bg-red-400 text-white rounded-full text-[10px] font-black shadow-xl shadow-red-200/50 hover:bg-red-500 transition-all uppercase tracking-widest active:scale-95">
+                        <button onClick={handleOrderBundle} className="flex items-center gap-2 px-6 py-2.5 bg-red-400 text-white rounded-full text-[13px] font-black shadow-xl shadow-red-200/50 hover:bg-red-500 transition-all uppercase tracking-widest active:scale-95">
                             অর্ডার করুন
                         </button>
                     </div>
@@ -85,11 +85,11 @@ export default function LandingPage() {
                             <div className="flex -space-x-3">
                                 {[1, 2, 3].map(i => <div key={i} className={`w-8 h-8 rounded-full border-2 border-white bg-slate-${200 + i * 100}`}></div>)}
                             </div>
-                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">৫,০০০+ সফল ডেলিভারি</span>
+                            <span className="text-[13px] font-black text-slate-400 uppercase tracking-widest mt-1">৫,০০০+ সফল ডেলিভারি</span>
                         </div>
                         <div className="flex items-center gap-1.5 px-3 py-1 bg-yellow-50 rounded-xl border border-yellow-100">
                             <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                            <span className="text-[10px] font-black text-slate-900 mt-0.5">৪.৯/৫ (৩২০ রিভিউ)</span>
+                            <span className="text-[13px] font-black text-slate-900 mt-0.5">৪.৯/৫ (৩২০ রিভিউ)</span>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@ export default function LandingPage() {
                         </div>
                     </div>
                     <div className="absolute -bottom-10 -left-10 bg-slate-900 text-white w-32 h-32 rounded-full flex flex-col items-center justify-center font-black shadow-2xl border-4 border-white animate-bounce-slow">
-                        <span className="text-[10px] uppercase tracking-widest opacity-60">Super</span>
+                        <span className="text-[13px] uppercase tracking-widest opacity-60">Super</span>
                         <span className="text-2xl mt-1">OFFER!</span>
                     </div>
                 </div>
@@ -169,7 +169,7 @@ export default function LandingPage() {
                         <span className="text-2xl font-black tracking-tighter text-white">Alinggon</span>
                     </Link>
                     <div className="h-0.5 w-1/4 bg-white/5 rounded-full"></div>
-                    <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">কপিরাইট অর্পিত &copy; ২০২৬ Alinggon. Developed by Rangpur IT</p>
+                    <p className="text-[13px] font-black text-white/30 uppercase tracking-[0.4em]">কপিরাইট অর্পিত &copy; ২০২৬ Alinggon. Developed by Rangpur IT</p>
                 </div>
             </footer>
 
@@ -197,7 +197,7 @@ function CountUnit({ value, label }: { value: number; label: string }) {
         <div className="flex flex-col items-center">
             <div className="bg-white/10 backdrop-blur-xl rounded-[2rem] w-24 h-24 flex flex-col items-center justify-center border border-white/20 shadow-2xl">
                 <span className="text-4xl font-black font-sans leading-none">{value.toString().padStart(2, "0")}</span>
-                <span className="text-[10px] font-black mt-1 uppercase tracking-widest opacity-60">{label}</span>
+                <span className="text-[13px] font-black mt-1 uppercase tracking-widest opacity-60">{label}</span>
             </div>
         </div>
     );

@@ -40,7 +40,7 @@ export default function TopBrands() {
         <section className="pb-12 pt-4  bg-white ">
             <div className="max-w-[1600px] mx-auto px-4">
                 <div className="flex flex-col items-center mb-8 text-center space-y-2">
-                    <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Official Partners</span>
+                    <span className="text-red-400 text-[13px] font-black uppercase tracking-[0.4em]">Official Partners</span>
                     <h2 className="text-2xl font-black tracking-tighter uppercase text-slate-900 pb-2">
                         Top Brands
                     </h2>

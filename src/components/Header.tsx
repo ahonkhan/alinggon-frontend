@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useMemo, useEffect, useRef } from "react";
 import MobileMenu from "./MobileMenu";
-import { useGetProductsQuery } from "@/store/api/frontendApi";
+import { useGetProductsQuery, useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 // Simple debounce hook
 function useDebounce<T>(value: T, delay: number): T {
@@ -34,6 +34,8 @@ export default function Header() {
         { q: debouncedSearchQuery },
         { skip: debouncedSearchQuery.length < 2 }
     );
+    const { data: homeContent } = useGetHomeContentQuery();
+    const logoUrl = homeContent?.data?.logo;
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -71,10 +73,16 @@ export default function Header() {
                         </button>
 
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-                            <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">
-                                <ShoppingBag className="w-6 h-6" />
-                            </div>
-                            <span className="text-2xl font-black tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">Alinggon</span>
+                            {logoUrl ? (
+                                <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
+                            ) : (
+                                <>
+                                    <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">
+                                        <ShoppingBag className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-2xl font-black tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">Alinggon</span>
+                                </>
+                            )}
                         </Link>
                     </div>
 
@@ -131,7 +139,7 @@ export default function Header() {
                                             </div>
                                             <div className="flex-1">
                                                 <h4 className="text-xs font-black text-slate-800 line-clamp-1 group-hover:text-red-500 transition-colors">{p.name}</h4>
-                                                <p className="text-[10px] font-black text-red-600 mt-1 font-sans">৳ {p.price}</p>
+                                                <p className="text-[11px] font-black text-red-600 mt-1 font-sans">৳ {p.price}</p>
                                             </div>
                                             <ChevronRight className="w-4 h-4 text-gray-200 group-hover:text-red-600 group-hover:translate-x-1 transition-all" />
                                         </Link>
@@ -143,7 +151,7 @@ export default function Header() {
                                 <Link
                                     href={`/shop?q=${searchQuery}`}
                                     onClick={() => setShowSuggestions(false)}
-                                    className="block w-full text-center py-4 bg-gray-50 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
+                                    className="block w-full text-center py-4 bg-gray-50 text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
                                 >
                                     View all search results
                                 </Link>
@@ -199,12 +207,12 @@ export default function Header() {
                                 </div>
                             ) : (
                                 <div className="hidden md:flex items-center gap-3 ml-2">
-                                    <Link href="/login" className="text-[10px] font-black text-slate-900 uppercase tracking-widest hover:text-red-600 transition-colors">
+                                    <Link href="/login" className="text-[11px] font-black text-slate-900 uppercase tracking-widest hover:text-red-600 transition-colors">
                                         Log In
                                     </Link>
                                     <Link
                                         href="/register"
-                                        className="px-6 py-3 bg-red-600 hover:bg-slate-900 text-white text-[10px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95"
+                                        className="px-6 py-3 bg-red-600 hover:bg-slate-900 text-white text-[11px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95"
                                     >
                                         Establish Account
                                     </Link>

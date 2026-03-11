@@ -29,7 +29,7 @@ export default function CustomerRatings() {
         return (
             <div className="flex flex-col items-center justify-center py-20 space-y-4 bg-white">
                 <Loader2 className="w-10 h-10 text-red-500 animate-spin" />
-                <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[10px]">Loading Chronicles...</p>
+                <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[13px]">Loading Chronicles...</p>
             </div>
         );
     }
@@ -42,7 +42,7 @@ export default function CustomerRatings() {
         <section className="bg-white pt-6 relative overflow-hidden">
             <div className="max-w-[1600px] mx-auto px-4 relative">
                 <div className="flex flex-col items-center mb-10 text-center space-y-4">
-                    <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Customer Trust</span>
+                    <span className="text-red-400 text-[13px] font-black uppercase tracking-[0.4em]">Customer Trust</span>
                     <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">
                         Alinggon Customer Reviews
                     </h2>

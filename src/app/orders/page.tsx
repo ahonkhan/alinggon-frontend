@@ -42,7 +42,7 @@ export default function MyOrdersPage() {
                         <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
                             My <span className="text-red-500">Orders</span>
                         </h1>
-                        <p className="text-[10px] uppercase font-black tracking-widest text-slate-400 mt-2">
+                        <p className="text-[13px] uppercase font-black tracking-widest text-slate-400 mt-2">
                             Manage and track your recent purchases
                         </p>
                     </div>
@@ -93,7 +93,7 @@ export default function MyOrdersPage() {
                                                         {status.label}
                                                     </span>
                                                 </div>
-                                                <div className="flex items-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                                <div className="flex items-center gap-4 text-[13px] font-black text-slate-400 uppercase tracking-widest">
                                                     <span>{new Date(order.created_at).toLocaleDateString()}</span>
                                                     <span>•</span>
                                                     <span>{order.items.length} Items</span>
@@ -102,7 +102,7 @@ export default function MyOrdersPage() {
                                         </div>
                                         <div className="flex items-center justify-between md:justify-end gap-10 border-t md:border-t-0 pt-4 md:pt-0">
                                             <div className="text-right">
-                                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Amount</p>
+                                                <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">Total Amount</p>
                                                 <p className="text-xl font-black text-slate-900 tracking-tighter">৳ {order.total_amount}</p>
                                             </div>
                                             <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-all">

@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function TopBar() {
 
     return (
-        <div className="bg-slate-900 text-white text-[10px] font-black py-2 hidden md:block uppercase tracking-widest border-b border-white/5">
+        <div className="bg-slate-900 text-white text-[11px] font-black py-2 hidden md:block uppercase tracking-widest border-b border-white/5">
             <div className="max-w-[1600px] mx-auto px-4 flex justify-between items-center">
                 <div className="flex items-center space-x-6">
                     <span className="opacity-40">Welcome to Alinggon Prime</span>

@@ -170,7 +170,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         }}
                     >
                         {displayDiscount && (
-                            <span className="absolute top-4 left-4 bg-red-500 text-white text-[10px] font-black px-3 py-1.5 rounded-full z-10 shadow-lg uppercase tracking-widest">
+                            <span className="absolute top-4 left-4 bg-red-500 text-white text-[13px] font-black px-3 py-1.5 rounded-full z-10 shadow-lg uppercase tracking-widest">
                                 {displayDiscount}
                             </span>
                         )}
@@ -217,16 +217,16 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     <div>
                         <h1 className="text-2xl font-black text-gray-900 leading-tight uppercase tracking-tight">{product.name}</h1>
                         <div className="flex flex-col gap-1 mt-2">
-                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                            <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
                                 Category: <Link href={`/shop?category=${product.category}`} className="text-red-500 hover:underline">{product.category}</Link>
                             </span>
                             {product.brand && (
-                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
                                     Brand: <Link href={`/shop?brand=${product.brand.slug || product.brand.id}`} className="text-red-500 hover:underline">{product.brand.name}</Link>
                                 </span>
                             )}
                             {product.vendor && (
-                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
                                     Vendor: <Link href={`/shop?vendor=${product.vendor.shop_slug || product.vendor.id}`} className="text-red-500 hover:underline">{product.vendor.shop_name}</Link>
                                 </span>
                             )}
@@ -239,11 +239,11 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                             <span className="text-lg text-gray-300 line-through font-sans font-bold">৳{displayOriginalPrice.toFixed(0)}</span>
                         )}
                         {displayDiscount && (
-                            <span className="bg-red-50 text-red-500 text-[10px] font-black px-3 py-1 rounded-full shadow-sm uppercase tracking-widest">{displayDiscount}</span>
+                            <span className="bg-red-50 text-red-500 text-[13px] font-black px-3 py-1 rounded-full shadow-sm uppercase tracking-widest">{displayDiscount}</span>
                         )}
                     </div>
 
-                    <div className="space-y-4 py-6 border-b border-gray-100 uppercase tracking-widest text-[10px] font-black text-gray-400">
+                    <div className="space-y-4 py-6 border-b border-gray-100 uppercase tracking-widest text-[13px] font-black text-gray-400">
                         <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4 text-green-500" />
                             <span>Availability: <span className="text-green-600 font-black">In Stock ({displayStock} items)</span></span>
@@ -255,7 +255,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <div className="space-y-6 py-4 border-b border-gray-100">
                             {product.variations.map((v) => (
                                 <div key={v.id}>
-                                    <h4 className="text-[10px] font-black text-slate-400 mb-3 uppercase tracking-widest flex items-center gap-1">
+                                    <h4 className="text-[13px] font-black text-slate-400 mb-3 uppercase tracking-widest flex items-center gap-1">
                                         Select {v.name}: <span className="text-red-500">*</span>
                                     </h4>
                                     <div className="flex flex-wrap gap-3">
@@ -303,26 +303,26 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                     <button
                         onClick={handleBuyNow}
-                        className="w-full bg-slate-900 hover:bg-black text-white font-black h-14 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-200 active:scale-95 uppercase tracking-widest text-xs"
+                        className="w-full bg-slate-900 hover:bg-black text-white font-black h-14 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-200 active:scale-95 uppercase tracking-widest text-base"
                     >
-                        <Zap className="w-5 h-5" /> BUY NOW
+                        <Zap className="w-5 h-5" /> অর্ডার করুন
                     </button>
 
                     {/* Trust Info */}
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-50 shadow-sm">
                             <div className="bg-red-50 p-2 rounded-xl"><ShieldCheck className="w-5 h-5 text-red-400" /></div>
-                            <span className="text-[10px] font-black text-slate-800 uppercase tracking-tighter leading-tight">১০১% আসল প্রোডাক্ট</span>
+                            <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">১০১% আসল প্রোডাক্ট</span>
                         </div>
                         <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-50 shadow-sm">
                             <div className="bg-blue-50 p-2 rounded-xl"><Truck className="w-5 h-5 text-blue-400" /></div>
-                            <span className="text-[10px] font-black text-slate-800 uppercase tracking-tighter leading-tight">সারা দেশে ডেলিভারি</span>
+                            <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">সারা দেশে ডেলিভারি</span>
                         </div>
                     </div>
 
                     {/* Call Support */}
                     <div className="flex flex-col md:flex-row gap-4">
-                        <a href="tel:+97336781645" className="flex-1 bg-white border border-gray-100 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1">
+                        <a href="tel:+97336781645" className="flex-1 bg-white border border-gray-100 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1">
                             <div className="bg-green-500 text-white p-1.5 rounded-lg"><Phone className="w-4 h-4" /></div>
                             +97336781645
                         </a>
@@ -342,7 +342,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     </div>
 
                     <Link href="/shop" className="block bg-gradient-to-br from-red-500 to-red-600 p-6 rounded-[2rem] text-white shadow-xl shadow-red-100 hover:shadow-red-200 transition-all hover:-translate-y-1 group">
-                        <p className="text-[10px] font-black uppercase tracking-widest opacity-80 mb-2">Exclusive Offer</p>
+                        <p className="text-[13px] font-black uppercase tracking-widest opacity-80 mb-2">Exclusive Offer</p>
                         <h4 className="text-xl font-black uppercase leading-tight">Explore More Trends</h4>
                         <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
                             Shop Now <ChevronRight className="w-4 h-4" />
@@ -388,11 +388,11 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 <div className="h-px bg-gray-50 w-full my-8" />
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div className="bg-red-50/30 p-8 rounded-[2rem] border border-red-50">
-                                        <h4 className="text-red-500 font-black uppercase text-[10px] tracking-widest mb-4">Quality Promise</h4>
+                                        <h4 className="text-red-500 font-black uppercase text-[13px] tracking-widest mb-4">Quality Promise</h4>
                                         <p className="text-gray-600 text-sm leading-relaxed">Each object in our collection undergoes rigorous quality inspection to ensure premium craftsmanship.</p>
                                     </div>
                                     <div className="bg-slate-50/50 p-8 rounded-[2rem] border border-slate-100">
-                                        <h4 className="text-slate-900 font-black uppercase text-[10px] tracking-widest mb-4">Official Warranty</h4>
+                                        <h4 className="text-slate-900 font-black uppercase text-[13px] tracking-widest mb-4">Official Warranty</h4>
                                         <p className="text-gray-600 text-sm leading-relaxed">Full coverage for manufacturing defects and guaranteed replacement options.</p>
                                     </div>
                                 </div>
@@ -408,7 +408,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                         <tbody>
                                             {product.attributes.map((attr, i) => (
                                                 <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
-                                                    <td className="py-5 px-8 text-[10px] font-black text-gray-400 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
+                                                    <td className="py-5 px-8 text-[13px] font-black text-gray-400 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
                                                     <td className="py-5 px-8 text-sm font-bold text-slate-800 font-sans">{attr.value}</td>
                                                 </tr>
                                             ))}
@@ -470,7 +470,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                 {r.admin_reply && (
                                                     <div className="mt-6 bg-white p-6 rounded-3xl border-2 border-red-100 shadow-sm relative overflow-hidden">
                                                         <div className="absolute top-0 left-0 w-1 h-full bg-red-400" />
-                                                        <div className="text-[10px] font-black text-red-500 uppercase tracking-widest mb-2 flex items-center gap-2">
+                                                        <div className="text-[13px] font-black text-red-500 uppercase tracking-widest mb-2 flex items-center gap-2">
                                                             <ShieldCheck className="w-3.5 h-3.5" /> Admin Hub Reply
                                                         </div>
                                                         <p className="text-sm text-slate-600 font-bold leading-relaxed">{r.admin_reply}</p>
@@ -483,7 +483,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                         className="flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors group/like"
                                                     >
                                                         <Heart className="w-4 h-4 group-hover/like:fill-red-500" />
-                                                        <span className="text-[10px] font-black uppercase tracking-widest">{r.likes_count} Helpful</span>
+                                                        <span className="text-[13px] font-black uppercase tracking-widest">{r.likes_count} Helpful</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -523,7 +523,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                             <div className="grid grid-cols-1 gap-4">
                                                 <div className="border-2 border-slate-200 rounded-[2rem] p-8 text-center cursor-pointer hover:bg-red-50/30 hover:border-red-100 transition-all group relative overflow-hidden">
                                                     <ImageIcon className="w-8 h-8 text-gray-200 mx-auto mb-2 group-hover:text-red-400 transition-all" />
-                                                    <span className="text-[10px] text-gray-400 font-black uppercase tracking-widest">ছবির অ্যালবাম যুক্ত করুন</span>
+                                                    <span className="text-[13px] text-gray-400 font-black uppercase tracking-widest">ছবির অ্যালবাম যুক্ত করুন</span>
                                                     <p className="text-[8px] text-gray-300 mt-2 uppercase">Max 5 photos, 2MB each</p>
                                                 </div>
                                             </div>
@@ -550,7 +550,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 <div className="mt-20">
                     <div className="flex items-center justify-between mb-8">
                         <div>
-                            <span className="text-red-400 text-[10px] font-black uppercase tracking-[0.4em]">Matching Trends</span>
+                            <span className="text-red-400 text-[13px] font-black uppercase tracking-[0.4em]">Matching Trends</span>
                             <h2 className="text-3xl font-black tracking-tighter uppercase text-slate-900 border-b-4 border-slate-100 pb-2">Related Products</h2>
                         </div>
                     </div>

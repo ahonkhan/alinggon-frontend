@@ -7,7 +7,7 @@ export default function TrackOrder() {
     return (
         <main className="max-w-4xl mx-auto px-4 py-16 md:py-24">
             <div className="text-center mb-16 space-y-4">
-                <div className="inline-flex items-center gap-2 bg-red-50 text-red-500 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                <div className="inline-flex items-center gap-2 bg-red-50 text-red-500 px-4 py-1.5 rounded-full text-[13px] font-black uppercase tracking-[0.2em] mb-4">
                     <Search className="w-3.5 h-3.5" /> Satellite Tracking Enabled
                 </div>
                 <h1 className="text-5xl font-extrabold text-slate-900 tracking-tighter uppercase leading-tight">
@@ -23,7 +23,7 @@ export default function TrackOrder() {
                 <div className="lg:col-span-5 bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-2xl shadow-slate-200/50 sticky top-32">
                     <div className="space-y-8">
                         <div className="space-y-4">
-                            <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Identity Verification</label>
+                            <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest px-1">Identity Verification</label>
                             <div className="relative group">
                                 <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-red-400 transition-colors" />
                                 <input
@@ -56,11 +56,11 @@ export default function TrackOrder() {
                     <div className="bg-slate-900 p-8 rounded-[2rem] text-white flex justify-between items-center shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-16 -mt-16 group-hover:scale-150 transition-transform"></div>
                         <div className="space-y-1 relative z-10">
-                            <span className="text-[10px] font-black text-red-400 uppercase tracking-widest leading-none">Order ID</span>
+                            <span className="text-[13px] font-black text-red-400 uppercase tracking-widest leading-none">Order ID</span>
                             <h2 className="text-2xl font-black tracking-tighter uppercase px-1">#ORD-55214BD</h2>
                         </div>
                         <div className="text-right relative z-10">
-                            <span className="text-[10px] font-black text-white/40 uppercase tracking-widest leading-none">Net Value</span>
+                            <span className="text-[13px] font-black text-white/40 uppercase tracking-widest leading-none">Net Value</span>
                             <h2 className="text-2xl font-black text-red-400 font-sans tracking-tighter underline underline-offset-8 decoration-white/10 decoration-2">৳ 1,250.00</h2>
                         </div>
                     </div>
@@ -105,7 +105,7 @@ export default function TrackOrder() {
                     {/* Address Intelligence */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-200/20 group">
-                            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
                                 <MapPin className="w-4 h-4 text-red-400" /> Destination
                             </h4>
                             <p className="text-sm font-black text-slate-800 leading-relaxed uppercase group-hover:text-red-400 transition-colors">
@@ -118,13 +118,13 @@ export default function TrackOrder() {
                         </div>
                         <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-200/20 flex flex-col justify-between">
                             <div>
-                                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                                <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
                                     <Package className="w-4 h-4 text-red-400" /> Logistics Hub
                                 </h4>
                                 <p className="text-sm font-black text-slate-900 uppercase">Pathao Courier</p>
-                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">ID: PT-10022354</p>
+                                <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mt-1">ID: PT-10022354</p>
                             </div>
-                            <button className="text-[10px] font-black text-red-400 hover:text-red-500 uppercase tracking-widest mt-6 bg-red-50 self-start px-4 py-2 rounded-xl transition-all">
+                            <button className="text-[13px] font-black text-red-400 hover:text-red-500 uppercase tracking-widest mt-6 bg-red-50 self-start px-4 py-2 rounded-xl transition-all">
                                 Support Link
                             </button>
                         </div>
@@ -142,8 +142,8 @@ function TimelineStep({ label, desc, status, tag }: any) {
     return (
         <div className="relative group">
             <div className={`absolute -left-12 w-8 h-8 rounded-2xl flex items-center justify-center border-4 border-white shadow-xl z-20 transition-all duration-500 ${isCompleted ? "bg-green-500 text-white" :
-                    isActive ? "bg-red-400 text-white ring-8 ring-red-50/50 animate-pulse" :
-                        "bg-gray-100 text-gray-300"
+                isActive ? "bg-red-400 text-white ring-8 ring-red-50/50 animate-pulse" :
+                    "bg-gray-100 text-gray-300"
                 }`}>
                 {isCompleted ? <Check className="w-4 h-4" strokeWidth={3} /> : <div className="w-2 h-2 bg-current rounded-full"></div>}
             </div>

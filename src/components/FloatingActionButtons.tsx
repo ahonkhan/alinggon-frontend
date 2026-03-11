@@ -87,7 +87,7 @@ export default function FloatingActionButtons() {
                         className="w-14 h-14 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 relative active:scale-95 border-2 border-white/20"
                     >
                         <ShoppingCart className="w-6 h-6" />
-                        <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[10px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
+                        <span className="absolute -top-1 -right-1 bg-slate-900 text-white text-[13px] font-black h-5 w-5 flex items-center justify-center rounded-full border-2 border-white">
                             {isMounted ? cart.length : 0}
                         </span>
                     </button>

@@ -23,7 +23,7 @@ export default function CartDrawer() {
                 <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-10">
                     <div className="flex items-center gap-2">
                         <ShoppingBag className="w-5 h-5 text-red-400" />
-                        <span className="font-bold text-slate-800 uppercase text-[10px] tracking-widest leading-none mt-1">Shopping Bag</span>
+                        <span className="font-bold text-slate-800 uppercase text-[13px] tracking-widest leading-none mt-1">Shopping Bag</span>
                         <span className="bg-red-50 text-red-500 text-[9px] font-black px-2 py-0.5 rounded-full uppercase">
                             {cart.length} Objects
                         </span>
@@ -55,7 +55,7 @@ export default function CartDrawer() {
                                 <ShoppingBag className="w-10 h-10 text-gray-200" />
                             </div>
                             <div className="space-y-2">
-                                <p className="text-slate-400 font-black uppercase text-[10px] tracking-widest">Bag is Empty</p>
+                                <p className="text-slate-400 font-black uppercase text-[13px] tracking-widest">Bag is Empty</p>
                                 <button
                                     onClick={closeCart}
                                     className="text-red-400 text-xs font-black uppercase hover:text-slate-900 transition-colors tracking-tighter"
@@ -125,7 +125,7 @@ export default function CartDrawer() {
                 {/* Footer */}
                 {cart.length > 0 && (
                     <div className="p-6 border-t border-gray-100 bg-white space-y-6">
-                        <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-gray-400">
+                        <div className="flex justify-between items-center text-[13px] font-black uppercase tracking-widest text-gray-400">
                             <span>Bag Subtotal</span>
                             <span className="text-2xl font-black text-slate-900 font-sans tracking-tighter">৳ {cartTotal}</span>
                         </div>

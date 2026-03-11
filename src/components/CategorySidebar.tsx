@@ -54,7 +54,7 @@ export default function CategorySidebar() {
                                 />
                             ) : (
                                 <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center border border-red-100 flex-shrink-0">
-                                    <span className="text-[10px] font-black text-red-400">{category.name.charAt(0)}</span>
+                                    <span className="text-[13px] font-black text-red-400">{category.name.charAt(0)}</span>
                                 </div>
                             )}
 
@@ -97,7 +97,7 @@ export default function CategorySidebar() {
                                         <div className="mt-8 pt-6 border-t border-gray-100">
                                             <div className="flex items-center justify-between mb-4 px-2">
                                                 <h5 className="text-xs font-black text-slate-900 uppercase tracking-widest">Latest in {category.name}</h5>
-                                                <Link href={`/shop?category=${category.slug}`} className="text-[10px] font-black text-red-500 hover:text-red-600 uppercase tracking-widest">View All</Link>
+                                                <Link href={`/shop?category=${category.slug}`} className="text-[13px] font-black text-red-500 hover:text-red-600 uppercase tracking-widest">View All</Link>
                                             </div>
                                             <div className="grid grid-cols-5 gap-3">
                                                 {category.latest_products.map((prod) => (
@@ -105,9 +105,9 @@ export default function CategorySidebar() {
                                                         <div className="aspect-square rounded-xl overflow-hidden bg-gray-50 mb-2 relative">
                                                             <img src={prod.image} alt={prod.name} className="w-full h-full object-cover group-hover/prod:scale-110 transition-transform duration-500" />
                                                         </div>
-                                                        <h6 className="text-[10px] font-black text-slate-800 line-clamp-1 mb-1 group-hover/prod:text-red-600 transition-colors uppercase">{prod.name}</h6>
+                                                        <h6 className="text-[13px] font-black text-slate-800 line-clamp-1 mb-1 group-hover/prod:text-red-600 transition-colors uppercase">{prod.name}</h6>
                                                         <div className="flex items-center gap-2">
-                                                            <span className="text-[10px] font-black text-red-600 font-sans">৳{prod.price}</span>
+                                                            <span className="text-[13px] font-black text-red-600 font-sans">৳{prod.price}</span>
                                                             {prod.originalPrice && (
                                                                 <span className="text-[8px] font-medium text-gray-400 line-through font-sans">৳{prod.originalPrice}</span>
                                                             )}

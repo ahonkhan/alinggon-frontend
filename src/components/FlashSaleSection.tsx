@@ -53,7 +53,7 @@ export default function FlashSaleSection() {
                     <div className="flex items-center gap-4">
                         <div className="flex items-center gap-2 text-slate-400">
                             <Clock className="w-5 h-5" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Ending In:</span>
+                            <span className="text-[13px] font-black uppercase tracking-widest">Ending In:</span>
                         </div>
                         <div className="flex gap-2">
                             {[

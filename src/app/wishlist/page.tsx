@@ -25,7 +25,7 @@ export default function Wishlist() {
                                 </div>
                                 <div>
                                     <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">My Wishlist</h1>
-                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Products you've saved for later</p>
+                                    <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mt-1">Products you've saved for later</p>
                                 </div>
                             </div>
                         </div>
