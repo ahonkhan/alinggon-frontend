@@ -14,7 +14,8 @@ const XIcon = (props: any) => (
 export default function Footer() {
     const { showToast } = useToast();
     const { data: homeContent } = useGetHomeContentQuery();
-    const logoUrl = homeContent?.data?.logo;
+    const logoUrl = homeContent?.data?.footer_logo || homeContent?.data?.logo;
+    const footerText = homeContent?.data?.footer_text || "Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.";
 
     const handleSubscribe = (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,63 +44,79 @@ export default function Footer() {
                             )}
                         </div>
                         <p className="text-sm leading-loose max-w-sm uppercase font-bold text-white/50 tracking-tight">
-                            Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.
+                            {footerText}
                         </p>
                         <div className="space-y-4 pt-4 border-t border-white/5">
                             <div className="space-y-1">
-                                <h5 className="text-sm font-black text-white uppercase tracking-tighter">Your Trust, <span className="text-red-600">Our Core.</span></h5>
-                                <p className="text-white/40 text-[9px] uppercase font-black tracking-widest leading-none">Seamless flow from choice to destination.</p>
+                                <h5 className="text-sm font-black text-white uppercase tracking-tighter" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_trust_title || 'Your Trust, <span class="text-red-600">Our Core.</span>' }}></h5>
+                                <p className="text-white/40 text-[9px] uppercase font-black tracking-widest leading-none">{homeContent?.data?.footer_trust_subtitle || "Seamless flow from choice to destination."}</p>
                             </div>
                             <div className="flex gap-4">
                                 <div className="space-y-1">
-                                    <p className="text-lg font-black text-white tracking-tighter leading-none">100%</p>
-                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">Authentic</p>
+                                    <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat1_value || "100%"}</p>
+                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat1_label || "Authentic"}</p>
                                 </div>
                                 <div className="space-y-1 border-l border-white/10 pl-4">
-                                    <p className="text-lg font-black text-white tracking-tighter leading-none">24/7</p>
-                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">Support</p>
+                                    <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat2_value || "24/7"}</p>
+                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat2_label || "Support"}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <SocialIcon icon={Facebook} url="https://www.facebook.com/profile.php?id=100019453901281" label="Facebook" />
-                            <SocialIcon icon={XIcon} url="https://www.x.com/Alinggon973" label="X (Twitter)" />
-                            <SocialIcon icon={Instagram} url="https://www.instagram.com/alinggonplatfrom" label="Instagram" />
-                            <SocialIcon icon={Youtube} url="https://www.youtube.com/channel/UCeOgawwdUJmIAXBh4T-LWtw" label="Youtube" />
+                            {homeContent?.data?.social_facebook && <SocialIcon icon={Facebook} url={homeContent.data.social_facebook} label="Facebook" />}
+                            {homeContent?.data?.social_x && <SocialIcon icon={XIcon} url={homeContent.data.social_x} label="X (Twitter)" />}
+                            {homeContent?.data?.social_instagram && <SocialIcon icon={Instagram} url={homeContent.data.social_instagram} label="Instagram" />}
+                            {homeContent?.data?.social_youtube && <SocialIcon icon={Youtube} url={homeContent.data.social_youtube} label="Youtube" />}
+                            {homeContent?.data?.social_linkedin && <SocialIcon icon={Linkedin} url={homeContent.data.social_linkedin} label="Linkedin" />}
                         </div>
                     </div>
 
                     {/* Navigation Columns */}
                     <div className="lg:col-span-2 space-y-4">
-                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">Platform</h4>
+                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">{homeContent?.data?.footer_col1_title || "Platform"}</h4>
                         <ul className="space-y-4 pt-8 text-[12px] font-black uppercase tracking-widest leading-none">
-                            <li><NavLink href="/shop">Master Catalog</NavLink></li>
-                            <li><NavLink href="/about">About Admin</NavLink></li>
-                            <li><NavLink href="/orders">Order Vault</NavLink></li>
-                            <li><NavLink href="/track-order">Live Tracking</NavLink></li>
-                            <li><NavLink href="/profile">Identity Profile</NavLink></li>
-                            <li><NavLink href="/wishlist">Saved Items</NavLink></li>
+                            {homeContent?.data?.footer_col1_links && homeContent.data.footer_col1_links.length > 0 ? (
+                                homeContent.data.footer_col1_links.map((link, idx) => (
+                                    <li key={idx}><NavLink href={link.url}>{link.name}</NavLink></li>
+                                ))
+                            ) : (
+                                <>
+                                    <li><NavLink href="/shop">Master Catalog</NavLink></li>
+                                    <li><NavLink href="/about">About Admin</NavLink></li>
+                                    <li><NavLink href="/orders">Order Vault</NavLink></li>
+                                    <li><NavLink href="/track-order">Live Tracking</NavLink></li>
+                                    <li><NavLink href="/profile">Identity Profile</NavLink></li>
+                                    <li><NavLink href="/wishlist">Saved Items</NavLink></li>
+                                </>
+                            )}
                         </ul>
 
                         <div className="space-y-1">
-                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter">Your dream website <span className="text-red-600">available here.</span></h5>
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col1_text || 'Your dream website <span class="text-red-600">available here.</span>' }}></h5>
                         </div>
                     </div>
 
                     <div className="lg:col-span-2 space-y-4">
-                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">Directives</h4>
+                        <h4 className="text-white text-[15px] font-black uppercase tracking-[0.3em] ">{homeContent?.data?.footer_col2_title || "Directives"}</h4>
                         <ul className="space-y-4 text-[12px] pt-8 font-black uppercase tracking-widest leading-none">
-                            <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
-                            <li><NavLink href="/terms">Terms of Access</NavLink></li>
-                            <li><NavLink href="/returns">Return Logic</NavLink></li>
-                            <li><NavLink href="#">Shipping Grid</NavLink></li>
-                            <li><NavLink href="#">Refund Policy</NavLink></li>
-                            <li><NavLink href="/returns">Customer Ratings</NavLink></li>
-
+                            {homeContent?.data?.footer_col2_links && homeContent.data.footer_col2_links.length > 0 ? (
+                                homeContent.data.footer_col2_links.map((link, idx) => (
+                                    <li key={idx}><NavLink href={link.url}>{link.name}</NavLink></li>
+                                ))
+                            ) : (
+                                <>
+                                    <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
+                                    <li><NavLink href="/terms">Terms of Access</NavLink></li>
+                                    <li><NavLink href="/returns">Return Logic</NavLink></li>
+                                    <li><NavLink href="#">Shipping Grid</NavLink></li>
+                                    <li><NavLink href="#">Refund Policy</NavLink></li>
+                                    <li><NavLink href="/returns">Customer Ratings</NavLink></li>
+                                </>
+                            )}
                         </ul>
 
                         <div className="space-y-1">
-                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter">We have also available <span className="text-red-600">Domain & Hosting.</span></h5>
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col2_text || 'We have also available <span class="text-red-600">Domain & Hosting.</span>' }}></h5>
                         </div>
                     </div>
 
@@ -122,8 +139,9 @@ export default function Footer() {
                         </div>
 
                         <div className="flex flex-col gap-6 pl-2">
-                            <ContactItem icon={MapPin} label="Operating Base" value="Mirpur 02, Dhaka" />
-                            <ContactItem icon={Phone} label="Priority Line" value="+97336781645" />
+                            <ContactItem icon={MapPin} label="Operating Base" value={homeContent?.data?.contact_address || "Mirpur 02, Dhaka"} />
+                            <ContactItem icon={Phone} label="Priority Line" value={homeContent?.data?.contact_phone || "+97336781645"} />
+                            {homeContent?.data?.contact_email && <ContactItem icon={Mail} label="Official Email" value={homeContent.data.contact_email} />}
                         </div>
                     </div>
                 </div>
@@ -132,8 +150,8 @@ export default function Footer() {
             {/* Copyright Utility Bar */}
             <div className="border-t border-white/5 bg-slate-950">
                 <div className="max-w-[1600px] mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40">
-                        © 2026 Alinggon Shop • Engineered by <span className="text-red-600/50">Rangpur IT</span>
+                    <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/80">
+                        © 2026 Alinggon Shop • Engineered by <span className="text-red-600/80">Rangpur IT</span>
                     </p>
                     <div className="flex items-center gap-6">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uU-E1bF5B8-L9R_Lq8_Y8yG7y-N0G-W-Yg&s" className="h-6 filter grayscale invert opacity-20 hover:opacity-100 transition-opacity cursor-pointer" alt="SSL Commerz" />

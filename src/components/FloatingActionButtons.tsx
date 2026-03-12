@@ -1,14 +1,25 @@
 "use client";
 
-import { ShoppingCart, ArrowUp, X, MessageCircle } from "lucide-react";
+import { ShoppingCart, ArrowUp, X, MessageCircle, Phone, MessageSquare } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function FloatingActionButtons() {
+    const { data: homeContent } = useGetHomeContentQuery();
     const { openCart, cart } = useCart();
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isPromoDismissed, setIsPromoDismissed] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
+    const [isHelpOpen, setIsHelpOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    const showFreeDelivery = homeContent?.data?.free_delivery_status ?? true;
+    const freeDeliveryText = homeContent?.data?.free_delivery_text || "৳500 কিনলে ফ্রি ডেলিভারি পাবেন!";
+
+    const whatsappNumber = homeContent?.data?.chat_whatsapp_number || "8801726526155";
+    const messengerLink = homeContent?.data?.chat_messenger_link || "https://m.me/";
+    const contactPhone = homeContent?.data?.contact_phone || "01726526155";
 
     useEffect(() => {
         setIsMounted(true);
@@ -28,24 +39,98 @@ export default function FloatingActionButtons() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsHelpOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     return (
         <>
-            {/* WhatsApp Chat Button - Global */}
-            <a
-                href="https://wa.me/+97336781645"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="fixed bottom-6 left-6 lg:bottom-10 lg:left-10 z-[60] w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:-translate-y-2 active:scale-95 group pointer-events-auto"
-                aria-label="Chat on WhatsApp"
-            >
-                <MessageCircle className="w-7 h-7 fill-current" />
-            </a>
+            {/* Interactive Help Menu */}
+            <div className="fixed bottom-32 left-6 lg:bottom-10 lg:left-10 z-[110] flex flex-col-reverse items-start gap-4" ref={menuRef}>
+                {/* Main Toggle Button */}
+                <button
+                    onClick={() => setIsHelpOpen(!isHelpOpen)}
+                    className={`w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 active:scale-95 group relative border-2 border-white/20 ${isHelpOpen ? 'bg-slate-900 border-red-500 scale-110' : 'bg-green-500 hover:bg-green-600 hover:-translate-y-2'}`}
+                    aria-label="Contact Options"
+                >
+                    {isHelpOpen ? (
+                        <X className="w-7 h-7 text-white animate-in fade-in zoom-in duration-300" />
+                    ) : (
+                        <MessageCircle className="w-7 h-7 text-white fill-current animate-in fade-in zoom-in duration-300" />
+                    )}
+                    
+                    {!isHelpOpen && (
+                        <span className="absolute -top-1 -right-1 flex h-4 w-4">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-4 w-4 bg-red-500"></span>
+                        </span>
+                    )}
+                </button>
 
-            <div className="fixed bottom-6 lg:bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none mb-20 lg:mb-0">
+                {/* Vertical Menu Items */}
+                {isHelpOpen && (
+                    <div className="flex flex-col gap-3 animate-in slide-in-from-bottom-10 fade-in duration-500 ease-out">
+                         {/* Call Option */}
+                         <a
+                            href={`tel:${contactPhone}`}
+                            className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-red-100 group hover:bg-red-50 transition-all hover:translate-x-2"
+                        >
+                            <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                                <Phone className="w-5 h-5" />
+                            </div>
+                            <div className="flex flex-col min-w-[120px]">
+                                <span className="text-[10px] font-black text-red-600 uppercase tracking-widest leading-none text-left">Direct Call</span>
+                                <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">{contactPhone}</span>
+                            </div>
+                        </a>
+
+                        {/* WhatsApp Option */}
+                        <a
+                            href={`https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-green-100 group hover:bg-green-50 transition-all hover:translate-x-2"
+                        >
+                            <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                                <MessageCircle className="w-5 h-5 fill-current" />
+                            </div>
+                            <div className="flex flex-col min-w-[120px]">
+                                <span className="text-[10px] font-black text-green-600 uppercase tracking-widest leading-none text-left">WhatsApp</span>
+                                <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">Chat with us</span>
+                            </div>
+                        </a>
+
+                        {/* Messenger Option */}
+                        <a
+                            href={messengerLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-blue-100 group hover:bg-blue-50 transition-all hover:translate-x-2"
+                        >
+                            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                                <MessageSquare className="w-5 h-5" />
+                            </div>
+                            <div className="flex flex-col min-w-[120px]">
+                                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none text-left">Messenger</span>
+                                <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">FB Messenger</span>
+                            </div>
+                        </a>
+                    </div>
+                )}
+            </div>
+
+            <div className="fixed bottom-32 lg:bottom-6 right-6 z-[110] flex flex-col items-end gap-3 pointer-events-none mb-0">
 
                 {/* Scroll To Top Button (Positioned Above) - Visible on Scroll */}
                 {showScrollTop && (
@@ -60,11 +145,15 @@ export default function FloatingActionButtons() {
 
                 <div className="flex items-end gap-3 pointer-events-auto">
                     {/* Free Delivery Promo Bubble - Always Visible until dismissed */}
-                    {!isPromoDismissed && (
+                    {!isPromoDismissed && showFreeDelivery && (
                         <div className="bg-white px-4 py-3 rounded-2xl shadow-xl border border-red-100 flex items-center gap-3 animate-in slide-in-from-right duration-500 relative group">
                             <div className="flex flex-col">
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-wide">
-                                    <span className="text-red-600">৳500</span> কিনলে ফ্রি ডেলিভারি পাবেন!
+                                    {freeDeliveryText.includes('৳500') ? (
+                                        <>
+                                            <span className="text-red-600">৳500</span> {freeDeliveryText.replace('৳500', '')}
+                                        </>
+                                    ) : freeDeliveryText}
                                 </span>
                             </div>
                             <button

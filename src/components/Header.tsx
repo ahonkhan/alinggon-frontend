@@ -35,7 +35,7 @@ export default function Header() {
         { skip: debouncedSearchQuery.length < 2 }
     );
     const { data: homeContent } = useGetHomeContentQuery();
-    const logoUrl = homeContent?.data?.logo;
+    const logoUrl = homeContent?.data?.header_logo || homeContent?.data?.logo;
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();

@@ -173,7 +173,7 @@ export default function Home() {
             Top Categories
           </h2>
         </div>
-        <div className="flex flex-wrap justify-start gap-4 md:gap-8">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8">
           {categories.map((cat) => (
             <Link
               key={cat.id}

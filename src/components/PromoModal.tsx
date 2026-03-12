@@ -2,28 +2,37 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import Link from "next/link";
+import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function PromoModal() {
     const [isOpen, setIsOpen] = useState(false);
-
+    const { data: homeContent } = useGetHomeContentQuery();
+    
+    // Only show if the popup is enabled in settings and we have an image
+    const popupStatus = homeContent?.data?.popup_status;
+    const popupImage = homeContent?.data?.popup_image;
+    
     useEffect(() => {
-        // Show modal on load
-        const showTimeout = setTimeout(() => {
-            setIsOpen(true);
-        }, 1000); // Small delay for better UX
+        if (popupStatus && popupImage) {
+            // Show modal on load
+            const showTimeout = setTimeout(() => {
+                setIsOpen(true);
+            }, 1000); // Small delay for better UX
 
-        // Auto-close after 30 seconds
-        const autoCloseTimeout = setTimeout(() => {
-            setIsOpen(false);
-        }, 310000000); // 30s + 1s delay
+            // Auto-close after 30 seconds
+            const autoCloseTimeout = setTimeout(() => {
+                setIsOpen(false);
+            }, 30000); // 30s
 
-        return () => {
-            clearTimeout(showTimeout);
-            clearTimeout(autoCloseTimeout);
-        };
-    }, []);
+            return () => {
+                clearTimeout(showTimeout);
+                clearTimeout(autoCloseTimeout);
+            };
+        }
+    }, [popupStatus, popupImage]);
 
-    if (!isOpen) return null;
+    if (!isOpen || !popupStatus || !popupImage) return null;
 
     return (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/80  animate-in fade-in duration-300">
@@ -40,23 +49,33 @@ export default function PromoModal() {
                 {/* Ads Image */}
                 <div className="relative h-[200px] md:h-[300px] w-full">
                     <img
-                        src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=1200"
+                        src={popupImage}
                         alt="Promotional Offer"
                         className="w-full h-full object-cover"
                     />
 
                     {/* Content Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex flex-col justify-end p-12">
-                        <span className="text-red-600 text-xs font-black uppercase tracking-[0.4em] mb-2">Flash Offer</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-none mb-4">
-                            Premium Savings<br />Up to <span className="text-red-600">50% Off</span>
+                        <span className="text-red-600 text-xs font-black uppercase tracking-[0.4em] mb-2">{homeContent?.data?.popup_title || "Flash Offer"}</span>
+                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-none mb-4" 
+                            dangerouslySetInnerHTML={{ __html: homeContent?.data?.popup_subtitle || 'Premium Savings<br />Up to <span class="text-red-600">50% Off</span>' }}>
                         </h2>
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className="w-fit bg-red-600 hover:bg-white hover:text-slate-900 text-white px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
-                        >
-                            Claim Discount
-                        </button>
+                        {homeContent?.data?.popup_button_link ? (
+                            <Link
+                                href={homeContent.data.popup_button_link}
+                                onClick={() => setIsOpen(false)}
+                                className="w-fit bg-red-600 hover:bg-white hover:text-slate-900 text-white px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
+                            >
+                                {homeContent?.data?.popup_button_text || "Claim Discount"}
+                            </Link>
+                        ) : (
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="w-fit bg-red-600 hover:bg-white hover:text-slate-900 text-white px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
+                            >
+                                {homeContent?.data?.popup_button_text || "Claim Discount"}
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

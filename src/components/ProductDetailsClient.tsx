@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart } from "lucide-react";
+import { useState, useMemo, useRef } from "react";
+import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation } from "@/store/api/frontendApi";
@@ -122,21 +122,59 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     const [reviewForm, setReviewForm] = useState({
         rating: 0,
         comment: '',
-        images: [] as string[]
     });
+    const [selectedImages, setSelectedImages] = useState<File[]>([]);
+    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const files = Array.from(e.target.files);
+            const totalFiles = [...selectedImages, ...files].slice(0, 5);
+            setSelectedImages(totalFiles);
+
+            const newPreviews = files.map(file => URL.createObjectURL(file));
+            setImagePreviews(prev => [...prev, ...newPreviews].slice(0, 5));
+        }
+    };
+
+    const removeImage = (index: number) => {
+        setSelectedImages(prev => prev.filter((_, i) => i !== index));
+        setImagePreviews(prev => {
+            const newPreviews = prev.filter((_, i) => i !== index);
+            // Revoke URL to prevent memory leaks
+            URL.revokeObjectURL(prev[index]);
+            return newPreviews;
+        });
+    };
 
     const [submitReview, { isLoading: isSubmitting }] = useSubmitReviewMutation();
     const [toggleLike] = useToggleLikeReviewMutation();
 
     const handleReviewSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (reviewForm.rating === 0) {
+            showToast("Please select a rating", "error");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('product_id', product.id.toString());
+        formData.append('rating', reviewForm.rating.toString());
+        formData.append('comment', reviewForm.comment);
+        
+        selectedImages.forEach((image) => {
+            formData.append('images[]', image);
+        });
+
         try {
-            await submitReview({
-                product_id: product.id,
-                ...reviewForm
-            }).unwrap();
+            await submitReview(formData).unwrap();
             showToast("Review submitted successfully! It will be visible after approval.", "success");
-            setReviewForm({ rating: 0, comment: '', images: [] });
+            setReviewForm({ rating: 0, comment: '' });
+            setSelectedImages([]);
+            imagePreviews.forEach(url => URL.revokeObjectURL(url));
+            setImagePreviews([]);
         } catch (err: any) {
             showToast(err.data?.message || "Failed to submit review", "error");
         }
@@ -436,10 +474,11 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                                     <div className="space-y-6">
                                         {reviews.length > 0 ? reviews.map((r) => (
-                                            <div key={r.id} className="bg-gray-50/50 p-8 rounded-[2.5rem] border-2 border-slate-100 group">
+                                            <div key={r.id} className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 relative group overflow-hidden hover:border-red-100 transition-all duration-500 shadow-xl shadow-slate-100/30">
+                                                <div className="absolute top-0 left-0 w-1.5 h-full bg-red-500/20 group-hover:bg-red-500 transition-colors" />
                                                 <div className="flex items-start justify-between mb-6">
                                                     <div className="flex items-center gap-4">
-                                                        <div className="w-12 h-12 rounded-2xl bg-white shadow-lg overflow-hidden border border-gray-100 p-0.5">
+                                                        <div className="w-14 h-14 rounded-2xl bg-white shadow-lg overflow-hidden border-2 border-red-50 p-0.5 group-hover:border-red-200 transition-colors">
                                                             <img
                                                                 src={r.user?.profile_photo ? (r.user.profile_photo.startsWith('http') ? r.user.profile_photo : `http://localhost:8000/storage/${r.user.profile_photo}`) : `https://ui-avatars.com/api/?name=${r.user?.name}&background=random`}
                                                                 alt={r.user?.name}
@@ -448,8 +487,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                         </div>
                                                         <div>
                                                             <div className="text-sm font-black text-slate-900 uppercase tracking-tight">{r.user?.name}</div>
-                                                            <div className="flex gap-0.5 text-yellow-400 mt-1">
-                                                                {[...Array(5)].map((_, i) => <Star key={i} className={`w-3 h-3 ${i < r.rating ? 'fill-current' : 'text-gray-200'}`} />)}
+                                                            <div className="flex gap-0.5 text-red-500 mt-1">
+                                                                {[...Array(5)].map((_, i) => <Star key={i} className={`w-3 h-3 ${i < r.rating ? 'fill-current' : 'text-gray-100'}`} />)}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -497,8 +536,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 </div>
 
                                 <div className="lg:col-span-5">
-                                    <div className="bg-white p-10 rounded-[3rem] border-2 border-slate-200 sticky top-24">
-                                        <h3 className="font-black text-slate-900 mb-8 text-sm uppercase tracking-widest text-center border-b border-gray-50 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
+                                    <div className="bg-white p-10 rounded-[3rem] border-2 border-red-500 shadow-2xl shadow-red-100/50 sticky top-24">
+                                        <h3 className="font-black text-slate-900 mb-8 text-sm uppercase tracking-widest text-center border-b-2 border-red-100 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
                                         <form className="space-y-6" onSubmit={handleReviewSubmit}>
                                             <div className="flex justify-center gap-3 mb-8">
                                                 {[1, 2, 3, 4, 5].map(s => (
@@ -506,34 +545,71 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                         key={s}
                                                         type="button"
                                                         onClick={() => setReviewForm(prev => ({ ...prev, rating: s }))}
-                                                        className={`transition-all hover:scale-110 active:scale-90 ${reviewForm.rating >= s ? 'text-yellow-400' : 'text-gray-100'}`}
+                                                        className={`transition-all hover:scale-110 active:scale-95 ${reviewForm.rating >= s ? 'text-red-500 drop-shadow-md' : 'text-gray-200'}`}
                                                     >
                                                         <Star className={`w-10 h-10 ${reviewForm.rating >= s ? 'fill-current' : 'fill-gray-100'}`} />
                                                     </button>
                                                 ))}
                                             </div>
-                                            <textarea
-                                                value={reviewForm.comment}
-                                                onChange={(e) => setReviewForm(prev => ({ ...prev, comment: e.target.value }))}
-                                                placeholder="আপনার মূল্যবান মন্তব্য লিখুন..."
-                                                className="w-full p-6 bg-gray-50 border-2 border-slate-200 rounded-[2rem] text-sm focus:outline-none focus:ring-4 focus:ring-red-50 focus:border-red-400 h-40 transition-all resize-none font-bold"
-                                                required
-                                            ></textarea>
-
-                                            <div className="grid grid-cols-1 gap-4">
-                                                <div className="border-2 border-slate-200 rounded-[2rem] p-8 text-center cursor-pointer hover:bg-red-50/30 hover:border-red-100 transition-all group relative overflow-hidden">
-                                                    <ImageIcon className="w-8 h-8 text-gray-200 mx-auto mb-2 group-hover:text-red-400 transition-all" />
-                                                    <span className="text-[13px] text-gray-400 font-black uppercase tracking-widest">ছবির অ্যালবাম যুক্ত করুন</span>
-                                                    <p className="text-[8px] text-gray-300 mt-2 uppercase">Max 5 photos, 2MB each</p>
+                                            <div className="relative group">
+                                                <textarea
+                                                    value={reviewForm.comment}
+                                                    onChange={(e) => setReviewForm(prev => ({ ...prev, comment: e.target.value }))}
+                                                    placeholder="আপনার মূল্যবান মন্তব্য লিখুন..."
+                                                    className="w-full p-6 bg-white border-4 border-red-500/20 rounded-[2rem] text-sm focus:outline-none focus:ring-8 focus:ring-red-500/10 focus:border-red-500 h-40 transition-all resize-none font-bold text-slate-800"
+                                                    required
+                                                ></textarea>
+                                                <div className="absolute top-4 right-6 text-red-500/20">
+                                                    <Quote className="w-8 h-8" />
                                                 </div>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <input 
+                                                    type="file" 
+                                                    ref={fileInputRef}
+                                                    onChange={handleImageChange}
+                                                    multiple 
+                                                    accept="image/*"
+                                                    className="hidden" 
+                                                />
+                                                <div 
+                                                    onClick={() => fileInputRef.current?.click()}
+                                                    className="border-4 border-dashed border-red-500/20 rounded-[2rem] p-8 text-center cursor-pointer hover:bg-red-50 hover:border-red-500 transition-all group relative overflow-hidden"
+                                                >
+                                                    <ImageIcon className="w-8 h-8 text-red-200 mx-auto mb-2 group-hover:text-red-500 transition-all" />
+                                                    <span className="text-[13px] text-slate-400 font-black uppercase tracking-widest group-hover:text-red-500">ছবির অ্যালবাম যুক্ত করুন</span>
+                                                    <p className="text-[9px] text-red-300 mt-2 uppercase font-black tracking-widest">Max 5 photos, 5MB each</p>
+                                                </div>
+
+                                                {imagePreviews.length > 0 && (
+                                                    <div className="flex flex-wrap gap-3 p-4 bg-red-50/50 rounded-2xl border-2 border-red-100 animate-in fade-in slide-in-from-top-2">
+                                                        {imagePreviews.map((url, idx) => (
+                                                            <div key={idx} className="relative group w-20 h-20 rounded-xl overflow-hidden shadow-lg border-2 border-white">
+                                                                <img src={url} className="w-full h-full object-cover" alt="Preview" />
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => removeImage(idx)}
+                                                                    className="absolute inset-0 bg-red-500/80 text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                                                                >
+                                                                    <X className="w-5 h-5" />
+                                                                </button>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )}
                                             </div>
 
                                             <button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="w-full bg-slate-900 hover:bg-black disabled:opacity-50 text-white font-black py-6 rounded-[2rem] transition-all text-[11px] uppercase tracking-[0.3em] shadow-2xl shadow-slate-200 active:scale-95 flex items-center justify-center gap-3"
+                                                className="w-full bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-black py-6 rounded-[2rem] transition-all text-[13px] uppercase tracking-[0.3em] shadow-2xl shadow-red-200 active:scale-95 flex items-center justify-center gap-3"
                                             >
-                                                {isSubmitting ? "সাবমিট হচ্ছে..." : "কমেন্ট সাবমিট করুন"}
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <Loader2 className="w-4 h-4 animate-spin" /> সাবমিট হচ্ছে...
+                                                    </>
+                                                ) : "কমেন্ট সাবমিট করুন"}
                                             </button>
                                         </form>
                                     </div>

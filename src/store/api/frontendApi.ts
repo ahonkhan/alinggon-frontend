@@ -53,6 +53,25 @@ export interface FlashSale {
     end_date: string;
     status: boolean;
     image: string | null;
+    footer_logo?: string;
+    footer_text?: string;
+    popup_image?: string;
+    popup_status?: boolean;
+    popup_title?: string;
+    popup_subtitle?: string;
+    popup_button_text?: string;
+    popup_button_link?: string;
+    free_delivery_status?: boolean;
+    free_delivery_text?: string;
+    contact_address?: string;
+    contact_phone?: string;
+    contact_email?: string;
+    social_facebook?: string;
+    social_instagram?: string;
+    social_x?: string;
+    social_youtube?: string;
+    social_linkedin?: string;
+    hero_banners?: string[] | null;
     products: FlashSaleProduct[];
 }
 
@@ -152,6 +171,39 @@ export interface HomeContentResponse {
             url: string;
         }[];
         logo: string | null;
+        header_logo: string | null;
+        footer_logo: string | null;
+        popup_image: string | null;
+        popup_status: boolean;
+        popup_title?: string | null;
+        popup_subtitle?: string | null;
+        popup_button_text?: string | null;
+        popup_button_link?: string | null;
+        free_delivery_status?: boolean;
+        free_delivery_text?: string | null;
+        footer_text: string | null;
+        contact_address?: string | null;
+        contact_phone?: string | null;
+        contact_email?: string | null;
+        social_facebook?: string | null;
+        social_instagram?: string | null;
+        social_x?: string | null;
+        social_youtube?: string | null;
+        social_linkedin?: string | null;
+        footer_trust_title?: string | null;
+        footer_trust_subtitle?: string | null;
+        footer_stat1_value?: string | null;
+        footer_stat1_label?: string | null;
+        footer_stat2_value?: string | null;
+        footer_stat2_label?: string | null;
+        footer_col1_title?: string | null;
+        footer_col1_text?: string | null;
+        footer_col2_title?: string | null;
+        footer_col2_text?: string | null;
+        footer_col1_links?: { name: string; url: string }[];
+        footer_col2_links?: { name: string; url: string }[];
+        chat_messenger_link?: string | null;
+        chat_whatsapp_number?: string | null;
     };
 }
 
