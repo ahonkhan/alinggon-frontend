@@ -173,7 +173,7 @@ export default function FloatingActionButtons() {
                 <div className="flex items-end gap-3 pointer-events-auto">
                     {/* Free Delivery Promo Bubble - Always Visible until minimized */}
                     {!isBannerMinimized && showFreeDelivery && (
-                        <div className="bg-white px-4 py-3 rounded-2xl shadow-xl border border-red-100 flex items-center gap-3 animate-in slide-in-from-right duration-500 relative group">
+                        <div className="bg-white px-4 py-3 rounded-2xl shadow-xl border border-red-700 flex items-center gap-3 animate-in slide-in-from-right duration-500 relative group">
                             <div className="flex flex-col">
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-wide">
                                     {freeDeliveryText.includes('৳500') ? (

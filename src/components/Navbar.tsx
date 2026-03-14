@@ -16,7 +16,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="bg-red-400 text-white shadow-sm hidden lg:block border-t border-white/10 uppercase tracking-[0.15em]">
+        <nav className="bg-red-400 border-b-2 border-b-gray-700 text-white shadow-sm hidden lg:block border-t border-white/10 uppercase tracking-[0.15em]">
             <div className="max-w-[1600px] mx-auto px-4">
                 <ul className="flex items-center justify-center space-x-6 text-[13px] font-black py-3">
                     {navItems.map((item) => (

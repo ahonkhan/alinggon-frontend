@@ -61,7 +61,7 @@ export default function Header() {
     return (
         <div className="w-full">
             {/* Main Header */}
-            <header className="bg-white border-b border-gray-100 z-50">
+            <header className="bg-white border-b-2 border-gray-700 md:border-gray-100 z-50">
                 <div className="max-w-[1600px] mx-auto px-4 py-4 md:py-6 flex items-center justify-between gap-8">
                     <div className="flex items-center gap-4">
                         <button

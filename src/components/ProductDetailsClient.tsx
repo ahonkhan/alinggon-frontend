@@ -153,7 +153,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
     const handleReviewSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (reviewForm.rating === 0) {
             showToast("Please select a rating", "error");
             return;
@@ -163,7 +163,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
         formData.append('product_id', product.id.toString());
         formData.append('rating', reviewForm.rating.toString());
         formData.append('comment', reviewForm.comment);
-        
+
         selectedImages.forEach((image) => {
             formData.append('images[]', image);
         });
@@ -392,8 +392,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
 
             {/* Description & Feedback (FULL WIDTH TABS) */}
-            <div className="mt-20 bg-white rounded-[3rem] border-2 border-slate-100 shadow-2xl shadow-slate-100/50 overflow-hidden">
-                <div className="border-b border-gray-50 px-10 pt-8 flex items-center gap-10 bg-gray-50/30">
+            <div className="mt-12 md:mt-20 bg-white rounded-3xl md:rounded-[3rem] border-2 border-slate-100 shadow-2xl shadow-slate-100/50 overflow-hidden">
+                <div className="border-b border-gray-50 px-4 md:px-10 pt-6 md:pt-8 flex items-center gap-6 md:gap-10 bg-gray-50/30 overflow-x-auto whitespace-nowrap scrollbar-hide">
                     <button
                         onClick={() => setActiveTab('description')}
                         className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'description' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
@@ -401,30 +401,31 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         Description
                     </button>
                     <button
-                        onClick={() => setActiveTab('specifications')}
-                        className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'specifications' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
-                    >
-                        Specifications
-                    </button>
-                    <button
                         onClick={() => setActiveTab('reviews')}
                         className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'reviews' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
                     >
                         Reviews ({reviews.length})
                     </button>
+                    <button
+                        onClick={() => setActiveTab('specifications')}
+                        className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'specifications' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
+                    >
+                        Specifications
+                    </button>
+
                 </div>
 
-                <div className="p-10">
+                <div className="p-4 md:p-10">
                     {activeTab === 'description' && (
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="max-w-4xl space-y-6">
-                                <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tighter">{product.name}</h2>
+                                <h2 className="text-xl md:text-3xl font-black text-slate-900 uppercase tracking-tighter">{product.name}</h2>
                                 <div
                                     className="text-gray-500 text-base leading-relaxed prose prose-slate max-w-none"
                                     dangerouslySetInnerHTML={{ __html: product.description }}
                                 />
                                 <div className="h-px bg-gray-50 w-full my-8" />
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                                     <div className="bg-red-50/30 p-8 rounded-[2rem] border border-red-50">
                                         <h4 className="text-red-500 font-black uppercase text-[13px] tracking-widest mb-4">Quality Promise</h4>
                                         <p className="text-gray-600 text-sm leading-relaxed">Each object in our collection undergoes rigorous quality inspection to ensure premium craftsmanship.</p>
@@ -433,7 +434,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                         <h4 className="text-slate-900 font-black uppercase text-[13px] tracking-widest mb-4">Official Warranty</h4>
                                         <p className="text-gray-600 text-sm leading-relaxed">Full coverage for manufacturing defects and guaranteed replacement options.</p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     )}
@@ -446,8 +447,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                         <tbody>
                                             {product.attributes.map((attr, i) => (
                                                 <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
-                                                    <td className="py-5 px-8 text-[13px] font-black text-gray-400 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
-                                                    <td className="py-5 px-8 text-sm font-bold text-slate-800 font-sans">{attr.value}</td>
+                                                    <td className="py-4 md:py-5 px-4 md:px-8 text-[11px] md:text-[13px] font-black text-gray-400 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
+                                                    <td className="py-4 md:py-5 px-4 md:px-8 text-xs md:text-sm font-bold text-slate-800 font-sans">{attr.value}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
@@ -463,10 +464,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                                 <div className="lg:col-span-7 space-y-8">
-                                    <div className="flex items-center justify-between border-b border-gray-100 pb-6">
-                                        <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">Customer Feedbacks</h3>
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-6 gap-4">
+                                        <h3 className="text-lg md:text-xl font-black text-slate-900 uppercase tracking-tight">Customer Feedbacks</h3>
                                         {reviews.length > 0 && (
-                                            <div className="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-xl text-yellow-600 font-black text-xs">
+                                            <div className="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-xl text-yellow-600 font-black text-xs w-fit">
                                                 <Star className="w-4 h-4 fill-current" /> {(reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)} Rating
                                             </div>
                                         )}
@@ -474,7 +475,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                                     <div className="space-y-6">
                                         {reviews.length > 0 ? reviews.map((r) => (
-                                            <div key={r.id} className="bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 relative group overflow-hidden hover:border-red-100 transition-all duration-500 shadow-xl shadow-slate-100/30">
+                                            <div key={r.id} className="bg-white p-5 md:p-8 rounded-3xl md:rounded-[2.5rem] border-2 border-slate-100 relative group overflow-hidden hover:border-red-100 transition-all duration-500 shadow-xl shadow-slate-100/30">
                                                 <div className="absolute top-0 left-0 w-1.5 h-full bg-red-500/20 group-hover:bg-red-500 transition-colors" />
                                                 <div className="flex items-start justify-between mb-6">
                                                     <div className="flex items-center gap-4">
@@ -536,8 +537,8 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 </div>
 
                                 <div className="lg:col-span-5">
-                                    <div className="bg-white p-10 rounded-[3rem] border-2 border-red-500 shadow-2xl shadow-red-100/50 sticky top-24">
-                                        <h3 className="font-black text-slate-900 mb-8 text-sm uppercase tracking-widest text-center border-b-2 border-red-100 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
+                                    <div className="bg-white p-6 md:p-10 rounded-3xl md:rounded-[3rem] border-2 border-red-500 shadow-2xl shadow-red-100/50 sticky top-24">
+                                        <h3 className="font-black text-slate-900 mb-6 md:mb-8 text-xs md:text-sm uppercase tracking-widest text-center border-b-2 border-red-100 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
                                         <form className="space-y-6" onSubmit={handleReviewSubmit}>
                                             <div className="flex justify-center gap-3 mb-8">
                                                 {[1, 2, 3, 4, 5].map(s => (
@@ -565,20 +566,20 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                             </div>
 
                                             <div className="space-y-4">
-                                                <input 
-                                                    type="file" 
+                                                <input
+                                                    type="file"
                                                     ref={fileInputRef}
                                                     onChange={handleImageChange}
-                                                    multiple 
+                                                    multiple
                                                     accept="image/*"
-                                                    className="hidden" 
+                                                    className="hidden"
                                                 />
-                                                <div 
+                                                <div
                                                     onClick={() => fileInputRef.current?.click()}
-                                                    className="border-4 border-dashed border-red-500/20 rounded-[2rem] p-8 text-center cursor-pointer hover:bg-red-50 hover:border-red-500 transition-all group relative overflow-hidden"
+                                                    className="border-4 border-dashed border-red-500/20 rounded-3xl md:rounded-[2rem] p-6 md:p-8 text-center cursor-pointer hover:bg-red-50 hover:border-red-500 transition-all group relative overflow-hidden"
                                                 >
-                                                    <ImageIcon className="w-8 h-8 text-red-200 mx-auto mb-2 group-hover:text-red-500 transition-all" />
-                                                    <span className="text-[13px] text-slate-400 font-black uppercase tracking-widest group-hover:text-red-500">ছবির অ্যালবাম যুক্ত করুন</span>
+                                                    <ImageIcon className="w-6 h-6 md:w-8 md:h-8 text-red-200 mx-auto mb-2 group-hover:text-red-500 transition-all" />
+                                                    <span className="text-[11px] md:text-[13px] text-slate-400 font-black uppercase tracking-widest group-hover:text-red-500">ছবির অ্যালবাম যুক্ত করুন</span>
                                                     <p className="text-[9px] text-red-300 mt-2 uppercase font-black tracking-widest">Max 5 photos, 5MB each</p>
                                                 </div>
 
@@ -603,7 +604,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                             <button
                                                 type="submit"
                                                 disabled={isSubmitting}
-                                                className="w-full bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-black py-6 rounded-[2rem] transition-all text-[13px] uppercase tracking-[0.3em] shadow-2xl shadow-red-200 active:scale-95 flex items-center justify-center gap-3"
+                                                className="w-full bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white font-black py-4 md:py-6 rounded-3xl md:rounded-[2rem] transition-all text-[11px] md:text-[13px] uppercase tracking-[0.3em] shadow-2xl shadow-red-200 active:scale-95 flex items-center justify-center gap-3"
                                             >
                                                 {isSubmitting ? (
                                                     <>
