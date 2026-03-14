@@ -49,7 +49,7 @@ export default function PromoModal() {
                 </button>
 
                 {/* Ads Image */}
-                <div className="relative h-[200px] md:h-[300px] w-full">
+                <div className="relative h-[200px] md:h-[280px] w-full">
                     <img
                         src={popupImage}
                         alt="Promotional Offer"
