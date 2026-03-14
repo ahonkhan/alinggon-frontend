@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, ArrowUp, X, MessageCircle, Phone, MessageSquare } from "lucide-react";
+import { ShoppingCart, ArrowUp, X, MessageCircle, Phone, MessageSquare, Gift } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState, useEffect, useRef } from "react";
 import { useGetHomeContentQuery } from "@/store/api/frontendApi";
@@ -9,7 +9,7 @@ export default function FloatingActionButtons() {
     const { data: homeContent } = useGetHomeContentQuery();
     const { openCart, cart } = useCart();
     const [showScrollTop, setShowScrollTop] = useState(false);
-    const [isPromoDismissed, setIsPromoDismissed] = useState(false);
+    const [isBannerMinimized, setIsBannerMinimized] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const [isHelpOpen, setIsHelpOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -130,6 +130,20 @@ export default function FloatingActionButtons() {
                 )}
             </div>
 
+            {/* Minimized Offer Toggle (Left Side) */}
+            {isBannerMinimized && showFreeDelivery && (
+                <div className="fixed bottom-48 left-6 lg:bottom-28 lg:left-10 z-[110] animate-in slide-in-from-left duration-500">
+                    <button
+                        onClick={() => setIsBannerMinimized(false)}
+                        className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border-2 border-red-100 hover:scale-110 transition-all group relative animate-bounce hover:animate-none"
+                        aria-label="Show Offer"
+                    >
+                        <Gift className="w-6 h-6 text-red-600 group-hover:rotate-12 transition-transform" />
+                   
+                    </button>
+                </div>
+            )}
+
             <div className="fixed bottom-32 lg:bottom-6 right-6 z-[110] flex flex-col items-end gap-3 pointer-events-none mb-0">
 
                 {/* Scroll To Top Button (Positioned Above) - Visible on Scroll */}
@@ -144,8 +158,8 @@ export default function FloatingActionButtons() {
                 )}
 
                 <div className="flex items-end gap-3 pointer-events-auto">
-                    {/* Free Delivery Promo Bubble - Always Visible until dismissed */}
-                    {!isPromoDismissed && showFreeDelivery && (
+                    {/* Free Delivery Promo Bubble - Always Visible until minimized */}
+                    {!isBannerMinimized && showFreeDelivery && (
                         <div className="bg-white px-4 py-3 rounded-2xl shadow-xl border border-red-100 flex items-center gap-3 animate-in slide-in-from-right duration-500 relative group">
                             <div className="flex flex-col">
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-wide">
@@ -157,11 +171,11 @@ export default function FloatingActionButtons() {
                                 </span>
                             </div>
                             <button
-                                onClick={() => setIsPromoDismissed(true)}
-                                aria-label="Dismiss promotion"
-                                className="text-gray-300 hover:text-red-600 transition-colors"
+                                onClick={() => setIsBannerMinimized(true)}
+                                aria-label="Minimize promotion"
+                                className="text-red-700 hover:text-red-600 transition-colors"
                             >
-                                <X className="w-3 h-3" />
+                                <X className="w-5 h-5" />
                             </button>
 
                             {/* Triangle Pointer */}

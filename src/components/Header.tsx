@@ -74,7 +74,7 @@ export default function Header() {
 
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
                             {logoUrl ? (
-                                <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
+                                <img src={logoUrl} alt="Logo" className="h-6 md:h-8  w-auto object-contain" />
                             ) : (
                                 <>
                                     <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">
