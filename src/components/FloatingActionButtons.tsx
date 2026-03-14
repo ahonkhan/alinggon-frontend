@@ -10,6 +10,19 @@ export default function FloatingActionButtons() {
     const { openCart, cart } = useCart();
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isBannerMinimized, setIsBannerMinimized] = useState(false);
+
+    // Persist banner state
+    useEffect(() => {
+        const savedMinimized = localStorage.getItem('alinggon_offer_minimized');
+        if (savedMinimized === 'true') {
+            setIsBannerMinimized(true);
+        }
+    }, []);
+
+    const toggleBannerMinimize = (minimized: boolean) => {
+        setIsBannerMinimized(minimized);
+        localStorage.setItem('alinggon_offer_minimized', String(minimized));
+    };
     const [isMounted, setIsMounted] = useState(false);
     const [isHelpOpen, setIsHelpOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -134,7 +147,7 @@ export default function FloatingActionButtons() {
             {isBannerMinimized && showFreeDelivery && (
                 <div className="fixed bottom-48 left-6 lg:bottom-28 lg:left-10 z-[110] animate-in slide-in-from-left duration-500">
                     <button
-                        onClick={() => setIsBannerMinimized(false)}
+                        onClick={() => toggleBannerMinimize(false)}
                         className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-2xl border-2 border-red-100 hover:scale-110 transition-all group relative animate-bounce hover:animate-none"
                         aria-label="Show Offer"
                     >
@@ -171,7 +184,7 @@ export default function FloatingActionButtons() {
                                 </span>
                             </div>
                             <button
-                                onClick={() => setIsBannerMinimized(true)}
+                                onClick={() => toggleBannerMinimize(true)}
                                 aria-label="Minimize promotion"
                                 className="text-red-700 hover:text-red-600 transition-colors"
                             >
