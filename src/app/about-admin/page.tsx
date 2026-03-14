@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import { ShieldCheck, Award, MessageCircle, Heart, Star, Gift, Sparkles, Loader2 } from "lucide-react";
 import { useGetAboutInfoQuery } from "@/store/api/frontendApi";
 import { AdminPersonalPictures } from "@/components/AdminPersonalPictures";
+import VideoPlayer from "@/components/VideoPlayer";
 
 // Enhanced Festive Shapes for Congratulations
 const FloatingShape = ({ type, color, size = 1 }: { type: number; color: string; size?: number }) => {
@@ -561,13 +562,11 @@ export default function AboutAdmin() {
                             </p>
                         </div>
                         <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                            <iframe
-                                className="absolute inset-0 w-full h-full"
-                                src={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
+                            <VideoPlayer
+                                type="youtube"
+                                url={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
                                 title="Alinggon Company Video"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
+                            />
                         </div>
                     </div>
 
