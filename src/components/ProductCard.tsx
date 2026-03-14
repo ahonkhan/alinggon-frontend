@@ -107,19 +107,27 @@ export default function ProductCard(props: ProductCardProps) {
                             </span>
                         )}
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col md:flex-row gap-2">
                         <button
                             onClick={handleOrderNow}
                             className="flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
                         >
-                            <Zap className="w-3 h-3" /> Order Now
+                            <Zap className="w-3 h-3 hidden sm:block" /> Order Now
                         </button>
                         <button
                             onClick={handleAddToCart}
                             aria-label="Add to Cart"
-                            className="w-9 h-9 flex items-center justify-center border border-red-200 text-red-600 rounded hover:bg-red-50 transition-all active:scale-95"
+                            className="hidden md:flex w-9 h-9  items-center justify-center border border-red-200 text-red-600 rounded hover:bg-red-50 transition-all active:scale-95"
                         >
                             <ShoppingCart className="w-4 h-4" />
+                        </button>
+
+
+                        <button
+                            onClick={handleAddToCart}
+                            className="md:hidden flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
+                        >
+                            <ShoppingCart className="w-4 h-4" /> Add To Cart
                         </button>
                     </div>
                 </div>

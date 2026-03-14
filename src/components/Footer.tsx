@@ -140,8 +140,8 @@ export default function Footer() {
 
                         <div className="flex flex-col gap-6 pl-2">
                             <ContactItem icon={MapPin} label="Operating Base" value={homeContent?.data?.contact_address || "Mirpur 02, Dhaka"} />
-                            <ContactItem icon={Phone} label="Priority Line" value={homeContent?.data?.contact_phone || "+97336781645"} />
-                            {homeContent?.data?.contact_email && <ContactItem icon={Mail} label="Official Email" value={homeContent.data.contact_email} />}
+                            <ContactItem icon={Phone} label="Priority Line" value={homeContent?.data?.contact_phone || "+97336781645"} href={`tel:${homeContent?.data?.contact_phone || "+97336781645"}`} />
+                            {homeContent?.data?.contact_email && <ContactItem icon={Mail} label="Official Email" value={homeContent.data.contact_email} href={`mailto:${homeContent.data.contact_email}`} />}
                         </div>
                     </div>
                 </div>
@@ -196,13 +196,19 @@ function SocialIcon({ icon: Icon, url, label }: { icon: any, url: string, label:
     );
 }
 
-function ContactItem({ icon: Icon, label, value }: any) {
+function ContactItem({ icon: Icon, label, value, href }: any) {
+    const content = href ? (
+        <a href={href} className="hover:text-red-600 transition-colors">
+            {value}
+        </a>
+    ) : value;
+
     return (
         <div className="flex gap-4">
             <div className="text-red-600/50 mt-1"><Icon className="w-4 h-4" /></div>
             <div>
                 <p className="text-[8px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">{label}</p>
-                <p className="text-xs font-black text-white/70 tracking-tight">{value}</p>
+                <p className="text-xs font-black text-white/70 tracking-tight">{content}</p>
             </div>
         </div>
     );

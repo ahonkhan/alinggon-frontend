@@ -53,7 +53,7 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
                     // @ts-ignore
                     swiper.params.navigation.nextEl = nextRef.current;
                 }}
-                spaceBetween={20}
+                spaceBetween={10}
                 slidesPerView={2}
                 breakpoints={{
                     640: { slidesPerView: 3 },
