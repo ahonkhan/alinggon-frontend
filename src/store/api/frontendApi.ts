@@ -175,6 +175,8 @@ export interface HomeContentResponse {
         footer_logo: string | null;
         popup_image: string | null;
         popup_status: boolean;
+        popup_overlay_status?: boolean;
+        popup_overlay_color?: string | null;
         popup_title?: string | null;
         popup_subtitle?: string | null;
         popup_button_text?: string | null;

@@ -12,6 +12,8 @@ export default function PromoModal() {
     // Only show if the popup is enabled in settings and we have an image
     const popupStatus = homeContent?.data?.popup_status;
     const popupImage = homeContent?.data?.popup_image;
+    const overlayStatus = homeContent?.data?.popup_overlay_status;
+    const overlayColor = homeContent?.data?.popup_overlay_color;
     
     useEffect(() => {
         if (popupStatus && popupImage) {
@@ -54,12 +56,23 @@ export default function PromoModal() {
                         className="w-full h-full object-cover"
                     />
 
+                    {/* Overlay Color */}
+                    {overlayStatus && (
+                        <div 
+                            className="absolute inset-0 z-[1]" 
+                            style={{ backgroundColor: overlayColor || 'rgba(0,0,0,0.5)', opacity: 0.5 }}
+                        ></div>
+                    )}
+
                     {/* Content Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex flex-col justify-end p-12">
-                        <span className="text-red-600 text-xs font-black uppercase tracking-[0.4em] mb-2">{homeContent?.data?.popup_title || "Flash Offer"}</span>
-                        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-none mb-4" 
+                    <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex flex-col justify-end p-12">
+                        <div 
+                            className="text-white text-xs font-black uppercase tracking-[0.4em] mb-2 [&_h1]:text-2xl [&_h2]:text-xl [&_h3]:text-lg [&_p]:m-0"
+                            dangerouslySetInnerHTML={{ __html: homeContent?.data?.popup_title || "Flash Offer" }}
+                        ></div>
+                        <div className="text-white mb-4 [&_h1]:text-4xl md:[&_h1]:text-6xl [&_h1]:font-black [&_h1]:tracking-tighter [&_h1]:uppercase [&_h1]:leading-none [&_h2]:text-3xl md:[&_h2]:text-5xl [&_h2]:font-black [&_h2]:tracking-tighter [&_h2]:uppercase [&_h2]:leading-none [&_p]:m-0" 
                             dangerouslySetInnerHTML={{ __html: homeContent?.data?.popup_subtitle || 'Premium Savings<br />Up to <span class="text-red-600">50% Off</span>' }}>
-                        </h2>
+                        </div>
                         {homeContent?.data?.popup_button_link ? (
                             <Link
                                 href={homeContent.data.popup_button_link}

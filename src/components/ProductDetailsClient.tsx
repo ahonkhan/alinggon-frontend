@@ -333,7 +333,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         </div>
                         <button
                             onClick={handleAddToCart}
-                            className="flex-1 bg-red-500 hover:bg-red-600 text-white font-black h-14 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-red-100 active:scale-95 uppercase tracking-widest text-xs"
+                            className="flex-1 bg-red-500 py-2 hover:bg-red-600 text-white font-black h-14 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-xl shadow-red-100 active:scale-95 uppercase tracking-widest text-xs"
                         >
                             <ShoppingCart className="w-5 h-5" /> ADD TO CART
                         </button>
