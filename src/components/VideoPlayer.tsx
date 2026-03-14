@@ -29,6 +29,7 @@ export default function VideoPlayer({ type, url, id, title, className }: VideoPl
 }
 
 function extractYouTubeId(url: string) {
+    url = url.trim();
     if (url.length === 11) return url;
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const match = url.match(regExp);
