@@ -17,7 +17,7 @@ export default function YouTubeEmbed({ id, title, className = "" }: YouTubeEmbed
             <iframe
                 width="100%"
                 height="100%"
-                src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`}
+                src={`https://www.youtube.com/embed/${id}?autoplay=1&rel=0&origin=${typeof window !== "undefined" ? window.location.origin : ""}`}
                 title={title}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -34,7 +34,7 @@ export default function YouTubeEmbed({ id, title, className = "" }: YouTubeEmbed
             aria-label={`Play video: ${title}`}
         >
             <img
-                src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
+                src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
                 alt={title}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
                 loading="lazy"

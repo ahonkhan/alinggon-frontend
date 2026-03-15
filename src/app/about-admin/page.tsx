@@ -292,10 +292,12 @@ export default function AboutAdmin() {
 
     const { leadership_team = [], social_network_groups = [], admin_settings = {}, personal_pictures = [] } = aboutData?.data || {};
 
+    console.log(admin_settings.about_video_url)
+
     return (
         <main className="min-h-screen bg-white flex flex-col items-center pt-6 pb-0 relative overflow-hidden">
             {/* Enhanced Animation Layer */}
-            <FloatingElements />
+            {/* <FloatingElements /> */}
 
             {/* Background Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-[500px] bg-red-50 -z-20" />
@@ -304,7 +306,7 @@ export default function AboutAdmin() {
 
             <div className="w-full relative z-10">
                 {/* Horizontal Top Balloons */}
-                <HorizontalBalloons />
+                {/* <HorizontalBalloons /> */}
 
 
 

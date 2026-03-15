@@ -13,7 +13,9 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ type, url, id, title, className }: VideoPlayerProps) {
     if (type === "youtube") {
-        const videoId = extractYouTubeId(id || url || "");
+        // If an ID is provided, assume it's the direct YouTube video ID.
+        // Otherwise, try to extract it from the URL.
+        const videoId = id || extractYouTubeId(url || "");
         return <YouTubeEmbed id={videoId} title={title} className={className} />;
     }
 
@@ -31,7 +33,9 @@ export default function VideoPlayer({ type, url, id, title, className }: VideoPl
 function extractYouTubeId(url: string) {
     url = url.trim();
     if (url.length === 11) return url;
+    
+    // More robust regex to extract the 11-character YouTube video ID
     const regExp = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/|shorts\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
     const match = url.match(regExp);
-    return match && match[1].length === 11 ? match[1] : "";
+    return (match && match[1].length === 11) ? match[1] : "";
 }

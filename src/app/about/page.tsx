@@ -9,6 +9,7 @@ import "swiper/css/pagination";
 import { ShieldCheck, Award, MessageCircle, Heart, Star, Gift, Sparkles, Loader2 } from "lucide-react";
 import { useGetAboutInfoQuery } from "@/store/api/frontendApi";
 import { AdminPersonalPictures } from "@/components/AdminPersonalPictures";
+import VideoPlayer from "@/components/VideoPlayer";
 
 // Enhanced Festive Shapes for Congratulations
 const FloatingShape = ({ type, color, size = 1 }: { type: number; color: string; size?: number }) => {
@@ -294,7 +295,7 @@ export default function AboutAdmin() {
     return (
         <main className="min-h-screen bg-white flex flex-col items-center pt-6 pb-0 relative overflow-hidden">
             {/* Enhanced Animation Layer */}
-            <FloatingElements />
+            {/* <FloatingElements /> */}
 
             {/* Background Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-[500px] bg-red-50 -z-20" />
@@ -303,7 +304,7 @@ export default function AboutAdmin() {
 
             <div className="w-full relative z-10">
                 {/* Horizontal Top Balloons */}
-                <HorizontalBalloons />
+                {/* <HorizontalBalloons /> */}
 
 
 
@@ -545,31 +546,30 @@ export default function AboutAdmin() {
                     </div>
 
                     {/* YouTube Video Section */}
-                    <div className="mt-24 max-w-4xl mx-auto px-4">
-                        <div className="text-center mb-8 space-y-4">
-                            <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
-                                {admin_settings.about_video_title ? (
-                                    <>
-                                        {admin_settings.about_video_title.split(' ').slice(0, -1).join(' ')} <span className="text-red-600">{admin_settings.about_video_title.split(' ').slice(-1)}</span>
-                                    </>
-                                ) : (
-                                    <>Experience <span className="text-red-600">Alinggon</span></>
-                                )}
-                            </h2>
-                            <p className="text-slate-500 font-medium">
-                                {admin_settings.about_video_description || 'Watch our journey and learn more about how we serve our community.'}
-                            </p>
-                        </div>
-                        <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                            <iframe
-                                className="absolute inset-0 w-full h-full"
-                                src={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
-                                title="Alinggon Company Video"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    </div>
+                     <div className="mt-24 max-w-4xl mx-auto px-4">
+                                           <div className="text-center mb-8 space-y-4">
+                                               <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
+                                                   {admin_settings.about_video_title ? (
+                                                       <>
+                                                           {admin_settings.about_video_title.split(' ').slice(0, -1).join(' ')} <span className="text-red-600">{admin_settings.about_video_title.split(' ').slice(-1)}</span>
+                                                       </>
+                                                   ) : (
+                                                       <>Experience <span className="text-red-600">Alinggon</span></>
+                                                   )}
+                                               </h2>
+                                               <p className="text-slate-500 font-medium">
+                                                   {admin_settings.about_video_description || 'Watch our journey and learn more about how we serve our community.'}
+                                               </p>
+                                           </div>
+                                           <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                                               <VideoPlayer
+                                                   type="youtube"
+                                                   url={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
+                                                   title="Alinggon Company Video"
+                                               />
+                                           </div>
+                                       </div>
+                   
 
                     {/* Bottom Celebration */}
                     <div className="mt-24 pt-12 border-t border-gray-200 text-center relative">
