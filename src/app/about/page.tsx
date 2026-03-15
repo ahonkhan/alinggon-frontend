@@ -295,7 +295,7 @@ export default function AboutAdmin() {
     return (
         <main className="min-h-screen bg-white flex flex-col items-center pt-6 pb-0 relative overflow-hidden">
             {/* Enhanced Animation Layer */}
-            <FloatingElements />
+            {/* <FloatingElements /> */}
 
             {/* Background Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-[500px] bg-red-50 -z-20" />
@@ -304,9 +304,7 @@ export default function AboutAdmin() {
 
             <div className="w-full relative z-10">
                 {/* Horizontal Top Balloons */}
-                <HorizontalBalloons />
-
-
+                {/* <HorizontalBalloons /> */}
 
 
                 {/* Header Section */}
@@ -380,12 +378,58 @@ export default function AboutAdmin() {
                 </div>
 
                 {/* Admin Deep-Dive Section */}
-                <section className="w-full bg-red-50/40 py-24 border-y border-red-100 relative overflow-hidden">
+                <section className="w-full bg-red-50/40 py-8 border-y border-red-100 relative overflow-hidden">
+                    <div className="space-y-4 flex flex-col items-center justify-center">
+                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-full text-lg font-black uppercase tracking-widest shadow-lg">
+                            <Sparkles className="w-4 h-4" />
+                            Our Admin Profile
+                            <Sparkles className="w-4 h-4" />
+                        </div>
 
+                        <p className="text-xl text-center px-4  text-red-500 font-bold italic">
+                            {admin_settings.admin_greetings}
+                        </p>
+                    </div>
 
-                    <div className="max-w-7xl mx-auto px-4 relative z-10">
-                        <div className="flex flex-col lg:flex-row items-center gap-16">
+                    <div className="max-w-7xl mx-auto  mt-5 px-4 relative z-10">
+                        <div className="flex flex-col  items-center gap-16">
                             {/* Admin Photo */}
+
+
+                            {/* Admin Info with Celebration Message */}
+                            <div className="w-full space-y-8">
+
+
+                                <div className="space-y-6 text-slate-600 font-medium bg-white/50  p-8 rounded-3xl border border-red-100">
+                                    <p className="text-xl text-slate-900 font-bold text-2xl leading-relaxed italic border-l-4 border-red-400 pl-6">
+                                        "{admin_settings.admin_quote}"
+                                    </p>
+                                    <p className="leading-relaxed font-bold text-lg">
+                                        {admin_settings.admin_description}
+                                    </p>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                                        <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
+                                            <p className="text-3xl font-black text-red-500">{admin_settings.years_lead}</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
+                                        </div>
+                                        <div className="space-y-1 text-center p-4 bg-pink-50 rounded-2xl">
+                                            <p className="text-3xl font-black text-pink-500">{admin_settings.community_size}</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Community</p>
+                                        </div>
+                                        <div className="space-y-1 text-center p-4 bg-purple-50 rounded-2xl">
+                                            <p className="text-3xl font-black text-purple-500">{admin_settings.dedication_hours}</p>
+                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Dedication</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 flex justify-center flex-wrap gap-4">
+                                    <button className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:shadow-2xl hover:shadow-red-500/30 transition-all active:scale-95">
+                                        Send Congratulations 🎉
+                                    </button>
+
+                                </div>
+                            </div>
                             <div className="w-full lg:w-1/2">
                                 <div className="relative mx-auto max-w-2xl">
                                     <div className="relative aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-xl">
@@ -419,52 +463,7 @@ export default function AboutAdmin() {
                                 </div>
                             </div>
 
-                            {/* Admin Info with Celebration Message */}
-                            <div className="w-full lg:w-1/2 space-y-8">
-                                <div className="space-y-4">
-                                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
-                                        <Sparkles className="w-4 h-4" />
-                                        Our Admin!
-                                        <Sparkles className="w-4 h-4" />
-                                    </div>
 
-                                    <p className="text-xl text-red-500 font-bold italic">
-                                        {admin_settings.admin_greetings}
-                                    </p>
-                                </div>
-
-                                <div className="space-y-6 text-slate-600 font-medium bg-white/50  p-8 rounded-3xl border border-red-100">
-                                    <p className="text-xl text-slate-900 font-bold leading-relaxed italic border-l-4 border-red-400 pl-6">
-                                        "{admin_settings.admin_quote}"
-                                    </p>
-                                    <p className="leading-relaxed">
-                                        {admin_settings.admin_description}
-                                    </p>
-                                    <div className="grid grid-cols-3 gap-4 pt-4">
-                                        <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
-                                            <p className="text-3xl font-black text-red-500">{admin_settings.years_lead}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
-                                        </div>
-                                        <div className="space-y-1 text-center p-4 bg-pink-50 rounded-2xl">
-                                            <p className="text-3xl font-black text-pink-500">{admin_settings.community_size}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Community</p>
-                                        </div>
-                                        <div className="space-y-1 text-center p-4 bg-purple-50 rounded-2xl">
-                                            <p className="text-3xl font-black text-purple-500">{admin_settings.dedication_hours}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Dedication</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="pt-8 flex flex-wrap gap-4">
-                                    <button className="bg-gradient-to-r from-red-500 to-pink-500 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:shadow-2xl hover:shadow-red-500/30 transition-all active:scale-95">
-                                        Send Congratulations 🎉
-                                    </button>
-                                    <button className="border-2 border-red-200 text-red-500 px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-red-50 transition-all active:scale-95">
-                                        View Achievements 🏆
-                                    </button>
-                                </div>
-                            </div>
                         </div>
 
                         {/* New Personal Pictures Section */}
@@ -546,30 +545,30 @@ export default function AboutAdmin() {
                     </div>
 
                     {/* YouTube Video Section */}
-                     <div className="mt-24 max-w-4xl mx-auto px-4">
-                                           <div className="text-center mb-8 space-y-4">
-                                               <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
-                                                   {admin_settings.about_video_title ? (
-                                                       <>
-                                                           {admin_settings.about_video_title.split(' ').slice(0, -1).join(' ')} <span className="text-red-600">{admin_settings.about_video_title.split(' ').slice(-1)}</span>
-                                                       </>
-                                                   ) : (
-                                                       <>Experience <span className="text-red-600">Alinggon</span></>
-                                                   )}
-                                               </h2>
-                                               <p className="text-slate-500 font-medium">
-                                                   {admin_settings.about_video_description || 'Watch our journey and learn more about how we serve our community.'}
-                                               </p>
-                                           </div>
-                                           <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                                               <VideoPlayer
-                                                   type="youtube"
-                                                   url={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
-                                                   title="Alinggon Company Video"
-                                               />
-                                           </div>
-                                       </div>
-                   
+                    <div className="mt-24 max-w-4xl mx-auto px-4">
+                        <div className="text-center mb-8 space-y-4">
+                            <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
+                                {admin_settings.about_video_title ? (
+                                    <>
+                                        {admin_settings.about_video_title.split(' ').slice(0, -1).join(' ')} <span className="text-red-600">{admin_settings.about_video_title.split(' ').slice(-1)}</span>
+                                    </>
+                                ) : (
+                                    <>Experience <span className="text-red-600">Alinggon</span></>
+                                )}
+                            </h2>
+                            <p className="text-slate-500 font-medium">
+                                {admin_settings.about_video_description || 'Watch our journey and learn more about how we serve our community.'}
+                            </p>
+                        </div>
+                        <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                            <VideoPlayer
+                                type="youtube"
+                                url={admin_settings.about_video_url || "https://www.youtube.com/embed/dQw4w9WgXcQ"}
+                                title="Alinggon Company Video"
+                            />
+                        </div>
+                    </div>
+
 
                     {/* Bottom Celebration */}
                     <div className="mt-24 pt-12 border-t border-gray-200 text-center relative">
