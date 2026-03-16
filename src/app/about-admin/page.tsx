@@ -435,13 +435,14 @@ export default function AboutAdmin() {
                                     </p>
                                 </div>
 
-                                <div className="space-y-6 text-slate-600 font-medium bg-white/50  p-8 rounded-3xl border border-red-100">
-                                    <p className="text-xl text-slate-900 font-bold leading-relaxed italic border-l-4 border-red-400 pl-6">
-                                        "{admin_settings.admin_quote}"
-                                    </p>
-                                    <p className="leading-relaxed">
-                                        {admin_settings.admin_description}
-                                    </p>
+                                <div className="space-y-6 text-slate-600 font-medium bg-white/50  p-8 rounded-3xl border border-red-100 rich-text-content">
+                                    <p className="text-xl text-slate-900 font-bold leading-relaxed italic border-l-4 border-red-400 pl-6"
+                                        dangerouslySetInnerHTML={{ __html: `"${admin_settings.admin_quote}"` }}
+                                    />
+                                    <div className="leading-relaxed mt-4"
+                                        dangerouslySetInnerHTML={{ __html: admin_settings.admin_description || "" }}
+                                    />
+
                                     <div className="grid grid-cols-3 gap-4 pt-4">
                                         <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
                                             <p className="text-3xl font-black text-red-500">{admin_settings.years_lead}</p>

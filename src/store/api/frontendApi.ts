@@ -371,6 +371,13 @@ export const frontendApi = createApi({
         getMyReviews: builder.query<any, void>({
             query: () => '/my-reviews',
         }),
+        submitSiteReview: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/site-reviews',
+                method: 'POST',
+                body: data,
+            }),
+        }),
         getActiveFlashSale: builder.query<{ success: boolean; data: FlashSale }, void>({
             query: () => '/flash-sale/active',
         }),
@@ -418,6 +425,7 @@ export const {
     useSubmitReviewMutation,
     useToggleLikeReviewMutation,
     useGetMyReviewsQuery,
+    useSubmitSiteReviewMutation,
     useGetActiveFlashSaleQuery,
     useGetSiteReviewsQuery,
     useGetHomeContentQuery,
