@@ -110,7 +110,7 @@ export default function ReviewsPage() {
                         
                         <div className="p-8 md:p-12">
                             <div className="text-center mb-8">
-                                <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Write Your Chronicle</h3>
+                                <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Write Your Review</h3>
                                 <p className="text-slate-500 font-medium text-sm mt-2">Share your experience with the Alinggon community</p>
                             </div>
 
