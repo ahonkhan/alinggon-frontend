@@ -283,6 +283,51 @@ export interface AboutInfoResponse {
     };
 }
 
+export interface TicketMessage {
+    id: number;
+    ticket_id: number;
+    user_id: number;
+    message: string | null;
+    attachment: string | null;
+    is_admin_reply: boolean;
+    created_at: string;
+    user?: {
+        id: number;
+        name: string;
+        profile_photo?: string;
+    };
+}
+
+export interface Ticket {
+    id: number;
+    user_id: number;
+    subject: string;
+    status: 'open' | 'closed' | 'pending';
+    priority: 'low' | 'medium' | 'high';
+    created_at: string;
+    updated_at: string;
+    messages?: TicketMessage[];
+}
+
+export interface TicketsResponse {
+    success: boolean;
+    data: Ticket[];
+}
+
+export interface TicketDetailsResponse {
+    success: boolean;
+    data: Ticket;
+}
+
+export interface ProfileStatsResponse {
+    success: boolean;
+    data: {
+        total_orders: number;
+        spent_amount: number;
+        active_tickets: number;
+    };
+}
+
 // Ensure base URL matches the backend API
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
 // const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
@@ -404,6 +449,29 @@ export const frontendApi = createApi({
                 body: data,
             }),
         }),
+        getTickets: builder.query<TicketsResponse, void>({
+            query: () => '/tickets',
+        }),
+        createTicket: builder.mutation<any, FormData>({
+            query: (formData) => ({
+                url: '/tickets',
+                method: 'POST',
+                body: formData,
+            }),
+        }),
+        getTicketDetails: builder.query<TicketDetailsResponse, string>({
+            query: (id) => `/tickets/${id}`,
+        }),
+        submitTicketReply: builder.mutation<any, { id: string, body: FormData }>({
+            query: ({ id, body }) => ({
+                url: `/tickets/${id}/reply`,
+                method: 'POST',
+                body: body,
+            }),
+        }),
+        getProfileStats: builder.query<ProfileStatsResponse, void>({
+            query: () => '/profile/stats',
+        }),
     }),
 });
 
@@ -432,4 +500,9 @@ export const {
     useGetAboutInfoQuery,
     useVerifyPersonalPicturePasswordMutation,
     useVerifyBulkPersonalPicturesPasswordMutation,
+    useGetTicketsQuery,
+    useCreateTicketMutation,
+    useGetTicketDetailsQuery,
+    useSubmitTicketReplyMutation,
+    useGetProfileStatsQuery,
 } = frontendApi;

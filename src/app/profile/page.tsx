@@ -1,15 +1,21 @@
 "use client";
 
-import { Camera, Edit3, Lock, MapPin, ShoppingBag, User as UserIcon, Phone, Mail, ChevronRight, Package, CreditCard, LogOut } from "lucide-react";
+import { Camera, Edit3, Lock, MapPin, ShoppingBag, User as UserIcon, Phone, Mail, ChevronRight, Package, CreditCard, LogOut, Headset } from "lucide-react";
 import Link from "next/link";
 import AccountSidebar from "@/components/AccountSidebar";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useGetProfileStatsQuery } from "@/store/api/frontendApi";
 
 export default function Profile() {
     const { user, logout } = useAuth();
     const router = useRouter();
+    const { data: statsData, isLoading: statsLoading } = useGetProfileStatsQuery(undefined, {
+        skip: !user
+    });
+
+    const stats = statsData?.data;
 
     // Redirect to login if not logged in
     useEffect(() => {
@@ -55,7 +61,7 @@ export default function Profile() {
                                         <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
                                             <Phone className="w-3 h-3 text-red-400" /> Phone Number
                                         </label>
-                                        <p className="text-lg font-black text-slate-700 font-sans tracking-tight">{user.phone}</p>
+                                        <p className="text-lg font-black text-slate-700 font-sans tracking-tight">{user.phone || 'N/A'}</p>
                                     </div>
                                     <div className="space-y-4">
                                         <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
@@ -88,14 +94,15 @@ export default function Profile() {
 
                             <div className="w-full md:w-56 space-y-4">
                                 <h3 className="text-[13px] font-black text-slate-400 mb-6 uppercase tracking-widest text-center">Platform Status</h3>
-                                <MetricCard icon={Package} label="Total Orders" value="0" color="bg-blue-50 text-blue-500" />
-                                <MetricCard icon={CreditCard} label="Spent Amount" value="৳ 0" color="bg-green-50 text-green-500" />
+                                <MetricCard icon={Package} label="Total Orders" value={statsLoading ? "..." : stats?.total_orders || 0} color="bg-blue-50 text-blue-500" />
+                                <MetricCard icon={CreditCard} label="Spent Amount" value={statsLoading ? "..." : `\u09F3 ${stats?.spent_amount?.toLocaleString() || 0}`} color="bg-green-50 text-green-500" />
+                                <MetricCard icon={Headset} label="Active Tickets" value={statsLoading ? "..." : stats?.active_tickets || 0} color="bg-orange-50 text-orange-500" />
                             </div>
                         </div>
                     </div>
 
                     {/* Account Settings Mini-Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30">
                             <h3 className="text-xs font-black text-slate-800 mb-6 uppercase tracking-widest border-b border-gray-50 pb-4">Security Settings</h3>
                             <ul className="space-y-4">
@@ -109,6 +116,25 @@ export default function Profile() {
                                 <SecurityItem icon={Mail} label="Email Notifications" sub="Get updates on your orders" />
                             </ul>
                         </div>
+                        
+                        {/* Support Quick Access */}
+                        <Link href="/support" className="bg-slate-900 rounded-[2rem] p-8 shadow-xl shadow-slate-400/20 group hover:bg-slate-800 transition-colors">
+                            <h3 className="text-xs font-black text-white/50 mb-6 uppercase tracking-widest border-b border-white/5 pb-4">Customer Support</h3>
+                            <div className="flex items-center gap-4">
+                                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                                    <Headset className="w-7 h-7" />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-black text-white uppercase tracking-tight">Need Help?</h4>
+                                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1">Talk to our team</p>
+                                </div>
+                                <ChevronRight className="w-5 h-5 text-white/20 ml-auto group-hover:translate-x-1 transition-transform" />
+                            </div>
+                            <div className="mt-8 flex justify-between items-center bg-white/5 rounded-2xl p-4">
+                                <span className="text-[10px] font-black text-white/60 uppercase tracking-widest">Active Tickets</span>
+                                <span className="text-lg font-black text-red-400">{statsLoading ? "..." : stats?.active_tickets || 0}</span>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

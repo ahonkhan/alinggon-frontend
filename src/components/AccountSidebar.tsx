@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Package, User, Heart, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Package, User, Heart, Settings, LogOut, Headset } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 
@@ -13,7 +13,7 @@ export default function AccountSidebar() {
         { label: "Dashboard", href: "/profile", icon: LayoutDashboard },
         { label: "My Orders", href: "/orders", icon: Package },
         { label: "Wishlist", href: "/wishlist", icon: Heart },
-        { label: "Account Settings", href: "/profile", icon: Settings },
+        { label: "Support Tickets", href: "/support", icon: Headset },
     ];
 
     if (!user) return null;

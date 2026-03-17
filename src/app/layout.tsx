@@ -14,6 +14,8 @@ import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
 import { AdminGalleryModal } from "@/components/AdminGalleryModal";
+import CreateTicketModal from "@/components/support/CreateTicketModal";
+import ImageViewerModal from "@/components/support/ImageViewerModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +34,8 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-50 text-gray-800 font-normal antialiased min-h-screen flex flex-col`}>
         <ReduxProvider>
           <AdminGalleryModal />
+          <CreateTicketModal />
+          <ImageViewerModal />
           <ToastProvider>
             <AuthProvider>
               <CartProvider>
