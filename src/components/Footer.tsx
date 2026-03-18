@@ -23,7 +23,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-slate-950 text-gray-400 font-not-not-sans-serif">
+        <footer className="bg-slate-950 text-gray-800 font-not-not-sans-serif">
 
 
             {/* Main Footer Content */}

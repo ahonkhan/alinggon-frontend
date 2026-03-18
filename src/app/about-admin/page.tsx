@@ -285,7 +285,7 @@ export default function AboutAdmin() {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-white space-y-4">
                 <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
-                <p className="font-black uppercase tracking-widest text-slate-400 text-xs text-center">Loading Excellence...</p>
+                <p className="font-black uppercase tracking-widest text-slate-800 text-xs text-center">Loading Excellence...</p>
             </div>
         );
     }
@@ -446,15 +446,15 @@ export default function AboutAdmin() {
                                     <div className="grid grid-cols-3 gap-4 pt-4">
                                         <div className="space-y-1 text-center p-4 bg-red-50 rounded-2xl">
                                             <p className="text-3xl font-black text-red-500">{admin_settings.years_lead}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Years Lead</p>
+                                            <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest">Years Lead</p>
                                         </div>
                                         <div className="space-y-1 text-center p-4 bg-pink-50 rounded-2xl">
                                             <p className="text-3xl font-black text-pink-500">{admin_settings.community_size}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Community</p>
+                                            <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest">Community</p>
                                         </div>
                                         <div className="space-y-1 text-center p-4 bg-purple-50 rounded-2xl">
                                             <p className="text-3xl font-black text-purple-500">{admin_settings.dedication_hours}</p>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest">Dedication</p>
+                                            <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest">Dedication</p>
                                         </div>
                                     </div>
                                 </div>
@@ -517,7 +517,7 @@ export default function AboutAdmin() {
                                             <h3 className="text-sm font-black text-slate-900">
                                                 {network.name}
                                             </h3>
-                                            <p className="text-[13px] font-bold text-slate-400 uppercase tracking-widest mt-1">
+                                            <p className="text-[13px] font-bold text-slate-800 uppercase tracking-widest mt-1">
                                                 {network.description || 'Official Network'}
                                             </p>
                                         </div>
@@ -541,7 +541,7 @@ export default function AboutAdmin() {
                                     <item.icon className="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <h4 className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">{item.label}</h4>
+                                    <h4 className="text-[13px] font-black text-slate-800 uppercase tracking-widest mb-1">{item.label}</h4>
                                     <p className="text-xl font-black text-slate-900 uppercase tracking-tighter">{item.value}</p>
                                 </div>
                             </div>
@@ -581,7 +581,7 @@ export default function AboutAdmin() {
                         <p className="text-slate-300 font-bold text-xs uppercase tracking-[0.5em] block mb-4 mt-8">
                             Alinggon Marketplace
                         </p>
-                        <p className="text-slate-400 font-medium text-sm italic">
+                        <p className="text-slate-800 font-medium text-sm italic">
                             {admin_settings.about_footer_text || 'Celebrating a decade of digital excellence and community trust.'}
                         </p>
                         <div className="flex items-center justify-center gap-4 mt-6">

@@ -37,7 +37,7 @@ export default function CategoriesPage() {
                             All <span className="text-red-400">Categories.</span>
                         </h1>
                     </div>
-                    <p className="max-w-md text-slate-400 text-xs font-bold uppercase tracking-widest leading-loose">
+                    <p className="max-w-md text-slate-800 text-xs font-bold uppercase tracking-widest leading-loose">
                         Architecting your shopping experience through a verified taxonomy of premium objects.
                     </p>
                 </div>

@@ -1,19 +1,29 @@
 "use client";
 
-import { Camera, Edit3, Lock, MapPin, ShoppingBag, User as UserIcon, Phone, Mail, ChevronRight, Package, CreditCard, LogOut, Headset } from "lucide-react";
+import { Camera, Edit3, Lock, MapPin, ShoppingBag, User as UserIcon, Phone, Mail, ChevronRight, Package, CreditCard, LogOut, Headset, Loader2, Heart } from "lucide-react";
 import Link from "next/link";
 import AccountSidebar from "@/components/AccountSidebar";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useGetProfileStatsQuery } from "@/store/api/frontendApi";
+import { useEffect, useState, useRef } from "react";
+import { useGetProfileStatsQuery, useUpdateProfilePhotoMutation } from "@/store/api/frontendApi";
+import EditProfileModal from "@/components/profile/EditProfileModal";
+import AddressBook from "@/components/profile/AddressBook";
+import SecuritySettings from "@/components/profile/SecuritySettings";
+import PreferenceSettings from "@/components/profile/PreferenceSettings";
+import { toast } from "react-hot-toast";
 
 export default function Profile() {
-    const { user, logout } = useAuth();
+    const { user, logout, updateUser } = useAuth();
     const router = useRouter();
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState<'overview' | 'addresses' | 'security' | 'preferences'>('overview');
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const { data: statsData, isLoading: statsLoading } = useGetProfileStatsQuery(undefined, {
         skip: !user
     });
+    const [updatePhoto, { isLoading: isUpdatingPhoto }] = useUpdateProfilePhotoMutation();
 
     const stats = statsData?.data;
 
@@ -23,6 +33,24 @@ export default function Profile() {
             router.push("/login");
         }
     }, [user, router]);
+
+    const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("photo", file);
+
+        try {
+            const response = await updatePhoto(formData).unwrap();
+            if (response.success) {
+                updateUser(response.user);
+            }
+            toast.success("Profile photo updated");
+        } catch (error) {
+            toast.error("Failed to update photo");
+        }
+    };
 
     if (!user) return null;
 
@@ -41,40 +69,76 @@ export default function Profile() {
 
                         <div className="relative z-10 flex flex-col md:flex-row gap-10 items-center md:items-start text-center md:text-left">
                             <div className="relative group">
-                                <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-100 rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl overflow-hidden">
-                                    <UserIcon className="w-16 h-16 text-gray-300" />
-                                    <input type="file" className="absolute inset-0 opacity-0 cursor-pointer z-10" />
+                                <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-100 rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl overflow-hidden relative">
+                                    {user.profile_photo ? (
+                                        <img
+                                            src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                            alt={user.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <UserIcon className="w-16 h-16 text-gray-300" />
+                                    )}
+                                    {isUpdatingPhoto && (
+                                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                                            <Loader2 className="w-8 h-8 text-white animate-spin" />
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="absolute -bottom-2 -right-2 bg-red-400 p-3 rounded-2xl text-white shadow-lg group-hover:scale-110 transition-transform cursor-pointer">
+                                <button
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="absolute -bottom-2 -right-2 bg-red-400 p-3 rounded-2xl text-white shadow-lg hover:bg-slate-900 hover:scale-110 transition-all active:scale-95"
+                                >
                                     <Camera className="w-5 h-5" />
-                                </div>
+                                </button>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    onChange={handlePhotoUpload}
+                                    className="hidden"
+                                    accept="image/*"
+                                />
                             </div>
 
                             <div className="flex-1 space-y-8">
                                 <div className="space-y-2">
-                                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter">{user.name}</h1>
-                                    <p className="text-gray-400 font-bold uppercase text-[13px] tracking-[0.2em]">{user.email}</p>
+                                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">{user.name}</h1>
+                                    <p className="text-gray-800 font-bold uppercase text-[10px] tracking-[0.2em]">{user.email}</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-4">
-                                        <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                                        <label className="text-[11px] font-black text-gray-800 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2">
                                             <Phone className="w-3 h-3 text-red-400" /> Phone Number
                                         </label>
                                         <p className="text-lg font-black text-slate-700 font-sans tracking-tight">{user.phone || 'N/A'}</p>
                                     </div>
                                     <div className="space-y-4">
-                                        <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                                            <MapPin className="w-3 h-3 text-red-400" /> Shipping Address
+                                        <label className="text-[11px] font-black text-gray-800 uppercase tracking-widest flex items-center justify-center md:justify-start gap-2">
+                                            <MapPin className="w-3 h-3 text-red-400" /> Quick Access
                                         </label>
-                                        <button className="text-sm font-black text-red-400 hover:text-red-500 flex items-center gap-1 group">
-                                            Add Address <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                        </button>
+                                        <div className="flex justify-center md:justify-start gap-3">
+                                            <button
+                                                onClick={() => setActiveSection('addresses')}
+                                                className="text-[10px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
+                                            >
+                                                My Addresses <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                            </button>
+                                            <Link
+                                                href="/wishlist"
+                                                className="text-[10px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
+                                            >
+                                                Wishlist <Heart className="w-3 h-3 group-hover:scale-110 transition-transform" />
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap gap-4 pt-4">
-                                    <button className="bg-red-400 hover:bg-red-500 text-white font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl shadow-red-200/50 flex items-center gap-2 active:scale-95">
+                                <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+                                    <button
+                                        onClick={() => setIsEditModalOpen(true)}
+                                        className="bg-red-400 hover:bg-slate-900 text-white font-black px-8 py-3.5 rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-red-200/50 flex items-center gap-2 active:scale-95"
+                                    >
                                         <Edit3 className="w-4 h-4" /> Edit Profile
                                     </button>
                                     <button
@@ -82,7 +146,7 @@ export default function Profile() {
                                             logout();
                                             router.push("/");
                                         }}
-                                        className="bg-slate-900 hover:bg-red-400 text-white font-black px-8 py-3.5 rounded-2xl text-xs uppercase tracking-widest transition-all shadow-xl flex items-center gap-2 active:scale-95"
+                                        className="bg-white border-2 border-slate-100 hover:border-red-400 hover:text-red-400 text-slate-800 font-black px-8 py-3.5 rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-sm flex items-center gap-2 active:scale-95"
                                     >
                                         <LogOut className="w-4 h-4" /> Sign Out
                                     </button>
@@ -93,7 +157,7 @@ export default function Profile() {
                             <div className="hidden md:block w-px h-48 bg-gray-100 self-center"></div>
 
                             <div className="w-full md:w-56 space-y-4">
-                                <h3 className="text-[13px] font-black text-slate-400 mb-6 uppercase tracking-widest text-center">Platform Status</h3>
+                                <h3 className="text-[13px] font-black text-slate-800 mb-6 uppercase tracking-widest text-center">Platform Status</h3>
                                 <MetricCard icon={Package} label="Total Orders" value={statsLoading ? "..." : stats?.total_orders || 0} color="bg-blue-50 text-blue-500" />
                                 <MetricCard icon={CreditCard} label="Spent Amount" value={statsLoading ? "..." : `\u09F3 ${stats?.spent_amount?.toLocaleString() || 0}`} color="bg-green-50 text-green-500" />
                                 <MetricCard icon={Headset} label="Active Tickets" value={statsLoading ? "..." : stats?.active_tickets || 0} color="bg-orange-50 text-orange-500" />
@@ -101,43 +165,56 @@ export default function Profile() {
                         </div>
                     </div>
 
-                    {/* Account Settings Mini-Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30">
-                            <h3 className="text-xs font-black text-slate-800 mb-6 uppercase tracking-widest border-b border-gray-50 pb-4">Security Settings</h3>
-                            <ul className="space-y-4">
-                                <SecurityItem icon={Lock} label="Change Password" sub="Keep your account safe" />
-                                <SecurityItem icon={MapPin} label="Manage Addresses" sub="Setup your delivery zones" />
-                            </ul>
+                    {/* Dynamic Section Viewer */}
+                    <div className="space-y-10">
+                        <div className="flex gap-4 p-2 bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-200/20 overflow-x-auto scrollbar-hide">
+                            <TabButton active={activeSection === 'overview'} onClick={() => setActiveSection('overview')} label="Overview" icon={UserIcon} />
+                            <TabButton active={activeSection === 'addresses'} onClick={() => setActiveSection('addresses')} label="Addresses" icon={MapPin} />
+                            <TabButton active={activeSection === 'security'} onClick={() => setActiveSection('security')} label="Security" icon={Lock} />
+                            <TabButton active={activeSection === 'preferences'} onClick={() => setActiveSection('preferences')} label="Preferences" icon={ShoppingBag} />
                         </div>
-                        <div className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30">
-                            <h3 className="text-xs font-black text-slate-800 mb-6 uppercase tracking-widest border-b border-gray-50 pb-4">Preferences</h3>
-                            <ul className="space-y-4">
-                                <SecurityItem icon={Mail} label="Email Notifications" sub="Get updates on your orders" />
-                            </ul>
-                        </div>
-                        
-                        {/* Support Quick Access */}
-                        <Link href="/support" className="bg-slate-900 rounded-[2rem] p-8 shadow-xl shadow-slate-400/20 group hover:bg-slate-800 transition-colors">
-                            <h3 className="text-xs font-black text-white/50 mb-6 uppercase tracking-widest border-b border-white/5 pb-4">Customer Support</h3>
-                            <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
-                                    <Headset className="w-7 h-7" />
+
+                        {activeSection === 'overview' && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                                <Link href="/wishlist" className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30 group hover:border-red-400 transition-colors">
+                                    <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-red-400 mb-6 group-hover:scale-110 transition-transform">
+                                        <Heart className="w-7 h-7" />
+                                    </div>
+                                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-widest">My Wishlist</h3>
+                                    <p className="text-[10px] font-bold text-gray-800 uppercase tracking-widest mt-1">Saved products for later</p>
+                                </Link>
+
+                                <div onClick={() => setActiveSection('addresses')} className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30 group hover:border-red-400 transition-colors cursor-pointer">
+                                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                                        <MapPin className="w-7 h-7" />
+                                    </div>
+                                    <h3 className="text-sm font-black text-slate-800 uppercase tracking-widest">Saved Addresses</h3>
+                                    <p className="text-[10px] font-bold text-gray-800 uppercase tracking-widest mt-1">Manage delivery locations</p>
                                 </div>
-                                <div>
-                                    <h4 className="text-sm font-black text-white uppercase tracking-tight">Need Help?</h4>
-                                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1">Talk to our team</p>
-                                </div>
-                                <ChevronRight className="w-5 h-5 text-white/20 ml-auto group-hover:translate-x-1 transition-transform" />
+
+                                <Link href="/support" className="bg-slate-900 rounded-[2rem] p-8 shadow-xl shadow-slate-400/20 group hover:bg-slate-800 transition-colors">
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                                            <Headset className="w-6 h-6" />
+                                        </div>
+                                        <h3 className="text-xs font-black text-white uppercase tracking-widest">Support</h3>
+                                    </div>
+                                    <div className="flex justify-between items-center bg-white/5 rounded-2xl p-4">
+                                        <span className="text-[10px] font-black text-white/50 uppercase tracking-widest">Open Tickets</span>
+                                        <span className="text-lg font-black text-red-400">{statsLoading ? "..." : stats?.active_tickets || 0}</span>
+                                    </div>
+                                </Link>
                             </div>
-                            <div className="mt-8 flex justify-between items-center bg-white/5 rounded-2xl p-4">
-                                <span className="text-[10px] font-black text-white/60 uppercase tracking-widest">Active Tickets</span>
-                                <span className="text-lg font-black text-red-400">{statsLoading ? "..." : stats?.active_tickets || 0}</span>
-                            </div>
-                        </Link>
+                        )}
+
+                        {activeSection === 'addresses' && <div className="animate-in fade-in slide-in-from-bottom-4 duration-500"><AddressBook /></div>}
+                        {activeSection === 'security' && <div className="animate-in fade-in slide-in-from-bottom-4 duration-500"><SecuritySettings /></div>}
+                        {activeSection === 'preferences' && <div className="animate-in fade-in slide-in-from-bottom-4 duration-500"><PreferenceSettings /></div>}
                     </div>
                 </div>
             </div>
+
+            <EditProfileModal user={user} isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
         </main>
     );
 }
@@ -149,26 +226,21 @@ function MetricCard({ icon: Icon, label, value, color }: any) {
                 <Icon className="w-5 h-5" />
             </div>
             <div className="text-right">
-                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter leading-none mb-1">{label}</p>
+                <p className="text-[9px] font-bold text-gray-800 uppercase tracking-tighter leading-none mb-1">{label}</p>
                 <p className="text-base font-black text-slate-700 tracking-tighter">{value}</p>
             </div>
         </div>
     );
 }
 
-function SecurityItem({ icon: Icon, label, sub }: any) {
+function TabButton({ active, onClick, label, icon: Icon }: any) {
     return (
-        <li className="group cursor-pointer">
-            <div className="flex items-center gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-all">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 group-hover:bg-red-50 group-hover:text-red-400 transition-colors">
-                    <Icon className="w-5 h-5" />
-                </div>
-                <div className="flex-1">
-                    <p className="text-xs font-black text-slate-800 uppercase tracking-tight group-hover:text-red-500 transition-colors">{label}</p>
-                    <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">{sub}</p>
-                </div>
-                <ChevronRight className="w-4 h-4 text-gray-300 group-hover:translate-x-1 transition-transform group-hover:text-red-400" />
-            </div>
-        </li>
+        <button
+            onClick={onClick}
+            className={`flex items-center gap-3 px-8 py-4 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap active:scale-95 ${active ? 'bg-slate-900 text-white shadow-xl shadow-slate-300' : 'bg-transparent text-slate-800 hover:bg-gray-50'}`}
+        >
+            <Icon className={`w-4 h-4 ${active ? 'text-red-400' : 'text-gray-300'}`} />
+            {label}
+        </button>
     );
 }

@@ -344,6 +344,7 @@ export const frontendApi = createApi({
             return headers;
         },
     }),
+    tagTypes: ['User', 'Addresses', 'Tickets', 'Stats', 'Orders', 'Wishlist'],
     endpoints: (builder) => ({
         getFeaturedProducts: builder.query<FeaturedProductsResponse, void>({
             query: () => '/featured-products',
@@ -369,12 +370,15 @@ export const frontendApi = createApi({
                 method: 'POST',
                 body: orderData,
             }),
+            invalidatesTags: ['Orders', 'Stats'],
         }),
         getMyOrders: builder.query<any, void>({
             query: () => '/orders/my-orders',
+            providesTags: ['Orders'],
         }),
         getOrderDetails: builder.query<any, string>({
             query: (orderNumber) => `/orders/${orderNumber}`,
+            providesTags: (result, error, arg) => [{ type: 'Orders', id: arg }],
         }),
         register: builder.mutation<any, any>({
             query: (data) => ({
@@ -451,6 +455,7 @@ export const frontendApi = createApi({
         }),
         getTickets: builder.query<TicketsResponse, void>({
             query: () => '/tickets',
+            providesTags: ['Tickets'],
         }),
         createTicket: builder.mutation<any, FormData>({
             query: (formData) => ({
@@ -458,9 +463,11 @@ export const frontendApi = createApi({
                 method: 'POST',
                 body: formData,
             }),
+            invalidatesTags: ['Tickets', 'Stats'],
         }),
         getTicketDetails: builder.query<TicketDetailsResponse, string>({
             query: (id) => `/tickets/${id}`,
+            providesTags: (result, error, arg) => [{ type: 'Tickets', id: arg }],
         }),
         submitTicketReply: builder.mutation<any, { id: string, body: FormData }>({
             query: ({ id, body }) => ({
@@ -468,9 +475,84 @@ export const frontendApi = createApi({
                 method: 'POST',
                 body: body,
             }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Tickets', id: arg.id },
+                'Tickets'
+            ],
         }),
         getProfileStats: builder.query<ProfileStatsResponse, void>({
             query: () => '/profile/stats',
+            providesTags: ['Stats'],
+        }),
+        updateProfile: builder.mutation<any, { name: string, email: string, phone?: string }>({
+            query: (data) => ({
+                url: '/profile/update',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['User', 'Stats'],
+        }),
+        updateProfilePhoto: builder.mutation<any, FormData>({
+            query: (formData) => ({
+                url: '/profile/photo',
+                method: 'POST',
+                body: formData,
+            }),
+            invalidatesTags: ['User', 'Stats'],
+        }),
+        changePassword: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/profile/password',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        updatePreferences: builder.mutation<any, { preferences: any }>({
+            query: (data) => ({
+                url: '/profile/preferences',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['User'],
+        }),
+        getAddresses: builder.query<any, void>({
+            query: () => '/profile/addresses',
+            providesTags: ['Addresses'],
+        }),
+        addAddress: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/profile/addresses',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Addresses'],
+        }),
+        updateAddress: builder.mutation<any, { id: number, data: any }>({
+            query: ({ id, data }) => ({
+                url: `/profile/addresses/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['Addresses'],
+        }),
+        deleteAddress: builder.mutation<any, number>({
+            query: (id) => ({
+                url: `/profile/addresses/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Addresses'],
+        }),
+        getWishlist: builder.query<any, void>({
+            query: () => '/wishlist',
+            providesTags: ['Wishlist'],
+        }),
+        toggleWishlist: builder.mutation<any, { product_id: string }>({
+            query: (data) => ({
+                url: '/wishlist/toggle',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Wishlist'],
         }),
     }),
 });
@@ -505,4 +587,14 @@ export const {
     useGetTicketDetailsQuery,
     useSubmitTicketReplyMutation,
     useGetProfileStatsQuery,
+    useUpdateProfileMutation,
+    useUpdateProfilePhotoMutation,
+    useChangePasswordMutation,
+    useUpdatePreferencesMutation,
+    useGetAddressesQuery,
+    useAddAddressMutation,
+    useUpdateAddressMutation,
+    useDeleteAddressMutation,
+    useGetWishlistQuery,
+    useToggleWishlistMutation,
 } = frontendApi;

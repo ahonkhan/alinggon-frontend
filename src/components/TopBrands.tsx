@@ -9,8 +9,8 @@ import { useGetBrandsQuery } from "@/store/api/frontendApi";
 const getLogoUrl = (logo: string | undefined) => {
     if (!logo) return '';
     if (logo.startsWith('http')) return logo;
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api', '') || 'http://localhost:8000';
-    return `${baseUrl}/${logo}`;
+    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '') || 'http://localhost:8000';
+    return `${baseUrl}/storage/${logo}`;
 };
 
 export default function TopBrands() {

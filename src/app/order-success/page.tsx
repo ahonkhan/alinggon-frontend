@@ -25,17 +25,17 @@ function SuccessContent() {
                             <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter uppercase leading-none">
                                 Order <span className="text-green-500">Confirmed!</span>
                             </h1>
-                            <p className="text-gray-400 font-bold uppercase text-[13px] tracking-[0.2em]">
+                            <p className="text-gray-800 font-bold uppercase text-[13px] tracking-[0.2em]">
                                 Your transaction was successful
                             </p>
                         </div>
 
                         <div className="bg-gray-50 rounded-3xl p-8 border border-gray-100 space-y-4">
-                            <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-gray-400">
+                            <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-gray-800">
                                 <span>Order Reference</span>
                                 <span className="text-slate-900">#{orderId}</span>
                             </div>
-                            <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-gray-400">
+                            <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-gray-800">
                                 <span>Status</span>
                                 <span className="text-green-500 bg-green-50 px-3 py-1 rounded-full text-[9px]">Verified</span>
                             </div>

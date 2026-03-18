@@ -31,10 +31,10 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
                         View All
                     </Link>
                     <div className="flex gap-2">
-                        <button ref={prevRef} className="p-2 rounded-full border border-gray-100 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all text-slate-400">
+                        <button ref={prevRef} className="p-2 rounded-full border border-gray-100 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all text-slate-800">
                             <ChevronLeft className="w-4 h-4" />
                         </button>
-                        <button ref={nextRef} className="p-2 rounded-full border border-gray-100 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all text-slate-400">
+                        <button ref={nextRef} className="p-2 rounded-full border border-gray-100 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all text-slate-800">
                             <ChevronRight className="w-4 h-4" />
                         </button>
                     </div>

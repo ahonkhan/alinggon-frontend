@@ -21,7 +21,7 @@ export default function NotFound() {
 
                 <div className="space-y-4">
                     <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tighter">Object Not Found</h2>
-                    <p className="text-gray-400 font-bold uppercase text-[13px] tracking-[0.2em] max-w-xs mx-auto leading-relaxed">
+                    <p className="text-gray-800 font-bold uppercase text-[13px] tracking-[0.2em] max-w-xs mx-auto leading-relaxed">
                         The resource you are looking for has been moved or does not exist in our current dimension.
                     </p>
                 </div>
@@ -36,9 +36,9 @@ export default function NotFound() {
                 </div>
 
                 <div className="pt-8 flex items-center justify-center gap-6 opacity-40">
-                    <Heart className="w-5 h-5 text-gray-400" />
-                    <User className="w-5 h-5 text-gray-400" />
-                    <ShoppingBag className="w-5 h-5 text-gray-400" />
+                    <Heart className="w-5 h-5 text-gray-800" />
+                    <User className="w-5 h-5 text-gray-800" />
+                    <ShoppingBag className="w-5 h-5 text-gray-800" />
                 </div>
             </div>
         </main>

@@ -51,7 +51,7 @@ export default function RegisterPage() {
                     <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
                         Create <span className="text-red-500">Account</span>
                     </h1>
-                    <p className="text-[13px] uppercase font-black tracking-widest text-slate-400 mt-2">
+                    <p className="text-[13px] uppercase font-black tracking-widest text-slate-800 mt-2">
                         Join us for a premium shopping experience
                     </p>
                 </div>
@@ -137,7 +137,7 @@ export default function RegisterPage() {
                 </form>
 
                 <div className="mt-10 text-center">
-                    <p className="text-[13px] font-black uppercase tracking-widest text-slate-400">
+                    <p className="text-[13px] font-black uppercase tracking-widest text-slate-800">
                         Already have an account?{" "}
                         <Link href="/login" className="text-red-500 hover:underline">
                             Login

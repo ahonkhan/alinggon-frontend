@@ -91,7 +91,7 @@ export const AdminGalleryModal: React.FC = () => {
                                     <button
                                         type="button"
                                         onClick={() => { dispatch(closePasswordModal()); setPassword(""); setError(""); }}
-                                        className="flex-1 px-4 py-4 border-2 border-slate-100 text-slate-400 font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-slate-50 transition-all"
+                                        className="flex-1 px-4 py-4 border-2 border-slate-100 text-slate-800 font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-slate-50 transition-all"
                                     >
                                         Cancel
                                     </button>

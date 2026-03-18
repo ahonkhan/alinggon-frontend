@@ -33,7 +33,7 @@ export default function VideoSection() {
                             className="object-cover"
                         />
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-xs uppercase tracking-widest text-center p-4">
+                        <div className="w-full h-full flex items-center justify-center text-slate-800 font-bold text-xs uppercase tracking-widest text-center p-4">
                             How to Order Video
                         </div>
                     )}
@@ -71,7 +71,7 @@ export default function VideoSection() {
                             ))}
                         </Swiper>
                     ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-400 font-bold text-xs uppercase tracking-widest text-center p-4">
+                        <div className="w-full h-full flex items-center justify-center text-slate-800 font-bold text-xs uppercase tracking-widest text-center p-4">
                             Customer Reviews
                         </div>
                     )}

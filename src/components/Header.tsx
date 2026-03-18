@@ -124,7 +124,7 @@ export default function Header() {
                         {showSuggestions && suggestions.length > 0 && (
                             <div className="absolute top-14 left-0 w-full bg-white rounded-3xl shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-gray-100 overflow-hidden z-[60] animate-in slide-in-from-top-2 duration-200">
                                 <div className="p-4 border-b border-gray-50 bg-gray-50/50">
-                                    <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Recommended Match</span>
+                                    <span className="text-[9px] font-black text-slate-800 uppercase tracking-widest">Recommended Match</span>
                                 </div>
                                 <div>
                                     {suggestions.map(p => (
@@ -145,13 +145,13 @@ export default function Header() {
                                         </Link>
                                     ))}
                                     {isFetching && (
-                                        <div className="text-center py-4 text-xs font-bold text-gray-400">Loading...</div>
+                                        <div className="text-center py-4 text-xs font-bold text-gray-800">Loading...</div>
                                     )}
                                 </div>
                                 <Link
                                     href={`/shop?q=${searchQuery}`}
                                     onClick={() => setShowSuggestions(false)}
-                                    className="block w-full text-center py-4 bg-gray-50 text-[11px] font-black text-slate-400 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
+                                    className="block w-full text-center py-4 bg-gray-50 text-[11px] font-black text-slate-800 uppercase tracking-widest hover:text-red-600 transition-all font-sans"
                                 >
                                     View all search results
                                 </Link>
@@ -162,7 +162,7 @@ export default function Header() {
                     {/* Actions */}
                     <div className="flex items-center gap-6 flex-shrink-0">
                         <a href="https://wa.me/+97336781645" target="_blank" rel="noopener noreferrer" className="hidden lg:flex flex-col items-end leading-tight text-right text-slate-900 mr-2 group">
-                            <span className="text-[9px] text-gray-400 font-bold uppercase tracking-widest group-hover:text-green-500 transition-colors">Global Support</span>
+                            <span className="text-[9px] text-gray-800 font-bold uppercase tracking-widest group-hover:text-green-500 transition-colors">Global Support</span>
                             <span className="text-sm font-black tracking-tighter group-hover:text-green-600 transition-colors">+97336781645</span>
                         </a>
 
@@ -187,11 +187,19 @@ export default function Header() {
                                 <div className="hidden md:flex items-center gap-4 ml-2">
                                     <Link href="/profile" aria-label="Profile" className="flex items-center gap-3 group bg-gray-50 pl-4 pr-1.5 py-1.5 rounded-2xl border border-gray-100 hover:bg-white hover:border-red-100 transition-all shadow-sm">
                                         <div className="text-right leading-none">
-                                            <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
+                                            <p className="text-[8px] font-black text-slate-800 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
                                             <p className="text-xs font-black text-slate-900 group-hover:text-red-500 transition-colors uppercase tracking-tight">{user.name.split(' ')[0]}</p>
                                         </div>
-                                        <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center group-hover:bg-red-600 transition-colors shadow-lg">
-                                            <User className="w-5 h-5 text-white" />
+                                        <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-red-50 transition-colors shadow-lg overflow-hidden">
+                                            {user.profile_photo ? (
+                                                <img
+                                                    src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                                    alt={user.name}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <User className="w-5 h-5 text-slate-800 group-hover:text-red-600" />
+                                            )}
                                         </div>
                                     </Link>
                                     <button

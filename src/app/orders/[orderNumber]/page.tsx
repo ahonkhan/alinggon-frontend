@@ -63,7 +63,7 @@ export default function OrderDetailsPage() {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                     <div>
-                        <Link href="/" className="flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors mb-4 group">
+                        <Link href="/" className="flex items-center gap-2 text-slate-800 hover:text-red-500 transition-colors mb-4 group">
                             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                             <span className="text-[13px] uppercase font-black tracking-widest leading-none mt-1">Back to Home</span>
                         </Link>
@@ -71,7 +71,7 @@ export default function OrderDetailsPage() {
                             Order <span className="text-red-500">#{order.order_number}</span>
                         </h1>
                         <div className="flex items-center gap-4 mt-2">
-                            <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-400 uppercase tracking-widest">
+                            <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-800 uppercase tracking-widest">
                                 <Calendar className="w-3.5 h-3.5" />
                                 {new Date(order.created_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                             </span>
@@ -112,14 +112,14 @@ export default function OrderDetailsPage() {
                                             {item.variation_details && (
                                                 <div className="flex gap-2">
                                                     {Object.entries(item.variation_details).map(([key, val]: any) => (
-                                                        <span key={key} className="text-[9px] font-black text-slate-400 uppercase tracking-tighter bg-white px-2 py-0.5 rounded border border-slate-100">
+                                                        <span key={key} className="text-[9px] font-black text-slate-800 uppercase tracking-tighter bg-white px-2 py-0.5 rounded border border-slate-100">
                                                             {key}: {val}
                                                         </span>
                                                     ))}
                                                 </div>
                                             )}
                                             <div className="mt-2 flex items-center justify-between">
-                                                <span className="text-[13px] font-bold text-slate-400">Qty: {item.quantity}</span>
+                                                <span className="text-[13px] font-bold text-slate-800">Qty: {item.quantity}</span>
                                                 <span className="text-xs font-black text-slate-900">৳ {item.unit_price}</span>
                                             </div>
                                         </div>
@@ -143,7 +143,7 @@ export default function OrderDetailsPage() {
                                             </div>
                                             <div>
                                                 <h4 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">{statusConfig[log.status]?.label || log.status}</h4>
-                                                <p className="text-[13px] text-slate-400 font-bold uppercase mt-1">
+                                                <p className="text-[13px] text-slate-800 font-bold uppercase mt-1">
                                                     {new Date(log.created_at).toLocaleString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true })}
                                                 </p>
                                                 {log.notes && (
@@ -161,7 +161,7 @@ export default function OrderDetailsPage() {
                                         </div>
                                         <div>
                                             <h4 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">Order Placed</h4>
-                                            <p className="text-[13px] text-slate-400 font-bold uppercase mt-1">
+                                            <p className="text-[13px] text-slate-800 font-bold uppercase mt-1">
                                                 {new Date(order.created_at).toLocaleString()}
                                             </p>
                                             <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 text-[13px] font-medium text-slate-600 italic">
@@ -178,13 +178,13 @@ export default function OrderDetailsPage() {
                     <div className="space-y-8">
                         {/* Order Summary */}
                         <div className="bg-slate-900 rounded-3xl p-6 shadow-xl text-white">
-                            <h3 className="text-[13px] font-black uppercase tracking-widest text-slate-400 mb-6">Order Summary</h3>
+                            <h3 className="text-[13px] font-black uppercase tracking-widest text-slate-800 mb-6">Order Summary</h3>
                             <div className="space-y-4">
-                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-400">
+                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-800">
                                     <span>Subtotal</span>
                                     <span className="text-white font-black font-sans tracking-tight text-sm">৳ {order.total_amount - order.shipping_cost}</span>
                                 </div>
-                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-400">
+                                <div className="flex justify-between items-center text-[13px] uppercase font-bold text-slate-800">
                                     <span>Shipping</span>
                                     <span className="text-white font-black font-sans tracking-tight text-sm">৳ {order.shipping_cost}</span>
                                 </div>
@@ -195,8 +195,8 @@ export default function OrderDetailsPage() {
                             </div>
                             <div className="mt-6 pt-6 border-t border-slate-800">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <Clock className="w-3.5 h-3.5 text-slate-400" />
-                                    <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Payment Method</span>
+                                    <Clock className="w-3.5 h-3.5 text-slate-800" />
+                                    <span className="text-[9px] font-black uppercase tracking-widest text-slate-800">Payment Method</span>
                                 </div>
                                 <span className="text-[11px] font-black uppercase tracking-widest py-1 px-3 rounded-lg bg-slate-800 text-slate-200">
                                     {order.payment_method === 'cod' ? 'Cash On Delivery' : order.payment_method}
@@ -212,7 +212,7 @@ export default function OrderDetailsPage() {
                                     <h3 className="text-[13px] font-black text-slate-900 uppercase tracking-widest">Customer</h3>
                                 </div>
                                 <p className="text-[11px] font-black text-slate-800 uppercase">{order.customer_name}</p>
-                                <div className="flex items-center gap-1.5 mt-1 text-[13px] font-bold text-slate-400">
+                                <div className="flex items-center gap-1.5 mt-1 text-[13px] font-bold text-slate-800">
                                     <Phone className="w-3.5 h-3.5" />
                                     {order.customer_phone}
                                 </div>

@@ -16,6 +16,8 @@ import { Suspense } from "react";
 import { AdminGalleryModal } from "@/components/AdminGalleryModal";
 import CreateTicketModal from "@/components/support/CreateTicketModal";
 import ImageViewerModal from "@/components/support/ImageViewerModal";
+import Script from "next/script";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,6 +55,7 @@ export default function RootLayout({
                 <main className="flex-grow pb-24 lg:pb-0">
                   {children}
                 </main>
+                <Toaster position="top-right" />
                 <Footer />
                 <Suspense fallback={null}>
                   <CartDrawer />
@@ -67,6 +70,11 @@ export default function RootLayout({
             </AuthProvider>
           </ToastProvider>
         </ReduxProvider>
+        <Toaster position="bottom-right" reverseOrder={false} />
+        <Script 
+          src="//code.tidio.co/uyhnfqwkon69wwzdjm91rvz3qmqmxxop.js" 
+          strategy="afterInteractive" 
+        />
       </body>
     </html>
   );

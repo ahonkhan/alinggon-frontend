@@ -13,7 +13,7 @@ export default function TrackOrder() {
                 <h1 className="text-5xl font-extrabold text-slate-900 tracking-tighter uppercase leading-tight">
                     Track Your <span className="text-red-400">Payload</span>
                 </h1>
-                <p className="text-gray-400 font-medium max-w-lg mx-auto uppercase text-xs tracking-widest leading-relaxed">
+                <p className="text-gray-800 font-medium max-w-lg mx-auto uppercase text-xs tracking-widest leading-relaxed">
                     Input your authenticated phone number to visualize your package status in realtime.
                 </p>
             </div>
@@ -23,7 +23,7 @@ export default function TrackOrder() {
                 <div className="lg:col-span-5 bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-2xl shadow-slate-200/50 sticky top-32">
                     <div className="space-y-8">
                         <div className="space-y-4">
-                            <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest px-1">Identity Verification</label>
+                            <label className="text-[13px] font-black text-gray-800 uppercase tracking-widest px-1">Identity Verification</label>
                             <div className="relative group">
                                 <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300 group-focus-within:text-red-400 transition-colors" />
                                 <input
@@ -105,12 +105,12 @@ export default function TrackOrder() {
                     {/* Address Intelligence */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-200/20 group">
-                            <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <h4 className="text-[13px] font-black text-gray-800 uppercase tracking-widest mb-6 flex items-center gap-2">
                                 <MapPin className="w-4 h-4 text-red-400" /> Destination
                             </h4>
                             <p className="text-sm font-black text-slate-800 leading-relaxed uppercase group-hover:text-red-400 transition-colors">
                                 Karim Ullah<br />
-                                <span className="text-gray-400 font-bold block mt-3 leading-loose">
+                                <span className="text-gray-800 font-bold block mt-3 leading-loose">
                                     House 24, Road 7, Block D<br />
                                     Mirpur 10, Dhaka
                                 </span>
@@ -118,11 +118,11 @@ export default function TrackOrder() {
                         </div>
                         <div className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-200/20 flex flex-col justify-between">
                             <div>
-                                <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                                <h4 className="text-[13px] font-black text-gray-800 uppercase tracking-widest mb-6 flex items-center gap-2">
                                     <Package className="w-4 h-4 text-red-400" /> Logistics Hub
                                 </h4>
                                 <p className="text-sm font-black text-slate-900 uppercase">Pathao Courier</p>
-                                <p className="text-[13px] font-bold text-gray-400 uppercase tracking-widest mt-1">ID: PT-10022354</p>
+                                <p className="text-[13px] font-bold text-gray-800 uppercase tracking-widest mt-1">ID: PT-10022354</p>
                             </div>
                             <button className="text-[13px] font-black text-red-400 hover:text-red-500 uppercase tracking-widest mt-6 bg-red-50 self-start px-4 py-2 rounded-xl transition-all">
                                 Support Link
@@ -151,7 +151,7 @@ function TimelineStep({ label, desc, status, tag }: any) {
                 <h4 className={`text-sm font-black uppercase tracking-tighter ${isActive ? "text-red-400" : "text-slate-800"}`}>
                     {label}
                 </h4>
-                <p className="text-xs font-bold text-gray-400 leading-snug">
+                <p className="text-xs font-bold text-gray-800 leading-snug">
                     {desc}
                 </p>
                 {tag && (

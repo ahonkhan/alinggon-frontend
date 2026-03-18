@@ -207,7 +207,7 @@ function ShopContent() {
                             <>Explore Our <span className="text-red-400">Inventory</span></>
                         )}
                     </h1>
-                    <p className="text-gray-400 font-medium max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                    <p className="text-gray-800 font-medium max-w-xl mx-auto text-sm md:text-base leading-relaxed">
                         From cutting-edge gadgets to essential lifestyle accessories, find everything you need in one place.
                     </p>
                 </div>
@@ -225,7 +225,7 @@ function ShopContent() {
                     <div className="fixed inset-y-0 right-0 w-[85vw] max-w-sm bg-gray-50 shadow-2xl flex flex-col pt-6 px-4 pb-6 overflow-y-auto animate-in slide-in-from-right-full duration-300">
                         <div className="flex justify-between items-center mb-6 px-2">
                             <h2 className="text-xl font-black text-slate-900 uppercase tracking-tighter">Filters</h2>
-                            <button onClick={() => setIsFilterOpen(false)} className="p-2 bg-white shadow-sm hover:bg-red-50 text-gray-400 hover:text-red-400 rounded-xl transition-all border border-gray-100">
+                            <button onClick={() => setIsFilterOpen(false)} className="p-2 bg-white shadow-sm hover:bg-red-50 text-gray-800 hover:text-red-400 rounded-xl transition-all border border-gray-100">
                                 <X className="w-5 h-5" />
                             </button>
                         </div>
@@ -261,7 +261,7 @@ function ShopContent() {
                         {/* Toolbar */}
                         <div className="bg-white p-4 md:p-6 rounded-3xl border border-gray-100 shadow-xl shadow-slate-200/30 flex flex-col md:flex-row justify-between items-center gap-4">
                             <div className="flex items-center justify-between w-full md:w-auto gap-4 md:gap-6">
-                                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
+                                <span className="text-xs font-black text-slate-800 uppercase tracking-widest">
                                     <span className="text-slate-900">{totalProductsCount}</span> Objects Found
                                 </span>
                                 <div className="h-4 w-px bg-gray-100 hidden md:block"></div>
@@ -273,19 +273,19 @@ function ShopContent() {
                                     </button>
                                     <button
                                         onClick={() => setViewMode("grid")}
-                                        className={`hidden md:block p-2 rounded-lg transition-all ${viewMode === "grid" ? "bg-red-400 text-white shadow-lg shadow-red-100" : "text-gray-400 hover:bg-gray-50"}`}>
+                                        className={`hidden md:block p-2 rounded-lg transition-all ${viewMode === "grid" ? "bg-red-400 text-white shadow-lg shadow-red-100" : "text-gray-800 hover:bg-gray-50"}`}>
                                         <LayoutGrid className="w-4 h-4" />
                                     </button>
                                     <button
                                         onClick={() => setViewMode("list")}
-                                        className={`hidden md:block p-2 rounded-lg transition-all ${viewMode === "list" ? "bg-red-400 text-white shadow-lg shadow-red-100" : "text-gray-400 hover:bg-gray-50"}`}>
+                                        className={`hidden md:block p-2 rounded-lg transition-all ${viewMode === "list" ? "bg-red-400 text-white shadow-lg shadow-red-100" : "text-gray-800 hover:bg-gray-50"}`}>
                                         <List className="w-4 h-4" />
                                     </button>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0">
-                                <label className="text-[13px] font-black text-gray-400 uppercase tracking-widest whitespace-nowrap hidden md:block">Sort Logic:</label>
+                                <label className="text-[13px] font-black text-gray-800 uppercase tracking-widest whitespace-nowrap hidden md:block">Sort Logic:</label>
                                 <select
                                     value={sortOption}
                                     onChange={(e) => handleSortChange(e.target.value)}
@@ -302,7 +302,7 @@ function ShopContent() {
                             <div className="flex flex-wrap gap-2 mb-6 animate-in fade-in slide-in-from-top-2 duration-500">
                                 {searchQuery && (
                                     <div className="flex items-center gap-2 bg-white border border-gray-100 px-3 py-1.5 rounded-full shadow-sm">
-                                        <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">Search:</span>
+                                        <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">Search:</span>
                                         <span className="text-xs font-bold text-slate-800">{searchQuery}</span>
                                         <button
                                             onClick={() => {
@@ -318,7 +318,7 @@ function ShopContent() {
                                 )}
                                 {brandFilter && (
                                     <div className="flex items-center gap-2 bg-white border border-gray-100 px-3 py-1.5 rounded-full shadow-sm">
-                                        <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">Brand:</span>
+                                        <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">Brand:</span>
                                         <span className="text-xs font-bold text-slate-800">{brandFilter}</span>
                                         <button
                                             onClick={() => {
@@ -334,7 +334,7 @@ function ShopContent() {
                                 )}
                                 {vendorFilter && (
                                     <div className="flex items-center gap-2 bg-white border border-gray-100 px-3 py-1.5 rounded-full shadow-sm">
-                                        <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">Vendor:</span>
+                                        <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">Vendor:</span>
                                         <span className="text-xs font-bold text-slate-800">{vendorFilter}</span>
                                         <button
                                             onClick={() => {
@@ -368,14 +368,14 @@ function ShopContent() {
                         {prodLoading || isFetching ? (
                             <div className="bg-white rounded-[2.5rem] border border-gray-100 p-12 md:p-32 text-center shadow-inner flex flex-col items-center">
                                 <Loader2 className="w-12 h-12 text-red-400 animate-spin mb-4" />
-                                <p className="text-gray-400 font-bold uppercase text-xs tracking-widest">Applying filters...</p>
+                                <p className="text-gray-800 font-bold uppercase text-xs tracking-widest">Applying filters...</p>
                             </div>
                         ) : products.length === 0 ? (
                             <div className="bg-white rounded-[2.5rem] border border-gray-100 p-10 md:p-20 text-center shadow-inner">
                                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <Package className="w-10 h-10 text-gray-200" />
                                 </div>
-                                <p className="text-gray-400 font-bold uppercase text-xs tracking-widest">No matching items</p>
+                                <p className="text-gray-800 font-bold uppercase text-xs tracking-widest">No matching items</p>
                                 <button
                                     onClick={() => {
                                         const params = new URLSearchParams(searchParams.toString());
@@ -402,7 +402,7 @@ function ShopContent() {
                                     <button
                                         disabled={meta.current_page === 1}
                                         onClick={() => handlePageChange(meta.current_page - 1)}
-                                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
+                                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-800 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
                                         <ChevronLeft className="w-5 h-5" />
                                     </button>
 
@@ -418,7 +418,7 @@ function ShopContent() {
                                                 <button
                                                     key={pageNum}
                                                     onClick={() => handlePageChange(pageNum)}
-                                                    className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl font-black text-xs transition-all shadow-sm ${meta.current_page === pageNum ? "bg-red-400 text-white shadow-red-200/50 scale-110" : "bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100 hidden sm:flex"}`}>
+                                                    className={`w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl font-black text-xs transition-all shadow-sm ${meta.current_page === pageNum ? "bg-red-400 text-white shadow-red-200/50 scale-110" : "bg-white border border-gray-100 text-slate-800 hover:text-red-400 hover:border-red-100 hidden sm:flex"}`}>
                                                     {pageNum}
                                                 </button>
                                             )
@@ -429,7 +429,7 @@ function ShopContent() {
                                     <button
                                         disabled={meta.current_page === meta.last_page}
                                         onClick={() => handlePageChange(meta.current_page + 1)}
-                                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-400 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
+                                        className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-2xl bg-white border border-gray-100 text-slate-800 hover:text-red-400 hover:border-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm">
                                         <ChevronRight className="w-5 h-5" />
                                     </button>
                                 </nav>
@@ -459,7 +459,7 @@ function CategoryItem({ label, count, isActive, onClick }: any) {
             className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all ${isActive ? "bg-red-400 text-white shadow-xl shadow-red-100/50" : "text-slate-500 hover:bg-gray-50 hover:text-red-400"
                 }`}>
             <span>{label}</span>
-            <span className={`px-2 py-0.5 rounded-lg text-[8px] ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-400"}`}>{count}</span>
+            <span className={`px-2 py-0.5 rounded-lg text-[8px] ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-800"}`}>{count}</span>
         </li>
     );
 }

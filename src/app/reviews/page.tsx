@@ -10,7 +10,7 @@ export default function ReviewsPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const [imagePreviews, setImagePreviews] = useState<string[]>([]);
-    
+
     const [formData, setFormData] = useState({
         name: "",
         role: "",
@@ -56,7 +56,7 @@ export default function ReviewsPage() {
         const files = Array.from(e.target.files || []);
         if (files.length > 0) {
             setFormData({ ...formData, review_images: [...formData.review_images, ...files] });
-            
+
             files.forEach(file => {
                 const reader = new FileReader();
                 reader.onloadend = () => {
@@ -69,7 +69,7 @@ export default function ReviewsPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         const data = new FormData();
         data.append('name', formData.name);
         data.append('role', formData.role);
@@ -100,14 +100,14 @@ export default function ReviewsPage() {
             {isModalOpen && (
                 <div className="fixed inset-0 z-[100001] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
                     <div className="bg-white max-w-2xl w-full max-h-[90vh] overflow-y-auto rounded-[2.5rem] shadow-2xl animate-in zoom-in-95 duration-300 relative">
-                        <button 
+                        <button
                             onClick={() => setIsModalOpen(false)}
                             className="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-red-500 hover:text-white rounded-2xl transition-all duration-300 z-[101] shadow-sm group"
                         >
                             <X className="w-5 h-5 text-slate-500 group-hover:text-white transition-colors" />
                         </button>
 
-                        
+
                         <div className="p-8 md:p-12">
                             <div className="text-center mb-8">
                                 <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Write Your Review</h3>
@@ -116,7 +116,7 @@ export default function ReviewsPage() {
 
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="flex flex-col items-center mb-8">
-                                    <div 
+                                    <div
                                         onClick={() => avatarInputRef.current?.click()}
                                         className="w-24 h-24 rounded-3xl bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center cursor-pointer hover:border-red-400 transition-colors overflow-hidden relative group"
                                     >
@@ -129,28 +129,28 @@ export default function ReviewsPage() {
                                             <span className="text-white text-[10px] font-black uppercase tracking-widest">Change</span>
                                         </div>
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-2">Your Photo</span>
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-800 mt-2">Your Photo</span>
                                     <input type="file" ref={avatarInputRef} className="hidden" accept="image/*" onChange={handleAvatarChange} />
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Full Name</label>
-                                        <input 
+                                        <label className="text-[11px] font-black uppercase tracking-widest text-slate-800">Full Name</label>
+                                        <input
                                             required
-                                            type="text" 
+                                            type="text"
                                             value={formData.name}
-                                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                             className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-red-500/20 transition-all font-medium"
                                             placeholder="e.g. John Doe"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Designation / Role</label>
-                                        <input 
-                                            type="text" 
+                                        <label className="text-[11px] font-black uppercase tracking-widest text-slate-800">Designation / Role</label>
+                                        <input
+                                            type="text"
                                             value={formData.role}
-                                            onChange={(e) => setFormData({...formData, role: e.target.value})}
+                                            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                                             className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-red-500/20 transition-all font-medium"
                                             placeholder="e.g. Travel Blogger"
                                         />
@@ -158,40 +158,40 @@ export default function ReviewsPage() {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Star Rating</label>
+                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-800">Star Rating</label>
                                     <div className="flex gap-2 p-4 bg-slate-50 rounded-2xl w-fit">
                                         {[1, 2, 3, 4, 5].map((s) => (
-                                            <Star 
-                                                key={s} 
-                                                onClick={() => setFormData({...formData, rating: s})}
-                                                className={`w-6 h-6 cursor-pointer transition-all ${s <= formData.rating ? "fill-red-500 text-red-500 scale-110" : "text-slate-200 hover:text-red-200"}`} 
+                                            <Star
+                                                key={s}
+                                                onClick={() => setFormData({ ...formData, rating: s })}
+                                                className={`w-6 h-6 cursor-pointer transition-all ${s <= formData.rating ? "fill-red-500 text-red-500 scale-110" : "text-slate-200 hover:text-red-200"}`}
                                             />
                                         ))}
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Your Story</label>
-                                    <textarea 
+                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-800">Your Story</label>
+                                    <textarea
                                         required
                                         value={formData.comment}
-                                        onChange={(e) => setFormData({...formData, comment: e.target.value})}
+                                        onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
                                         className="w-full px-6 py-4 bg-slate-50 border-none rounded-[2rem] focus:ring-2 focus:ring-red-500/20 transition-all font-medium min-h-[150px]"
                                         placeholder="How was your experience with Alinggon?"
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-400">Showcase Images (max 4)</label>
+                                    <label className="text-[11px] font-black uppercase tracking-widest text-slate-800">Showcase Images (max 4)</label>
                                     <div className="grid grid-cols-4 gap-4">
                                         {imagePreviews.map((pre, i) => (
                                             <div key={i} className="aspect-square rounded-2xl overflow-hidden bg-slate-50 relative group">
                                                 <img src={pre} className="w-full h-full object-cover" />
-                                                <button 
+                                                <button
                                                     type="button"
                                                     onClick={() => {
                                                         setImagePreviews(prev => prev.filter((_, idx) => idx !== i));
-                                                        setFormData(prev => ({...prev, review_images: prev.review_images.filter((_, idx) => idx !== i)}));
+                                                        setFormData(prev => ({ ...prev, review_images: prev.review_images.filter((_, idx) => idx !== i) }));
                                                     }}
                                                     className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                                                 >
@@ -200,7 +200,7 @@ export default function ReviewsPage() {
                                             </div>
                                         ))}
                                         {imagePreviews.length < 4 && (
-                                            <div 
+                                            <div
                                                 onClick={() => imagesInputRef.current?.click()}
                                                 className="aspect-square rounded-2xl bg-slate-50 border-2 border-dashed border-slate-200 flex items-center justify-center cursor-pointer hover:border-red-400 transition-colors group"
                                             >
@@ -211,9 +211,9 @@ export default function ReviewsPage() {
                                     <input type="file" multiple ref={imagesInputRef} className="hidden" accept="image/*" onChange={handleImagesChange} />
                                 </div>
 
-                                <button 
+                                <button
                                     disabled={isSubmitting}
-                                    type="submit" 
+                                    type="submit"
                                     className="w-full bg-slate-900 hover:bg-red-600 text-white font-black text-[13px] uppercase tracking-[0.4em] py-6 rounded-3xl transition-all duration-500 disabled:opacity-50 disabled:cursor-not-allowed group flex items-center justify-center gap-3"
                                 >
                                     {isSubmitting ? (
@@ -283,7 +283,7 @@ export default function ReviewsPage() {
                 {isLoading ? (
                     <div className="flex flex-col items-center justify-center py-20 space-y-4">
                         <Loader2 className="w-12 h-12 text-red-500 animate-spin" />
-                        <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[13px]">Retrieving Stories...</p>
+                        <p className="text-slate-800 font-black uppercase tracking-[0.3em] text-[13px]">Retrieving Stories...</p>
                     </div>
                 ) : isError ? (
                     <div className="text-center py-20 bg-red-50 rounded-[3rem] border border-red-100">
@@ -292,7 +292,7 @@ export default function ReviewsPage() {
                     </div>
                 ) : reviews.length === 0 ? (
                     <div className="text-center py-32 bg-slate-50 rounded-[3rem] border border-slate-100">
-                        <p className="text-slate-400 font-black uppercase tracking-[0.4em] text-xs">No chronicles shared yet.</p>
+                        <p className="text-slate-800 font-black uppercase tracking-[0.4em] text-xs">No chronicles shared yet.</p>
                     </div>
                 ) : (
                     /* Main Reviews Layout with Custom Scroll/Masonry Feel */
@@ -374,7 +374,7 @@ export default function ReviewsPage() {
                 <div className="mt-20 relative px-4">
                     <div className="bg-slate-900 rounded-[3rem] p-10 md:p-16 text-center relative overflow-hidden group">
                         <div className="absolute top-0 left-0 w-64 h-64 bg-red-600/10 rounded-full blur-[80px] -ml-32 -mt-32"></div>
-                        
+
                         <div className="relative z-10 space-y-6 max-w-xl mx-auto">
                             <h2 className="text-3xl md:text-5xl font-black text-white leading-none tracking-tight">
                                 YOUR STORY <span className="text-red-500 italic">MATTERS.</span>
@@ -383,7 +383,7 @@ export default function ReviewsPage() {
                                 Join the Alinggon community and share your chronicle.
                             </p>
                             <div className="pt-2">
-                                <button 
+                                <button
                                     onClick={() => setIsModalOpen(true)}
                                     className="relative group/btn overflow-hidden bg-red-600 hover:bg-white text-white hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.3em] px-10 py-4 rounded-2xl transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(239,68,68,0.4)] active:scale-95"
                                 >

@@ -8,6 +8,8 @@ interface User {
     name: string;
     email: string;
     phone: string;
+    profile_photo?: string;
+    preferences?: any;
 }
 
 interface AuthContextType {
@@ -16,6 +18,7 @@ interface AuthContextType {
     login: (credentials: any) => Promise<any>;
     register: (userData: any) => Promise<any>;
     logout: () => void;
+    updateUser: (userData: User) => void;
     isLoading: boolean;
 }
 
@@ -80,8 +83,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.removeItem("alinggon_token");
     };
 
+    const updateUser = (userData: User) => {
+        const updatedUser = { ...user, ...userData };
+        setUser(updatedUser);
+        localStorage.setItem("alinggon_user", JSON.stringify(updatedUser));
+    };
+
     return (
-        <AuthContext.Provider value={{ user, token, login, register, logout, isLoading }}>
+        <AuthContext.Provider value={{ user, token, login, register, logout, updateUser, isLoading }}>
             {children}
         </AuthContext.Provider>
     );

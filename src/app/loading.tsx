@@ -14,7 +14,7 @@ export default function Loading() {
                 </div>
             </div>
             <div className="text-center space-y-2">
-                <p className="text-[13px] font-black text-slate-400 uppercase tracking-[0.4em] animate-pulse">Syncing Reality...</p>
+                <p className="text-[13px] font-black text-slate-800 uppercase tracking-[0.4em] animate-pulse">Syncing Reality...</p>
                 <div className="h-1 w-32 bg-slate-100 rounded-full mx-auto overflow-hidden">
                     <div className="h-full bg-red-400 w-1/2 animate-[loading-bar_1.5s_ease-in-out_infinite]"></div>
                 </div>

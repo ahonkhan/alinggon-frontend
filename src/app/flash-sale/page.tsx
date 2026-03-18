@@ -54,7 +54,7 @@ export default function FlashSalePage() {
                 <div className="bg-gray-100 p-8 rounded-[3rem] border-2 border-dashed border-gray-200 mb-6">
                     <Zap className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                     <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">No Active Flash Sale</h1>
-                    <p className="text-gray-400 text-sm mt-2 max-w-md">There are currently no active flash sales. Please check back later for amazing deals and discounts!</p>
+                    <p className="text-gray-800 text-sm mt-2 max-w-md">There are currently no active flash sales. Please check back later for amazing deals and discounts!</p>
                 </div>
                 <Link href="/" className="bg-slate-900 hover:bg-red-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-xl shadow-slate-200 active:scale-95 uppercase tracking-widest text-xs flex items-center gap-2">
                     <Home className="w-4 h-4" /> Return Home
@@ -68,7 +68,7 @@ export default function FlashSalePage() {
             {/* Breadcrumb */}
             <div className="bg-gray-50 border-b border-gray-100">
                 <div className="max-w-[1600px] mx-auto px-4 py-4">
-                    <div className="flex items-center gap-2 text-[13px] font-black uppercase tracking-widest text-slate-400">
+                    <div className="flex items-center gap-2 text-[13px] font-black uppercase tracking-widest text-slate-800">
                         <Link href="/" className="hover:text-red-500 transition-colors">Home</Link>
                         <ChevronRight className="w-3 h-3" />
                         <span className="text-red-600">Flash Sale</span>
@@ -89,7 +89,7 @@ export default function FlashSalePage() {
                             <h1 className="text-5xl lg:text-6xl font-black text-white uppercase tracking-tighter leading-tight mb-4">
                                 {flashSale.name}
                             </h1>
-                            <p className="text-slate-400 text-lg uppercase tracking-widest font-black max-w-xl">
+                            <p className="text-slate-800 text-lg uppercase tracking-widest font-black max-w-xl">
                                 Unbeatable prices on your favorite items. Limited time and limited quantities available.
                             </p>
                         </div>

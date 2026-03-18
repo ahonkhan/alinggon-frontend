@@ -72,7 +72,7 @@ export default function Checkout() {
         <main className="max-w-7xl mx-auto px-4 py-8 md:py-12 bg-gray-50/50">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 border-b border-gray-100 pb-8">
                 <div className="flex items-center gap-4">
-                    <Link href="/shop" className="p-2 bg-white rounded-full border border-gray-200 text-gray-400 hover:text-red-500 hover:border-red-200 transition-all">
+                    <Link href="/shop" className="p-2 bg-white rounded-full border border-gray-200 text-gray-800 hover:text-red-500 hover:border-red-200 transition-all">
                         <ArrowLeft className="w-5 h-5" />
                     </Link>
                     <h1 className="text-3xl font-extrabold text-slate-900 uppercase tracking-tighter">
@@ -98,7 +98,7 @@ export default function Checkout() {
                         <div className="p-8">
                             {cart.length === 0 ? (
                                 <div className="text-center py-20 px-10">
-                                    <p className="text-gray-400 font-bold uppercase text-xs tracking-widest mb-6">Your bag is currently empty</p>
+                                    <p className="text-gray-800 font-bold uppercase text-xs tracking-widest mb-6">Your bag is currently empty</p>
                                     <Link href="/shop" className="inline-block bg-red-400 text-white px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-500 transition-all shadow-lg active:scale-95">
                                         Browse Shop
                                     </Link>
@@ -173,7 +173,7 @@ export default function Checkout() {
                                     </div>
                                     <div>
                                         <span className="text-sm font-black text-slate-800 uppercase tracking-tighter">Cash on Delivery</span>
-                                        <p className="text-[13px] text-gray-400 font-bold uppercase mt-0.5">Pay after you receive your items</p>
+                                        <p className="text-[13px] text-gray-800 font-bold uppercase mt-0.5">Pay after you receive your items</p>
                                     </div>
                                 </label>
                             </div>
@@ -191,9 +191,9 @@ export default function Checkout() {
                         <div className="p-8 space-y-6">
                             <div className="space-y-4">
                                 <div className="space-y-1">
-                                    <label className="block text-[13px] font-black text-gray-400 uppercase tracking-widest mb-1.5 px-1">Customer Information</label>
+                                    <label className="block text-[13px] font-black text-gray-800 uppercase tracking-widest mb-1.5 px-1">Customer Information</label>
                                     <div className="relative">
-                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                        <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-800" />
                                         <input
                                             type="text"
                                             name="customer_name"
@@ -206,7 +206,7 @@ export default function Checkout() {
                                     </div>
                                 </div>
                                 <div className="relative">
-                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-800" />
                                     <input
                                         type="text"
                                         name="customer_phone"
@@ -218,7 +218,7 @@ export default function Checkout() {
                                     />
                                 </div>
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-800" />
                                     <input
                                         type="email"
                                         name="customer_email"
@@ -230,7 +230,7 @@ export default function Checkout() {
                                 </div>
                                 <div className="space-y-1">
                                     <div className="relative">
-                                        <MapPin className="absolute left-4 top-5 w-4 h-4 text-gray-400" />
+                                        <MapPin className="absolute left-4 top-5 w-4 h-4 text-gray-800" />
                                         <textarea
                                             name="shipping_address"
                                             value={formData.shipping_address}
@@ -243,7 +243,7 @@ export default function Checkout() {
                                 </div>
 
                                 <div className="space-y-3 pt-2">
-                                    <h4 className="text-[13px] font-black text-gray-400 uppercase tracking-widest px-1">Delivery Zone</h4>
+                                    <h4 className="text-[13px] font-black text-gray-800 uppercase tracking-widest px-1">Delivery Zone</h4>
                                     <div className="flex flex-col gap-3">
                                         <label className={`flex items-center justify-between p-4 bg-gray-50 border-2 rounded-2xl cursor-pointer transition-all font-sans ${shippingZone === "inside" ? 'border-red-400 bg-white' : 'border-transparent hover:border-gray-200'}`}>
                                             <div className="flex items-center gap-3">
@@ -276,11 +276,11 @@ export default function Checkout() {
                             </div>
 
                             <div className="pt-6 mt-6 border-t border-gray-100 space-y-3 font-sans">
-                                <div className="flex justify-between items-center text-xs font-bold uppercase tracking-widest text-gray-400">
+                                <div className="flex justify-between items-center text-xs font-bold uppercase tracking-widest text-gray-800">
                                     <span>Subtotal</span>
                                     <span className="text-slate-900">৳ {cartTotal}</span>
                                 </div>
-                                <div className="flex justify-between items-center text-xs font-bold uppercase tracking-widest text-gray-400">
+                                <div className="flex justify-between items-center text-xs font-bold uppercase tracking-widest text-gray-800">
                                     <span>Shipping</span>
                                     <span className="text-slate-900">৳ {shippingCharge}</span>
                                 </div>
@@ -308,7 +308,7 @@ export default function Checkout() {
                                         </>
                                     )}
                                 </button>
-                                <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest text-center mt-6 flex items-center justify-center gap-2">
+                                <p className="text-[9px] text-gray-800 font-bold uppercase tracking-widest text-center mt-6 flex items-center justify-center gap-2">
                                     <CreditCard className="w-3 h-3" />
                                     Security Verified Transaction
                                 </p>

@@ -5,7 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
-import { useToast } from "@/context/ToastContext";
+
+import { useAuth } from "@/context/AuthContext";
+import { useToggleWishlistMutation, useGetWishlistQuery } from "@/store/api/frontendApi";
+import { toast } from "react-hot-toast";
 
 interface ProductCardProps {
     id: string;
@@ -23,7 +26,9 @@ interface ProductCardProps {
 export default function ProductCard(props: ProductCardProps) {
     const { id, slug, name, price, originalPrice, discount, image } = props;
     const { addToCart } = useCart();
-    const { showToast } = useToast();
+    const { user } = useAuth();
+    const [toggleWishlist, { isLoading: isToggling }] = useToggleWishlistMutation();
+    const { data: wishlistData } = useGetWishlistQuery(undefined, { skip: !user });
     const router = useRouter();
     const productHref = `/product/${slug}`;
 
@@ -36,7 +41,7 @@ export default function ProductCard(props: ProductCardProps) {
         }
         // @ts-ignore
         addToCart(props);
-        showToast("Added to bag", "success");
+        toast.success("Added to bag");
     };
 
     const handleOrderNow = (e: React.MouseEvent) => {
@@ -45,6 +50,26 @@ export default function ProductCard(props: ProductCardProps) {
         // @ts-ignore
         addToCart(props, 1, false);
         router.push("/checkout");
+    };
+
+    const isInWishlist = wishlistData?.data?.some((item: any) => item.product_id === id);
+
+    const handleWishlist = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (!user) {
+            toast.error("Please login to manage wishlist");
+            router.push("/login");
+            return;
+        }
+
+        try {
+            await toggleWishlist({ product_id: id }).unwrap();
+            toast.success(isInWishlist ? "Removed from wishlist" : "Added to wishlist");
+        } catch (error) {
+            toast.error("Failed to update wishlist");
+        }
     };
 
     return (
@@ -77,18 +102,19 @@ export default function ProductCard(props: ProductCardProps) {
                         <ShoppingCart className="w-3.5 h-3.5" />
                     </button>
                     <button
-                        className="w-8 h-8 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition-all shadow-lg border border-gray-100"
-                        title="Add to Wishlist"
-                        aria-label="Add to Wishlist"
-                        onClick={(e) => { e.preventDefault(); showToast("Added to wishlist", "success"); }}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shadow-lg border border-gray-100 ${isInWishlist ? 'bg-red-600 text-white border-red-600' : 'bg-white text-slate-900 hover:bg-red-600 hover:text-white'}`}
+                        title={isInWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                        aria-label="Wishlist Toggle"
+                        disabled={isToggling}
+                        onClick={handleWishlist}
                     >
-                        <Heart className="w-3.5 h-3.5" />
+                        <Heart className={`w-3.5 h-3.5 ${isInWishlist ? 'fill-current' : ''}`} />
                     </button>
                     <button
                         className="w-8 h-8 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition-all shadow-lg border border-gray-100"
                         title="Compare"
                         aria-label="Compare"
-                        onClick={(e) => { e.preventDefault(); showToast("Added to compare", "success"); }}
+                        onClick={(e) => { e.preventDefault(); toast.success("Added to compare"); }}
                     >
                         <ArrowLeftRight className="w-3.5 h-3.5" />
                     </button>
@@ -102,7 +128,7 @@ export default function ProductCard(props: ProductCardProps) {
                     <div className="flex items-baseline gap-2 mb-3">
                         <span className="text-red-600 font-semibold">৳ {price.toLocaleString()}</span>
                         {originalPrice && (
-                            <span className="text-gray-400 text-xs line-through decoration-gray-400">
+                            <span className="text-gray-800 text-xs line-through decoration-gray-400">
                                 ৳ {originalPrice.toLocaleString()}
                             </span>
                         )}

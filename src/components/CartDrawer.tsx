@@ -55,7 +55,7 @@ export default function CartDrawer() {
                                 <ShoppingBag className="w-10 h-10 text-gray-200" />
                             </div>
                             <div className="space-y-2">
-                                <p className="text-slate-400 font-black uppercase text-[13px] tracking-widest">Bag is Empty</p>
+                                <p className="text-slate-800 font-black uppercase text-[13px] tracking-widest">Bag is Empty</p>
                                 <button
                                     onClick={closeCart}
                                     className="text-red-400 text-xs font-black uppercase hover:text-slate-900 transition-colors tracking-tighter"
@@ -94,12 +94,12 @@ export default function CartDrawer() {
                                                 <Trash2 className="w-3.5 h-3.5" />
                                             </button>
                                         </div>
-                                        <p className="text-[9px] text-gray-400 mt-1 font-bold uppercase tracking-widest font-sans">Unit: ৳ {item.price}</p>
+                                        <p className="text-[9px] text-gray-800 mt-1 font-bold uppercase tracking-widest font-sans">Unit: ৳ {item.price}</p>
                                         <div className="mt-auto flex items-center justify-between pt-2">
                                             <div className="flex border-2 border-gray-50 rounded-lg bg-gray-50/50 overflow-hidden origin-left">
                                                 <button
                                                     onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
-                                                    className="px-2 py-1 hover:bg-white text-gray-400 hover:text-red-400 transition-colors flex items-center"
+                                                    className="px-2 py-1 hover:bg-white text-gray-800 hover:text-red-400 transition-colors flex items-center"
                                                 >
                                                     <Minus className="w-3 h-3" strokeWidth={3} />
                                                 </button>
@@ -108,7 +108,7 @@ export default function CartDrawer() {
                                                 </span>
                                                 <button
                                                     onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
-                                                    className="px-2 py-1 hover:bg-white text-gray-400 hover:text-red-400 transition-colors flex items-center"
+                                                    className="px-2 py-1 hover:bg-white text-gray-800 hover:text-red-400 transition-colors flex items-center"
                                                 >
                                                     <Plus className="w-3 h-3" strokeWidth={3} />
                                                 </button>
@@ -125,7 +125,7 @@ export default function CartDrawer() {
                 {/* Footer */}
                 {cart.length > 0 && (
                     <div className="p-6 border-t border-gray-100 bg-white space-y-6">
-                        <div className="flex justify-between items-center text-[13px] font-black uppercase tracking-widest text-gray-400">
+                        <div className="flex justify-between items-center text-[13px] font-black uppercase tracking-widest text-gray-800">
                             <span>Bag Subtotal</span>
                             <span className="text-2xl font-black text-slate-900 font-sans tracking-tighter">৳ {cartTotal}</span>
                         </div>
@@ -140,7 +140,7 @@ export default function CartDrawer() {
                             </Link>
                             <button
                                 onClick={closeCart}
-                                className="w-full bg-gray-50 hover:bg-gray-100 text-gray-400 font-black h-12 rounded-xl transition-all text-[9px] uppercase tracking-widest"
+                                className="w-full bg-gray-50 hover:bg-gray-100 text-gray-800 font-black h-12 rounded-xl transition-all text-[9px] uppercase tracking-widest"
                             >
                                 Continue Discovery
                             </button>

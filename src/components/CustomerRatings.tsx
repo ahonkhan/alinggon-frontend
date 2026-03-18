@@ -29,7 +29,7 @@ export default function CustomerRatings() {
         return (
             <div className="flex flex-col items-center justify-center py-20 space-y-4 bg-white">
                 <Loader2 className="w-10 h-10 text-red-500 animate-spin" />
-                <p className="text-slate-400 font-black uppercase tracking-[0.3em] text-[13px]">Loading Chronicles...</p>
+                <p className="text-slate-800 font-black uppercase tracking-[0.3em] text-[13px]">Loading Chronicles...</p>
             </div>
         );
     }
@@ -106,7 +106,7 @@ function ReviewCard({ review, formatDate, className = "" }: { review: any; forma
             </p>
 
             <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{formatDate(review.created_at)}</span>
+                <span className="text-[9px] font-black text-slate-800 uppercase tracking-widest">{formatDate(review.created_at)}</span>
                 {review.is_verified && (
                     <div className="flex items-center gap-1 text-red-400">
                         <CheckCircle2 className="w-2.5 h-2.5" />

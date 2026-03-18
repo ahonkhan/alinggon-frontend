@@ -255,16 +255,16 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     <div>
                         <h1 className="text-2xl font-black text-gray-900 leading-tight uppercase tracking-tight">{product.name}</h1>
                         <div className="flex flex-col gap-1 mt-2">
-                            <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
+                            <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">
                                 Category: <Link href={`/shop?category=${product.category}`} className="text-red-500 hover:underline">{product.category}</Link>
                             </span>
                             {product.brand && (
-                                <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
+                                <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">
                                     Brand: <Link href={`/shop?brand=${product.brand.slug || product.brand.id}`} className="text-red-500 hover:underline">{product.brand.name}</Link>
                                 </span>
                             )}
                             {product.vendor && (
-                                <span className="text-[13px] font-black text-gray-400 uppercase tracking-widest">
+                                <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">
                                     Vendor: <Link href={`/shop?vendor=${product.vendor.shop_slug || product.vendor.id}`} className="text-red-500 hover:underline">{product.vendor.shop_name}</Link>
                                 </span>
                             )}
@@ -281,7 +281,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         )}
                     </div>
 
-                    <div className="space-y-4 py-6 border-b border-gray-100 uppercase tracking-widest text-[13px] font-black text-gray-400">
+                    <div className="space-y-4 py-6 border-b border-gray-100 uppercase tracking-widest text-[13px] font-black text-gray-800">
                         <div className="flex items-center gap-2">
                             <CheckCircle className="w-4 h-4 text-green-500" />
                             <span>Availability: <span className="text-green-600 font-black">In Stock ({displayStock} items)</span></span>
@@ -293,7 +293,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <div className="space-y-6 py-4 border-b border-gray-100">
                             {product.variations.map((v) => (
                                 <div key={v.id}>
-                                    <h4 className="text-[13px] font-black text-slate-400 mb-3 uppercase tracking-widest flex items-center gap-1">
+                                    <h4 className="text-[13px] font-black text-slate-800 mb-3 uppercase tracking-widest flex items-center gap-1">
                                         Select {v.name}: <span className="text-red-500">*</span>
                                     </h4>
                                     <div className="flex flex-wrap gap-3">
@@ -319,14 +319,14 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <div className="flex border-2 border-gray-200 rounded-2xl overflow-hidden h-14 bg-gray-50/50 shadow-inner">
                             <button
                                 onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                                className="px-5 hover:bg-white text-slate-400 hover:text-red-500 transition-colors flex items-center justify-center active:scale-90"
+                                className="px-5 hover:bg-white text-slate-800 hover:text-red-500 transition-colors flex items-center justify-center active:scale-90"
                             >
                                 <Minus className="w-4 h-4" strokeWidth={3} />
                             </button>
                             <input type="number" value={quantity} readOnly className="w-14 text-center text-sm font-black focus:outline-none bg-transparent text-slate-900 font-sans" />
                             <button
                                 onClick={() => setQuantity(q => q + 1)}
-                                className="px-5 hover:bg-white text-slate-400 hover:text-red-500 transition-colors flex items-center justify-center active:scale-90"
+                                className="px-5 hover:bg-white text-slate-800 hover:text-red-500 transition-colors flex items-center justify-center active:scale-90"
                             >
                                 <Plus className="w-4 h-4" strokeWidth={3} />
                             </button>
@@ -447,14 +447,14 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                         <tbody>
                                             {product.attributes.map((attr, i) => (
                                                 <tr key={i} className="border-b border-gray-50 last:border-0 hover:bg-gray-50/50 transition-colors">
-                                                    <td className="py-4 md:py-5 px-4 md:px-8 text-[11px] md:text-[13px] font-black text-gray-400 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
+                                                    <td className="py-4 md:py-5 px-4 md:px-8 text-[11px] md:text-[13px] font-black text-gray-800 uppercase tracking-widest bg-gray-50/30 w-1/3">{attr.name || attr.label}</td>
                                                     <td className="py-4 md:py-5 px-4 md:px-8 text-xs md:text-sm font-bold text-slate-800 font-sans">{attr.value}</td>
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
                                 ) : (
-                                    <div className="p-10 text-center text-gray-400 italic font-medium">No detailed specifications available.</div>
+                                    <div className="p-10 text-center text-gray-800 italic font-medium">No detailed specifications available.</div>
                                 )}
                             </div>
                         </div>
@@ -520,7 +520,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                 <div className="mt-6 pt-4 border-t border-gray-100 flex items-center gap-6">
                                                     <button
                                                         onClick={() => toggleLike(r.id)}
-                                                        className="flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors group/like"
+                                                        className="flex items-center gap-2 text-slate-800 hover:text-red-500 transition-colors group/like"
                                                     >
                                                         <Heart className="w-4 h-4 group-hover/like:fill-red-500" />
                                                         <span className="text-[13px] font-black uppercase tracking-widest">{r.likes_count} Helpful</span>
@@ -530,7 +530,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                         )) : (
                                             <div className="text-center py-20 bg-gray-50/30 rounded-[3rem] border-2 border-dashed border-gray-100">
                                                 <MessageCircle className="w-12 h-12 text-gray-200 mx-auto mb-4" />
-                                                <p className="text-sm font-black text-gray-400 uppercase tracking-widest">No reviews yet. Be the first to share!</p>
+                                                <p className="text-sm font-black text-gray-800 uppercase tracking-widest">No reviews yet. Be the first to share!</p>
                                             </div>
                                         )}
                                     </div>
@@ -579,7 +579,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                     className="border-4 border-dashed border-red-500/20 rounded-3xl md:rounded-[2rem] p-6 md:p-8 text-center cursor-pointer hover:bg-red-50 hover:border-red-500 transition-all group relative overflow-hidden"
                                                 >
                                                     <ImageIcon className="w-6 h-6 md:w-8 md:h-8 text-red-200 mx-auto mb-2 group-hover:text-red-500 transition-all" />
-                                                    <span className="text-[11px] md:text-[13px] text-slate-400 font-black uppercase tracking-widest group-hover:text-red-500">ছবির অ্যালবাম যুক্ত করুন</span>
+                                                    <span className="text-[11px] md:text-[13px] text-slate-800 font-black uppercase tracking-widest group-hover:text-red-500">ছবির অ্যালবাম যুক্ত করুন</span>
                                                     <p className="text-[9px] text-red-300 mt-2 uppercase font-black tracking-widest">Max 5 photos, 5MB each</p>
                                                 </div>
 

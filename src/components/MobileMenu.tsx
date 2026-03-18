@@ -71,13 +71,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <div className="flex border-b border-gray-100 bg-gray-50/30">
                     <button
                         onClick={() => setActiveTab("menu")}
-                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "menu" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-400 hover:text-gray-600 border-b-[3px] border-transparent"}`}
+                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "menu" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-800 hover:text-gray-600 border-b-[3px] border-transparent"}`}
                     >
                         Menu
                     </button>
                     <button
                         onClick={() => setActiveTab("categories")}
-                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "categories" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-400 hover:text-gray-600 border-b-[3px] border-transparent"}`}
+                        className={`flex-1 py-3.5 text-[11px] font-black tracking-widest uppercase transition-colors ${activeTab === "categories" ? "text-red-500 border-b-[3px] border-red-500 bg-white" : "text-gray-800 hover:text-gray-600 border-b-[3px] border-transparent"}`}
                     >
                         Categories
                     </button>
@@ -176,7 +176,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                                                         key={child.id}
                                                                         href={`/shop?category=${child.slug}`}
                                                                         onClick={onClose}
-                                                                        className="flex items-center px-3 py-1.5 rounded-lg hover:bg-gray-50 text-[11px] font-medium text-slate-400 hover:text-red-400 transition-all"
+                                                                        className="flex items-center px-3 py-1.5 rounded-lg hover:bg-gray-50 text-[11px] font-medium text-slate-800 hover:text-red-400 transition-all"
                                                                     >
                                                                         {child.name}
                                                                     </Link>
@@ -199,7 +199,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <Link href="/login" onClick={onClose} className="w-full bg-slate-900 text-white font-black h-12 rounded-xl flex items-center justify-center text-xs uppercase tracking-widest mb-3">
                         Log In
                     </Link>
-                    <p className="text-[9px] text-gray-400 font-bold uppercase text-center tracking-tighter">
+                    <p className="text-[9px] text-gray-800 font-bold uppercase text-center tracking-tighter">
                         &copy; 2026 Alinggon. Premium Quality.
                     </p>
                 </div>

@@ -85,7 +85,7 @@ export default function LandingPage() {
                             <div className="flex -space-x-3">
                                 {[1, 2, 3].map(i => <div key={i} className={`w-8 h-8 rounded-full border-2 border-white bg-slate-${200 + i * 100}`}></div>)}
                             </div>
-                            <span className="text-[13px] font-black text-slate-400 uppercase tracking-widest mt-1">৫,০০০+ সফল ডেলিভারি</span>
+                            <span className="text-[13px] font-black text-slate-800 uppercase tracking-widest mt-1">৫,০০০+ সফল ডেলিভারি</span>
                         </div>
                         <div className="flex items-center gap-1.5 px-3 py-1 bg-yellow-50 rounded-xl border border-yellow-100">
                             <Star className="w-4 h-4 text-yellow-500 fill-current" />
@@ -119,7 +119,7 @@ export default function LandingPage() {
                         Special Pricing Event
                     </div>
                     <div className="bg-white/5 backdrop-blur-3xl rounded-[3rem] border border-white/10 p-12 md:p-20 shadow-2xl">
-                        <p className="text-gray-400 font-bold uppercase text-xs tracking-[0.3em] mb-6">Regular Value <span className="line-through decoration-red-400 font-sans mx-2">১,৫৯০ ৳</span></p>
+                        <p className="text-gray-800 font-bold uppercase text-xs tracking-[0.3em] mb-6">Regular Value <span className="line-through decoration-red-400 font-sans mx-2">১,৫৯০ ৳</span></p>
                         <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none">
                             মাত্র <span className="text-red-400 font-sans">১,০৯০</span> টাকা
                         </h2>

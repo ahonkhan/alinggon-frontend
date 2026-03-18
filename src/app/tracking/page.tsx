@@ -32,7 +32,7 @@ export default function TrackingPage() {
                     <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase mb-4">
                         Track Your <span className="text-red-500">Order</span>
                     </h1>
-                    <p className="text-[11px] uppercase font-black tracking-widest text-slate-400 max-w-md mx-auto leading-relaxed">
+                    <p className="text-[11px] uppercase font-black tracking-widest text-slate-800 max-w-md mx-auto leading-relaxed">
                         Enter your phone number to track your latest order in real-time
                     </p>
                 </div>
@@ -101,7 +101,7 @@ export default function TrackingPage() {
                                 <div>
                                     <h3 className="text-2xl font-black tracking-tighter uppercase mb-2">Order Tracking Results</h3>
                                     <div className="flex items-center gap-4 mt-2">
-                                        <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-400 uppercase tracking-widest">
+                                        <span className="flex items-center gap-1.5 text-[13px] font-black text-slate-800 uppercase tracking-widest">
                                             <Calendar className="w-3.5 h-3.5" />
                                             {new Date(data.order.created_at).toLocaleDateString()}
                                         </span>
@@ -125,7 +125,7 @@ export default function TrackingPage() {
                                             <UserIcon className="w-4 h-4 text-red-400" />
                                         </div>
                                         <div>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">Customer</p>
+                                            <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest mb-1">Customer</p>
                                             <p className="text-xs font-black uppercase">{data.order.customer_name}</p>
                                         </div>
                                     </div>
@@ -134,13 +134,13 @@ export default function TrackingPage() {
                                             <MapPin className="w-4 h-4 text-red-400" />
                                         </div>
                                         <div>
-                                            <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-1">Shipping Address</p>
+                                            <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest mb-1">Shipping Address</p>
                                             <p className="text-xs font-bold text-slate-300 italic line-clamp-2">{data.order.shipping_address}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="bg-white/5 rounded-3xl p-6 border border-white/10">
-                                    <p className="text-[13px] font-black text-slate-400 uppercase tracking-widest mb-4">Live Status</p>
+                                    <p className="text-[13px] font-black text-slate-800 uppercase tracking-widest mb-4">Live Status</p>
                                     <div className="flex items-center gap-4">
                                         <div className={`p-4 rounded-2xl ${statusConfig[data.order.order_status]?.bg || 'bg-white/10'}`}>
                                             {(() => {
@@ -150,7 +150,7 @@ export default function TrackingPage() {
                                         </div>
                                         <div>
                                             <h4 className="text-xl font-black uppercase tracking-tight">{statusConfig[data.order.order_status]?.label}</h4>
-                                            <p className="text-[13px] font-bold text-slate-400 mt-1 uppercase">Updated: {new Date(data.order.updated_at).toLocaleTimeString()}</p>
+                                            <p className="text-[13px] font-bold text-slate-800 mt-1 uppercase">Updated: {new Date(data.order.updated_at).toLocaleTimeString()}</p>
                                         </div>
                                     </div>
                                 </div>
