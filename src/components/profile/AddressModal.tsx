@@ -68,7 +68,7 @@ export default function AddressModal({ address, isOpen, onClose }: AddressModalP
                 <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                     <div>
                         <h2 className="text-2xl font-black text-slate-900 tracking-tighter uppercase">{address ? 'Edit Address' : 'Add New Address'}</h2>
-                        <p className="text-[10px] font-black text-gray-800 uppercase tracking-[0.2em] mt-1">Provide your delivery details</p>
+                        <p className="text-[12px] font-black text-gray-800 uppercase tracking-[0.2em] mt-1">Provide your delivery details</p>
                     </div>
                     <button onClick={onClose} className="p-3 hover:bg-white rounded-2xl transition-colors text-gray-800 hover:text-red-500 shadow-sm border border-transparent hover:border-red-100">
                         <X className="w-6 h-6" />
@@ -80,14 +80,14 @@ export default function AddressModal({ address, isOpen, onClose }: AddressModalP
                         <button
                             type="button"
                             onClick={() => setType('home')}
-                            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest transition-all ${type === 'home' ? 'bg-white text-red-400 shadow-sm' : 'text-gray-800 hover:text-gray-600'}`}
+                            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[1.2rem] text-[12px] font-black uppercase tracking-widest transition-all ${type === 'home' ? 'bg-white text-red-400 shadow-sm' : 'text-gray-800 hover:text-gray-600'}`}
                         >
                             <Home className="w-4 h-4" /> Home
                         </button>
                         <button
                             type="button"
                             onClick={() => setType('office')}
-                            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[1.2rem] text-[10px] font-black uppercase tracking-widest transition-all ${type === 'office' ? 'bg-white text-red-400 shadow-sm' : 'text-gray-800 hover:text-gray-600'}`}
+                            className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-[1.2rem] text-[12px] font-black uppercase tracking-widest transition-all ${type === 'office' ? 'bg-white text-red-400 shadow-sm' : 'text-gray-800 hover:text-gray-600'}`}
                         >
                             <Building2 className="w-4 h-4" /> Office
                         </button>

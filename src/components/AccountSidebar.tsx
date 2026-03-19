@@ -59,7 +59,7 @@ export default function AccountSidebar() {
                                 href={item.href}
                                 className={`flex items-center gap-4 px-6 py-4 rounded-2xl text-xs font-black transition-all group ${isActive
                                     ? "bg-slate-900 text-white shadow-xl shadow-slate-200"
-                                    : "text-slate-500 hover:bg-red-50 hover:text-red-500"
+                                    : "text-slate-700 hover:bg-red-50 hover:text-red-500"
                                     }`}
                             >
                                 <item.icon className="w-4 h-4" />

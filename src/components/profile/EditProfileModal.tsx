@@ -49,7 +49,7 @@ export default function EditProfileModal({ user, isOpen, onClose }: EditProfileM
                 <div className="p-8 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                     <div>
                         <h2 className="text-2xl font-black text-slate-900 tracking-tighter uppercase">Edit Profile</h2>
-                        <p className="text-[10px] font-black text-gray-800 uppercase tracking-[0.2em] mt-1">Update your account info</p>
+                        <p className="text-[12px] font-black text-gray-800 uppercase tracking-[0.2em] mt-1">Update your account info</p>
                     </div>
                     <button onClick={onClose} className="p-3 hover:bg-white rounded-2xl transition-colors text-gray-800 hover:text-red-500 shadow-sm border border-transparent hover:border-red-100">
                         <X className="w-6 h-6" />

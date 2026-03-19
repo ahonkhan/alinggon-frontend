@@ -103,7 +103,7 @@ export default function Profile() {
                             <div className="flex-1 space-y-8">
                                 <div className="space-y-2">
                                     <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase">{user.name}</h1>
-                                    <p className="text-gray-800 font-bold uppercase text-[10px] tracking-[0.2em]">{user.email}</p>
+                                    <p className="text-gray-800 font-bold uppercase text-[12px] tracking-[0.2em]">{user.email}</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -120,13 +120,13 @@ export default function Profile() {
                                         <div className="flex justify-center md:justify-start gap-3">
                                             <button
                                                 onClick={() => setActiveSection('addresses')}
-                                                className="text-[10px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
+                                                className="text-[12px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
                                             >
                                                 My Addresses <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                                             </button>
                                             <Link
                                                 href="/wishlist"
-                                                className="text-[10px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
+                                                className="text-[12px] font-black text-red-400 hover:text-slate-900 flex items-center gap-1 group transition-colors uppercase tracking-[0.1em]"
                                             >
                                                 Wishlist <Heart className="w-3 h-3 group-hover:scale-110 transition-transform" />
                                             </Link>
@@ -137,7 +137,7 @@ export default function Profile() {
                                 <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
                                     <button
                                         onClick={() => setIsEditModalOpen(true)}
-                                        className="bg-red-400 hover:bg-slate-900 text-white font-black px-8 py-3.5 rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-xl shadow-red-200/50 flex items-center gap-2 active:scale-95"
+                                        className="bg-red-400 hover:bg-slate-900 text-white font-black px-8 py-3.5 rounded-2xl text-[12px] uppercase tracking-widest transition-all shadow-xl shadow-red-200/50 flex items-center gap-2 active:scale-95"
                                     >
                                         <Edit3 className="w-4 h-4" /> Edit Profile
                                     </button>
@@ -146,7 +146,7 @@ export default function Profile() {
                                             logout();
                                             router.push("/");
                                         }}
-                                        className="bg-white border-2 border-slate-100 hover:border-red-400 hover:text-red-400 text-slate-800 font-black px-8 py-3.5 rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-sm flex items-center gap-2 active:scale-95"
+                                        className="bg-white border-2 border-slate-100 hover:border-red-400 hover:text-red-400 text-slate-800 font-black px-8 py-3.5 rounded-2xl text-[12px] uppercase tracking-widest transition-all shadow-sm flex items-center gap-2 active:scale-95"
                                     >
                                         <LogOut className="w-4 h-4" /> Sign Out
                                     </button>
@@ -181,7 +181,7 @@ export default function Profile() {
                                         <Heart className="w-7 h-7" />
                                     </div>
                                     <h3 className="text-sm font-black text-slate-800 uppercase tracking-widest">My Wishlist</h3>
-                                    <p className="text-[10px] font-bold text-gray-800 uppercase tracking-widest mt-1">Saved products for later</p>
+                                    <p className="text-[12px] font-bold text-gray-800 uppercase tracking-widest mt-1">Saved products for later</p>
                                 </Link>
 
                                 <div onClick={() => setActiveSection('addresses')} className="bg-white rounded-[2rem] border border-gray-100 p-8 shadow-xl shadow-slate-200/30 group hover:border-red-400 transition-colors cursor-pointer">
@@ -189,7 +189,7 @@ export default function Profile() {
                                         <MapPin className="w-7 h-7" />
                                     </div>
                                     <h3 className="text-sm font-black text-slate-800 uppercase tracking-widest">Saved Addresses</h3>
-                                    <p className="text-[10px] font-bold text-gray-800 uppercase tracking-widest mt-1">Manage delivery locations</p>
+                                    <p className="text-[12px] font-bold text-gray-800 uppercase tracking-widest mt-1">Manage delivery locations</p>
                                 </div>
 
                                 <Link href="/support" className="bg-slate-900 rounded-[2rem] p-8 shadow-xl shadow-slate-400/20 group hover:bg-slate-800 transition-colors">
@@ -200,7 +200,7 @@ export default function Profile() {
                                         <h3 className="text-xs font-black text-white uppercase tracking-widest">Support</h3>
                                     </div>
                                     <div className="flex justify-between items-center bg-white/5 rounded-2xl p-4">
-                                        <span className="text-[10px] font-black text-white/50 uppercase tracking-widest">Open Tickets</span>
+                                        <span className="text-[12px] font-black text-white/50 uppercase tracking-widest">Open Tickets</span>
                                         <span className="text-lg font-black text-red-400">{statsLoading ? "..." : stats?.active_tickets || 0}</span>
                                     </div>
                                 </Link>
@@ -237,7 +237,7 @@ function TabButton({ active, onClick, label, icon: Icon }: any) {
     return (
         <button
             onClick={onClick}
-            className={`flex items-center gap-3 px-8 py-4 rounded-[1.5rem] text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap active:scale-95 ${active ? 'bg-slate-900 text-white shadow-xl shadow-slate-300' : 'bg-transparent text-slate-800 hover:bg-gray-50'}`}
+            className={`flex items-center gap-3 px-8 py-4 rounded-[1.5rem] text-[12px] font-black uppercase tracking-widest transition-all whitespace-nowrap active:scale-95 ${active ? 'bg-slate-900 text-white shadow-xl shadow-slate-300' : 'bg-transparent text-slate-800 hover:bg-gray-50'}`}
         >
             <Icon className={`w-4 h-4 ${active ? 'text-red-400' : 'text-gray-300'}`} />
             {label}

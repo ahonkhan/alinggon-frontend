@@ -82,7 +82,7 @@ export default function FloatingActionButtons() {
                     ) : (
                         <MessageCircle className="w-7 h-7 text-white fill-current animate-in fade-in zoom-in duration-300" />
                     )}
-                    
+
                     {!isHelpOpen && (
                         <span className="absolute -top-1 -right-1 flex h-4 w-4">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -94,8 +94,8 @@ export default function FloatingActionButtons() {
                 {/* Vertical Menu Items */}
                 {isHelpOpen && (
                     <div className="flex flex-col gap-3 animate-in slide-in-from-bottom-10 fade-in duration-500 ease-out">
-                         {/* Call Option */}
-                         <a
+                        {/* Call Option */}
+                        <a
                             href={`tel:${contactPhone}`}
                             className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-red-100 group hover:bg-red-50 transition-all hover:translate-x-2"
                         >
@@ -103,7 +103,7 @@ export default function FloatingActionButtons() {
                                 <Phone className="w-5 h-5" />
                             </div>
                             <div className="flex flex-col min-w-[120px]">
-                                <span className="text-[10px] font-black text-red-600 uppercase tracking-widest leading-none text-left">Direct Call</span>
+                                <span className="text-[12px] font-black text-red-600 uppercase tracking-widest leading-none text-left">Direct Call</span>
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">{contactPhone}</span>
                             </div>
                         </a>
@@ -119,7 +119,7 @@ export default function FloatingActionButtons() {
                                 <MessageCircle className="w-5 h-5 fill-current" />
                             </div>
                             <div className="flex flex-col min-w-[120px]">
-                                <span className="text-[10px] font-black text-green-600 uppercase tracking-widest leading-none text-left">WhatsApp</span>
+                                <span className="text-[12px] font-black text-green-600 uppercase tracking-widest leading-none text-left">WhatsApp</span>
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">Chat with us</span>
                             </div>
                         </a>
@@ -135,7 +135,7 @@ export default function FloatingActionButtons() {
                                 <MessageSquare className="w-5 h-5" />
                             </div>
                             <div className="flex flex-col min-w-[120px]">
-                                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest leading-none text-left">Messenger</span>
+                                <span className="text-[12px] font-black text-blue-600 uppercase tracking-widest leading-none text-left">Messenger</span>
                                 <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">FB Messenger</span>
                             </div>
                         </a>
@@ -152,7 +152,7 @@ export default function FloatingActionButtons() {
                         aria-label="Show Offer"
                     >
                         <Gift className="w-6 h-6 text-red-600 group-hover:rotate-12 transition-transform" />
-                   
+
                     </button>
                 </div>
             )}

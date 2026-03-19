@@ -72,7 +72,7 @@ const CreateTicketModal: React.FC = () => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-red-400/5 rounded-full blur-2xl -mr-16 -mt-16"></div>
                     <div className="relative z-10 text-left">
                         <h2 className="text-2xl font-black text-slate-900 tracking-tighter uppercase">Open New Ticket</h2>
-                        <p className="text-[10px] font-bold text-gray-800 uppercase tracking-[0.2em] mt-1">Briefly describe your request</p>
+                        <p className="text-[12px] font-bold text-gray-800 uppercase tracking-[0.2em] mt-1">Briefly describe your request</p>
                     </div>
                     <button onClick={onClose} className="relative z-10 p-3 bg-white hover:bg-slate-900 hover:text-white rounded-2xl transition-all shadow-sm group">
                         <X className="w-5 h-5 text-gray-800 group-hover:text-white" />
@@ -81,7 +81,7 @@ const CreateTicketModal: React.FC = () => {
 
                 <form onSubmit={handleSubmit} className="p-8 space-y-6">
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-800 uppercase tracking-widest ml-1">Subject of inquiry</label>
+                        <label className="text-[12px] font-black text-slate-800 uppercase tracking-widest ml-1">Subject of inquiry</label>
                         <input
                             type="text"
                             value={subject}
@@ -94,7 +94,7 @@ const CreateTicketModal: React.FC = () => {
 
                     <div className="grid grid-cols-1 gap-4">
                         <div className="space-y-2">
-                            <label className="text-[10px] font-black text-slate-800 uppercase tracking-widest ml-1">Urgency Level</label>
+                            <label className="text-[12px] font-black text-slate-800 uppercase tracking-widest ml-1">Urgency Level</label>
                             <div className="relative">
                                 <select
                                     value={priority}
@@ -113,7 +113,7 @@ const CreateTicketModal: React.FC = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-800 uppercase tracking-widest ml-1">Detailed Description</label>
+                        <label className="text-[12px] font-black text-slate-800 uppercase tracking-widest ml-1">Detailed Description</label>
                         <textarea
                             rows={4}
                             value={message}
@@ -125,9 +125,9 @@ const CreateTicketModal: React.FC = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-800 uppercase tracking-widest ml-1">Relevant Screenshots</label>
+                        <label className="text-[12px] font-black text-slate-800 uppercase tracking-widest ml-1">Relevant Screenshots</label>
                         <div className="flex flex-wrap items-center gap-4">
-                            <label className="cursor-pointer flex items-center gap-3 px-6 py-3 bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all text-slate-600 text-[10px] font-black uppercase tracking-widest border border-slate-200 active:scale-95">
+                            <label className="cursor-pointer flex items-center gap-3 px-6 py-3 bg-slate-50 hover:bg-slate-100 rounded-2xl transition-all text-slate-600 text-[12px] font-black uppercase tracking-widest border border-slate-200 active:scale-95">
                                 <Paperclip className="w-4 h-4 text-slate-900" />
                                 {attachment ? 'Change Image' : 'Attach Photo'}
                                 <input type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
@@ -155,14 +155,14 @@ const CreateTicketModal: React.FC = () => {
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 px-8 py-4 rounded-2xl border border-gray-200 font-black text-[10px] text-slate-800 uppercase tracking-widest hover:bg-gray-50 transition-colors"
+                            className="flex-1 px-8 py-4 rounded-2xl border border-gray-200 font-black text-[12px] text-slate-800 uppercase tracking-widest hover:bg-gray-50 transition-colors"
                         >
                             Dismiss
                         </button>
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="flex-[2] bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-slate-200 disabled:opacity-50 active:scale-95"
+                            className="flex-[2] bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-[12px] uppercase tracking-[0.2em] hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-2xl shadow-slate-200 disabled:opacity-50 active:scale-95"
                         >
                             {isLoading ? (
                                 <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>

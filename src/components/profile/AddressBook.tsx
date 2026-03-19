@@ -44,13 +44,13 @@ export default function AddressBook() {
                     </div>
                     <div>
                         <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">My Addresses</h3>
-                        <p className="text-[10px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Manage your shipping locations</p>
+                        <p className="text-[12px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Manage your shipping locations</p>
                     </div>
                 </div>
 
                 <button
                     onClick={handleAdd}
-                    className="flex items-center gap-2 bg-slate-900 hover:bg-red-400 text-white font-black px-6 py-4 rounded-2xl text-[10px] uppercase tracking-widest transition-all shadow-lg active:scale-95"
+                    className="flex items-center gap-2 bg-slate-900 hover:bg-red-400 text-white font-black px-6 py-4 rounded-2xl text-[12px] uppercase tracking-widest transition-all shadow-lg active:scale-95"
                 >
                     <Plus className="w-4 h-4" /> Add New Address
                 </button>
@@ -74,7 +74,7 @@ export default function AddressBook() {
                                     <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-900 shadow-sm">
                                         {addr.type === 'home' ? <Home className="w-5 h-5" /> : <Building2 className="w-5 h-5" />}
                                     </div>
-                                    <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest">{addr.type}</span>
+                                    <span className="text-[12px] font-black text-slate-900 uppercase tracking-widest">{addr.type}</span>
                                     {addr.is_default && (
                                         <div className="bg-red-400 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
                                             <Star className="w-2 h-2 fill-white" /> Default
@@ -100,7 +100,7 @@ export default function AddressBook() {
                             <p className="text-sm font-bold text-slate-600 leading-relaxed uppercase tracking-tight mb-2">
                                 {addr.address}
                             </p>
-                            <div className="text-[10px] font-black text-gray-800 uppercase tracking-widest">
+                            <div className="text-[12px] font-black text-gray-800 uppercase tracking-widest">
                                 {addr.city}{addr.state ? `, ${addr.state}` : ''} {addr.zip_code}
                             </div>
                         </div>

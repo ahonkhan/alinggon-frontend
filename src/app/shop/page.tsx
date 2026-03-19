@@ -115,7 +115,7 @@ function ShopContent() {
                         {!showAllOption && upCategory && (
                             <li
                                 onClick={() => { handleCategoryChange(upCategory === "All" ? "All" : upCategory.slug); setIsFilterOpen(false); }}
-                                className="flex items-center gap-2 px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all text-slate-500 hover:bg-red-50 hover:text-red-400 mb-2"
+                                className="flex items-center gap-2 px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all text-slate-700 hover:bg-red-50 hover:text-red-400 mb-2"
                             >
                                 <ChevronLeft className="w-4 h-4" /> Go Back
                             </li>
@@ -163,7 +163,7 @@ function ShopContent() {
                             }}
                             className={`flex items-center justify-between px-4 py-3 rounded-2xl cursor-pointer transition-all border ${!brandFilter
                                 ? "bg-red-500 text-white border-red-500 shadow-lg shadow-red-200"
-                                : "text-slate-500 border-transparent hover:bg-gray-50"}`}
+                                : "text-slate-700 border-transparent hover:bg-gray-50"}`}
                         >
                             <span className="text-[13px] font-black uppercase tracking-widest">All Brands</span>
                             <ChevronRight className={`w-3 h-3 ${!brandFilter ? "text-white" : "text-gray-300"}`} />
@@ -180,7 +180,7 @@ function ShopContent() {
                                 }}
                                 className={`flex items-center justify-between px-4 py-3 rounded-2xl cursor-pointer transition-all border ${brandFilter === (brand.slug || brand.id.toString())
                                     ? "bg-red-500 text-white border-red-500 shadow-lg shadow-red-200"
-                                    : "text-slate-500 border-transparent hover:bg-gray-50"}`}
+                                    : "text-slate-700 border-transparent hover:bg-gray-50"}`}
                             >
                                 <span className="text-[13px] font-black uppercase tracking-widest">{brand.name}</span>
                                 <ChevronRight className={`w-3 h-3 ${brandFilter === (brand.slug || brand.id.toString()) ? "text-white" : "text-gray-300"}`} />
@@ -456,7 +456,7 @@ function CategoryItem({ label, count, isActive, onClick }: any) {
     return (
         <li
             onClick={onClick}
-            className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all ${isActive ? "bg-red-400 text-white shadow-xl shadow-red-100/50" : "text-slate-500 hover:bg-gray-50 hover:text-red-400"
+            className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all ${isActive ? "bg-red-400 text-white shadow-xl shadow-red-100/50" : "text-slate-700 hover:bg-gray-50 hover:text-red-400"
                 }`}>
             <span>{label}</span>
             <span className={`px-2 py-0.5 rounded-lg text-[8px] ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-800"}`}>{count}</span>

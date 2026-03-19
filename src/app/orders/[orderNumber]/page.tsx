@@ -33,7 +33,7 @@ export default function OrderDetailsPage() {
             <div className="min-h-screen flex flex-col items-center justify-center p-4">
                 <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
                 <h1 className="text-2xl font-black text-slate-800 uppercase mb-2">Order Not Found</h1>
-                <p className="text-slate-500 mb-6">We couldn't find the order you're looking for.</p>
+                <p className="text-slate-700 mb-6">We couldn't find the order you're looking for.</p>
                 <Link href="/" className="bg-slate-900 text-white px-8 py-3 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-red-500 transition-colors">
                     Back to Shopping
                 </Link>
@@ -50,7 +50,7 @@ export default function OrderDetailsPage() {
         'delivered': { icon: CheckCircle2, color: 'text-green-500', label: 'Delivered' },
         'cancelled': { icon: AlertCircle, color: 'text-red-500', label: 'Cancelled' },
         'ready_delivery': { icon: Package, color: 'text-cyan-500', label: 'Ready for Delivery' },
-        'on_hold': { icon: Clock, color: 'text-slate-500', label: 'On Hold' },
+        'on_hold': { icon: Clock, color: 'text-slate-700', label: 'On Hold' },
         'follow_up': { icon: Phone, color: 'text-indigo-500', label: 'Follow Up' },
         'call_not_received': { icon: Phone, color: 'text-orange-500', label: 'Call Not Received' },
     };
@@ -222,7 +222,7 @@ export default function OrderDetailsPage() {
                                     <MapPin className="w-4 h-4 text-red-500" />
                                     <h3 className="text-[13px] font-black text-slate-900 uppercase tracking-widest">Shipping Address</h3>
                                 </div>
-                                <p className="text-[11px] font-bold text-slate-500 leading-relaxed italic">
+                                <p className="text-[11px] font-bold text-slate-700 leading-relaxed italic">
                                     {order.shipping_address}
                                 </p>
                             </div>

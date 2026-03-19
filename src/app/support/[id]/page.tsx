@@ -14,7 +14,7 @@ export default function TicketDetailsPage() {
         <div className="min-h-screen bg-gray-50/50 pt-8 pb-8">
             <div className="container mx-auto px-4 max-w-4xl">
                 <div className="mb-12">
-                    <Link href="/support" className="flex items-center gap-2 text-gray-800 font-bold uppercase text-[10px] tracking-widest hover:text-slate-900 transition-colors mb-6 inline-flex group">
+                    <Link href="/support" className="flex items-center gap-2 text-gray-800 font-bold uppercase text-[12px] tracking-widest hover:text-slate-900 transition-colors mb-6 inline-flex group">
                         <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Back to Support Center
                     </Link>
                     <div className="flex items-center gap-4">

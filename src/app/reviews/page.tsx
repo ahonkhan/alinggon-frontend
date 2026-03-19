@@ -104,14 +104,14 @@ export default function ReviewsPage() {
                             onClick={() => setIsModalOpen(false)}
                             className="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-red-500 hover:text-white rounded-2xl transition-all duration-300 z-[101] shadow-sm group"
                         >
-                            <X className="w-5 h-5 text-slate-500 group-hover:text-white transition-colors" />
+                            <X className="w-5 h-5 text-slate-700 group-hover:text-white transition-colors" />
                         </button>
 
 
                         <div className="p-8 md:p-12">
                             <div className="text-center mb-8">
                                 <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Write Your Review</h3>
-                                <p className="text-slate-500 font-medium text-sm mt-2">Share your experience with the Alinggon community</p>
+                                <p className="text-slate-700 font-medium text-sm mt-2">Share your experience with the Alinggon community</p>
                             </div>
 
                             <form onSubmit={handleSubmit} className="space-y-6">
@@ -126,10 +126,10 @@ export default function ReviewsPage() {
                                             <ImageIcon className="w-8 h-8 text-slate-300 group-hover:text-red-400" />
                                         )}
                                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                            <span className="text-white text-[10px] font-black uppercase tracking-widest">Change</span>
+                                            <span className="text-white text-[12px] font-black uppercase tracking-widest">Change</span>
                                         </div>
                                     </div>
-                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-800 mt-2">Your Photo</span>
+                                    <span className="text-[12px] font-black uppercase tracking-widest text-slate-800 mt-2">Your Photo</span>
                                     <input type="file" ref={avatarInputRef} className="hidden" accept="image/*" onChange={handleAvatarChange} />
                                 </div>
 
@@ -275,7 +275,7 @@ export default function ReviewsPage() {
                         <br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">REVIEWS</span>
                     </h1>
-                    <p className="max-w-xl text-slate-500 text-sm md:text-base font-medium leading-relaxed opacity-80 uppercase tracking-widest px-4 md:px-0">
+                    <p className="max-w-xl text-slate-700 text-sm md:text-base font-medium leading-relaxed opacity-80 uppercase tracking-widest px-4 md:px-0">
                         Real stories from real travelers who chose <span className="font-black text-slate-900">Alinggon</span> for their curated lifestyle needs.
                     </p>
                 </div>
@@ -385,7 +385,7 @@ export default function ReviewsPage() {
                             <div className="pt-2">
                                 <button
                                     onClick={() => setIsModalOpen(true)}
-                                    className="relative group/btn overflow-hidden bg-red-600 hover:bg-white text-white hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.3em] px-10 py-4 rounded-2xl transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(239,68,68,0.4)] active:scale-95"
+                                    className="relative group/btn overflow-hidden bg-red-600 hover:bg-white text-white hover:text-slate-900 font-black text-[12px] uppercase tracking-[0.3em] px-10 py-4 rounded-2xl transition-all duration-500 shadow-[0_15px_30px_-10px_rgba(239,68,68,0.4)] active:scale-95"
                                 >
                                     <span className="relative z-10">Write Your Review</span>
                                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>

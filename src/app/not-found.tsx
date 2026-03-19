@@ -30,7 +30,7 @@ export default function NotFound() {
                     <Link href="/" className="flex items-center justify-center gap-2 bg-slate-900 text-white font-black py-4 rounded-2xl text-[13px] uppercase tracking-widest hover:bg-red-400 transition-all active:scale-95">
                         <Home className="w-4 h-4" /> Go Home
                     </Link>
-                    <Link href="/shop" className="flex items-center justify-center gap-2 border-2 border-slate-100 text-slate-500 font-black py-4 rounded-2xl text-[13px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
+                    <Link href="/shop" className="flex items-center justify-center gap-2 border-2 border-slate-100 text-slate-700 font-black py-4 rounded-2xl text-[13px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
                         <Search className="w-4 h-4" /> Browse Shop
                     </Link>
                 </div>

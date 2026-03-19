@@ -71,7 +71,7 @@ export const AdminGalleryModal: React.FC = () => {
                             </div>
                             <div className="space-y-2">
                                 <h4 className="text-2xl font-black text-slate-900 uppercase tracking-tighter">Private Content</h4>
-                                <p className="text-slate-500 font-medium">Please enter the password provided by the admin to unlock this picture.</p>
+                                <p className="text-slate-700 font-medium">Please enter the password provided by the admin to unlock this picture.</p>
                             </div>
 
                             <form onSubmit={handleUnlock} className="space-y-4">

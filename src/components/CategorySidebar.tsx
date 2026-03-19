@@ -81,7 +81,7 @@ export default function CategorySidebar() {
                                                     <ul className="space-y-2 pl-4 border-l border-gray-50 ml-1">
                                                         {sub.children.map((item: any) => (
                                                             <li key={item.id}>
-                                                                <Link href={`/shop?category=${item.slug}`} className="text-xs text-slate-500 hover:text-red-500 font-medium block py-0.5 transition-colors">
+                                                                <Link href={`/shop?category=${item.slug}`} className="text-xs text-slate-700 hover:text-red-500 font-medium block py-0.5 transition-colors">
                                                                     {item.name}
                                                                 </Link>
                                                             </li>

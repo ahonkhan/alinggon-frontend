@@ -40,7 +40,7 @@ export default function TrackingPage() {
                 <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-sm border border-slate-100 mb-10">
                     <form onSubmit={handleTrack} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Order Number (Optional)</label>
+                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-700 ml-1">Order Number (Optional)</label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -54,7 +54,7 @@ export default function TrackingPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-500 ml-1">Phone Number</label>
+                            <label className="text-[13px] font-black uppercase tracking-widest text-slate-700 ml-1">Phone Number</label>
                             <div className="relative">
                                 <input
                                     type="tel" required

@@ -78,11 +78,11 @@ const TicketList: React.FC = () => {
                                     <h3 className="text-base font-black text-slate-900 uppercase tracking-tight group-hover:text-red-500 transition-colors">
                                         {ticket.subject}
                                     </h3>
-                                    <div className="flex flex-wrap items-center gap-3 mt-2 text-[10px] font-black uppercase tracking-widest">
+                                    <div className="flex flex-wrap items-center gap-3 mt-2 text-[12px] font-black uppercase tracking-widest">
                                         <span className={`px-3 py-1  rounded-lg border shadow-sm ${getStatusColor(ticket.status)}`}>
                                             {ticket.status}
                                         </span>
-                                        <span className="flex items-center gap-1.5 text-slate-500 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">
+                                        <span className="flex items-center gap-1.5 text-slate-700 bg-slate-50 px-3 py-1 rounded-lg border border-slate-100">
                                             {getPriorityIcon(ticket.priority)}
                                             {ticket.priority}
                                         </span>

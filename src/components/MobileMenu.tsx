@@ -160,7 +160,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                                                     onClose();
                                                                 }
                                                             }}
-                                                            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 text-xs font-bold text-slate-500 group transition-all"
+                                                            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-50 text-xs font-bold text-slate-700 group transition-all"
                                                         >
                                                             <span>{sub.name}</span>
                                                             {sub.children && sub.children.length > 0 && (

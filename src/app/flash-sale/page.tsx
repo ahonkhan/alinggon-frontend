@@ -111,7 +111,7 @@ export default function FlashSalePage() {
                                             <div className="bg-white/10 border-2 border-white/20 group-hover:border-red-500 w-16 h-16 md:w-24 md:h-24 flex items-center justify-center rounded-3xl transition-all duration-500">
                                                 <span className="text-2xl md:text-5xl font-black text-white tracking-tighter">{item.value.toString().padStart(2, '0')}</span>
                                             </div>
-                                            <span className="text-[13px] font-black uppercase text-slate-500 mt-4 tracking-widest group-hover:text-red-500 transition-colors">{item.label}</span>
+                                            <span className="text-[13px] font-black uppercase text-slate-700 mt-4 tracking-widest group-hover:text-red-500 transition-colors">{item.label}</span>
                                         </div>
                                     ))}
                                 </div>

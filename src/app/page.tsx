@@ -146,7 +146,7 @@ export default function Home() {
                       )}
                     </div>
                   </div>
-                  <h3 className="text-center text-xs font-black text-slate-500 tracking-widest uppercase group-hover:text-red-600 transition-colors line-clamp-1 px-1">{item.name}</h3>
+                  <h3 className="text-center text-xs font-black text-slate-700 tracking-widest uppercase group-hover:text-red-600 transition-colors line-clamp-1 px-1">{item.name}</h3>
                 </Link>
               </SwiperSlide>
             ))}

@@ -559,7 +559,7 @@ export default function AboutAdmin() {
                                     <>Experience <span className="text-red-600">Alinggon</span></>
                                 )}
                             </h2>
-                            <p className="text-slate-500 font-medium">
+                            <p className="text-slate-700 font-medium">
                                 {admin_settings.about_video_description || 'Watch our journey and learn more about how we serve our community.'}
                             </p>
                         </div>

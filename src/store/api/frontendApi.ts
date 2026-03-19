@@ -380,6 +380,27 @@ export const frontendApi = createApi({
             query: (orderNumber) => `/orders/${orderNumber}`,
             providesTags: (result, error, arg) => [{ type: 'Orders', id: arg }],
         }),
+        sendOtp: builder.mutation<any, { name: string, email?: string, phone?: string }>({
+            query: (data) => ({
+                url: '/register/send-otp',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        verifyOtp: builder.mutation<any, { identifier: string, type: 'email' | 'phone', otp: string }>({
+            query: (data) => ({
+                url: '/register/verify-otp',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        resendOtp: builder.mutation<any, { identifier: string, type: 'email' | 'phone' }>({
+            query: (data) => ({
+                url: '/register/resend-otp',
+                method: 'POST',
+                body: data,
+            }),
+        }),
         register: builder.mutation<any, any>({
             query: (data) => ({
                 url: '/register',
@@ -567,6 +588,9 @@ export const {
     usePlaceOrderMutation,
     useGetMyOrdersQuery,
     useGetOrderDetailsQuery,
+    useSendOtpMutation,
+    useVerifyOtpMutation,
+    useResendOtpMutation,
     useRegisterMutation,
     useLoginMutation,
     useTrackOrderQuery,

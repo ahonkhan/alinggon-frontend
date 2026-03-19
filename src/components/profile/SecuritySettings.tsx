@@ -37,7 +37,7 @@ export default function SecuritySettings() {
                 </div>
                 <div>
                     <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Security Settings</h3>
-                    <p className="text-[10px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Protect your account</p>
+                    <p className="text-[12px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Protect your account</p>
                 </div>
             </div>
 

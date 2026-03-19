@@ -68,7 +68,7 @@ export default function MyOrdersPage() {
                                 <ShoppingBag className="w-10 h-10 text-slate-200" />
                             </div>
                             <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight mb-2">No Orders Found</h3>
-                            <p className="text-sm font-medium text-slate-500 mb-8 max-w-xs uppercase">
+                            <p className="text-sm font-medium text-slate-700 mb-8 max-w-xs uppercase">
                                 It looks like you haven't placed any orders yet.
                             </p>
                             <Link href="/" className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.15em] hover:bg-red-500 transition-all shadow-xl active:scale-95">

@@ -42,7 +42,7 @@ export default function PreferenceSettings() {
                 </div>
                 <div>
                     <h3 className="text-xl font-black text-slate-800 uppercase tracking-tighter">Preferences</h3>
-                    <p className="text-[10px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Customize your experience</p>
+                    <p className="text-[12px] font-black text-gray-800 uppercase tracking-widest mt-0.5">Customize your experience</p>
                 </div>
             </div>
 
@@ -93,7 +93,7 @@ function PreferenceToggle({ icon: Icon, label, sub, isEnabled, onToggle, isLoadi
                 </div>
                 <div>
                     <h4 className="text-xs font-black text-slate-800 uppercase tracking-tight">{label}</h4>
-                    <p className="text-[10px] font-bold text-gray-800 uppercase tracking-widest mt-0.5">{sub}</p>
+                    <p className="text-[12px] font-bold text-gray-800 uppercase tracking-widest mt-0.5">{sub}</p>
                 </div>
             </div>
 

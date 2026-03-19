@@ -49,7 +49,7 @@ function SuccessContent() {
                             <Link href={`/orders/${orderId}`} className="flex items-center justify-center gap-3 bg-slate-900 text-white font-black py-5 rounded-2xl text-[13px] uppercase tracking-widest hover:bg-red-400 transition-all active:scale-95 shadow-xl">
                                 <Package className="w-4 h-4" /> View Order details
                             </Link>
-                            <button className="flex items-center justify-center gap-3 border-2 border-slate-100 text-slate-500 font-black py-5 rounded-2xl text-[13px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
+                            <button className="flex items-center justify-center gap-3 border-2 border-slate-100 text-slate-700 font-black py-5 rounded-2xl text-[13px] uppercase tracking-widest hover:border-red-400 hover:text-red-400 transition-all active:scale-95">
                                 <Download className="w-4 h-4" /> Download Invoice
                             </button>
                         </div>

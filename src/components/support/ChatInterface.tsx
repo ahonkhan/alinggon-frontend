@@ -79,12 +79,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ ticketId }) => {
                         <h3 className="text-lg font-black text-slate-900 leading-tight uppercase tracking-tight">{ticket?.subject}</h3>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-black text-gray-800 uppercase tracking-widest leading-none">Live Help Active</span>
+                            <span className="text-[12px] font-black text-gray-800 uppercase tracking-widest leading-none">Live Help Active</span>
                         </div>
                     </div>
                 </div>
                 <div className="relative z-10">
-                    <span className={`px-4 py-1.5 rounded-xl border-2 text-[10px] font-black uppercase tracking-widest shadow-sm ${ticket?.status === 'closed'
+                    <span className={`px-4 py-1.5 rounded-xl border-2 text-[12px] font-black uppercase tracking-widest shadow-sm ${ticket?.status === 'closed'
                         ? 'bg-gray-100 text-gray-500 border-gray-200'
                         : 'bg-green-50 text-green-700 border-green-200'
                         }`}>
@@ -101,8 +101,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ ticketId }) => {
                         <div key={msg.id} className={`flex ${isAdmin ? 'justify-start' : 'justify-end'}`}>
                             <div className={`flex flex-col max-w-[85%] ${isAdmin ? 'items-start' : 'items-end'}`}>
                                 <div className={`flex items-center gap-3 mb-2 px-2`}>
-                                    {!!isAdmin && <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">Support Expert</span>}
-                                    <span className="text-[10px] font-bold text-gray-800 uppercase tracking-widest">{format(new Date(msg.created_at), 'hh:mm a')}</span>
+                                    {!!isAdmin && <span className="text-[12px] font-black text-red-500 uppercase tracking-widest">Support Expert</span>}
+                                    <span className="text-[12px] font-bold text-gray-800 uppercase tracking-widest">{format(new Date(msg.created_at), 'hh:mm a')}</span>
                                 </div>
                                 <div className={`relative px-5 py-4 rounded-[1.5rem] shadow-md border ${isAdmin
                                     ? 'bg-slate-50 text-slate-800 rounded-tl-none border-slate-100'
@@ -152,7 +152,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ ticketId }) => {
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}
                             placeholder="Describe your issue here..."
-                            className="flex-1 bg-transparent border-none outline-none text-sm font-bold py-2 px-1 text-slate-700 placeholder:text-gray-300 placeholder:font-black placeholder:uppercase placeholder:tracking-widest placeholder:text-[10px]"
+                            className="flex-1 bg-transparent border-none outline-none text-sm font-bold py-2 px-1 text-slate-700 placeholder:text-gray-300 placeholder:font-black placeholder:uppercase placeholder:tracking-widest placeholder:text-[12px]"
                         />
                         <button
                             type="submit"
