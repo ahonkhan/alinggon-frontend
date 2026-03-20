@@ -15,13 +15,18 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useGetFeaturedProductsQuery, useGetCategoriesQuery, CategoryData, useGetHomeContentQuery } from "@/store/api/frontendApi";
+import HomeLoader from "@/components/HomeLoader";
 
 export default function Home() {
-  const { data: featuredData, isLoading } = useGetFeaturedProductsQuery();
+  const { data: featuredData, isLoading: featuredLoading } = useGetFeaturedProductsQuery();
   const { data: catData, isLoading: catLoading } = useGetCategoriesQuery();
   const { data: homeContent, isLoading: homeLoading } = useGetHomeContentQuery();
   const categories = catData?.data || [];
   const banners = homeContent?.data.banners || [];
+
+  if (featuredLoading || catLoading || homeLoading) {
+    return <HomeLoader />;
+  }
 
   return (
     <div className="bg-gray-50/50">
@@ -38,11 +43,7 @@ export default function Home() {
           {/* Main Slider - 7 Columns */}
           <div className="col-span-1 lg:col-span-7">
             <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
-              {homeLoading ? (
-                <div className="w-full h-[380px] bg-slate-200 animate-pulse flex items-center justify-center">
-                  <div className="w-12 h-12 border-4 border-slate-300 border-t-red-400 rounded-full animate-spin"></div>
-                </div>
-              ) : banners.length > 0 ? (
+              {banners.length > 0 ? (
                 <Swiper
                   modules={[Autoplay, Pagination]}
                   slidesPerView={1}
@@ -106,14 +107,7 @@ export default function Home() {
             Explore Collections
           </h2>
         </div>
-        {catLoading ? (
-          <div className="flex gap-4 overflow-x-auto pb-12 opacity-50">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="min-w-[150px] aspect-square bg-white rounded-[2rem] animate-pulse rounded-2xl block border border-gray-100"></div>
-            ))}
-          </div>
-        ) : (
-          <Swiper
+        <Swiper
             modules={[Autoplay, Pagination]}
             spaceBetween={20}
             slidesPerView={3}
@@ -151,7 +145,6 @@ export default function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
-        )}
       </section>
 
 
