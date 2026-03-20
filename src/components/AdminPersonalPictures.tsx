@@ -39,11 +39,11 @@ export const AdminPersonalPictures: React.FC<AdminPersonalPicturesProps> = ({ pi
                     </h3>
                     <div className="flex items-center gap-2 px-3 py-1 bg-red-50 rounded-full w-fit">
                         <Lock className="w-3 h-3 text-red-500" />
-                        <span className="text-[8px] font-black text-red-500 uppercase tracking-widest">Private Content</span>
+                        <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">Private Content</span>
                     </div>
                 </div>
-                
-                <button 
+
+                <button
                     onClick={() => dispatch(openBulkPasswordModal())}
                     className="group bg-slate-900 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-red-600 transition-all active:scale-95 flex items-center gap-3 shadow-xl shadow-slate-900/10"
                 >

@@ -169,7 +169,7 @@ export default function LandingPage() {
                         <span className="text-2xl font-black tracking-tighter text-white">Alinggon</span>
                     </Link>
                     <div className="h-0.5 w-1/4 bg-white/5 rounded-full"></div>
-                    <p className="text-[13px] font-black text-white/30 uppercase tracking-[0.4em]">কপিরাইট অর্পিত &copy; ২০২৬ Alinggon. Developed by Rangpur IT</p>
+                    <p className="text-[13px] font-black text-white/80 uppercase tracking-[0.4em]">কপিরাইট অর্পিত &copy; ২০২৬ Alinggon. Developed by Rangpur IT</p>
                 </div>
             </footer>
 

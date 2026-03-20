@@ -80,7 +80,7 @@ export default function CartDrawer() {
                                                 {item.variation_details && (
                                                     <div className="flex flex-wrap gap-1 mt-1">
                                                         {Object.entries(item.variation_details).map(([key, val]) => (
-                                                            <span key={key} className="text-[8px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-black uppercase tracking-tighter">
+                                                            <span key={key} className="text-[10px] bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded font-black uppercase tracking-tighter">
                                                                 {key}: {val}
                                                             </span>
                                                         ))}

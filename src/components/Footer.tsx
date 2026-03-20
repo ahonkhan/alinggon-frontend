@@ -23,7 +23,7 @@ export default function Footer() {
     };
 
     return (
-        <footer className="bg-slate-950 text-gray-800 font-not-not-sans-serif">
+        <footer className="bg-slate-950 text-gray-200 font-not-not-sans-serif">
 
 
             {/* Main Footer Content */}
@@ -54,11 +54,11 @@ export default function Footer() {
                             <div className="flex gap-4">
                                 <div className="space-y-1">
                                     <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat1_value || "100%"}</p>
-                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat1_label || "Authentic"}</p>
+                                    <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat1_label || "Authentic"}</p>
                                 </div>
                                 <div className="space-y-1 border-l border-white/10 pl-4">
                                     <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat2_value || "24/7"}</p>
-                                    <p className="text-[8px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat2_label || "Support"}</p>
+                                    <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat2_label || "Support"}</p>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@ export default function Footer() {
 
                     {/* Newsletter & Contact */}
                     <div className="lg:col-span-4 space-y-6">
-                        <div className="bg-white/5 rounded-[2rem]  border border-white/5 space-y-4">
+                        <div className="bg-white/5 p-4 rounded-[2rem]  border border-white/5 space-y-4">
                             <h4 className="text-white text-[15px] font-black uppercase tracking-widest">Global Newsletter</h4>
                             <p className="text-[12px] uppercase font-bold text-white/70 tracking-widest">Get prioritized for limited stock drops.</p>
                             <form onSubmit={handleSubscribe} className="flex gap-2">
@@ -157,9 +157,9 @@ export default function Footer() {
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uU-E1bF5B8-L9R_Lq8_Y8yG7y-N0G-W-Yg&s" className="h-6 filter grayscale invert opacity-20 hover:opacity-100 transition-opacity cursor-pointer" alt="SSL Commerz" />
                         <div className="h-4 w-px bg-white/5"></div>
                         <div className="flex gap-4">
-                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[8px] font-black text-white/30">VISA</div>
-                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[8px] font-black text-white/30">MC</div>
-                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[8px] font-black text-white/30">COD</div>
+                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[10px] font-black text-white/80">VISA</div>
+                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[10px] font-black text-white/80">MC</div>
+                            <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[10px] font-black text-white/80">COD</div>
                         </div>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ function ContactItem({ icon: Icon, label, value, href }: any) {
         <div className="flex gap-4">
             <div className="text-red-600/50 mt-1"><Icon className="w-4 h-4" /></div>
             <div>
-                <p className="text-[8px] font-black uppercase text-white/30 tracking-[0.2em] mb-1">{label}</p>
+                <p className="text-[10px] font-black uppercase text-white/80 tracking-[0.2em] mb-1">{label}</p>
                 <p className="text-xs font-black text-white/70 tracking-tight">{content}</p>
             </div>
         </div>

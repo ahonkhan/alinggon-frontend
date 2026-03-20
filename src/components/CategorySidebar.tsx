@@ -109,7 +109,7 @@ export default function CategorySidebar() {
                                                         <div className="flex items-center gap-2">
                                                             <span className="text-[13px] font-black text-red-600 font-sans">৳{prod.price}</span>
                                                             {prod.originalPrice && (
-                                                                <span className="text-[8px] font-medium text-gray-800 line-through font-sans">৳{prod.originalPrice}</span>
+                                                                <span className="text-[10px] font-medium text-gray-800 line-through font-sans">৳{prod.originalPrice}</span>
                                                             )}
                                                         </div>
                                                     </Link>

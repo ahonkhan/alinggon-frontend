@@ -328,7 +328,7 @@ export default function ReviewsPage() {
                                                     />
                                                 ))}
                                             </div>
-                                            <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest">{formatDate(review.created_at)}</span>
+                                            <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">{formatDate(review.created_at)}</span>
                                         </div>
                                     </div>
                                 </div>

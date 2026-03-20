@@ -459,7 +459,7 @@ function CategoryItem({ label, count, isActive, onClick }: any) {
             className={`flex items-center justify-between px-4 py-3.5 rounded-2xl text-[13px] font-black uppercase tracking-widest cursor-pointer transition-all ${isActive ? "bg-red-400 text-white shadow-xl shadow-red-100/50" : "text-slate-700 hover:bg-gray-50 hover:text-red-400"
                 }`}>
             <span>{label}</span>
-            <span className={`px-2 py-0.5 rounded-lg text-[8px] ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-800"}`}>{count}</span>
+            <span className={`px-2 py-0.5 rounded-lg text-[10px] ${isActive ? "bg-white/20 text-white" : "bg-gray-100 text-gray-800"}`}>{count}</span>
         </li>
     );
 }

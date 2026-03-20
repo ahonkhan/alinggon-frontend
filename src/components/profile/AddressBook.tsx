@@ -76,7 +76,7 @@ export default function AddressBook() {
                                     </div>
                                     <span className="text-[12px] font-black text-slate-900 uppercase tracking-widest">{addr.type}</span>
                                     {addr.is_default && (
-                                        <div className="bg-red-400 text-white text-[8px] font-black px-2 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
+                                        <div className="bg-red-400 text-white text-[10px] font-black px-2 py-1 rounded-full uppercase tracking-widest flex items-center gap-1">
                                             <Star className="w-2 h-2 fill-white" /> Default
                                         </div>
                                     )}

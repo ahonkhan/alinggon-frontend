@@ -65,7 +65,7 @@ export default function FlashSaleSection() {
                                     <div className="bg-white border-2 border-slate-900 w-12 h-12 flex items-center justify-center rounded-lg shadow-sm">
                                         <span className="text-xl font-black text-slate-900">{item.value.toString().padStart(2, '0')}</span>
                                     </div>
-                                    <span className="text-[8px] font-bold uppercase text-slate-800 mt-1">{item.label}</span>
+                                    <span className="text-[10px] font-bold uppercase text-slate-800 mt-1">{item.label}</span>
                                 </div>
                             ))}
                         </div>

@@ -65,13 +65,13 @@ function SuccessContent() {
                 </div>
 
                 <div className="mt-12 flex items-center justify-center gap-8 opacity-30">
-                    <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
                         <div className="w-1.5 h-1.5 bg-slate-900 rounded-full"></div> Fast Logistics
                     </div>
-                    <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
                         <div className="w-1.5 h-1.5 bg-slate-900 rounded-full"></div> Secure Checkout
                     </div>
-                    <div className="flex items-center gap-2 text-[8px] font-black uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
                         <div className="w-1.5 h-1.5 bg-slate-900 rounded-full"></div> 24/7 Priority
                     </div>
                 </div>

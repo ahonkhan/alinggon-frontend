@@ -110,7 +110,7 @@ function ReviewCard({ review, formatDate, className = "" }: { review: any; forma
                 {review.is_verified && (
                     <div className="flex items-center gap-1 text-red-400">
                         <CheckCircle2 className="w-2.5 h-2.5" />
-                        <span className="text-[8px] font-black uppercase tracking-widest">Verified</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest">Verified</span>
                     </div>
                 )}
             </div>

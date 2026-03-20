@@ -34,7 +34,7 @@ const FloatingShape = ({ type, color, size = 1 }: { type: number; color: string;
                     <div className="absolute left-1/2 bottom-0 w-[1px] bg-gradient-to-b from-pink-300 to-transparent h-[50px] animate-wobble-string" />
                     {/* Congratulations tag */}
                     {Math.random() > 0.7 && (
-                        <div className="absolute -top-6 -right-4 bg-white text-[8px] font-black px-2 py-1 rounded-full shadow-lg transform rotate-12 animate-pulse">
+                        <div className="absolute -top-6 -right-4 bg-white text-[10px] font-black px-2 py-1 rounded-full shadow-lg transform rotate-12 animate-pulse">
                             ❤
                         </div>
                     )}

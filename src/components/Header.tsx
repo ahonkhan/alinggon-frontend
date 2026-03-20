@@ -187,7 +187,7 @@ export default function Header() {
                                 <div className="hidden md:flex items-center gap-4 ml-2">
                                     <Link href="/profile" aria-label="Profile" className="flex items-center gap-3 group bg-gray-50 pl-4 pr-1.5 py-1.5 rounded-2xl border border-gray-100 hover:bg-white hover:border-red-100 transition-all shadow-sm">
                                         <div className="text-right leading-none">
-                                            <p className="text-[8px] font-black text-slate-800 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
+                                            <p className="text-[10px] font-black text-slate-800 uppercase tracking-widest mb-1 leading-none">Access Granted</p>
                                             <p className="text-xs font-black text-slate-900 group-hover:text-red-500 transition-colors uppercase tracking-tight">{user.name.split(' ')[0]}</p>
                                         </div>
                                         <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-red-50 transition-colors shadow-lg overflow-hidden">

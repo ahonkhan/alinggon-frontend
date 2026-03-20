@@ -137,7 +137,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                                 {cat.image ? (
                                                     <img src={cat.image} alt={cat.name} className="w-5 h-5 rounded-md object-cover" />
                                                 ) : (
-                                                    <div className="w-5 h-5 rounded-md bg-gray-100 flex items-center justify-center text-[8px] font-black">{cat.name.charAt(0)}</div>
+                                                    <div className="w-5 h-5 rounded-md bg-gray-100 flex items-center justify-center text-[10px] font-black">{cat.name.charAt(0)}</div>
                                                 )}
                                                 <span>{cat.name}</span>
                                             </div>
