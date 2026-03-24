@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogIn, Mail, Lock, Phone, AlertCircle } from "lucide-react";
 import { useToast } from "@/context/ToastContext";
+import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function LoginPage() {
     const [emailOrPhone, setEmailOrPhone] = useState("");
@@ -14,6 +15,8 @@ export default function LoginPage() {
     const { login } = useAuth();
     const { showToast } = useToast();
     const router = useRouter();
+    const { data: homeContent } = useGetHomeContentQuery();
+    const logoUrl = homeContent?.data?.logo || homeContent?.data?.header_logo;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -32,10 +35,16 @@ export default function LoginPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-10">
+            <div className="max-w-md  w-full bg-white rounded-[2.5rem] shadow-xl border border-slate-300 p-10">
                 <div className="text-center mb-10">
-                    <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <LogIn className="w-8 h-8 text-red-500" />
+                    <div className="h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 p-2">
+                        {logoUrl ? (
+                            <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
+                        ) : (
+                            <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center">
+                                <LogIn className="w-8 h-8 text-red-500" />
+                            </div>
+                        )}
                     </div>
                     <h1 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">
                         Welcome <span className="text-red-500">Back</span>

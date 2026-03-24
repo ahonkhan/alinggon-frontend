@@ -56,7 +56,7 @@ export default function Footer() {
                                     <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat1_value || "100%"}</p>
                                     <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat1_label || "Authentic"}</p>
                                 </div>
-                                <div className="space-y-1 border-l border-white/10 pl-4">
+                                <div className="space-y-1 border-l border-green/80 pl-4 border-r-2 border-green-500 pr-4">
                                     <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat2_value || "24/7"}</p>
                                     <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat2_label || "Support"}</p>
                                 </div>
@@ -108,8 +108,8 @@ export default function Footer() {
                                     <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
                                     <li><NavLink href="/terms">Terms of Access</NavLink></li>
                                     <li><NavLink href="/returns">Return Logic</NavLink></li>
-                                    <li><NavLink href="#">Shipping Grid</NavLink></li>
-                                    <li><NavLink href="#">Refund Policy</NavLink></li>
+                                    <li><NavLink href="/shipping">Shipping Grid</NavLink></li>
+                                    <li><NavLink href="/refund-policy">Refund Policy</NavLink></li>
                                     <li><NavLink href="/returns">Customer Ratings</NavLink></li>
                                 </>
                             )}

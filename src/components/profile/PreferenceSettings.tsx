@@ -86,9 +86,9 @@ export default function PreferenceSettings() {
 
 function PreferenceToggle({ icon: Icon, label, sub, isEnabled, onToggle, isLoading }: any) {
     return (
-        <div className="flex items-center justify-between p-6 bg-gray-50/50 rounded-3xl border border-transparent hover:border-gray-200 transition-all group">
+        <div className="flex items-center justify-between p-6 bg-gray-50/50 rounded-3xl border border-red-300 hover:border-red-200 transition-all group">
             <div className="flex items-center gap-4">
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${isEnabled ? 'bg-red-400 text-white' : 'bg-white text-gray-800 shadow-sm'}`}>
+                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${isEnabled ? 'bg-red-500 text-white shadow-lg shadow-red-500/30' : 'bg-white text-gray-800 shadow-sm'}`}>
                     <Icon className="w-6 h-6" />
                 </div>
                 <div>
@@ -100,7 +100,7 @@ function PreferenceToggle({ icon: Icon, label, sub, isEnabled, onToggle, isLoadi
             <button
                 onClick={onToggle}
                 disabled={isLoading}
-                className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors outline-none ${isEnabled ? 'bg-slate-900' : 'bg-gray-200'}`}
+                className={`relative inline-flex h-7 w-12 items-center rounded-full transition-all duration-300 outline-none shadow-inner ${isEnabled ? 'bg-gradient-to-r from-red-500 to-rose-500 shadow-md shadow-red-500/20' : 'bg-slate-300'}`}
             >
                 <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${isEnabled ? 'translate-x-6' : 'translate-x-1'}`} />
             </button>
