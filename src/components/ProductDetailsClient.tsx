@@ -369,15 +369,16 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                 {/* Right: Secondary Info */}
                 <div className="lg:col-span-3 space-y-6">
-                    <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative aspect-video shadow-2xl group border-4 border-white">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Video Placeholder" />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
-                            <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform cursor-pointer border border-white/30">
-                                <PlayCircle className="w-8 h-8 text-white fill-white" />
-                            </div>
-                            <span className="text-[9px] font-black uppercase tracking-[0.2em]">Live Demonstration</span>
+                    {product.video && (
+                        <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative aspect-video shadow-2xl group border-4 border-white">
+                            <video 
+                                src={product.video.startsWith('http') ? product.video : `http://localhost:8000/storage/${product.video}`} 
+                                className="w-full h-full object-cover" 
+                                controls 
+                                poster={product.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400"}
+                            />
                         </div>
-                    </div>
+                    )}
 
                     <Link href="/shop" className="block bg-gradient-to-br from-red-500 to-red-600 p-6 rounded-[2rem] text-white shadow-xl shadow-red-100 hover:shadow-red-200 transition-all hover:-translate-y-1 group">
                         <p className="text-[13px] font-black uppercase tracking-widest opacity-80 mb-2">Exclusive Offer</p>

@@ -2,8 +2,9 @@
 
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ShoppingBag, Youtube, Send, ShieldCheck, Truck, RefreshCcw } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
-import { useGetHomeContentQuery } from "@/store/api/frontendApi";
+import { useGetHomeContentQuery, useSubscribeNewsletterMutation } from "@/store/api/frontendApi";
 
 const XIcon = (props: any) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -14,12 +15,21 @@ const XIcon = (props: any) => (
 export default function Footer() {
     const { showToast } = useToast();
     const { data: homeContent } = useGetHomeContentQuery();
+    const [subscribe, { isLoading }] = useSubscribeNewsletterMutation();
+    const [email, setEmail] = useState("");
+    
     const logoUrl = homeContent?.data?.footer_logo || homeContent?.data?.logo;
     const footerText = homeContent?.data?.footer_text || "Architecting the future of digital shopping with a focus on premium objects and seamless customer intelligence.";
 
-    const handleSubscribe = (e: React.FormEvent) => {
+    const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
-        showToast("Welcome to our Newsletter!", "success");
+        try {
+            const res = await subscribe({ email }).unwrap();
+            showToast(res.message || "Welcome to our Newsletter!", "success");
+            setEmail("");
+        } catch (error: any) {
+            showToast(error?.data?.message || "Failed to subscribe. Please try again.", "error");
+        }
     };
 
     return (
@@ -110,7 +120,7 @@ export default function Footer() {
                                     <li><NavLink href="/returns">Return Logic</NavLink></li>
                                     <li><NavLink href="/shipping">Shipping Grid</NavLink></li>
                                     <li><NavLink href="/refund-policy">Refund Policy</NavLink></li>
-                                    <li><NavLink href="/returns">Customer Ratings</NavLink></li>
+                                    <li><NavLink href="/reviews">Customer Ratings</NavLink></li>
                                 </>
                             )}
                         </ul>
@@ -128,12 +138,15 @@ export default function Footer() {
                             <form onSubmit={handleSubscribe} className="flex gap-2">
                                 <input
                                     type="email"
-                                    placeholder="your@intel.com"
-                                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl py-3.5 px-6 text-xs font-black text-white placeholder:text-white/10 focus:outline-none focus:border-red-600 transition-all outline-none"
+                                    placeholder="your@email.com"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="flex-1 bg-white/5 border border-white/10 rounded-2xl py-3.5 px-6 text-xs font-black text-white placeholder:text-white/30 focus:outline-none focus:border-red-600 transition-all outline-none"
                                     required
+                                    disabled={isLoading}
                                 />
-                                <button type="submit" aria-label="Subscribe" className="bg-red-600 hover:bg-white hover:text-slate-900 text-white rounded-2xl p-4 transition-all shadow-xl active:scale-90">
-                                    <Send className="w-4 h-4" />
+                                <button type="submit" disabled={isLoading} aria-label="Subscribe" className={`bg-red-600 hover:bg-white hover:text-slate-900 text-white rounded-2xl p-4 transition-all shadow-xl ${isLoading ? 'opacity-50' : 'active:scale-90'}`}>
+                                    <Send className={`w-4 h-4 ${isLoading ? 'animate-pulse' : ''}`} />
                                 </button>
                             </form>
                         </div>

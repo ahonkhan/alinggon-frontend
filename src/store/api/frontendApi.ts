@@ -8,6 +8,7 @@ export interface Product {
     originalPrice?: number;
     discount?: string;
     image: string;
+    video?: string | null;
     category: string;
     brand_id?: number;
     vendor_id?: number;
@@ -575,6 +576,13 @@ export const frontendApi = createApi({
             }),
             invalidatesTags: ['Wishlist'],
         }),
+        subscribeNewsletter: builder.mutation<any, { email: string }>({
+            query: (data) => ({
+                url: '/newsletter/subscribe',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
@@ -621,4 +629,5 @@ export const {
     useDeleteAddressMutation,
     useGetWishlistQuery,
     useToggleWishlistMutation,
+    useSubscribeNewsletterMutation,
 } = frontendApi;
