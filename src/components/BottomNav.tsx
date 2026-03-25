@@ -38,7 +38,7 @@ export default function BottomNav() {
                                 aria-label={item.label}
                                 className="relative flex flex-col items-center gap-1 group transition-all"
                             >
-                                <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-600 text-white' : 'text-gray-100 group-hover:text-white'}`}>
+                                <div className={`p-2.5 rounded-2xl transition-all duration-300 ${isActive ? 'bg-red-600 text-white' : 'text-white'}`}>
                                     <Icon className="w-5 h-5" />
                                 </div>
                                 {isMounted && item.badge > 0 && (
