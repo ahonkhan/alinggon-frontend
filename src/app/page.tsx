@@ -69,7 +69,7 @@ export default function Home() {
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
-                      <div className="relative w-full aspect-[21/9] md:aspect-[3/1]">
+                      <div className="relative w-full h-auto">
                         <Image
                           src={banner}
                           alt={`Banner ${index + 1}`}
@@ -110,69 +110,69 @@ export default function Home() {
           </h2>
         </div>
         <Swiper
-            modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            slidesPerView={3}
-            breakpoints={{
-              640: { slidesPerView: 3 },
-              768: { slidesPerView: 4 },
-              1024: { slidesPerView: 6 },
-              1280: { slidesPerView: 8 },
-            }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            className="!pb-12"
-            pagination={{ clickable: true }}
-          >
-            {categories.map((item: CategoryData) => (
-              <SwiperSlide key={item.id}>
-                <Link href={`/shop?category=${item.slug}`} className="group cursor-pointer block">
-                  <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-100/50 overflow-hidden aspect-square mb-4 relative group-hover:shadow-red-100 transition-all p-2 flex items-center justify-center">
-                    <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative bg-gray-50 flex items-center justify-center">
-                      <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
-                      {item.image ? (
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          fill
-                          quality={60}
-                          sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
-                          className="object-cover group-hover:scale-110 transition-transform duration-700"
-                        />
-                      ) : (
-                        <span className="text-4xl font-black text-slate-200">{item.name.charAt(0)}</span>
-                      )}
-                    </div>
+          modules={[Autoplay, Pagination]}
+          spaceBetween={20}
+          slidesPerView={3}
+          breakpoints={{
+            640: { slidesPerView: 3 },
+            768: { slidesPerView: 4 },
+            1024: { slidesPerView: 6 },
+            1280: { slidesPerView: 8 },
+          }}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          className="!pb-12"
+          pagination={{ clickable: true }}
+        >
+          {categories.map((item: CategoryData) => (
+            <SwiperSlide key={item.id}>
+              <Link href={`/shop?category=${item.slug}`} className="group cursor-pointer block">
+                <div className="bg-white rounded-[2rem] border border-gray-100 shadow-lg shadow-slate-100/50 overflow-hidden aspect-square mb-4 relative group-hover:shadow-red-100 transition-all p-2 flex items-center justify-center">
+                  <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative bg-gray-50 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        quality={60}
+                        sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                    ) : (
+                      <span className="text-4xl font-black text-slate-200">{item.name.charAt(0)}</span>
+                    )}
                   </div>
-                  <h3 className="text-center text-xs font-black text-slate-700 tracking-widest uppercase group-hover:text-red-600 transition-colors line-clamp-1 px-1">{item.name}</h3>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </div>
+                <h3 className="text-center text-xs font-black text-slate-700 tracking-widest uppercase group-hover:text-red-600 transition-colors line-clamp-1 px-1">{item.name}</h3>
+              </Link>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
 
 
       {/* Product Sliders */}
-      <ProductSlider 
-        title="12 Months Product" 
-        products={featuredData?.data.twelve_months_products || []} 
+      <ProductSlider
+        title="12 Months Product"
+        products={featuredData?.data.twelve_months_products || []}
         isLoading={featuredLoading}
       />
 
-      <ProductSlider 
-        title="Alinggon New Arrival" 
-        products={featuredData?.data.new_arrivals || []} 
+      <ProductSlider
+        title="Alinggon New Arrival"
+        products={featuredData?.data.new_arrivals || []}
         isLoading={featuredLoading}
       />
 
-      <ProductSlider 
-        title="Our Special Offers" 
-        products={featuredData?.data.special_offers || []} 
+      <ProductSlider
+        title="Our Special Offers"
+        products={featuredData?.data.special_offers || []}
         isLoading={featuredLoading}
       />
 
-      <ProductSlider 
-        title="Today's Deals" 
-        products={featuredData?.data.todays_deals || []} 
+      <ProductSlider
+        title="Today's Deals"
+        products={featuredData?.data.todays_deals || []}
         isLoading={featuredLoading}
       />
 

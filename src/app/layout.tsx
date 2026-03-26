@@ -13,13 +13,9 @@ import FloatingActionButtons from "@/components/FloatingActionButtons";
 import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
+import ClientModals from "@/components/ClientModals";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
-
-const AdminGalleryModal = dynamic(() => import("@/components/AdminGalleryModal").then(m => m.AdminGalleryModal), { ssr: false });
-const CreateTicketModal = dynamic(() => import("@/components/support/CreateTicketModal"), { ssr: false });
-const ImageViewerModal = dynamic(() => import("@/components/support/ImageViewerModal"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,9 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-800 font-normal antialiased min-h-screen flex flex-col`}>
         <ReduxProvider>
-          <AdminGalleryModal />
-          <CreateTicketModal />
-          <ImageViewerModal />
+          <ClientModals />
           <ToastProvider>
             <AuthProvider>
               <CartProvider>
