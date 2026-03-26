@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { UserPlus, Mail, Lock, Phone, User as UserIcon, CheckCircle, ArrowRight, ArrowLeft, ShieldCheck } from "lucide-react";
 import { useToast } from "@/context/ToastContext";
-import { useSendOtpMutation, useVerifyOtpMutation, useRegisterMutation, useResendOtpMutation } from "@/store/api/frontendApi";
+import { useSendOtpMutation, useVerifyOtpMutation, useRegisterMutation, useResendOtpMutation, useGetHomeContentQuery } from "@/store/api/frontendApi";
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 
@@ -26,6 +26,8 @@ export default function RegisterPage() {
     const [verifyOtp, { isLoading: isVerifyingOtp }] = useVerifyOtpMutation();
     const [resendOtp, { isLoading: isResendingOtp }] = useResendOtpMutation();
     const [registerApi, { isLoading: isRegistering }] = useRegisterMutation();
+    const { data: homeContent } = useGetHomeContentQuery();
+    const logoUrl = homeContent?.data?.logo || homeContent?.data?.header_logo;
     const { setAuth } = useAuth();
     const { showToast } = useToast();
     const router = useRouter();
@@ -145,10 +147,16 @@ export default function RegisterPage() {
                 <div className="absolute bottom-0 left-0 w-32 h-32 bg-red-100 rounded-full -ml-16 -mb-16 opacity-40 blur-3xl"></div>
 
                 <div className="text-center mb-8 relative z-10">
-                    <div className="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mx-auto mb-5 shadow-lg shadow-red-200">
-                        {step === 1 && <UserPlus className="w-8 h-8 text-white" />}
-                        {step === 2 && <ShieldCheck className="w-8 h-8 text-white" />}
-                        {step === 3 && <Lock className="w-8 h-8 text-white" />}
+                    <div className="h-12 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 p-2">
+                        {logoUrl ? (
+                            <img src={logoUrl} alt="Logo" className="w-full h-full object-contain" />
+                        ) : (
+                            <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center">
+                                {step === 1 && <UserPlus className="w-8 h-8 text-red-500" />}
+                                {step === 2 && <ShieldCheck className="w-8 h-8 text-red-500" />}
+                                {step === 3 && <Lock className="w-8 h-8 text-red-500" />}
+                            </div>
+                        )}
                     </div>
                     <h1 className="text-2xl font-black text-slate-900 tracking-tight">
                         {step === 1 && <>Create <span className="text-red-500">Account</span></>}

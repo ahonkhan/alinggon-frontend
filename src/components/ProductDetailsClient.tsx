@@ -1,8 +1,8 @@
 import { useState, useMemo, useRef } from "react";
-import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Instagram, Youtube, Linkedin, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
-import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation } from "@/store/api/frontendApi";
+import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation, useGetHomeContentQuery } from "@/store/api/frontendApi";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,6 +12,12 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+const XIcon = (props: any) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298l13.312 17.404z" />
+    </svg>
+);
 
 type APIProduct = ProductDetailsResponse['data'];
 
@@ -37,6 +43,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
         return initial;
     });
 
+    const { data: homeContent } = useGetHomeContentQuery();
     const { addToCart } = useCart();
     const { showToast } = useToast();
 
@@ -346,23 +353,22 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <Zap className="w-5 h-5" /> অর্ডার করুন
                     </button>
 
-                    {/* Trust Info */}
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-50 shadow-sm">
+                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-100/50 shadow-sm">
                             <div className="bg-red-50 p-2 rounded-xl"><ShieldCheck className="w-5 h-5 text-red-400" /></div>
                             <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">১০১% আসল প্রোডাক্ট</span>
                         </div>
-                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-50 shadow-sm">
+                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-100/50 shadow-sm">
                             <div className="bg-blue-50 p-2 rounded-xl"><Truck className="w-5 h-5 text-blue-400" /></div>
                             <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">সারা দেশে ডেলিভারি</span>
                         </div>
                     </div>
 
-                    {/* Call Support */}
+                    {/* Call Support Back to Original Position */}
                     <div className="flex flex-col md:flex-row gap-4">
-                        <a href="tel:+97336781645" className="flex-1 bg-white border border-gray-100 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1">
-                            <div className="bg-green-500 text-white p-1.5 rounded-lg"><Phone className="w-4 h-4" /></div>
-                            +97336781645
+                        <a href={`tel:${homeContent?.data?.contact_phone || "+97336781645"}`} className="flex-1 bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group">
+                            <div className="bg-green-500 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><Phone className="w-4 h-4" /></div>
+                            {homeContent?.data?.contact_phone || "+97336781645"}
                         </a>
                     </div>
                 </div>
@@ -387,6 +393,38 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                             Shop Now <ChevronRight className="w-4 h-4" />
                         </div>
                     </Link>
+
+                    {/* WhatsApp & Social Media */}
+                    <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 space-y-6">
+                        <div className="space-y-4">
+                            <h4 className="text-[13px] font-black text-slate-900 uppercase tracking-widest border-b border-gray-50 pb-4">Order on WhatsApp</h4>
+                            <div className="flex flex-col gap-3">
+                                <a 
+                                    href={`https://wa.me/${(homeContent?.data?.chat_whatsapp_number || "8801726526155").replace(/[^0-9]/g, '')}`} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    className="w-full bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
+                                >
+                                    <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
+                                    WhatsApp
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="h-px bg-gray-50" />
+
+                        {/* Social Media Links */}
+                        <div className="space-y-4">
+                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Share / Follow</h4>
+                            <div className="flex flex-wrap gap-3">
+                                {homeContent?.data?.social_facebook && <SocialLink icon={Facebook} url={homeContent.data.social_facebook} />}
+                                {homeContent?.data?.social_x && <SocialLink icon={XIcon} url={homeContent.data.social_x} />}
+                                {homeContent?.data?.social_instagram && <SocialLink icon={Instagram} url={homeContent.data.social_instagram} />}
+                                {homeContent?.data?.social_youtube && <SocialLink icon={Youtube} url={homeContent.data.social_youtube} />}
+                                {homeContent?.data?.social_linkedin && <SocialLink icon={Linkedin} url={homeContent.data.social_linkedin} />}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -655,5 +693,18 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 </div>
             )}
         </>
+    );
+}
+
+function SocialLink({ icon: Icon, url }: { icon: any, url: string }) {
+    return (
+        <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-gray-100 text-slate-400 hover:bg-red-500 hover:text-white hover:border-red-500 transition-all transform hover:-translate-y-1 shadow-sm"
+        >
+            <Icon className="w-4 h-4" />
+        </a>
     );
 }
