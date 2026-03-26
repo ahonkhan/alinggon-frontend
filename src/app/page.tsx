@@ -7,15 +7,18 @@ import ProductSlider from "@/components/ProductSlider";
 import VideoSection from "@/components/VideoSection";
 import AdsSection from "@/components/AdsSection";
 import ProductCard from "@/components/ProductCard";
-import CustomerRatings from "@/components/CustomerRatings";
-import TopBrands from "@/components/TopBrands";
-import PromoModal from "@/components/PromoModal";
+import dynamic from "next/dynamic";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useGetFeaturedProductsQuery, useGetCategoriesQuery, CategoryData, useGetHomeContentQuery } from "@/store/api/frontendApi";
-import HomeLoader from "@/components/HomeLoader";
+import { SliderSkeleton } from "@/components/Skeleton";
+
+// Dynamic imports for below-the-fold components
+const CustomerRatings = dynamic(() => import("@/components/CustomerRatings"), { ssr: false });
+const TopBrands = dynamic(() => import("@/components/TopBrands"), { ssr: false });
+const PromoModal = dynamic(() => import("@/components/PromoModal"), { ssr: false });
 
 export default function Home() {
   const { data: featuredData, isLoading: featuredLoading } = useGetFeaturedProductsQuery();
@@ -23,10 +26,6 @@ export default function Home() {
   const { data: homeContent, isLoading: homeLoading } = useGetHomeContentQuery();
   const categories = catData?.data || [];
   const banners = homeContent?.data.banners || [];
-
-  if (featuredLoading || catLoading || homeLoading) {
-    return <HomeLoader />;
-  }
 
   return (
     <div className="bg-gray-50/50">
@@ -40,25 +39,28 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Main Slider - 7 Columns */}
-          <div className="col-span-1 lg:col-span-7">
-            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group">
-              {banners.length > 0 ? (
+          <div className="col-span-1 lg:col-span-12 xl:col-span-7">
+            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-50 shadow-2xl group min-h-[200px] md:min-h-[380px]">
+              {homeLoading ? (
+                <SliderSkeleton />
+              ) : banners.length > 0 ? (
                 <Swiper
                   modules={[Autoplay, Pagination]}
                   slidesPerView={1}
                   autoplay={{ delay: 5000, disableOnInteraction: false }}
                   pagination={{ clickable: true }}
-                  autoHeight={true}
                   className="w-full"
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
-                      <div className="relative w-full">
-                        <img
+                      <div className="relative w-full aspect-[21/9] md:aspect-[3/1]">
+                        <Image
                           src={banner}
                           alt={`Banner ${index + 1}`}
-                          className="w-full h-auto object-cover"
+                          fill
+                          priority={index === 0}
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 60vw"
                         />
                       </div>
                     </SwiperSlide>
@@ -149,13 +151,29 @@ export default function Home() {
 
 
       {/* Product Sliders */}
-      <ProductSlider title="12 Months Product" products={featuredData?.data.twelve_months_products || []} />
+      <ProductSlider 
+        title="12 Months Product" 
+        products={featuredData?.data.twelve_months_products || []} 
+        isLoading={featuredLoading}
+      />
 
-      <ProductSlider title="Alinggon  New Arrival" products={featuredData?.data.new_arrivals || []} />
+      <ProductSlider 
+        title="Alinggon New Arrival" 
+        products={featuredData?.data.new_arrivals || []} 
+        isLoading={featuredLoading}
+      />
 
-      <ProductSlider title="Our Special Offers" products={featuredData?.data.special_offers || []} />
+      <ProductSlider 
+        title="Our Special Offers" 
+        products={featuredData?.data.special_offers || []} 
+        isLoading={featuredLoading}
+      />
 
-      <ProductSlider title="Today's Deals" products={featuredData?.data.todays_deals || []} />
+      <ProductSlider 
+        title="Today's Deals" 
+        products={featuredData?.data.todays_deals || []} 
+        isLoading={featuredLoading}
+      />
 
       <CustomerRatings />
 

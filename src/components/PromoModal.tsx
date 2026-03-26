@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function PromoModal() {
@@ -48,12 +49,12 @@ export default function PromoModal() {
                     <X className="w-6 h-6" />
                 </button>
 
-                {/* Ads Image */}
-                <div className="relative h-[200px] md:h-[280px] w-full">
-                    <img
+                <div className="relative h-[200px] md:h-[350px] w-full">
+                    <Image
                         src={popupImage}
                         alt="Promotional Offer"
-                        className="w-full h-full object-cover"
+                        fill
+                        className="object-cover"
                     />
 
                     {/* Overlay Color */}
@@ -65,7 +66,7 @@ export default function PromoModal() {
                     )}
 
                     {/* Content Overlay */}
-                    <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex flex-col justify-end p-12">
+                    <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent flex flex-col justify-end p-8 md:p-12">
                         <div 
                             className="text-white text-xs font-black uppercase tracking-[0.4em] mb-2 [&_h1]:text-2xl [&_h2]:text-xl [&_h3]:text-lg [&_p]:m-0"
                             dangerouslySetInnerHTML={{ __html: homeContent?.data?.popup_title || "Flash Offer" }}

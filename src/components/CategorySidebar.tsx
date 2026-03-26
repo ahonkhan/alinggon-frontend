@@ -103,7 +103,13 @@ export default function CategorySidebar() {
                                                 {category.latest_products.map((prod) => (
                                                     <Link key={prod.id} href={`/product/${prod.slug}`} className="group/prod block p-2 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100">
                                                         <div className="aspect-square rounded-xl overflow-hidden bg-gray-50 mb-2 relative">
-                                                            <img src={prod.image} alt={prod.name} className="w-full h-full object-cover group-hover/prod:scale-110 transition-transform duration-500" />
+                                                            <Image 
+                                                                src={prod.image} 
+                                                                alt={prod.name} 
+                                                                fill
+                                                                sizes="100px"
+                                                                className="object-cover group-hover/prod:scale-110 transition-transform duration-500" 
+                                                            />
                                                         </div>
                                                         <h6 className="text-[13px] font-black text-slate-800 line-clamp-1 mb-1 group-hover/prod:text-red-600 transition-colors uppercase">{prod.name}</h6>
                                                         <div className="flex items-center gap-2">

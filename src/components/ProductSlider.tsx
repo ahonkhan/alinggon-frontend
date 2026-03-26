@@ -8,14 +8,16 @@ import ProductCard from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
+import { ProductSkeleton } from "./Skeleton";
 
 interface ProductSliderProps {
     title: string;
     products: any[];
     link?: string;
+    isLoading?: boolean;
 }
 
-export default function ProductSlider({ title, products, link = "/shop" }: ProductSliderProps) {
+export default function ProductSlider({ title, products, link = "/shop", isLoading = false }: ProductSliderProps) {
     const prevRef = useRef(null);
     const nextRef = useRef(null);
 
@@ -41,37 +43,45 @@ export default function ProductSlider({ title, products, link = "/shop" }: Produ
                 </div>
             </div>
 
-            <Swiper
-                modules={[Navigation, Autoplay]}
-                navigation={{
-                    prevEl: prevRef.current,
-                    nextEl: nextRef.current,
-                }}
-                onBeforeInit={(swiper) => {
-                    // @ts-ignore
-                    swiper.params.navigation.prevEl = prevRef.current;
-                    // @ts-ignore
-                    swiper.params.navigation.nextEl = nextRef.current;
-                }}
-                spaceBetween={10}
-                slidesPerView={2}
-                breakpoints={{
-                    640: { slidesPerView: 3 },
-                    1024: { slidesPerView: 6 },
-                }}
-                autoplay={{
-                    delay: 5000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true
-                }}
-                className="!pb-10"
-            >
-                {products.map((product) => (
-                    <SwiperSlide key={product.id} className="!h-auto">
-                        <ProductCard {...product} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+            {isLoading ? (
+                <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+                    {[...Array(6)].map((_, i) => (
+                        <ProductSkeleton key={i} />
+                    ))}
+                </div>
+            ) : (
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    navigation={{
+                        prevEl: prevRef.current,
+                        nextEl: nextRef.current,
+                    }}
+                    onBeforeInit={(swiper) => {
+                        // @ts-ignore
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        // @ts-ignore
+                        swiper.params.navigation.nextEl = nextRef.current;
+                    }}
+                    spaceBetween={10}
+                    slidesPerView={2}
+                    breakpoints={{
+                        640: { slidesPerView: 3 },
+                        1024: { slidesPerView: 6 },
+                    }}
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                        pauseOnMouseEnter: true
+                    }}
+                    className="!pb-10"
+                >
+                    {products.map((product) => (
+                        <SwiperSlide key={product.id} className="!h-auto">
+                            <ProductCard {...product} />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
         </section>
     );
 }
