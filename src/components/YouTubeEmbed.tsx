@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Play } from "lucide-react";
 
 interface YouTubeEmbedProps {
@@ -33,11 +34,13 @@ export default function YouTubeEmbed({ id, title, className = "" }: YouTubeEmbed
             className={`absolute inset-0 w-full h-full group bg-slate-900 cursor-pointer ${className}`}
             aria-label={`Play video: ${title}`}
         >
-            <img
+            <Image
                 src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
                 alt={title}
+                fill
+                priority={true}
+                quality={60}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-                loading="lazy"
             />
             <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">

@@ -2,6 +2,7 @@
 
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, ShoppingBag, Youtube, Send, ShieldCheck, Truck, RefreshCcw } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useToast } from "@/context/ToastContext";
 import { useGetHomeContentQuery, useSubscribeNewsletterMutation } from "@/store/api/frontendApi";
@@ -43,7 +44,7 @@ export default function Footer() {
                     <div className="lg:col-span-4 space-y-6">
                         <div className="flex items-center gap-3">
                             {logoUrl ? (
-                                <img src={logoUrl} alt="Logo" className="h-10 w-auto object-contain" />
+                                <Image src={logoUrl} alt="Logo" width={160} height={40} className="h-10 w-auto object-contain" />
                             ) : (
                                 <>
                                     <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-500/10">
@@ -167,7 +168,13 @@ export default function Footer() {
                         © 2026 Alinggon Shop • Engineered by <span className="text-red-600/80">Rangpur IT</span>
                     </p>
                     <div className="flex items-center gap-6">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uU-E1bF5B8-L9R_Lq8_Y8yG7y-N0G-W-Yg&s" className="h-6 filter grayscale invert opacity-20 hover:opacity-100 transition-opacity cursor-pointer" alt="SSL Commerz" />
+                        <Image 
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_uU-E1bF5B8-L9R_Lq8_Y8yG7y-N0G-W-Yg&s" 
+                            width={120}
+                            height={24}
+                            className="h-6 w-auto filter grayscale invert opacity-20 hover:opacity-100 transition-opacity cursor-pointer" 
+                            alt="SSL Commerz" 
+                        />
                         <div className="h-4 w-px bg-white/5"></div>
                         <div className="flex gap-4">
                             <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-[10px] font-black text-white/80">VISA</div>

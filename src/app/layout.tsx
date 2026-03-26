@@ -43,31 +43,19 @@ export default function RootLayout({
           <ToastProvider>
             <AuthProvider>
               <CartProvider>
-                <Suspense fallback={<div className="h-10 bg-slate-900 w-full" />}>
-                  <TopBar />
-                </Suspense>
+                <TopBar />
                 <div className="sticky top-0 z-[200] w-full shadow-sm">
-                  <Suspense fallback={<div className="h-20 bg-white w-full border-b border-gray-100" />}>
-                    <Header />
-                  </Suspense>
-                  <Suspense fallback={<div className="h-12 bg-white w-full shadow-sm" />}>
-                    <Navbar />
-                  </Suspense>
+                  <Header />
+                  <Navbar />
                 </div>
                 <main className="flex-grow pb-24 lg:pb-0">
                   {children}
                 </main>
                 <Toaster position="top-right" />
                 <Footer />
-                <Suspense fallback={null}>
-                  <CartDrawer />
-                </Suspense>
-                <Suspense fallback={null}>
-                  <FloatingActionButtons />
-                </Suspense>
-                <Suspense fallback={null}>
-                  <BottomNav />
-                </Suspense>
+                <CartDrawer />
+                <FloatingActionButtons />
+                <BottomNav />
               </CartProvider>
             </AuthProvider>
           </ToastProvider>
