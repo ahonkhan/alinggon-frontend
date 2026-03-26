@@ -49,6 +49,7 @@ export default function AdsSection() {
                             src={ad.image}
                             alt={ad.alt}
                             fill
+                            quality={60}
                             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />

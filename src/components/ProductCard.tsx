@@ -86,6 +86,7 @@ export default function ProductCard(props: ProductCardProps) {
                         src={image}
                         alt={name}
                         fill
+                        quality={60}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover"
                     />

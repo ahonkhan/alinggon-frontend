@@ -13,9 +13,11 @@ import FloatingActionButtons from "@/components/FloatingActionButtons";
 import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
-import { AdminGalleryModal } from "@/components/AdminGalleryModal";
-import CreateTicketModal from "@/components/support/CreateTicketModal";
-import ImageViewerModal from "@/components/support/ImageViewerModal";
+import dynamic from "next/dynamic";
+
+const AdminGalleryModal = dynamic(() => import("@/components/AdminGalleryModal").then(m => m.AdminGalleryModal), { ssr: false });
+const CreateTicketModal = dynamic(() => import("@/components/support/CreateTicketModal"), { ssr: false });
+const ImageViewerModal = dynamic(() => import("@/components/support/ImageViewerModal"), { ssr: false });
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 
@@ -70,7 +72,6 @@ export default function RootLayout({
             </AuthProvider>
           </ToastProvider>
         </ReduxProvider>
-        <Toaster position="bottom-right" reverseOrder={false} />
         <Script 
           src="//code.tidio.co/uyhnfqwkon69wwzdjm91rvz3qmqmxxop.js" 
           strategy="afterInteractive" 

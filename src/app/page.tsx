@@ -39,7 +39,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="col-span-1 lg:col-span-12 xl:col-span-7">
+          <div className="col-span-1 lg:col-span-7 xl:col-span-7">
             <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-50 shadow-2xl group min-h-[200px] md:min-h-[380px]">
               {homeLoading ? (
                 <SliderSkeleton />
@@ -59,6 +59,7 @@ export default function Home() {
                           alt={`Banner ${index + 1}`}
                           fill
                           priority={index === 0}
+                          quality={60}
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 60vw"
                         />
@@ -134,6 +135,7 @@ export default function Home() {
                           src={item.image}
                           alt={item.name}
                           fill
+                          quality={60}
                           sizes="(max-width: 640px) 33vw, (max-width: 768px) 25vw, (max-width: 1024px) 16vw, 12vw"
                           className="object-cover group-hover:scale-110 transition-transform duration-700"
                         />

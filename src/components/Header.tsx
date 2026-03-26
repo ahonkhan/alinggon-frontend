@@ -2,6 +2,7 @@
 
 import { Heart, Mail, Phone, Search, ShoppingBag, ShoppingCart, Truck, User, Menu, LogOut, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -74,7 +75,14 @@ export default function Header() {
 
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
                             {logoUrl ? (
-                                <img src={logoUrl} alt="Logo" className="h-6 md:h-8  w-auto object-contain" />
+                                <Image 
+                                    src={logoUrl} 
+                                    alt="Logo" 
+                                    width={150} 
+                                    height={40} 
+                                    priority
+                                    className="h-6 md:h-8 w-auto object-contain" 
+                                />
                             ) : (
                                 <>
                                     <div className="bg-red-600 text-white p-2 rounded-xl shadow-lg shadow-red-100 group-hover:rotate-6 transition-transform">

@@ -21,7 +21,7 @@ export default function PromoModal() {
             // Show modal on load
             const showTimeout = setTimeout(() => {
                 setIsOpen(true);
-            }, 1000); // Small delay for better UX
+            }, 3000); // Increased delay
 
             // Auto-close after 30 seconds
             const autoCloseTimeout = setTimeout(() => {
@@ -54,6 +54,7 @@ export default function PromoModal() {
                         src={popupImage}
                         alt="Promotional Offer"
                         fill
+                        quality={60}
                         className="object-cover"
                     />
 
