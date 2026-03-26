@@ -65,7 +65,7 @@ export default function Home() {
                   slidesPerView={1}
                   autoplay={{ delay: 5000, disableOnInteraction: false }}
                   pagination={{ clickable: true }}
-                  className="w-full relative z-10"
+                  className="w-full h-full relative z-10"
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
