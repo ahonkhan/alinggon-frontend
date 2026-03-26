@@ -69,7 +69,7 @@ export default function Home() {
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
-                      <div className="relative w-full h-auto">
+                      <div className="relative w-full h-full">
                         <Image
                           src={banner}
                           alt={`Banner ${index + 1}`}
