@@ -40,16 +40,32 @@ export default function Home() {
           </div>
 
           <div className="col-span-1 lg:col-span-7 xl:col-span-7">
-            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-50 shadow-2xl group min-h-[200px] md:min-h-[380px]">
-              {homeLoading ? (
-                <SliderSkeleton />
-              ) : banners.length > 0 ? (
+            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group min-h-[200px] md:min-h-[380px] aspect-[21/9] md:aspect-[3/1]">
+              {/* Static Fallback / LCP Target */}
+              {(!banners || banners.length === 0 || homeLoading) && (
+                <div className="absolute inset-0 z-0">
+                  <Image
+                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1600"
+                    alt="Hero Loading"
+                    fill
+                    priority
+                    quality={60}
+                    className="object-cover opacity-40 animate-pulse"
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-center px-12 text-white z-10">
+                    <div className="h-4 w-32 bg-red-600/50 rounded-full mb-6 animate-pulse" />
+                    <div className="h-12 w-64 bg-white/20 rounded-xl mb-4 animate-pulse" />
+                  </div>
+                </div>
+              )}
+
+              {banners.length > 0 && (
                 <Swiper
                   modules={[Autoplay, Pagination]}
                   slidesPerView={1}
                   autoplay={{ delay: 5000, disableOnInteraction: false }}
                   pagination={{ clickable: true }}
-                  className="w-full"
+                  className="w-full relative z-10"
                 >
                   {banners.map((banner, index) => (
                     <SwiperSlide key={index}>
@@ -67,23 +83,6 @@ export default function Home() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              ) : (
-                <div className="h-[380px] relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent z-10"></div>
-                  <div className="absolute inset-y-0 left-0 flex flex-col justify-center px-12 text-white z-20 max-w-xl">
-                    <span className="bg-red-600 text-white text-[13px] font-black px-4 py-1.5 rounded-full w-fit mb-6 shadow-xl shadow-red-600/20 uppercase tracking-[0.2em] border border-red-300">New Collection '26</span>
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 leading-none uppercase">Elevate Your<br /><span className="text-red-600">Identity.</span></h1>
-                    <p className="text-xs md:text-sm font-medium opacity-60 mb-8 leading-relaxed uppercase tracking-widest text-balance">Premium curated products for the modern lifestyle explorer.</p>
-                    <Link href="/shop" className="w-fit bg-white text-slate-900 px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-600 hover:text-white transition-all shadow-2xl shadow-white/5 active:scale-95">Discover Shop</Link>
-                  </div>
-                  <Image
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1600"
-                    alt="Banner visual"
-                    fill
-                    priority
-                    className="object-cover opacity-60 transition-transform duration-[10000ms] group-hover:scale-110"
-                  />
-                </div>
               )}
             </div>
           </div>
