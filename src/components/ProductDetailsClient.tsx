@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Instagram, Youtube, Linkedin, MessageCircle, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
+import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Instagram, Youtube, Linkedin, MessageCircle, MessageSquare, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation, useGetHomeContentQuery } from "@/store/api/frontendApi";
@@ -457,6 +457,15 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 >
                                     <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
                                     WhatsApp
+                                </a>
+                                <a
+                                    href={homeContent?.data?.chat_messenger_link || "https://m.me/"}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-white border border-gray-100/80 hover:border-blue-100 hover:bg-blue-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
+                                >
+                                    <div className="bg-blue-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageSquare className="w-4 h-4" /></div>
+                                    Messenger
                                 </a>
                             </div>
                         </div>
