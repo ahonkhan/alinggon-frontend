@@ -36,10 +36,29 @@ export const ProductSkeleton = () => (
 );
 
 export const SliderSkeleton = () => (
-    <div className="relative w-full aspect-[21/9] md:aspect-[3/1] bg-slate-50 border border-gray-100 animate-pulse overflow-hidden flex flex-col justify-center px-12 space-y-4">
-        <div className="h-6 w-32 bg-gray-100 rounded-full"></div>
-        <div className="h-12 w-1/2 bg-gray-100 rounded-xl"></div>
-        <div className="h-4 w-1/3 bg-gray-100 rounded-lg"></div>
-        <div className="h-10 w-28 bg-gray-100 rounded-xl"></div>
+    <div className="relative w-full h-full bg-slate-100 animate-pulse overflow-hidden flex flex-col justify-center px-6 md:px-12 space-y-3 md:space-y-4">
+        {/* Decorative background pulse elements */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-slate-50/30 skew-x-12 -translate-y-1/4 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-50/10 rounded-full blur-3xl"></div>
+        
+        {/* Content placeholders */}
+        <div className="relative z-10 space-y-4">
+            <div className="h-5 md:h-6 w-24 md:w-32 bg-slate-50 rounded-full"></div>
+            <div className="space-y-2">
+                <div className="h-8 md:h-12 w-3/4 md:w-1/2 bg-slate-50 rounded-xl"></div>
+                <div className="h-8 md:h-12 w-1/2 md:w-1/3 bg-slate-50 rounded-xl opacity-60"></div>
+            </div>
+            <div className="h-4 md:h-5 w-2/3 md:w-1/3 bg-slate-50 rounded-lg"></div>
+            <div className="pt-4">
+                <div className="h-10 md:h-12 w-32 md:w-40 bg-slate-50 rounded-xl"></div>
+            </div>
+        </div>
+        
+        {/* Slider dots indicator skeleton */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+            {[1, 2, 3].map((i) => (
+                <div key={i} className={`h-1.5 rounded-full bg-slate-50 ${i === 1 ? 'w-8' : 'w-4'}`}></div>
+            ))}
+        </div>
     </div>
 );

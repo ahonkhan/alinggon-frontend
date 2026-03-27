@@ -43,20 +43,7 @@ export default function Home() {
             <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group min-h-[200px] md:min-h-[380px] aspect-[21/9] md:aspect-[3/1]">
               {/* Static Fallback / LCP Target */}
               {(!banners || banners.length === 0 || homeLoading) && (
-                <div className="absolute inset-0 z-0">
-                  <Image
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1600"
-                    alt="Hero Loading"
-                    fill
-                    priority
-                    quality={60}
-                    className="object-cover opacity-40 animate-pulse"
-                  />
-                  <div className="absolute inset-0 flex flex-col justify-center px-12 text-white z-10">
-                    <div className="h-4 w-32 bg-red-600/50 rounded-full mb-6 animate-pulse" />
-                    <div className="h-12 w-64 bg-white/20 rounded-xl mb-4 animate-pulse" />
-                  </div>
-                </div>
+                <SliderSkeleton />
               )}
 
               {banners.length > 0 && (
