@@ -477,26 +477,25 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
             {/* Description & Feedback (FULL WIDTH TABS) */}
             <div className="mt-12 md:mt-20 bg-white rounded-3xl md:rounded-[3rem] border-2 border-slate-100 shadow-2xl shadow-slate-100/50 overflow-hidden">
-                <div className="border-b border-gray-50 px-4 md:px-10 pt-6 md:pt-8 flex items-center gap-6 md:gap-10 bg-gray-50/30 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                <div className="px-4 md:px-10 py-6 md:py-8 flex items-center gap-4 md:gap-8 bg-gray-50/30 overflow-x-auto whitespace-nowrap scrollbar-hide border-b border-gray-100">
                     <button
                         onClick={() => setActiveTab('description')}
-                        className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'description' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
+                        className={`text-[11px] md:text-sm font-black px-6 py-3 md:px-10 md:py-4 rounded-xl md:rounded-2xl uppercase tracking-[0.2em] transition-all ${activeTab === 'description' ? 'bg-red-500 text-white shadow-xl shadow-red-200' : 'text-slate-700 hover:bg-white hover:text-slate-800 shadow-sm hover:shadow-md'}`}
                     >
                         Description
                     </button>
                     <button
                         onClick={() => setActiveTab('reviews')}
-                        className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'reviews' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
+                        className={`text-[11px] md:text-sm font-black px-6 py-3 md:px-10 md:py-4 rounded-xl md:rounded-2xl uppercase tracking-[0.2em] transition-all ${activeTab === 'reviews' ? 'bg-red-500 text-white shadow-xl shadow-red-200' : 'text-slate-700 hover:bg-white hover:text-slate-800 shadow-sm hover:shadow-md'}`}
                     >
                         Reviews ({reviews.length})
                     </button>
                     <button
                         onClick={() => setActiveTab('specifications')}
-                        className={`text-xs font-black pb-6 -mb-[2px] uppercase tracking-[0.2em] transition-all border-b-2 ${activeTab === 'specifications' ? 'text-red-500 border-red-500' : 'text-gray-300 border-transparent hover:text-slate-600'}`}
+                        className={`text-[11px] md:text-sm font-black px-6 py-3 md:px-10 md:py-4 rounded-xl md:rounded-2xl uppercase tracking-[0.2em] transition-all ${activeTab === 'specifications' ? 'bg-red-500 text-white shadow-xl shadow-red-200' : 'text-slate-700 hover:bg-white hover:text-slate-800 shadow-sm hover:shadow-md'}`}
                     >
                         Specifications
                     </button>
-
                 </div>
 
                 <div className="p-4 md:p-10">
