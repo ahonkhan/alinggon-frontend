@@ -71,7 +71,7 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
                         1024: { slidesPerView: 6 },
                     }}
                     autoplay={{
-                        delay: 5000,
+                        delay: 1000,
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true
                     }}
