@@ -49,7 +49,7 @@ export default function PromoModal() {
                     <X className="w-6 h-6" />
                 </button>
 
-                <div className="relative h-[200px] md:h-[350px] w-full">
+                <div className="relative h-[180px] md:h-[250px] w-full">
                     <Image
                         src={popupImage}
                         alt="Promotional Offer"
