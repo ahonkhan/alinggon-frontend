@@ -29,6 +29,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     const [selectedImage, setSelectedImage] = useState(product.image);
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState<'description' | 'specifications' | 'reviews'>('description');
+    const [magnifier, setMagnifier] = useState({ x: 0, y: 0, show: false });
 
     // Initialize variations to the first available option for each variation type
     const [selectedVariations, setSelectedVariations] = useState<Record<string, string>>(() => {
@@ -198,38 +199,41 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 {/* Left: Gallery */}
                 <div className="lg:col-span-5 space-y-4">
                     <div
-                        className="bg-white p-4 rounded-3xl border border-gray-100 shadow-xl shadow-slate-100/50 relative group overflow-hidden cursor-crosshair"
+                        className="bg-white p-4 rounded-3xl border border-gray-100 shadow-xl shadow-slate-100/50 relative group cursor-crosshair"
                         onMouseMove={(e) => {
                             const rect = e.currentTarget.getBoundingClientRect();
                             const x = ((e.clientX - rect.left) / rect.width) * 100;
                             const y = ((e.clientY - rect.top) / rect.height) * 100;
-                            const magnifier = e.currentTarget.querySelector('.magnifier-overlay') as HTMLElement;
-                            if (magnifier) {
-                                magnifier.style.display = 'block';
-                                magnifier.style.backgroundPosition = `${x}% ${y}%`;
-                            }
+                            setMagnifier({ x, y, show: true });
                         }}
-                        onMouseLeave={(e) => {
-                            const magnifier = e.currentTarget.querySelector('.magnifier-overlay') as HTMLElement;
-                            if (magnifier) magnifier.style.display = 'none';
-                        }}
+                        onMouseLeave={() => setMagnifier(prev => ({ ...prev, show: false }))}
                     >
                         {displayDiscount && (
                             <span className="absolute top-4 left-4 bg-red-500 text-white text-[13px] font-black px-3 py-1.5 rounded-full z-10 shadow-lg uppercase tracking-widest">
                                 {displayDiscount}
                             </span>
                         )}
-                        <img src={selectedImage} className="w-full h-auto object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700" alt={product.name} />
+                        <img 
+                            src={selectedImage} 
+                            className={`w-full h-auto object-cover rounded-2xl transition-all duration-500 ${magnifier.show ? 'scale-105' : 'scale-100'}`} 
+                            alt={product.name} 
+                        />
 
-                        {/* Magnifier Overlay */}
-                        <div
-                            className="magnifier-overlay absolute inset-0 z-20 pointer-events-none border-2 border-red-400/20 rounded-2xl shadow-2xl transition-opacity hidden"
-                            style={{
-                                backgroundImage: `url(${selectedImage})`,
-                                backgroundSize: '250%',
-                                backgroundRepeat: 'no-repeat'
-                            }}
-                        ></div>
+                        {/* External Magnifier Overlay - Logic for Desktop */}
+                        {magnifier.show && (
+                            <div
+                                className="fixed lg:absolute top-0 lg:left-[calc(100%+2rem)] w-[90vw] lg:w-[120%] h-[50vh] lg:h-full z-[100] border-2 border-white/50 backdrop-blur-xl rounded-3xl shadow-2xl pointer-events-none hidden md:block overflow-hidden bg-white"
+                                style={{
+                                    backgroundImage: `url(${selectedImage})`,
+                                    backgroundPosition: `${magnifier.x}% ${magnifier.y}%`,
+                                    backgroundSize: '120%',
+                                    backgroundRepeat: 'no-repeat'
+                                }}
+                            >
+                                {/* Crosshair guide */}
+                                <div className="absolute inset-0 border-2 border-red-500/20 rounded-3xl"></div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Thumbnail Slider */}
