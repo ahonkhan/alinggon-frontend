@@ -1,9 +1,10 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 import ProductCard from "./ProductCard";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
@@ -51,7 +52,7 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
                 </div>
             ) : (
                 <Swiper
-                    modules={[Navigation, Autoplay]}
+                    modules={[Navigation, Autoplay, Pagination]}
                     navigation={{
                         prevEl: prevRef.current,
                         nextEl: nextRef.current,
@@ -62,6 +63,7 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
                         // @ts-ignore
                         swiper.params.navigation.nextEl = nextRef.current;
                     }}
+                    pagination={{ clickable: true }}
                     spaceBetween={10}
                     slidesPerView={2}
                     breakpoints={{
@@ -69,11 +71,11 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
                         1024: { slidesPerView: 6 },
                     }}
                     autoplay={{
-                        delay: 1000,
+                        delay: 5000,
                         disableOnInteraction: false,
                         pauseOnMouseEnter: true
                     }}
-                    className="!pb-10"
+                    className="!pb-14"
                 >
                     {products.map((product) => (
                         <SwiperSlide key={product.id} className="!h-auto">

@@ -92,4 +92,23 @@ body {
 .rich-text-content em { font-style: italic; }
 
 .rich-text-content a { color: #ef4444; text-decoration: underline; }
-.rich-text-content a:hover { color: #dc2626; }
+.rich-text-content a:hover { color: #dc2626; }
+
+/* Swiper Pagination Styles */
+.swiper-pagination {
+    bottom: 0px !important;
+}
+
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    background: #cbd5e1 !important; /* slate-300 */
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #ef4444 !important; /* red-500 */
+    width: 28px !important;
+    border-radius: 5px !important;
+}
