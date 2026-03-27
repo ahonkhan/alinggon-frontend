@@ -213,10 +213,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 {displayDiscount}
                             </span>
                         )}
-                        <img 
-                            src={selectedImage} 
-                            className={`w-full h-auto object-cover rounded-2xl transition-all duration-500 ${magnifier.show ? 'scale-105' : 'scale-100'}`} 
-                            alt={product.name} 
+                        <img
+                            src={selectedImage}
+                            className={`w-full h-auto object-cover rounded-2xl transition-all duration-500 ${magnifier.show ? 'scale-105' : 'scale-100'}`}
+                            alt={product.name}
                         />
 
                         {/* External Magnifier Overlay - Logic for Desktop */}
@@ -381,10 +381,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 <div className="lg:col-span-3 space-y-6">
                     {product.video && (
                         <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative aspect-video shadow-2xl group border-4 border-white">
-                            <video 
-                                src={product.video.startsWith('http') ? product.video : `http://localhost:8000/storage/${product.video}`} 
-                                className="w-full h-full object-cover" 
-                                controls 
+                            <video
+                                src={product.video.startsWith('http') ? product.video : `http://localhost:8000/storage/${product.video}`}
+                                className="w-full h-full object-cover"
+                                controls
                                 poster={product.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400"}
                             />
                         </div>
@@ -400,18 +400,34 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                     {/* WhatsApp & Social Media */}
                     <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 space-y-6">
+
+
+                        <div className="h-px bg-gray-50" />
+
+                        {/* Share Product Section */}
                         <div className="space-y-4">
-                            <h4 className="text-[13px] font-black text-slate-900 uppercase tracking-widest border-b border-gray-50 pb-4">Order on WhatsApp</h4>
-                            <div className="flex flex-col gap-3">
-                                <a 
-                                    href={`https://wa.me/${(homeContent?.data?.chat_whatsapp_number || "8801726526155").replace(/[^0-9]/g, '')}`} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="w-full bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
-                                >
-                                    <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
-                                    WhatsApp
-                                </a>
+                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Share this Product</h4>
+                            <div className="flex flex-wrap gap-3">
+                                <ShareLink
+                                    icon={Facebook}
+                                    platform="facebook"
+                                url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://bazarei.com/product/204/basic-t-deep-violent')}`}
+                                />
+                                <ShareLink
+                                    icon={XIcon}
+                                    platform="x"
+                                    url={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(product.name)}`}
+                                />
+                                <ShareLink
+                                    icon={Linkedin}
+                                    platform="linkedin"
+                                    url={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                                />
+                                <ShareLink
+                                    icon={MessageCircle}
+                                    platform="whatsapp"
+                                    url={`https://api.whatsapp.com/send?text=${encodeURIComponent(product.name + ' ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
+                                />
                             </div>
                         </div>
 
@@ -419,13 +435,29 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
                         {/* Social Media Links */}
                         <div className="space-y-4">
-                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Share / Follow</h4>
-                            <div className="flex flex-wrap gap-3">
-                                {homeContent?.data?.social_facebook && <SocialLink icon={Facebook} url={homeContent.data.social_facebook} />}
-                                {homeContent?.data?.social_x && <SocialLink icon={XIcon} url={homeContent.data.social_x} />}
-                                {homeContent?.data?.social_instagram && <SocialLink icon={Instagram} url={homeContent.data.social_instagram} />}
-                                {homeContent?.data?.social_youtube && <SocialLink icon={Youtube} url={homeContent.data.social_youtube} />}
-                                {homeContent?.data?.social_linkedin && <SocialLink icon={Linkedin} url={homeContent.data.social_linkedin} />}
+                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Follow Us</h4>
+                            <div className="flex flex-wrap lg:flex-nowrap gap-1">
+                                {homeContent?.data?.social_facebook && <SocialLink icon={Facebook} url={homeContent.data.social_facebook} platform="facebook" />}
+                                {homeContent?.data?.social_x && <SocialLink icon={XIcon} url={homeContent.data.social_x} platform="x" />}
+                                {homeContent?.data?.social_instagram && <SocialLink icon={Instagram} url={homeContent.data.social_instagram} platform="instagram" />}
+                                {homeContent?.data?.social_youtube && <SocialLink icon={Youtube} url={homeContent.data.social_youtube} platform="youtube" />}
+                                {homeContent?.data?.social_linkedin && <SocialLink icon={Linkedin} url={homeContent.data.social_linkedin} platform="linkedin" />}
+                            </div>
+                        </div>
+
+
+                        <div className="space-y-4">
+                            <h4 className="text-[13px] font-black text-slate-900 uppercase tracking-widest border-b border-gray-50 pb-4">Order on WhatsApp</h4>
+                            <div className="flex flex-col gap-3">
+                                <a
+                                    href={`https://wa.me/${(homeContent?.data?.chat_whatsapp_number || "8801726526155").replace(/[^0-9]/g, '')}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
+                                >
+                                    <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
+                                    WhatsApp
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -700,13 +732,46 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     );
 }
 
-function SocialLink({ icon: Icon, url }: { icon: any, url: string }) {
+function SocialLink({ icon: Icon, url, platform }: { icon: any, url: string, platform?: string }) {
+    const colors: Record<string, string> = {
+        facebook: 'bg-[#1877F2]',
+        x: 'bg-black',
+        instagram: 'bg-[#E4405F]',
+        youtube: 'bg-[#FF0000]',
+        linkedin: 'bg-[#0077B5]',
+        whatsapp: 'bg-[#25D366]',
+    };
+
+    const bgColor = platform ? colors[platform] : 'bg-slate-400';
+
     return (
-        <a 
-            href={url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-gray-100 text-slate-400 hover:bg-red-500 hover:text-white hover:border-red-500 transition-all transform hover:-translate-y-1 shadow-sm"
+        <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-10 h-10 flex items-center justify-center rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110 active:scale-95 ${bgColor}`}
+        >
+            <Icon className="w-4 h-4" />
+        </a>
+    );
+}
+
+function ShareLink({ icon: Icon, url, platform }: { icon: any, url: string, platform: string }) {
+    const colors: Record<string, string> = {
+        facebook: 'bg-[#1877F2]',
+        x: 'bg-black',
+        instagram: 'bg-[#E4405F]',
+        linkedin: 'bg-[#0077B5]',
+        whatsapp: 'bg-[#25D366]',
+    };
+
+    return (
+        <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-10 h-10 flex items-center justify-center rounded-full text-white shadow-xl transition-all transform hover:-translate-y-1 hover:scale-110 active:scale-95 ${colors[platform]}`}
+            title={`Share on ${platform}`}
         >
             <Icon className="w-4 h-4" />
         </a>
