@@ -23,6 +23,7 @@ export default function Checkout() {
         notes: "",
     });
 
+    const [paymentMethod, setPaymentMethod] = useState<"cod" | "zinipay">("cod");
     const [shippingZone, setShippingZone] = useState<"inside" | "outside">("inside");
     const shippingCharge = cart.length > 0 ? (shippingZone === "inside" ? 80 : 120) : 0;
     const total = cartTotal + shippingCharge;
@@ -44,6 +45,7 @@ export default function Checkout() {
         try {
             const orderData = {
                 ...formData,
+                payment_method: paymentMethod,
                 shipping_cost: shippingCharge,
                 items: cart.map(item => ({
                     product_id: item.id,
@@ -57,7 +59,12 @@ export default function Checkout() {
             if (response.success) {
                 showToast("Order placed successfully!", "success");
                 clearCart();
-                router.push(`/orders/${response.order.order_number}`);
+
+                if (response.payment_url) {
+                    window.location.href = response.payment_url;
+                } else {
+                    router.push(`/orders/${response.order.order_number}`);
+                }
             } else {
                 showToast(response.message || "Failed to place order", "error");
             }
@@ -160,23 +167,43 @@ export default function Checkout() {
                         </div>
                     </div>
 
-                    {/* Payment Method - Only COD as per request */}
+                    {/* Payment Method */}
                     <div className="bg-white rounded-3xl border border-gray-200 shadow-xl shadow-slate-100/50 overflow-hidden">
                         <div className="bg-gray-50 px-8 py-5 border-b border-gray-100">
                             <h3 className="font-black text-gray-800 text-sm uppercase tracking-widest">Payment Method</h3>
                         </div>
-                        <div className="p-8">
-                            <div className="relative">
-                                <label className="flex items-center gap-4 p-5 border-2 border-red-400 bg-red-50/50 rounded-3xl cursor-default transition-all shadow-sm">
-                                    <div className="w-6 h-6 rounded-full border-4 border-white ring-2 ring-red-400 bg-red-400 shadow-inner flex items-center justify-center">
-                                        <div className="w-2.5 h-2.5 bg-white rounded-full"></div>
-                                    </div>
+                        <div className="p-8 space-y-4">
+                            <label
+                                onClick={() => setPaymentMethod("cod")}
+                                className={`flex items-center gap-4 p-5 border-2 rounded-3xl cursor-pointer transition-all shadow-sm ${paymentMethod === "cod" ? "border-red-400 bg-red-50/50" : "border-gray-100 bg-white hover:border-gray-200"}`}
+                            >
+                                <div className={`w-6 h-6 rounded-full border-4 border-white ring-2 flex items-center justify-center ${paymentMethod === "cod" ? "ring-red-400 bg-red-400" : "ring-gray-200 bg-gray-100"}`}>
+                                    {paymentMethod === "cod" && <div className="w-2.5 h-2.5 bg-white rounded-full"></div>}
+                                </div>
+                                <div>
+                                    <span className="text-sm font-black text-slate-800 uppercase tracking-tighter">Cash on Delivery</span>
+                                    <p className="text-[11px] text-gray-500 font-bold uppercase mt-0.5">Pay after you receive your items</p>
+                                </div>
+                            </label>
+
+                            <label
+                                onClick={() => setPaymentMethod("zinipay")}
+                                className={`flex items-center gap-4 p-5 border-2 rounded-3xl cursor-pointer transition-all shadow-sm ${paymentMethod === "zinipay" ? "border-sky-400 bg-sky-50/50" : "border-gray-100 bg-white hover:border-gray-200"}`}
+                            >
+                                <div className={`w-6 h-6 rounded-full border-4 border-white ring-2 flex items-center justify-center ${paymentMethod === "zinipay" ? "ring-sky-400 bg-sky-400" : "ring-gray-200 bg-gray-100"}`}>
+                                    {paymentMethod === "zinipay" && <div className="w-2.5 h-2.5 bg-white rounded-full"></div>}
+                                </div>
+                                <div className="flex-1 flex items-center justify-between">
                                     <div>
-                                        <span className="text-sm font-black text-slate-800 uppercase tracking-tighter">Cash on Delivery</span>
-                                        <p className="text-[13px] text-gray-800 font-bold uppercase mt-0.5">Pay after you receive your items</p>
+                                        <span className="text-sm font-black text-slate-800 uppercase tracking-tighter">Online Payment</span>
+                                        <p className="text-[11px] text-gray-500 font-bold uppercase mt-0.5">bKash, Nagad, Rocket & More</p>
                                     </div>
-                                </label>
-                            </div>
+                                    <div className="flex gap-1">
+                                        <div className="h-4 w-6 bg-slate-100 rounded flex items-center justify-center text-[6px] font-black text-pink-600">bKash</div>
+                                        <div className="h-4 w-6 bg-slate-100 rounded flex items-center justify-center text-[6px] font-black text-orange-600">Nagad</div>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -303,8 +330,8 @@ export default function Checkout() {
                                         </>
                                     ) : (
                                         <>
-                                            <span className="relative z-10">Confirm Order (COD)</span>
-                                            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-600 translate-y-full group-hover:translate-y-0 transition-transform"></div>
+                                            <span className="relative z-10">Confirm Order {paymentMethod === 'cod' ? '(COD)' : '(Online)'}</span>
+                                            <div className={`absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform ${paymentMethod === 'cod' ? 'bg-gradient-to-r from-red-500 to-red-600' : 'bg-gradient-to-r from-sky-500 to-sky-600'}`}></div>
                                         </>
                                     )}
                                 </button>

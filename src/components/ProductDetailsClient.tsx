@@ -411,7 +411,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 <ShareLink
                                     icon={Facebook}
                                     platform="facebook"
-                                url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://bazarei.com/product/204/basic-t-deep-violent')}`}
+                                    url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://bazarei.com/product/204/basic-t-deep-violent')}`}
                                 />
                                 <ShareLink
                                     icon={XIcon}
