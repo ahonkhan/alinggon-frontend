@@ -2,34 +2,25 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function AdsSection() {
-    const ads = [
-        {
-            id: 1,
-            image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=600",
-            link: "/shop?category=Electronics",
-            alt: "Electronics Sale"
-        },
-        {
-            id: 2,
-            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600",
-            link: "/shop?category=Fashion",
-            alt: "Fashion Clearance"
-        },
-        {
-            id: 3,
-            image: "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?auto=format&fit=crop&q=80&w=600",
-            link: "/shop?category=Beauty",
-            alt: "Beauty Essentials"
-        },
-        {
-            id: 4,
-            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600",
-            link: "/shop?category=Home",
-            alt: "Home Decor"
-        }
-    ];
+    const { data: homeContent, isLoading } = useGetHomeContentQuery();
+    const ads = homeContent?.data.special_offer_banners || [];
+
+    if (isLoading) {
+        return (
+            <section className="max-w-[1600px] mx-auto px-4 py-8">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+                    {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="h-[110px] rounded-lg bg-gray-100 animate-pulse"></div>
+                    ))}
+                </div>
+            </section>
+        );
+    }
+
+    if (ads.length === 0) return null;
 
     return (
         <section className="max-w-[1600px] mx-auto px-4 py-8">
@@ -47,15 +38,15 @@ export default function AdsSection() {
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <Image
                             src={ad.image}
-                            alt={ad.alt}
+                            alt={ad.title}
                             fill
                             quality={60}
                             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 25vw"
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />
-                        <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[13px] font-black uppercase tracking-widest shadow-lg">
-                                Shop Now
+                        <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                            <span className="bg-white/90 backdrop-blur text-slate-900 px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                                {ad.title}
                             </span>
                         </div>
                     </Link>

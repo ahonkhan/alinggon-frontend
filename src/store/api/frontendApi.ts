@@ -164,6 +164,12 @@ export interface HomeContentResponse {
     success: boolean;
     data: {
         banners: string[];
+        special_offer_banners: {
+            id: number;
+            title: string;
+            image: string;
+            link: string;
+        }[];
         how_to_order: {
             url: string | null;
             type: 'youtube' | 'custom';

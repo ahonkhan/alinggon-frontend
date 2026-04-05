@@ -358,21 +358,35 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     </button>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-100/50 shadow-sm">
+                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border-2 border-red-500 shadow-sm">
                             <div className="bg-red-50 p-2 rounded-xl"><ShieldCheck className="w-5 h-5 text-red-400" /></div>
                             <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">১০১% আসল প্রোডাক্ট</span>
                         </div>
-                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-gray-100/50 shadow-sm">
+                        <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border-2 border-red-500 shadow-sm">
                             <div className="bg-blue-50 p-2 rounded-xl"><Truck className="w-5 h-5 text-blue-400" /></div>
                             <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">সারা দেশে ডেলিভারি</span>
                         </div>
                     </div>
 
-                    {/* Call Support Back to Original Position */}
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <a href={`tel:${homeContent?.data?.contact_phone || "+97336781645"}`} className="flex-1 bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group">
-                            <div className="bg-green-500 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><Phone className="w-4 h-4" /></div>
-                            {homeContent?.data?.contact_phone || "+97336781645"}
+                    {/* WhatsApp & Messenger Quick Links */}
+                    <div className="flex flex-col md:flex-row gap-3">
+                        <a
+                            href={`https://wa.me/${(homeContent?.data?.chat_whatsapp_number || "8801726526155").replace(/[^0-9]/g, '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-white border-2 border-red-500 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
+                        >
+                            <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
+                            WhatsApp
+                        </a>
+                        <a
+                            href={homeContent?.data?.chat_messenger_link || "https://m.me/"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-white border-2 border-red-500 hover:border-blue-100 hover:bg-blue-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
+                        >
+                            <div className="bg-blue-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageSquare className="w-4 h-4" /></div>
+                            Messenger
                         </a>
                     </div>
                 </div>
@@ -380,10 +394,10 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                 {/* Right: Secondary Info */}
                 <div className="lg:col-span-3 space-y-6">
                     {product.video && (
-                        <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative aspect-video shadow-2xl group border-4 border-white">
+                        <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative shadow-2xl group border-4 border-white">
                             <video
                                 src={product.video.startsWith('http') ? product.video : `http://localhost:8000/storage/${product.video}`}
-                                className="w-full h-full object-cover"
+                                className="w-full h-auto"
                                 controls
                                 poster={product.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400"}
                             />
@@ -399,74 +413,16 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     </Link>
 
                     {/* WhatsApp & Social Media */}
-                    <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 space-y-6">
-
-
-                        <div className="h-px bg-gray-50" />
-
-                        {/* Share Product Section */}
-                        <div className="space-y-4">
-                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Share this Product</h4>
-                            <div className="flex flex-wrap gap-3">
-                                <ShareLink
-                                    icon={Facebook}
-                                    platform="facebook"
-                                    url={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : 'https://bazarei.com/product/204/basic-t-deep-violent')}`}
-                                />
-                                <ShareLink
-                                    icon={XIcon}
-                                    platform="x"
-                                    url={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(product.name)}`}
-                                />
-                                <ShareLink
-                                    icon={Linkedin}
-                                    platform="linkedin"
-                                    url={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
-                                />
-                                <ShareLink
-                                    icon={MessageCircle}
-                                    platform="whatsapp"
-                                    url={`https://api.whatsapp.com/send?text=${encodeURIComponent(product.name + ' ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="h-px bg-gray-50" />
-
+                    <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 space-y-4">
                         {/* Social Media Links */}
                         <div className="space-y-4">
-                            <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Follow Us</h4>
+                            <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">Follow Us</h4>
                             <div className="flex flex-wrap lg:flex-nowrap gap-1">
                                 {homeContent?.data?.social_facebook && <SocialLink icon={Facebook} url={homeContent.data.social_facebook} platform="facebook" />}
                                 {homeContent?.data?.social_x && <SocialLink icon={XIcon} url={homeContent.data.social_x} platform="x" />}
                                 {homeContent?.data?.social_instagram && <SocialLink icon={Instagram} url={homeContent.data.social_instagram} platform="instagram" />}
                                 {homeContent?.data?.social_youtube && <SocialLink icon={Youtube} url={homeContent.data.social_youtube} platform="youtube" />}
                                 {homeContent?.data?.social_linkedin && <SocialLink icon={Linkedin} url={homeContent.data.social_linkedin} platform="linkedin" />}
-                            </div>
-                        </div>
-
-
-                        <div className="space-y-4">
-                            <h4 className="text-[13px] font-black text-slate-900 uppercase tracking-widest border-b border-gray-50 pb-4">Order on WhatsApp</h4>
-                            <div className="flex flex-col gap-3">
-                                <a
-                                    href={`https://wa.me/${(homeContent?.data?.chat_whatsapp_number || "8801726526155").replace(/[^0-9]/g, '')}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full bg-white border border-gray-100/80 hover:border-green-100 hover:bg-green-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
-                                >
-                                    <div className="bg-green-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageCircle className="w-4 h-4 fill-current" /></div>
-                                    WhatsApp
-                                </a>
-                                <a
-                                    href={homeContent?.data?.chat_messenger_link || "https://m.me/"}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full bg-white border border-gray-100/80 hover:border-blue-100 hover:bg-blue-50 text-slate-800 flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
-                                >
-                                    <div className="bg-blue-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageSquare className="w-4 h-4" /></div>
-                                    Messenger
-                                </a>
                             </div>
                         </div>
                     </div>
