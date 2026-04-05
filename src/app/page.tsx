@@ -14,6 +14,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { useGetFeaturedProductsQuery, useGetCategoriesQuery, CategoryData, useGetHomeContentQuery } from "@/store/api/frontendApi";
 import { SliderSkeleton } from "@/components/Skeleton";
+import Loader from "@/components/Loader";
 
 // Dynamic imports for below-the-fold components
 const CustomerRatings = dynamic(() => import("@/components/CustomerRatings"), { ssr: false });
@@ -24,6 +25,7 @@ export default function Home() {
   const { data: featuredData, isLoading: featuredLoading } = useGetFeaturedProductsQuery();
   const { data: catData, isLoading: catLoading } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true });
   const { data: homeContent, isLoading: homeLoading } = useGetHomeContentQuery(undefined, { refetchOnMountOrArgChange: true });
+  const isHeroLoading = catLoading || homeLoading;
   const categories = catData?.data || [];
   const banners = homeContent?.data.banners || [];
 
@@ -31,56 +33,57 @@ export default function Home() {
     <div className="bg-gray-50/50">
       {/* Hero Section */}
       <div className="max-w-[1600px] mx-auto md:px-4 md:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Sidebar Categories - 2 Columns */}
-          <div className="hidden lg:block lg:col-span-2 relative">
-            <div className="lg:absolute lg:inset-0">
-              <CategorySidebar />
+        {isHeroLoading ? (
+          <div className="flex items-center justify-center w-full min-h-[380px] rounded-[1rem] bg-white border border-gray-100 shadow-xl shadow-slate-100/50">
+            <Loader size="lg" variant="brand" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-in fade-in duration-500">
+            {/* Sidebar Categories - 2 Columns */}
+            <div className="hidden lg:block lg:col-span-2 relative">
+              <div className="lg:absolute lg:inset-0">
+                <CategorySidebar />
+              </div>
+            </div>
+
+            <div className="col-span-1 lg:col-span-7 xl:col-span-7">
+              <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group min-h-[200px] md:min-h-[380px] aspect-[21/9] md:aspect-[3/1]">
+                {banners.length > 0 && (
+                  <Swiper
+                    modules={[Autoplay, Pagination]}
+                    slidesPerView={1}
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    pagination={{ clickable: true }}
+                    className="w-full h-full relative z-10"
+                  >
+                    {banners.map((banner, index) => (
+                      <SwiperSlide key={index}>
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={banner}
+                            alt={`Banner ${index + 1}`}
+                            fill
+                            priority={index === 0}
+                            quality={60}
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 60vw"
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                )}
+              </div>
+            </div>
+
+            {/* Video Section - 3 Columns */}
+            <div className="col-span-1 px-4 md:px-0 lg:col-span-3 relative">
+              <div className="lg:absolute lg:inset-0">
+                <VideoSection />
+              </div>
             </div>
           </div>
-
-          <div className="col-span-1 lg:col-span-7 xl:col-span-7">
-            <div className="relative w-full md:rounded-[1rem] overflow-hidden bg-slate-900 shadow-2xl group min-h-[200px] md:min-h-[380px] aspect-[21/9] md:aspect-[3/1]">
-              {/* Static Fallback / LCP Target */}
-              {(!banners || banners.length === 0 || homeLoading) && (
-                <SliderSkeleton />
-              )}
-
-              {banners.length > 0 && (
-                <Swiper
-                  modules={[Autoplay, Pagination]}
-                  slidesPerView={1}
-                  autoplay={{ delay: 5000, disableOnInteraction: false }}
-                  pagination={{ clickable: true }}
-                  className="w-full h-full relative z-10"
-                >
-                  {banners.map((banner, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="relative w-full h-full">
-                        <Image
-                          src={banner}
-                          alt={`Banner ${index + 1}`}
-                          fill
-                          priority={index === 0}
-                          quality={60}
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 75vw, 60vw"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              )}
-            </div>
-          </div>
-
-          {/* Video Section - 2 Columns */}
-          <div className="col-span-1 px-4 md:px-0 lg:col-span-3 relative">
-            <div className="lg:absolute lg:inset-0">
-              <VideoSection />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Ads Section */}

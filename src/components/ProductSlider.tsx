@@ -10,6 +10,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import Link from "next/link";
 import { ProductSkeleton } from "./Skeleton";
+import Loader from "./Loader";
 
 interface ProductSliderProps {
     title: string;
@@ -45,10 +46,8 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
             </div>
 
             {isLoading ? (
-                <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
-                    {[...Array(6)].map((_, i) => (
-                        <ProductSkeleton key={i} />
-                    ))}
+                <div className="flex items-center justify-center py-20 min-h-[400px]">
+                    <Loader size="lg" />
                 </div>
             ) : (
                 <Swiper

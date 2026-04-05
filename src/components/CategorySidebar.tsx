@@ -12,19 +12,6 @@ export default function CategorySidebar() {
 
     const categories = data?.data || [];
 
-    if (isLoading) {
-        return (
-            <div className="relative h-full bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 flex flex-col p-6 space-y-4 animate-pulse">
-                <div className="h-6 w-1/2 bg-gray-100 rounded-lg"></div>
-                <div className="space-y-3 mt-4">
-                    {[...Array(8)].map((_, i) => (
-                        <div key={i} className="h-10 bg-gray-50 rounded-xl w-full"></div>
-                    ))}
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="relative h-full bg-white rounded-[2rem] border border-gray-100 shadow-xl shadow-slate-100/50 flex flex-col">
             <div className="p-4 border-b border-gray-50 bg-gray-50/30 rounded-t-[2rem]">
