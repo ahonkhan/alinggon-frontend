@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { REHYDRATE } from 'redux-persist';
 
 export interface Product {
     id: string;
@@ -335,6 +336,11 @@ const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangp
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
+    extractRehydrationInfo(action, { reducerPath }) {
+        if (action.type === REHYDRATE) {
+            return (action.payload as any)?.[reducerPath];
+        }
+    },
     baseQuery: fetchBaseQuery({
         baseUrl,
         prepareHeaders: (headers) => {

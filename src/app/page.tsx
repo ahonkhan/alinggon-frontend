@@ -22,8 +22,8 @@ const PromoModal = dynamic(() => import("@/components/PromoModal"), { ssr: false
 
 export default function Home() {
   const { data: featuredData, isLoading: featuredLoading } = useGetFeaturedProductsQuery();
-  const { data: catData, isLoading: catLoading } = useGetCategoriesQuery();
-  const { data: homeContent, isLoading: homeLoading } = useGetHomeContentQuery();
+  const { data: catData, isLoading: catLoading } = useGetCategoriesQuery(undefined, { refetchOnMountOrArgChange: true });
+  const { data: homeContent, isLoading: homeLoading } = useGetHomeContentQuery(undefined, { refetchOnMountOrArgChange: true });
   const categories = catData?.data || [];
   const banners = homeContent?.data.banners || [];
 

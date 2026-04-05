@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Lock, Eye, ChevronLeft, ChevronRight, X, Loader2 } from "lucide-react";
-import { useVerifyPersonalPicturePasswordMutation, useVerifyBulkPersonalPicturesPasswordMutation } from "@/store/api/frontendApi";
+import { useVerifyPersonalPicturePasswordMutation, useVerifyBulkPersonalPicturesPasswordMutation, PersonalPicture } from "@/store/api/frontendApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, EffectFade } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,7 +46,7 @@ export const AdminGalleryModal: React.FC = () => {
                     setPassword("");
                     setError("");
                     // Automatically open viewer for this picture
-                    const index = pictures.findIndex(p => p.id === passwordModalId);
+                    const index = pictures.findIndex((p: PersonalPicture) => p.id === passwordModalId);
                     if (index !== -1) {
                         dispatch(openViewer(index));
                     }
