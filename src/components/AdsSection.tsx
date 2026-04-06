@@ -37,7 +37,7 @@ export default function AdsSection() {
                     <Link
                         key={ad.id}
                         href={`/offers/${ad.slug}`}
-                        className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 block animate-shine hover:-translate-y-1 active:scale-[0.98]"
+                        className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 block hover:-translate-y-1 active:scale-[0.98]"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <Image
@@ -49,7 +49,7 @@ export default function AdsSection() {
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform text-center mx-2">
+                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg transform translate-y-2 group-hover:translate-y-0 hover:bg-red-600 hover:text-white transition-all duration-300 text-center mx-2 cursor-pointer">
                                 {ad.title}
                             </span>
                         </div>
