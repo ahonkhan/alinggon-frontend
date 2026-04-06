@@ -443,6 +443,27 @@ export const frontendApi = createApi({
                 body: data,
             }),
         }),
+        forgotPasswordSendOtp: builder.mutation<any, { email_or_phone: string }>({
+            query: (data) => ({
+                url: '/forgot-password/send-otp',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        forgotPasswordVerifyOtp: builder.mutation<any, { identifier: string, type: 'email' | 'phone', otp: string }>({
+            query: (data) => ({
+                url: '/forgot-password/verify-otp',
+                method: 'POST',
+                body: data,
+            }),
+        }),
+        resetPassword: builder.mutation<any, any>({
+            query: (data) => ({
+                url: '/forgot-password/reset',
+                method: 'POST',
+                body: data,
+            }),
+        }),
         trackOrder: builder.query<any, { orderNumber?: string, phone: string }>({
             query: ({ orderNumber, phone }) => {
                 let url = `/orders/track?phone=${phone}`;
@@ -631,6 +652,9 @@ export const {
     useResendOtpMutation,
     useRegisterMutation,
     useLoginMutation,
+    useForgotPasswordSendOtpMutation,
+    useForgotPasswordVerifyOtpMutation,
+    useResetPasswordMutation,
     useTrackOrderQuery,
     useLazyTrackOrderQuery,
     useGetProductReviewsQuery,
