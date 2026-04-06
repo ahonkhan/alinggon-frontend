@@ -137,9 +137,9 @@ export default function ProductCard(props: ProductCardProps) {
                     <div className="flex flex-col md:flex-row gap-2">
                         <button
                             onClick={handleOrderNow}
-                            className="flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
+                            className="flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight animate-shine hover:shadow-lg hover:shadow-red-200"
                         >
-                            <Zap className="w-3 h-3 hidden sm:block" /> Order Now
+                            <Zap className="w-3 h-3 hidden sm:block group-hover:animate-pulse" /> Order Now
                         </button>
                         <button
                             onClick={handleAddToCart}
@@ -152,7 +152,7 @@ export default function ProductCard(props: ProductCardProps) {
 
                         <button
                             onClick={handleAddToCart}
-                            className="md:hidden flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight"
+                            className="md:hidden flex-1 bg-red-600 hover:bg-red-500 text-white text-[13px] font-bold py-2 px-2 rounded transition-all flex items-center justify-center gap-1 active:scale-95 uppercase tracking-tight animate-shine"
                         >
                             <ShoppingCart className="w-4 h-4" /> Add To Cart
                         </button>

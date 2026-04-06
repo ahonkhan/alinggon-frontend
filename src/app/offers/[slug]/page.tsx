@@ -36,7 +36,7 @@ export default function OfferDetailsPage() {
                     <p className="text-gray-500 text-sm leading-relaxed mb-8">
                         The offer you're looking for might have expired or been moved. Don't worry, we have plenty of other amazing deals waiting for you!
                     </p>
-                    <Link href="/" className="inline-flex items-center gap-3 bg-slate-900 hover:bg-red-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-xl shadow-slate-200 active:scale-95 uppercase tracking-widest text-xs group">
+                    <Link href="/" className="inline-flex items-center gap-3 bg-slate-900 hover:bg-red-600 text-white font-black px-10 py-4 rounded-2xl transition-all shadow-xl shadow-slate-200 active:scale-95 uppercase tracking-widest text-xs group animate-shine">
                         <Home className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" /> Return Home
                     </Link>
                 </div>

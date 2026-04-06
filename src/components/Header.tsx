@@ -230,7 +230,7 @@ export default function Header() {
                                     </Link>
                                     <Link
                                         href="/register"
-                                        className="px-6 py-3 bg-red-600 hover:bg-slate-900 text-white text-[11px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95"
+                                        className="px-6 py-3 bg-red-600 hover:bg-slate-900 text-white text-[11px] font-black rounded-xl shadow-xl shadow-red-100/50 transition-all uppercase tracking-widest active:scale-95 animate-shine"
                                     >
                                         Establish Account
                                     </Link>

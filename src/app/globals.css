@@ -5,17 +5,49 @@
   --animate-bounce-slow: bounce-slow 3s infinite;
 
   @keyframes bounce-slow {
-
-    0%,
-    100% {
+    0%, 100% {
       transform: translateY(-5%);
       animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
-
     50% {
       transform: none;
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
+  }
+
+  @keyframes shine {
+    from {
+      left: -100%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+
+  .animate-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transform: skewX(-25deg);
+    transition: none;
+  }
+
+  .animate-shine:hover::after {
+    animation: shine 0.75s ease-in-out;
   }
 }
 

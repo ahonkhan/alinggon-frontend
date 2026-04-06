@@ -37,7 +37,7 @@ export default function AdsSection() {
                     <Link
                         key={ad.id}
                         href={`/offers/${ad.slug}`}
-                        className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
+                        className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 block animate-shine hover:-translate-y-1 active:scale-[0.98]"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <Image

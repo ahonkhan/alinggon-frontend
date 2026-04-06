@@ -31,8 +31,8 @@ export default function ProductSlider({ title, products, link = "/shop", isLoadi
                     <h2 className="text-xl md:text-2xl font-black tracking-tighter text-slate-900 uppercase">{title}</h2>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Link href={link} className="hidden md:block text-[13px] font-black text-red-400 hover:text-slate-900 transition-colors uppercase tracking-widest">
-                        View All
+                    <Link href={link} className="hidden md:block text-[13px] font-black text-red-500 hover:text-slate-900 transition-all uppercase tracking-widest hover:translate-x-1 duration-300">
+                        View All →
                     </Link>
                     <div className="flex gap-2">
                         <button ref={prevRef} className="p-2 rounded-full border border-gray-100 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all text-slate-800">
