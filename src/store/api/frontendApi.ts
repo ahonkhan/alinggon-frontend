@@ -167,8 +167,9 @@ export interface HomeContentResponse {
         special_offer_banners: {
             id: number;
             title: string;
-            image: string;
-            link: string;
+            slug: string;
+            thumbnail: string | null;
+            banner: string | null;
         }[];
         how_to_order: {
             url: string | null;
@@ -215,6 +216,20 @@ export interface HomeContentResponse {
         chat_messenger_link?: string | null;
         chat_whatsapp_number?: string | null;
     };
+}
+
+export interface Offer {
+    id: number;
+    title: string;
+    slug: string;
+    banner: string | null;
+    thumbnail: string | null;
+    products: Product[];
+}
+
+export interface OfferDetailsResponse {
+    success: boolean;
+    data: Offer;
 }
 
 export interface BrandsResponse {
@@ -470,6 +485,9 @@ export const frontendApi = createApi({
         getHomeContent: builder.query<HomeContentResponse, void>({
             query: () => '/home-content',
         }),
+        getOfferDetails: builder.query<OfferDetailsResponse, string>({
+            query: (slug) => `/offers/${slug}`,
+        }),
         getAboutInfo: builder.query<AboutInfoResponse, void>({
             query: () => '/about-info',
         }),
@@ -623,6 +641,7 @@ export const {
     useGetActiveFlashSaleQuery,
     useGetSiteReviewsQuery,
     useGetHomeContentQuery,
+    useGetOfferDetailsQuery,
     useGetAboutInfoQuery,
     useVerifyPersonalPicturePasswordMutation,
     useVerifyBulkPersonalPicturesPasswordMutation,

@@ -7,6 +7,10 @@ import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 export default function AdsSection() {
     const { data: homeContent, isLoading } = useGetHomeContentQuery();
     const ads = homeContent?.data.special_offer_banners || [];
+    const bannerUrl = (path: string | null) => {
+        if (!path) return "/placeholder.jpg";
+        return path;
+    };
 
     if (isLoading) {
         return (
@@ -32,12 +36,12 @@ export default function AdsSection() {
                 {ads.map((ad) => (
                     <Link
                         key={ad.id}
-                        href={ad.link}
+                        href={`/offers/${ad.slug}`}
                         className="group overflow-hidden rounded-lg relative h-[110px] shadow-lg hover:shadow-xl transition-shadow border border-gray-100 block"
                     >
                         <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors z-10"></div>
                         <Image
-                            src={ad.image}
+                            src={bannerUrl(ad.thumbnail)}
                             alt={ad.title}
                             fill
                             quality={60}
@@ -45,7 +49,7 @@ export default function AdsSection() {
                             className="object-cover transform group-hover:scale-110 transition-transform duration-700"
                         />
                         <div className="absolute inset-0 flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                            <span className="bg-white/90 backdrop-blur text-slate-900 px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                            <span className="bg-white/90 backdrop-blur text-slate-900 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-transform text-center mx-2">
                                 {ad.title}
                             </span>
                         </div>
