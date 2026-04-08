@@ -6,14 +6,12 @@ import CategorySidebar from "@/components/CategorySidebar";
 import ProductSlider from "@/components/ProductSlider";
 import VideoSection from "@/components/VideoSection";
 import AdsSection from "@/components/AdsSection";
-import ProductCard from "@/components/ProductCard";
 import dynamic from "next/dynamic";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { useGetFeaturedProductsQuery, useGetCategoriesQuery, CategoryData, useGetHomeContentQuery } from "@/store/api/frontendApi";
-import { SliderSkeleton } from "@/components/Skeleton";
 import Loader from "@/components/Loader";
 
 // Dynamic imports for below-the-fold components
@@ -86,9 +84,19 @@ export default function Home() {
         )}
       </div>
 
-      {/* Ads Section */}
-      <div className="border-t border-gray-100">
-        <AdsSection />
+    
+
+      {/* Promotional Banner */}
+      <div className="max-w-[1000px] mx-auto ">
+        <Link href="/offers" className="block w-full overflow-hidden rounded-xl md:rounded-[2rem] transition-all active:scale-[0.99] group">
+          <div className="relative w-full aspect-[22/3] md:aspect-[2200/140]">
+             <img 
+               src="https://img.lazcdn.com/us/domino/060cca7b-c922-4fc4-aa87-5f0394dd3801_BD-1188-140.gif_2200x2200q80.gif_.webp" 
+               alt="Exclusive Offers" 
+               className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-700"
+             />
+          </div>
+        </Link>
       </div>
 
       {/* Explore Collections Slider */}
@@ -151,12 +159,6 @@ export default function Home() {
       <ProductSlider
         title="Alinggon New Arrival"
         products={featuredData?.data.new_arrivals || []}
-        isLoading={featuredLoading}
-      />
-
-      <ProductSlider
-        title="Our Special Offers"
-        products={featuredData?.data.special_offers || []}
         isLoading={featuredLoading}
       />
 

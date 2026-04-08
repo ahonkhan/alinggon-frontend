@@ -85,9 +85,7 @@ export default function OfferDetailsPage() {
                             <h1 className="text-4xl lg:text-6xl font-black text-slate-900 uppercase tracking-tighter leading-[0.9] mb-6">
                                 {offer.title}
                             </h1>
-                            <p className="text-gray-500 text-sm lg:text-base uppercase tracking-widest font-bold mb-8 max-w-xl leading-relaxed">
-                                Discover our curated collection of premium products at special prices. limited time offer for our valued customers.
-                            </p>
+                           
                             
                             <div className="flex justify-center flex-wrap gap-4">
                                 <div className="bg-gray-50 border border-gray-100 px-6 py-3 rounded-2xl flex items-center gap-3">

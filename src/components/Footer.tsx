@@ -67,8 +67,14 @@ export default function Footer() {
                                     <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat1_value || "100%"}</p>
                                     <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat1_label || "Authentic"}</p>
                                 </div>
-                                <div className="space-y-1 border-l border-green/80 pl-4 border-r-2 border-green-500 pr-4">
-                                    <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat2_value || "24/7"}</p>
+                                <div className="space-y-1 border-l border-white/10 pl-4">
+                                    <div className="flex items-center gap-2">
+                                        <p className="text-lg font-black text-white tracking-tighter leading-none">{homeContent?.data?.footer_stat2_value || "24/7"}</p>
+                                        <div className="relative flex h-2 w-2">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                        </div>
+                                    </div>
                                     <p className="text-[10px] font-black text-red-600 uppercase tracking-widest">{homeContent?.data?.footer_stat2_label || "Support"}</p>
                                 </div>
                             </div>

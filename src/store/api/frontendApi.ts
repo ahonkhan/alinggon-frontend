@@ -232,6 +232,11 @@ export interface OfferDetailsResponse {
     data: Offer;
 }
 
+export interface OffersResponse {
+    success: boolean;
+    data: Offer[];
+}
+
 export interface BrandsResponse {
     success: boolean;
     data: BrandData[];
@@ -352,8 +357,8 @@ export interface ProfileStatsResponse {
 }
 
 // Ensure base URL matches the backend API
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
-// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
+const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
@@ -508,6 +513,9 @@ export const frontendApi = createApi({
         }),
         getOfferDetails: builder.query<OfferDetailsResponse, string>({
             query: (slug) => `/offers/${slug}`,
+        }),
+        getOffers: builder.query<OffersResponse, void>({
+            query: () => '/offers',
         }),
         getAboutInfo: builder.query<AboutInfoResponse, void>({
             query: () => '/about-info',
@@ -666,6 +674,7 @@ export const {
     useGetSiteReviewsQuery,
     useGetHomeContentQuery,
     useGetOfferDetailsQuery,
+    useGetOffersQuery,
     useGetAboutInfoQuery,
     useVerifyPersonalPicturePasswordMutation,
     useVerifyBulkPersonalPicturesPasswordMutation,
