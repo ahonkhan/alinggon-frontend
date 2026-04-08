@@ -87,13 +87,20 @@ export default function Home() {
     
 
       {/* Promotional Banner */}
-      <div className="max-w-[1000px] mx-auto p-4">
+      <div className="max-w-[1600px] mx-auto p-4">
+
+        <div className="flex flex-col items-center mb-10 text-center space-y-4">
+          <h2 className="text-3xl animate-color-pulse font-black tracking-tighter uppercase text-slate-900 border-b-4 border-red-600 pb-2">
+            Alinggon Exclusive Offers
+          </h2>
+        </div>
+
         <Link href="/offers" className="block w-full overflow-hidden rounded-xl md:rounded-[2rem] transition-all active:scale-[0.99] group">
-          <div className="relative w-full aspect-[22/3] md:aspect-[2200/140]">
+          <div className="relative w-full ">
              <img 
                src="https://img.lazcdn.com/us/domino/060cca7b-c922-4fc4-aa87-5f0394dd3801_BD-1188-140.gif_2200x2200q80.gif_.webp" 
                alt="Exclusive Offers" 
-               className="w-full h-auto object-cover group-hover:scale-[1.01] transition-transform duration-700"
+               className="w-full  object-cover group-hover:scale-[1.01] transition-transform duration-700"
              />
           </div>
         </Link>

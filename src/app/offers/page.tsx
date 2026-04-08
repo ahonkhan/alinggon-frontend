@@ -57,45 +57,57 @@ export default function OffersPage() {
                 </div>
             </div>
 
+             <div className="max-w-[1600px] mx-auto px-4 mb-6">
+            <img
+                    src="/images/banners/alinggon.jpg"
+                    alt="Alinggon Exclusive Offers Banner"
+          
+                    className="object-cover w-full h-auto lg:h-[400px]"
+                />
+        </div>
+
             <div className="max-w-[1600px] mx-auto px-4">
                 {offers.map((offer, index) => (
                     <section key={offer.id} className="mb-4 last:mb-0 animate-in fade-in slide-in-from-bottom-4 duration-700" style={{ animationDelay: `${index * 150}ms` }}>
                         {/* Offer Header - Styled after Daraz MEGA DEALS */}
                         <div className={`relative overflow-hidden rounded-lg md:rounded-xl p-2 md:p-4 mb-0 flex items-center justify-between shadow-lg ${
-                            index % 3 === 0 ? 'bg-gradient-to-r from-[#ff9900] to-[#ff4d00]' : 
-                            index % 3 === 1 ? 'bg-gradient-to-r from-[#00bfff] to-[#1e90ff]' : 
-                            'bg-gradient-to-r from-[#8e44ad] to-[#9b59b6]'
+                            index % 4 === 0 ? 'bg-gradient-to-r from-[#ff9900] to-[#ff4d00]' : 
+                            index % 4 === 1 ? 'bg-gradient-to-r from-[#00bfff] to-green-500' : 
+                            index % 4 === 2 ? 'bg-gradient-to-r from-red-500 to-blue-600' : 
+                            'bg-gradient-to-r from-yellow-500 to-blue-600'
                         }`}>
                             {/* Decorative background icons (simplified) */}
                             <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
                                 <Zap className="w-32 h-32 rotate-12" />
                             </div>
 
-                            <div className="flex items-center gap-4 relative z-10">
+                            <div className="flex w-full  justify-between items-center gap-4 relative z-10">
                                 <div className="hidden md:flex items-center justify-center w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl border border-white/30">
                                     {index % 3 === 0 ? <Flame className="w-6 h-6 text-white" /> : 
                                      index % 3 === 1 ? <Zap className="w-6 h-6 text-white" /> : 
                                      <Star className="w-6 h-6 text-white" />}
                                 </div>
-                                <div>
-                                    <h2 className="text-xl md:text-3xl font-black text-white uppercase tracking-tighter leading-none italic">
+                                <div className="flex justify-center flex-col ">
+                                    <h2 className="text-xl md:text-3xl font-black text-black uppercase tracking-tighter leading-none italic">
                                         {offer.title}
                                     </h2>
                                     <div className="flex items-center gap-2 mt-1">
-                                        <div className="w-8 h-[2px] bg-white/50"></div>
-                                        <span className="text-[10px] md:text-xs font-black text-white/80 uppercase tracking-widest leading-none">
+                                        <div className="w-8 h-[2px] bg-black/50"></div>
+                                        <span className="text-[10px] md:text-xs font-black text-black/80 uppercase tracking-widest leading-none">
                                             Limited Time Offer
                                         </span>
                                     </div>
                                 </div>
-                            </div>
 
-                            <Link 
+                                 <Link 
                                 href={`/offers/${offer.slug}`} 
                                 className="relative z-10 flex items-center gap-2 bg-slate-900/40 hover:bg-slate-900 backdrop-blur-md text-white px-5 md:px-8 py-2 md:py-3 rounded-full border border-white/20 transition-all font-black uppercase text-[10px] md:text-xs tracking-[0.2em] group"
                             >
                                 More <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Link>
+                            </div>
+
+                           
                         </div>
 
                         {/* Product Grid */}

@@ -24,6 +24,17 @@
     }
   }
 
+  --animate-color-pulse: color-change 2s infinite;
+
+  @keyframes color-change {
+    0% {
+      color: red; /* slate-900 */
+    }
+    100% {
+      color: black; /* red-600 */
+    }
+  }
+
 }
 
 .animate-shine {
@@ -52,6 +63,19 @@
   animation: shine 0.75s ease-in-out;
 }
 
+  .animate-color-pulse{
+    animation:color-change 1s infinite ease-in-out;
+
+    } 
+
+  @keyframes color-change {
+    0%, 100% {
+      color: #0f172a; /* slate-900 */
+    }
+    50% {
+      color: #dc2626;   /* red-600 */
+    }
+  }
 
 :root {
   --foreground-rgb: 15, 23, 42;
