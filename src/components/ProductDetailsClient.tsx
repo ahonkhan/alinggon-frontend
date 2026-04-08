@@ -417,7 +417,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         {/* Social Media Links */}
                         <div className="space-y-4">
                             <h4 className="text-[11px] font-black text-slate-900 uppercase tracking-widest">Follow Us</h4>
-                            <div className="flex flex-wrap lg:flex-nowrap gap-1">
+                            <div className="flex flex-wrap lg:flex-nowrap justify-between">
                                 {homeContent?.data?.social_facebook && <SocialLink icon={Facebook} url={homeContent.data.social_facebook} platform="facebook" />}
                                 {homeContent?.data?.social_x && <SocialLink icon={XIcon} url={homeContent.data.social_x} platform="x" />}
                                 {homeContent?.data?.social_instagram && <SocialLink icon={Instagram} url={homeContent.data.social_instagram} platform="instagram" />}
