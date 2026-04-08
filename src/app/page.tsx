@@ -87,7 +87,7 @@ export default function Home() {
     
 
       {/* Promotional Banner */}
-      <div className="max-w-[1000px] mx-auto ">
+      <div className="max-w-[1000px] mx-auto p-4">
         <Link href="/offers" className="block w-full overflow-hidden rounded-xl md:rounded-[2rem] transition-all active:scale-[0.99] group">
           <div className="relative w-full aspect-[22/3] md:aspect-[2200/140]">
              <img 
