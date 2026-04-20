@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { usePlaceOrderMutation } from "@/store/api/frontendApi";
 import { useToast } from "@/context/ToastContext";
+import { useEffect } from "react";
+import { trackPixelEvent } from "@/utils/pixel";
 
 export default function Checkout() {
     const { cart, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
@@ -27,6 +29,19 @@ export default function Checkout() {
     const [shippingZone, setShippingZone] = useState<"inside" | "outside">("inside");
     const shippingCharge = cart.length > 0 ? (shippingZone === "inside" ? 80 : 120) : 0;
     const total = cartTotal + shippingCharge;
+
+    // Facebook Pixel & CAPI tracking
+    useEffect(() => {
+        if (cart.length > 0) {
+            trackPixelEvent("InitiateCheckout", {
+                content_ids: cart.map(item => item.id.toString()),
+                content_type: "product",
+                value: cartTotal,
+                currency: "BDT",
+                num_items: cart.reduce((acc, item) => acc + item.quantity, 0)
+            });
+        }
+    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,6 +72,19 @@ export default function Checkout() {
             const response = await placeOrder(orderData).unwrap();
 
             if (response.success) {
+                // Facebook Pixel & CAPI tracking for Purchase
+                trackPixelEvent("Purchase", {
+                    content_ids: cart.map(item => item.id.toString()),
+                    content_type: "product",
+                    value: total,
+                    currency: "BDT",
+                    num_items: cart.reduce((acc, item) => acc + item.quantity, 0),
+                    order_id: response.order.order_number
+                }, {
+                    email: formData.customer_email,
+                    phone: formData.customer_phone
+                });
+
                 showToast("Order placed successfully!", "success");
                 clearCart();
 

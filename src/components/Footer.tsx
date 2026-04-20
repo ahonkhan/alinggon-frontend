@@ -99,6 +99,7 @@ export default function Footer() {
                             ) : (
                                 <>
                                     <li><NavLink href="/shop">Master Catalog</NavLink></li>
+                                    <li><NavLink href="/blog">Our Blog</NavLink></li>
                                     <li><NavLink href="/about">About Admin</NavLink></li>
                                     <li><NavLink href="/orders">Order Vault</NavLink></li>
                                     <li><NavLink href="/track-order">Live Tracking</NavLink></li>

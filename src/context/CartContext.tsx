@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { Product } from "@/store/api/frontendApi";
+import { trackPixelEvent } from "@/utils/pixel";
 
 export interface CartItem extends Product {
     quantity: number;
@@ -83,6 +84,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (openDrawer) {
             setIsCartOpen(true);
         }
+
+        // Facebook Pixel & CAPI tracking
+        trackPixelEvent("AddToCart", {
+            content_ids: [product.id.toString()],
+            content_name: product.name,
+            content_type: "product",
+            value: product.price * quantity,
+            currency: "BDT",
+            contents: [
+                { id: product.id.toString(), quantity: quantity, price: product.price }
+            ]
+        });
     };
 
     const removeFromCart = (cartItemId: string) => {

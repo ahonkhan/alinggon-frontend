@@ -14,6 +14,7 @@ import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
 import ClientModals from "@/components/ClientModals";
+import MarketingScripts from "@/components/MarketingScripts";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-gray-50 text-gray-800 font-normal antialiased min-h-screen flex flex-col`}>
         <ReduxProvider>
+          <MarketingScripts />
           <ClientModals />
           <ToastProvider>
             <AuthProvider>

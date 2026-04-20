@@ -215,6 +215,15 @@ export interface HomeContentResponse {
         footer_col2_links?: { name: string; url: string }[];
         chat_messenger_link?: string | null;
         chat_whatsapp_number?: string | null;
+        marketing?: {
+            gtm_head: string | null;
+            gtm_body: string | null;
+            analytics_code: string | null;
+            meta_domain_verification: string | null;
+            custom_head_script: string | null;
+            custom_footer_script: string | null;
+            cookie_consent_script: string | null;
+        };
     };
 }
 
@@ -353,6 +362,50 @@ export interface ProfileStatsResponse {
         total_orders: number;
         spent_amount: number;
         active_tickets: number;
+    };
+}
+
+export interface Blog {
+    id: number;
+    blog_category_id: number;
+    title: string;
+    slug: string;
+    content: string;
+    featured_image: string | null;
+    tags: string | null;
+    author: string | null;
+    view_count: number;
+    meta_title: string | null;
+    meta_description: string | null;
+    status: boolean;
+    created_at: string;
+    category?: BlogCategory;
+    images?: { id: number; image_path: string }[];
+}
+
+export interface BlogCategory {
+    id: number;
+    name: string;
+    slug: string;
+    status: boolean;
+    blogs_count?: number;
+}
+
+export interface BlogsResponse {
+    success: boolean;
+    data: Blog[];
+    meta: {
+        current_page: number;
+        last_page: number;
+        total: number;
+    };
+}
+
+export interface BlogDetailsResponse {
+    success: boolean;
+    data: {
+        blog: Blog;
+        related_blogs: Blog[];
     };
 }
 
@@ -642,6 +695,21 @@ export const frontendApi = createApi({
                 body: data,
             }),
         }),
+        getBlogCategories: builder.query<{ success: boolean; data: BlogCategory[] }, void>({
+            query: () => '/blog-categories',
+        }),
+        getBlogs: builder.query<BlogsResponse, Record<string, string | number>>({
+            query: (params) => {
+                const searchParams = new URLSearchParams();
+                Object.entries(params).forEach(([key, value]) => {
+                    if (value) searchParams.append(key, value.toString());
+                });
+                return `/blogs?${searchParams.toString()}`;
+            },
+        }),
+        getBlogDetails: builder.query<BlogDetailsResponse, string>({
+            query: (slug) => `/blogs/${slug}`,
+        }),
     }),
 });
 
@@ -694,4 +762,7 @@ export const {
     useGetWishlistQuery,
     useToggleWishlistMutation,
     useSubscribeNewsletterMutation,
+    useGetBlogCategoriesQuery,
+    useGetBlogsQuery,
+    useGetBlogDetailsQuery,
 } = frontendApi;

@@ -2,12 +2,23 @@
 
 import { CheckCircle, Package, ArrowRight, Home, ShoppingBag, Download } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { trackPixelEvent } from "@/utils/pixel";
 
 function SuccessContent() {
     const searchParams = useSearchParams();
     const orderId = searchParams.get("id") || "ORD-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+    // Facebook Pixel & CAPI tracking (Fallback for redirects)
+    useEffect(() => {
+        if (orderId) {
+            trackPixelEvent("Purchase", {
+                order_id: orderId,
+                currency: "BDT"
+            });
+        }
+    }, [orderId]);
 
     return (
         <main className="min-h-screen flex items-center justify-center p-4 bg-gray-50/50">

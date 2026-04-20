@@ -5,7 +5,8 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import ProductDetailsClient from "@/components/ProductDetailsClient";
 import { useGetProductDetailsQuery } from "@/store/api/frontendApi";
-import { use } from "react";
+import { use, useEffect } from "react";
+import { trackPixelEvent } from "@/utils/pixel";
 
 interface PageProps {
     params: Promise<{ slug: string }>;
@@ -29,6 +30,19 @@ export default function ProductDetailsPage({ params }: PageProps) {
     }
 
     const product = response.data;
+
+    // Facebook Pixel & CAPI tracking
+    useEffect(() => {
+        if (product) {
+            trackPixelEvent("ViewContent", {
+                content_ids: [product.id.toString()],
+                content_name: product.name,
+                content_type: "product",
+                value: product.price,
+                currency: "BDT"
+            });
+        }
+    }, [product]);
 
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
