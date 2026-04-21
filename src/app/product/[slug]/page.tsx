@@ -16,20 +16,7 @@ export default function ProductDetailsPage({ params }: PageProps) {
     const { slug } = use(params);
     const { data: response, isLoading, error } = useGetProductDetailsQuery(slug);
 
-    if (isLoading) {
-        return <div className="min-h-screen flex items-center justify-center font-bold text-gray-500">Loading product...</div>;
-    }
-
-    if (error || !response || !response.success) {
-        return (
-            <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-                <h1 className="text-2xl font-bold text-gray-800">Product not found</h1>
-                <Link href="/shop" className="text-red-500 hover:text-red-600 underline">Return to Shop</Link>
-            </div>
-        );
-    }
-
-    const product = response.data;
+    const product = response?.data;
 
     // Facebook Pixel & CAPI tracking
     useEffect(() => {
@@ -43,6 +30,19 @@ export default function ProductDetailsPage({ params }: PageProps) {
             });
         }
     }, [product]);
+
+    if (isLoading) {
+        return <div className="min-h-screen flex items-center justify-center font-bold text-gray-500">Loading product...</div>;
+    }
+
+    if (error || !response || !response.success || !product) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center gap-4">
+                <h1 className="text-2xl font-bold text-gray-800">Product not found</h1>
+                <Link href="/shop" className="text-red-500 hover:text-red-600 underline">Return to Shop</Link>
+            </div>
+        );
+    }
 
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
