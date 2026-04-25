@@ -218,6 +218,7 @@ export interface HomeContentResponse {
         marketing?: {
             gtm_head: string | null;
             gtm_body: string | null;
+            facebook_pixel_id: string | null;
             analytics_code: string | null;
             meta_domain_verification: string | null;
             custom_head_script: string | null;

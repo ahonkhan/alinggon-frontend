@@ -35,6 +35,8 @@ export default function Checkout() {
         if (cart.length > 0) {
             trackPixelEvent("InitiateCheckout", {
                 content_ids: cart.map(item => item.id.toString()),
+                content_name: cart.map(item => item.name).join(', '),
+                content_category: cart[0]?.category,
                 content_type: "product",
                 value: cartTotal,
                 currency: "BDT",
@@ -75,11 +77,17 @@ export default function Checkout() {
                 // Facebook Pixel & CAPI tracking for Purchase
                 trackPixelEvent("Purchase", {
                     content_ids: cart.map(item => item.id.toString()),
+                    content_name: cart.map(item => item.name).join(', '),
                     content_type: "product",
                     value: total,
                     currency: "BDT",
                     num_items: cart.reduce((acc, item) => acc + item.quantity, 0),
-                    order_id: response.order.order_number
+                    order_id: response.order.order_number,
+                    contents: cart.map(item => ({
+                        id: item.id.toString(),
+                        quantity: item.quantity,
+                        price: item.price
+                    }))
                 }, {
                     email: formData.customer_email,
                     phone: formData.customer_phone

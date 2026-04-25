@@ -8,9 +8,13 @@ export const trackPixelEvent = async (
     data: Record<string, any> = {},
     userData: Record<string, any> = {}
 ) => {
+    // Generate a unique Event ID for deduplication between Browser and CAPI
+    const event_id = `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+
     // 1. Browser Event (If fbq is available)
     if (typeof window !== "undefined" && (window as any).fbq) {
-        (window as any).fbq("track", eventName, data);
+        // Facebook requires the eventID as the 4th parameter for deduplication
+        (window as any).fbq("track", eventName, data, { eventID: event_id });
     }
 
     // 2. Server Event (CAPI via our backend)
@@ -23,6 +27,7 @@ export const trackPixelEvent = async (
             },
             body: JSON.stringify({
                 event_name: eventName,
+                event_id: event_id, // Pass the same ID to the server
                 data: {
                     ...data,
                     source_url: typeof window !== "undefined" ? window.location.href : "",

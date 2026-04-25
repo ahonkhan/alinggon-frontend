@@ -24,6 +24,7 @@ export default function ProductDetailsPage({ params }: PageProps) {
             trackPixelEvent("ViewContent", {
                 content_ids: [product.id.toString()],
                 content_name: product.name,
+                content_category: product.category,
                 content_type: "product",
                 value: product.price,
                 currency: "BDT"

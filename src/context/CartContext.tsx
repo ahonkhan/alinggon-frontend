@@ -89,6 +89,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         trackPixelEvent("AddToCart", {
             content_ids: [product.id.toString()],
             content_name: product.name,
+            content_category: product.category,
             content_type: "product",
             value: product.price * quantity,
             currency: "BDT",
