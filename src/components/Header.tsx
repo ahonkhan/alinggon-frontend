@@ -76,13 +76,13 @@ export default function Header() {
                         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
                             {logoUrl ? (
                                 <div className="h-6 md:h-8 flex items-center">
-                                    <Image 
-                                        src={logoUrl} 
-                                        alt="Logo" 
-                                        width={160} 
-                                        height={32} 
+                                    <Image
+                                        src={logoUrl}
+                                        alt="Logo"
+                                        width={160}
+                                        height={32}
                                         priority
-                                        className="h-full w-auto object-contain" 
+                                        className="h-full w-auto object-contain"
                                     />
                                 </div>
                             ) : (
@@ -203,7 +203,7 @@ export default function Header() {
                                         <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-red-50 transition-colors shadow-lg overflow-hidden">
                                             {user.profile_photo ? (
                                                 <img
-                                                    src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                                    src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '')}/storage/${user.profile_photo}`}
                                                     alt={user.name}
                                                     className="w-full h-full object-cover"
                                                 />

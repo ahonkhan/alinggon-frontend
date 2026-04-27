@@ -7,8 +7,10 @@ import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { ChatProvider } from "@/context/ChatContext";
 import { ToastProvider } from "@/context/ToastContext";
 import CartDrawer from "@/components/CartDrawer";
+import ChatBox from "@/components/chat/ChatBox";
 import FloatingActionButtons from "@/components/FloatingActionButtons";
 import BottomNav from "@/components/BottomNav";
 import { ReduxProvider } from "@/providers/ReduxProvider";
@@ -38,33 +40,36 @@ export default function RootLayout({
           <ClientModals />
           <ToastProvider>
             <AuthProvider>
-              <CartProvider>
-                <Suspense fallback={<div className="h-[40px] bg-slate-900 w-full" />}>
-                  <TopBar />
-                </Suspense>
-                <div className="sticky top-0 z-[200] w-full shadow-sm">
-                  <Suspense fallback={<div className="h-[80px] md:h-[104px] bg-white w-full border-b border-gray-100" />}>
-                    <Header />
+              <ChatProvider>
+                <CartProvider>
+                  <Suspense fallback={<div className="h-[40px] bg-slate-900 w-full" />}>
+                    <TopBar />
                   </Suspense>
-                  <Suspense fallback={<div className="h-[48px] bg-white w-full shadow-sm" />}>
-                    <Navbar />
+                  <div className="sticky top-0 z-[200] w-full shadow-sm">
+                    <Suspense fallback={<div className="h-[80px] md:h-[104px] bg-white w-full border-b border-gray-100" />}>
+                      <Header />
+                    </Suspense>
+                    <Suspense fallback={<div className="h-[48px] bg-white w-full shadow-sm" />}>
+                      <Navbar />
+                    </Suspense>
+                  </div>
+                  <main className="flex-grow pb-24 lg:pb-0">
+                    {children}
+                  </main>
+                  <Toaster position="top-right" />
+                  <Footer />
+                  <Suspense fallback={null}>
+                    <CartDrawer />
                   </Suspense>
-                </div>
-                <main className="flex-grow pb-24 lg:pb-0">
-                  {children}
-                </main>
-                <Toaster position="top-right" />
-                <Footer />
-                <Suspense fallback={null}>
-                  <CartDrawer />
-                </Suspense>
-                <Suspense fallback={null}>
-                  <FloatingActionButtons />
-                </Suspense>
-                <Suspense fallback={null}>
-                  <BottomNav />
-                </Suspense>
-              </CartProvider>
+                  <ChatBox />
+                  <Suspense fallback={null}>
+                    <FloatingActionButtons />
+                  </Suspense>
+                  <Suspense fallback={null}>
+                    <BottomNav />
+                  </Suspense>
+                </CartProvider>
+              </ChatProvider>
             </AuthProvider>
           </ToastProvider>
         </ReduxProvider>

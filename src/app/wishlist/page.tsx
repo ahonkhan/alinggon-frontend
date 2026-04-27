@@ -34,7 +34,7 @@ export default function WishlistPage() {
     const getImageUrl = (image: string | undefined) => {
         if (!image) return '/images/placeholder.png';
         if (image.startsWith('http')) return image;
-        const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '');
+        const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '');
         return `${baseUrl}/storage/${image}`;
     };
 

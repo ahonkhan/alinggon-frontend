@@ -3,11 +3,13 @@
 import { ShoppingCart, ArrowUp, X, MessageCircle, Phone, MessageSquare, Gift } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState, useEffect, useRef } from "react";
+import { useChat } from "@/context/ChatContext";
 import { useGetHomeContentQuery } from "@/store/api/frontendApi";
 
 export default function FloatingActionButtons() {
     const { data: homeContent } = useGetHomeContentQuery();
     const { openCart, cart } = useCart();
+    const { toggleChat } = useChat();
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isBannerMinimized, setIsBannerMinimized] = useState(false);
 
@@ -124,21 +126,22 @@ export default function FloatingActionButtons() {
                             </div>
                         </a>
 
-                        {/* Messenger Option */}
-                        <a
-                            href={messengerLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-blue-100 group hover:bg-blue-50 transition-all hover:translate-x-2"
+                        {/* Live Chat Option */}
+                        <button
+                            onClick={() => {
+                                toggleChat();
+                                setIsHelpOpen(false);
+                            }}
+                            className="flex items-center gap-3 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 group hover:bg-slate-50 transition-all hover:translate-x-2 w-full"
                         >
-                            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
+                            <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition-transform">
                                 <MessageSquare className="w-5 h-5" />
                             </div>
                             <div className="flex flex-col min-w-[120px]">
-                                <span className="text-[12px] font-black text-blue-600 uppercase tracking-widest leading-none text-left">Messenger</span>
-                                <span className="text-xs font-black text-slate-800 uppercase tracking-tight text-left">FB Messenger</span>
+                                <span className="text-[12px] font-black text-slate-900 uppercase tracking-widest leading-none text-left">Live Chat</span>
+                                <span className="text-xs font-black text-slate-500 uppercase tracking-tight text-left">Chat with Vendor</span>
                             </div>
-                        </a>
+                        </button>
                     </div>
                 )}
             </div>

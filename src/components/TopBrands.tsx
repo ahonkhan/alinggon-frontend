@@ -9,7 +9,7 @@ import { useGetBrandsQuery } from "@/store/api/frontendApi";
 const getLogoUrl = (logo: string | undefined) => {
     if (!logo) return '';
     if (logo.startsWith('http')) return logo;
-    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '') || 'http://localhost:8000';
+    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '') || 'https://alinggon-admin.rangpurit.com';
     return `${baseUrl}/storage/${logo}`;
 };
 

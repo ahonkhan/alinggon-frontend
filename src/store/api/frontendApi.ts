@@ -412,7 +412,7 @@ export interface BlogDetailsResponse {
 
 // Ensure base URL matches the backend API
 const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
-// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api';
+// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',

@@ -19,7 +19,7 @@ export const trackPixelEvent = async (
 
     // 2. Server Event (CAPI via our backend)
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com'}/api/pixel/track`, {
+        const response = await fetch(`${'https://alinggon-admin.rangpurit.com'}/api/pixel/track`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -72,7 +72,7 @@ export default function Profile() {
                                 <div className="w-32 h-32 md:w-40 md:h-40 bg-gray-100 rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl overflow-hidden relative">
                                     {user.profile_photo ? (
                                         <img
-                                            src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                            src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '')}/storage/${user.profile_photo}`}
                                             alt={user.name}
                                             className="w-full h-full object-cover"
                                         />
