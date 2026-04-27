@@ -285,7 +285,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     </div>
 
                     <div className="flex items-baseline gap-3">
-                        <span className="text-4xl font-black text-red-500 font-sans tracking-tighter">৳{displayPrice.toFixed(0)}</span>
+                        <span className="text-4xl font-black text-red-500 font-sans tracking-tighter">৳{Number(displayPrice).toFixed(0)}</span>
                         {displayOriginalPrice && (
                             <span className="text-lg text-gray-300 line-through font-sans font-bold">৳{Number(displayOriginalPrice).toFixed(0)}</span>
                         )}
