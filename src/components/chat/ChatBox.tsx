@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useChat } from "@/context/ChatContext";
 import { useAuth } from "@/context/AuthContext";
 import { X, Send, User, Store, ArrowLeft } from "lucide-react";
+import { API_URL } from "@/config/api";
 
 export default function ChatBox() {
     const { isOpen, toggleChat, messages, sendMessage, activeReceiver, setActiveReceiver, activeVendorId } = useChat();
@@ -37,14 +38,16 @@ export default function ChatBox() {
 
     const fetchChatList = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat/list`, {
+            const response = await fetch(`${API_URL}/chat/list`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json',
                 },
             });
-            const data = await response.json();
-            setChatList(data);
+            if (response.ok) {
+                const data = await response.json();
+                setChatList(data);
+            }
         } catch (error) {
             console.error("Failed to fetch chat list", error);
         }

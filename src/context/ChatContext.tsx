@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useAuth } from "./AuthContext";
 import { initEcho } from "@/utils/echo";
+import { API_URL } from "@/config/api";
 
 interface Message {
     id: number;
@@ -71,14 +72,16 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
     const fetchMessages = async (receiverId: number) => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat/messages/${receiverId}`, {
+            const response = await fetch(`${API_URL}/chat/messages/${receiverId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json',
                 },
             });
-            const data = await response.json();
-            setMessages(data);
+            if (response.ok) {
+                const data = await response.json();
+                setMessages(data);
+            }
         } catch (error) {
             console.error("Failed to fetch messages", error);
         }
@@ -86,7 +89,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
     const sendMessage = async (message: string, receiverId: number, vendorId?: number) => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat/send`, {
+            const response = await fetch(`${API_URL}/chat/send`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

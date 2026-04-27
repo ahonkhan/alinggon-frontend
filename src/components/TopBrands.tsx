@@ -6,10 +6,12 @@ import Link from "next/link";
 import "swiper/css";
 import { useGetBrandsQuery } from "@/store/api/frontendApi";
 
+import { API_URL } from "@/config/api";
+
 const getLogoUrl = (logo: string | undefined) => {
     if (!logo) return '';
     if (logo.startsWith('http')) return logo;
-    const baseUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '') || 'https://alinggon-admin.rangpurit.com';
+    const baseUrl = API_URL.replace('/api', '');
     return `${baseUrl}/storage/${logo}`;
 };
 

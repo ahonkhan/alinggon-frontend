@@ -410,9 +410,7 @@ export interface BlogDetailsResponse {
     };
 }
 
-// Ensure base URL matches the backend API
-const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
-// const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api';
+import { API_URL } from '@/config/api';
 
 export const frontendApi = createApi({
     reducerPath: 'frontendApi',
@@ -422,7 +420,7 @@ export const frontendApi = createApi({
         }
     },
     baseQuery: fetchBaseQuery({
-        baseUrl,
+        baseUrl: API_URL,
         prepareHeaders: (headers) => {
             const token = typeof window !== 'undefined' ? localStorage.getItem('alinggon_token') : null;
             if (token) {

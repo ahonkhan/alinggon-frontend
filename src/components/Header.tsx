@@ -20,6 +20,8 @@ function useDebounce<T>(value: T, delay: number): T {
     return debouncedValue;
 }
 
+import { API_URL } from "@/config/api";
+
 export default function Header() {
     const { openCart, cartCount } = useCart();
     const { user, logout } = useAuth();
@@ -203,7 +205,7 @@ export default function Header() {
                                         <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-red-50 transition-colors shadow-lg overflow-hidden">
                                             {user.profile_photo ? (
                                                 <img
-                                                    src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                                    src={user.profile_photo.startsWith('http') ? user.profile_photo : `${API_URL.replace('/api', '')}/storage/${user.profile_photo}`}
                                                     alt={user.name}
                                                     className="w-full h-full object-cover"
                                                 />

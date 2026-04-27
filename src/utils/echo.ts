@@ -9,6 +9,8 @@ declare global {
     }
 }
 
+import { API_URL, PUSHER_KEY, PUSHER_CLUSTER } from '@/config/api';
+
 /**
  * Initializes Laravel Echo for the client-side.
  * Since Next.js runs on both server and client, we must check for 'window'.
@@ -20,10 +22,10 @@ export const initEcho = (token: string | null): Echo<any> | undefined => {
 
             window.Echo = new Echo({
                 broadcaster: 'pusher',
-                key: process.env.NEXT_PUBLIC_PUSHER_APP_KEY,
-                cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
+                key: PUSHER_KEY,
+                cluster: PUSHER_CLUSTER,
                 forceTLS: true,
-                authEndpoint: `${process.env.NEXT_PUBLIC_API_URL}/broadcasting/auth`,
+                authEndpoint: `${API_URL}/broadcasting/auth`,
                 auth: {
                     headers: {
                         Authorization: token ? `Bearer ${token}` : '',
