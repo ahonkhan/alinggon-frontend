@@ -12,6 +12,9 @@ interface Message {
     message: string;
     is_read: boolean;
     is_vendor_sender: boolean;
+    image?: string;
+    file_type?: string;
+    file_name?: string;
     created_at: string;
 }
 
@@ -19,7 +22,7 @@ interface ChatContextType {
     isOpen: boolean;
     toggleChat: () => void;
     messages: Message[];
-    sendMessage: (message: string, receiverId: number, vendorId?: number) => Promise<void>;
+    sendMessage: (message: string, receiverId: number, vendorId?: number, file?: File) => Promise<void>;
     activeReceiver: number | null;
     setActiveReceiver: (id: number | null) => void;
     activeVendorId: number | null;
@@ -50,7 +53,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
             channel.listen('.message.sent', (data: { message: Message }) => {
                 // Update messages state if the sender is the one we are currently viewing
-                if (data.message.sender_id === activeReceiver) {
+                if (Number(data.message.sender_id) === Number(activeReceiver)) {
                     setMessages((prev) => [...prev, data.message]);
                 }
             });
@@ -87,20 +90,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    const sendMessage = async (message: string, receiverId: number, vendorId?: number) => {
+    const sendMessage = async (message: string, receiverId: number, vendorId?: number, file?: File) => {
         try {
+            const formData = new FormData();
+            formData.append('receiver_id', receiverId.toString());
+            if (message) formData.append('message', message);
+            if (vendorId) formData.append('vendor_id', vendorId.toString());
+            if (file) formData.append('image', file);
+
             const response = await fetch(`${API_URL}/chat/send`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                     Accept: 'application/json',
                 },
-                body: JSON.stringify({
-                    receiver_id: receiverId,
-                    message,
-                    vendor_id: vendorId,
-                }),
+                body: formData,
             });
             
             if (response.ok) {

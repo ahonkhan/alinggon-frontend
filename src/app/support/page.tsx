@@ -2,9 +2,6 @@
 
 import React from 'react';
 import TicketList from '@/components/support/TicketList';
-import { ChevronLeft } from 'lucide-react';
-import Link from 'next/link';
-
 import AccountSidebar from '@/components/AccountSidebar';
 
 export default function SupportPage() {

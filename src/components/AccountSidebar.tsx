@@ -11,7 +11,8 @@ import {
     Headset,
     Heart,
     ShieldCheck,
-    LayoutDashboard
+    LayoutDashboard,
+    MessageSquare
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
@@ -25,6 +26,7 @@ export default function AccountSidebar() {
         { label: "My Orders", href: "/orders", icon: Package },
         { label: "Wishlist", href: "/wishlist", icon: Heart },
         { label: "Support Tickets", href: "/support", icon: Headset },
+        { label: "Vendor Chat", href: "/vendor-chat", icon: MessageSquare },
     ];
 
     if (!user) return null;
@@ -36,7 +38,7 @@ export default function AccountSidebar() {
                     <div className="w-20 h-20 bg-gray-100 rounded-2xl mx-auto flex items-center justify-center text-white shadow-xl rotate-3 hover:rotate-0 transition-transform mb-4 overflow-hidden border-2 border-white">
                         {user.profile_photo ? (
                             <img
-                                src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-admin.rangpurit.com/api').replace('/api', '')}/storage/${user.profile_photo}`}
+                                src={user.profile_photo.startsWith('http') ? user.profile_photo : `${(process.env.NEXT_PUBLIC_API_URL || 'https://alinggon-ap.rangpurit.com/api').replace('/api', '')}/storage/${user.profile_photo}`}
                                 alt={user.name}
                                 className="w-full h-full object-cover"
                             />

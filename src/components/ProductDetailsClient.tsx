@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import { Minus, Plus, ShoppingCart, Zap, CheckCircle, ShieldCheck, Truck, Phone, PhoneForwarded, Facebook, Instagram, Youtube, Linkedin, MessageCircle, MessageSquare, PlayCircle, Star, Image as ImageIcon, User, ChevronRight, Heart, Quote, X, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ProductCard from "./ProductCard";
 import { ProductDetailsResponse, useSubmitReviewMutation, useToggleLikeReviewMutation, useGetHomeContentQuery } from "@/store/api/frontendApi";
 import { useCart } from "@/context/CartContext";
@@ -27,6 +28,7 @@ interface ProductDetailsClientProps {
 }
 
 export default function ProductDetailsClient({ product }: ProductDetailsClientProps) {
+    const router = useRouter();
     const [selectedImage, setSelectedImage] = useState(product.image);
     const [quantity, setQuantity] = useState(1);
     const [activeTab, setActiveTab] = useState<'description' | 'specifications' | 'reviews'>('description');
@@ -90,7 +92,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
     // Track active image from combination if exists, otherwise fallback to generic switching logic
     useMemo(() => {
         if (activeCombination?.featured_image) {
-            const imgPath = activeCombination.featured_image.startsWith('http') ? activeCombination.featured_image : `https://alinggon-admin.rangpurit.com/storage/${activeCombination.featured_image}`;
+            const imgPath = activeCombination.featured_image.startsWith('http') ? activeCombination.featured_image : `https://alinggon-ap.rangpurit.com/storage/${activeCombination.featured_image}`;
             setSelectedImage(imgPath);
         }
     }, [activeCombination]);
@@ -192,7 +194,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
 
     // Format gallery images
     const galleryImages: string[] = product.gallery && product.gallery.length > 0
-        ? product.gallery.map((g: any) => g.image_path.startsWith('http') ? g.image_path : `https://alinggon-admin.rangpurit.com/storage/${g.image_path}`)
+        ? product.gallery.map((g: any) => g.image_path.startsWith('http') ? g.image_path : `https://alinggon-ap.rangpurit.com/storage/${g.image_path}`)
         : [product.image];
 
     return (
@@ -277,8 +279,14 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 </span>
                             )}
                             {product.vendor && (
-                                <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest">
+                                <span className="text-[13px] font-black text-gray-800 uppercase tracking-widest flex items-center gap-2">
                                     Vendor: <Link href={`/shop?vendor=${product.vendor.shop_slug || product.vendor.id}`} className="text-red-500 hover:underline">{product.vendor.shop_name}</Link>
+                                    <button
+                                        onClick={() => router.push(`/vendor-chat?receiver_id=${product.vendor.user_id}&vendor_id=${product.vendor.id}&name=${encodeURIComponent(product.vendor.shop_name)}`)}
+                                        className="inline-flex items-center gap-1.5 text-[10px] bg-slate-900 text-white font-black px-2.5 py-1 rounded-lg hover:bg-black transition-all active:scale-95 cursor-pointer shadow-sm"
+                                    >
+                                        <MessageSquare className="w-3.5 h-3.5" /> Chat
+                                    </button>
                                 </span>
                             )}
                         </div>
@@ -359,7 +367,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                         <Zap className="w-5 h-5" /> অর্ডার করুন
                     </button>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border-2 border-red-500 shadow-sm">
                             <div className="bg-red-50 p-2 rounded-xl"><ShieldCheck className="w-5 h-5 text-red-400" /></div>
                             <span className="text-[13px] font-black text-slate-800 uppercase tracking-tighter leading-tight">১০১% আসল প্রোডাক্ট</span>
@@ -390,19 +398,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                             <div className="bg-blue-600 text-white p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><MessageSquare className="w-4 h-4" /></div>
                             Messenger
                         </a>
-                        {product.vendor && (
-                            <button
-                                onClick={() => {
-                                    setActiveReceiver(product.vendor.user_id);
-                                    setActiveVendorId(product.vendor.id);
-                                    toggleChat();
-                                }}
-                                className="flex-1 bg-slate-900 border-2 border-slate-900 hover:bg-black text-white flex items-center justify-center gap-3 p-4 rounded-2xl font-black text-[13px] uppercase tracking-widest shadow-sm transition-all hover:-translate-y-1 group"
-                            >
-                                <div className="bg-white text-slate-900 p-1.5 rounded-lg group-hover:rotate-12 transition-transform"><User className="w-4 h-4" /></div>
-                                Chat with Vendor
-                            </button>
-                        )}
+
                     </div>
                 </div>
 
@@ -411,7 +407,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                     {product.video && (
                         <div className="bg-slate-900 rounded-[2rem] overflow-hidden relative shadow-2xl group border-4 border-white">
                             <video
-                                src={product.video.startsWith('http') ? product.video : `https://alinggon-admin.rangpurit.com/storage/${product.video}`}
+                                src={product.video.startsWith('http') ? product.video : `https://alinggon-ap.rangpurit.com/storage/${product.video}`}
                                 className="w-full h-auto"
                                 controls
                                 poster={product.image || "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=400"}
@@ -535,7 +531,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                     <div className="flex items-center gap-4">
                                                         <div className="w-14 h-14 rounded-2xl bg-white shadow-lg overflow-hidden border-2 border-red-50 p-0.5 group-hover:border-red-200 transition-colors">
                                                             <img
-                                                                src={r.user?.profile_photo ? (r.user.profile_photo.startsWith('http') ? r.user.profile_photo : `https://alinggon-admin.rangpurit.com/storage/${r.user.profile_photo}`) : `https://ui-avatars.com/api/?name=${r.user?.name}&background=random`}
+                                                                src={r.user?.profile_photo ? (r.user.profile_photo.startsWith('http') ? r.user.profile_photo : `https://alinggon-ap.rangpurit.com/storage/${r.user.profile_photo}`) : `https://ui-avatars.com/api/?name=${r.user?.name}&background=random`}
                                                                 alt={r.user?.name}
                                                                 className="w-full h-full object-cover rounded-[14px]"
                                                             />
@@ -555,7 +551,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                                     <div className="flex gap-3 mt-6">
                                                         {r.images.map((img, idx) => (
                                                             <div key={idx} className="w-20 h-20 rounded-2xl overflow-hidden shadow-sm border border-white">
-                                                                <img src={img.startsWith('http') ? img : `https://alinggon-admin.rangpurit.com/storage/${img}`} className="w-full h-full object-cover" />
+                                                                <img src={img.startsWith('http') ? img : `https://alinggon-ap.rangpurit.com/storage/${img}`} className="w-full h-full object-cover" />
                                                             </div>
                                                         ))}
                                                     </div>
@@ -591,7 +587,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsClientPr
                                 </div>
 
                                 <div className="lg:col-span-5">
-                                    <div className="bg-white p-6 md:p-10 rounded-3xl md:rounded-[3rem] border-2 border-red-500 shadow-2xl shadow-red-100/50 sticky top-24">
+                                    <div className="bg-white p-6 md:p-10 rounded-3xl md:rounded-[3rem] border-2 border-red-500 shadow-2xl shadow-red-100/50 lg:sticky lg:top-24">
                                         <h3 className="font-black text-slate-900 mb-6 md:mb-8 text-xs md:text-sm uppercase tracking-widest text-center border-b-2 border-red-100 pb-6">এই পণ্য সম্পর্কে মতামত দিন</h3>
                                         <form className="space-y-6" onSubmit={handleReviewSubmit}>
                                             <div className="flex justify-center gap-3 mb-8">

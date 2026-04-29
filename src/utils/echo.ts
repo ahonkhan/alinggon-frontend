@@ -19,6 +19,7 @@ export const initEcho = (token: string | null): Echo<any> | undefined => {
     if (typeof window !== 'undefined') {
         if (!window.Echo) {
             window.Pusher = Pusher;
+            Pusher.logToConsole = true;
 
             window.Echo = new Echo({
                 broadcaster: 'pusher',

@@ -38,7 +38,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         { label: "My Orders", href: "/orders" },
         { label: "Track Order", href: "/tracking" },
         { label: "Customer Review", href: "/reviews" },
-        { label: "Become a Vendor", href: "https://alinggon-admin.rangpurit.com/vendor/register", external: true },
+        { label: "Become a Vendor", href: "https://alinggon-ap.rangpurit.com/vendor/register", external: true },
     ];
 
     return (

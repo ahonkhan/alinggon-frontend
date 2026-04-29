@@ -28,7 +28,7 @@ export default function TopBar() {
                     <span className="opacity-20 hidden md:block">/</span>
 
                     <a
-                        href="https://alinggon-admin.rangpurit.com/vendor/register"
+                        href="https://alinggon-ap.rangpurit.com/vendor/register"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-red-400 hover:text-white transition-colors"
