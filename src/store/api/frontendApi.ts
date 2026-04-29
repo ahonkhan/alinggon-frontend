@@ -709,12 +709,20 @@ export const frontendApi = createApi({
         getBlogDetails: builder.query<BlogDetailsResponse, string>({
             query: (slug) => `/blogs/${slug}`,
         }),
+        cookieConsent: builder.mutation<any, { consent_type: string }>({
+            query: (data) => ({
+                url: '/cookie-consent',
+                method: 'POST',
+                body: data,
+            }),
+        }),
     }),
 });
 
-
 export const {
     useGetFeaturedProductsQuery,
+    useCookieConsentMutation,
+
     useGetCategoriesQuery,
     useGetProductDetailsQuery,
     useGetProductsQuery,

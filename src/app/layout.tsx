@@ -17,8 +17,10 @@ import { ReduxProvider } from "@/providers/ReduxProvider";
 import { Suspense } from "react";
 import ClientModals from "@/components/ClientModals";
 import MarketingScripts from "@/components/MarketingScripts";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 import Script from "next/script";
 import { Toaster } from "react-hot-toast";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +40,9 @@ export default function RootLayout({
         <ReduxProvider>
           <MarketingScripts />
           <ClientModals />
+          <CookieConsentBanner />
           <ToastProvider>
+
             <AuthProvider>
               <ChatProvider>
                 <CartProvider>
