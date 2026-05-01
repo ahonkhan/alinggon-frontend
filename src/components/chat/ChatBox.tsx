@@ -3,15 +3,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useChat } from "@/context/ChatContext";
 import { useAuth } from "@/context/AuthContext";
-import { X, Send, User, Store, ArrowLeft } from "lucide-react";
+import { X, Send, User, Store, ArrowLeft, Phone, PhoneOff, Mic, MicOff } from "lucide-react";
 import { API_URL } from "@/config/api";
+import { agoraCallService } from "@/utils/AgoraCallService";
 
 export default function ChatBox() {
-    const { isOpen, toggleChat, messages, sendMessage, activeReceiver, setActiveReceiver, activeVendorId } = useChat();
+    const { 
+        isOpen, toggleChat, messages, sendMessage, 
+        activeReceiver, setActiveReceiver, activeVendorId,
+        isCalling, incomingCall, startCall, acceptCall, rejectCall, endCall
+    } = useChat();
     const { user, token } = useAuth();
     const [input, setInput] = useState("");
     const [chatList, setChatList] = useState<any[]>([]);
     const [view, setView] = useState<'list' | 'chat'>('list');
+    const [isMuted, setIsMuted] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -34,6 +40,38 @@ export default function ChatBox() {
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    // Agora Call Effect
+    useEffect(() => {
+        if (isCalling && token && activeReceiver) {
+            handleJoinCall();
+        } else {
+            agoraCallService.leave();
+        }
+    }, [isCalling]);
+
+    const handleJoinCall = async () => {
+        try {
+            const channelName = incomingCall?.channel_name || `call_${Math.min(user.id, activeReceiver)}_${Math.max(user.id, activeReceiver)}`;
+            
+            const response = await fetch(`${API_URL}/agora/token?channelName=${channelName}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            const { token: agoraToken, appId, uid } = await response.json();
+            
+            await agoraCallService.init(appId);
+            await agoraCallService.join(channelName, agoraToken, uid);
+        } catch (error) {
+            console.error("Agora join failed", error);
+            endCall();
+        }
+    };
+
+    const toggleMute = () => {
+        const newMuted = !isMuted;
+        setIsMuted(newMuted);
+        agoraCallService.toggleMute(newMuted);
     };
 
     const fetchChatList = async () => {
@@ -83,9 +121,20 @@ export default function ChatBox() {
                         </p>
                     </div>
                 </div>
-                <button onClick={toggleChat} className="hover:bg-white/10 p-1 rounded-full">
-                    <X className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-2">
+                    {view === 'chat' && (
+                        <button 
+                            onClick={() => startCall(activeReceiver!)} 
+                            className="hover:bg-white/10 p-2 rounded-full text-green-400"
+                            title="Start Voice Call"
+                        >
+                            <Phone className="w-5 h-5" />
+                        </button>
+                    )}
+                    <button onClick={toggleChat} className="hover:bg-white/10 p-1 rounded-full">
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
             </div>
 
             {/* Content */}
@@ -146,6 +195,56 @@ export default function ChatBox() {
                             </div>
                         ))}
                         <div ref={messagesEndRef} />
+                    </div>
+                )}
+
+                {/* Call Overlay */}
+                {(isCalling || incomingCall) && (
+                    <div className="absolute inset-0 bg-slate-900/95 z-[250] flex flex-col items-center justify-center text-white p-6 animate-in fade-in duration-300">
+                        <div className="w-24 h-24 bg-slate-800 rounded-full flex items-center justify-center mb-6 animate-pulse ring-4 ring-blue-500/20">
+                            <User className="w-12 h-12 text-blue-400" />
+                        </div>
+                        
+                        <h4 className="text-xl font-bold mb-1 text-center">
+                            {incomingCall ? incomingCall.from_user.name : (chatList.find(c => c.id === activeReceiver)?.name || 'Calling...')}
+                        </h4>
+                        <p className="text-sm text-gray-400 mb-12">
+                            {incomingCall ? 'Incoming Voice Call' : (isCalling ? 'On Call' : 'Connecting...')}
+                        </p>
+
+                        <div className="flex gap-6">
+                            {incomingCall ? (
+                                <>
+                                    <button 
+                                        onClick={rejectCall}
+                                        className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-all shadow-lg"
+                                    >
+                                        <PhoneOff className="w-8 h-8" />
+                                    </button>
+                                    <button 
+                                        onClick={acceptCall}
+                                        className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-lg"
+                                    >
+                                        <Phone className="w-8 h-8" />
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <button 
+                                        onClick={toggleMute}
+                                        className={`w-14 h-14 ${isMuted ? 'bg-orange-500' : 'bg-slate-700'} rounded-full flex items-center justify-center hover:opacity-80 transition-all`}
+                                    >
+                                        {isMuted ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
+                                    </button>
+                                    <button 
+                                        onClick={endCall}
+                                        className="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-all shadow-lg"
+                                    >
+                                        <PhoneOff className="w-6 h-6" />
+                                    </button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>

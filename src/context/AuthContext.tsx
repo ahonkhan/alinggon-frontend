@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { useLoginMutation, useRegisterMutation } from "@/store/api/frontendApi";
 
+import { initBeams } from "@/utils/beams";
+
 interface User {
     id?: number;
     name: string;
@@ -96,6 +98,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         localStorage.setItem("alinggon_user", JSON.stringify(userData));
         localStorage.setItem("alinggon_token", userToken);
     };
+
+    useEffect(() => {
+        if (user && user.id) {
+            initBeams(user.id.toString());
+        }
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user, token, login, register, logout, updateUser, setAuth, isLoading }}>

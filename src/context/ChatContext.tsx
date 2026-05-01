@@ -27,6 +27,15 @@ interface ChatContextType {
     setActiveReceiver: (id: number | null) => void;
     activeVendorId: number | null;
     setActiveVendorId: (id: number | null) => void;
+    
+    // Call related
+    isCalling: boolean;
+    incomingCall: any | null;
+    startCall: (receiverId: number) => Promise<void>;
+    acceptCall: () => Promise<void>;
+    rejectCall: () => Promise<void>;
+    endCall: () => Promise<void>;
+    isAccepted: boolean;
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
@@ -38,6 +47,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     const [activeReceiver, setActiveReceiver] = useState<number | null>(null);
     const [activeVendorId, setActiveVendorId] = useState<number | null>(null);
 
+    // Call state
+    const [isCalling, setIsCalling] = useState(false);
+    const [incomingCall, setIncomingCall] = useState<any | null>(null);
+    const [currentCallData, setCurrentCallData] = useState<any | null>(null);
+    const [isAccepted, setIsAccepted] = useState(false);
+
     const toggleChat = () => setIsOpen(!isOpen);
 
     // Handle Real-time Echo Listeners
@@ -45,26 +60,170 @@ export function ChatProvider({ children }: { children: ReactNode }) {
         if (token && user) {
             const echo = initEcho(token);
 
-            // FIX: Guard clause to prevent "possibly undefined" error
             if (!echo) return;
 
             const channelName = `chat.${user.id}`;
             const channel = echo.private(channelName);
 
             channel.listen('.message.sent', (data: { message: Message }) => {
-                // Update messages state if the sender is the one we are currently viewing
-                if (Number(data.message.sender_id) === Number(activeReceiver)) {
-                    setMessages((prev) => [...prev, data.message]);
+                if (Number(data.message.sender_id) === Number(activeReceiver) || Number(data.message.receiver_id) === Number(user.id)) {
+                    setMessages((prev) => {
+                        // Avoid duplicates
+                        if (prev.some(m => m.id === data.message.id)) return prev;
+                        return [...prev, data.message];
+                    });
+                }
+            });
+
+            channel.listen('.call-signal', (data: any) => {
+                console.log("Call Signal Received:", data);
+                if (data.type === 'incoming') {
+                    setIncomingCall(data);
+                } else if (data.type === 'accept') {
+                    setIsCalling(true);
+                    setIsAccepted(true);
+                    setIncomingCall(null);
+                    setCurrentCallData(data);
+                } else if (data.type === 'reject' || data.type === 'end') {
+                    setIsCalling(false);
+                    setIsAccepted(false);
+                    setIncomingCall(null);
+                    setCurrentCallData(null);
                 }
             });
 
             return () => {
-                // Cleanup listeners and leave the channel to prevent memory leaks/duplicate listeners
                 channel.stopListening('.message.sent');
+                channel.stopListening('.call-signal');
                 echo.leave(channelName);
             };
         }
     }, [token, user, activeReceiver]);
+
+    // Check for active calls on mount
+    useEffect(() => {
+        if (token) {
+            fetch(`${API_URL}/agora/active-call`, {
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                }
+            }).then(res => res.json()).then(data => {
+                if (data.active) {
+                    setIncomingCall(data.call);
+                }
+            });
+        }
+    }, [token]);
+
+    const startCall = async (receiverId: number) => {
+        if (!token) return;
+        try {
+            const channelName = `call_${Date.now()}_${user.id}`;
+            const res = await fetch(`${API_URL}/agora/signal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    to_user_id: receiverId,
+                    type: 'incoming',
+                    channel_name: channelName
+                })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setCurrentCallData(data.data);
+                setIsCalling(true);
+                setIsAccepted(false); // Wait for receiver to accept
+            }
+        } catch (error) {
+            console.error("Failed to start call", error);
+        }
+    };
+
+    const acceptCall = async () => {
+        if (!token || !incomingCall) return;
+        try {
+            await fetch(`${API_URL}/agora/signal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    to_user_id: incomingCall.from_user.id,
+                    type: 'accept',
+                    channel_name: incomingCall.channel_name
+                })
+            });
+            setIsCalling(true);
+            setIsAccepted(true);
+            setCurrentCallData(incomingCall);
+            setIncomingCall(null);
+        } catch (error) {
+            console.error("Failed to accept call", error);
+        }
+    };
+
+    const rejectCall = async () => {
+        if (!token || !incomingCall) return;
+        try {
+            await fetch(`${API_URL}/agora/signal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    to_user_id: incomingCall.from_user.id,
+                    type: 'reject',
+                    channel_name: incomingCall.channel_name
+                })
+            });
+            setIncomingCall(null);
+        } catch (error) {
+            console.error("Failed to reject call", error);
+        }
+    };
+
+    const endCall = async () => {
+        const targetId = currentCallData?.from_user?.id === user?.id 
+            ? activeReceiver 
+            : currentCallData?.from_user?.id;
+            
+        if (!token || !targetId) {
+            setIsCalling(false);
+            setCurrentCallData(null);
+            return;
+        }
+
+        try {
+            await fetch(`${API_URL}/agora/signal`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    to_user_id: targetId,
+                    type: 'end',
+                    channel_name: currentCallData?.channel_name
+                })
+            });
+            setIsCalling(false);
+            setCurrentCallData(null);
+        } catch (error) {
+            console.error("Failed to end call", error);
+            setIsCalling(false);
+            setCurrentCallData(null);
+        }
+    };
 
     // Fetch message history when active receiver changes
     useEffect(() => {
@@ -127,6 +286,13 @@ export function ChatProvider({ children }: { children: ReactNode }) {
                 setActiveReceiver,
                 activeVendorId,
                 setActiveVendorId,
+                isCalling,
+                incomingCall,
+                startCall,
+                acceptCall,
+                rejectCall,
+                endCall,
+                isAccepted,
             }}
         >
             {children}

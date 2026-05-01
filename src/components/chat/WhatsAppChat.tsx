@@ -4,12 +4,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { useChat } from "@/context/ChatContext";
 import { useAuth } from "@/context/AuthContext";
 import { useSearchParams } from "next/navigation";
-import { Search, Send, User, Store, ArrowLeft, Paperclip, Image as ImageIcon, Check, CheckCheck, Loader2, FileText, Smile } from "lucide-react";
+import { Search, Send, User, Store, ArrowLeft, Paperclip, Image as ImageIcon, Check, CheckCheck, Loader2, FileText, Smile, Phone, PhoneOff, Mic, MicOff } from "lucide-react";
+import { agoraCallService } from "@/utils/AgoraCallService";
 import { API_URL } from "@/config/api";
 import { format } from "date-fns";
 
 export default function WhatsAppChat() {
-    const { messages, sendMessage, activeReceiver, setActiveReceiver, activeVendorId, setActiveVendorId } = useChat();
+    const { 
+        messages, sendMessage, activeReceiver, setActiveReceiver, activeVendorId, setActiveVendorId,
+        isCalling, incomingCall, startCall, acceptCall, rejectCall, endCall, isAccepted
+    } = useChat();
     const { user, token } = useAuth();
     const searchParams = useSearchParams();
     const paramReceiverId = searchParams.get('receiver_id');
@@ -34,6 +38,10 @@ export default function WhatsAppChat() {
     const [filePreview, setFilePreview] = useState<string | null>(null);
     const [isSending, setIsSending] = useState(false);
     const [isLoadingChats, setIsLoadingChats] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
+    const [callDuration, setCallDuration] = useState(0);
+    const ringingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -95,6 +103,108 @@ export default function WhatsAppChat() {
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    // Agora Call Effect
+    useEffect(() => {
+        if (isAccepted && token && activeReceiver) {
+            initiateJoin();
+        } else if (incomingCall && token) {
+            startRingingTimeout();
+        } else if (!isCalling && !incomingCall) {
+            agoraCallService.leave();
+            stopRingingTimeout();
+            stopTimer();
+        }
+    }, [isAccepted, isCalling, incomingCall]);
+
+    // When call is accepted or started, we join.
+    // This is now triggered manually to avoid effect races.
+    const handleStartCall = async () => {
+        if (!activeReceiver) return;
+        await startCall(activeReceiver);
+        // Wait for accept signal before joining
+    };
+
+    const handleAcceptCall = async () => {
+        await acceptCall();
+        // Join immediately after sending accept signal
+        await initiateJoin();
+    };
+
+    const initiateJoin = async () => {
+        if (token && activeReceiver) {
+            await handleJoinCall();
+            startTimer();
+        }
+    };
+
+    const startTimer = () => {
+        stopTimer();
+        setCallDuration(0);
+        timerIntervalRef.current = setInterval(() => {
+            setCallDuration(prev => prev + 1);
+        }, 1000);
+    };
+
+    const stopTimer = () => {
+        if (timerIntervalRef.current) {
+            clearInterval(timerIntervalRef.current);
+            timerIntervalRef.current = null;
+        }
+    };
+
+    const formatDuration = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    const startRingingTimeout = () => {
+        stopRingingTimeout();
+        ringingTimeoutRef.current = setTimeout(() => {
+            if (!isCalling && incomingCall) {
+                console.log("Ringing timeout - rejecting call");
+                rejectCall();
+            }
+        }, 10000); // 10 seconds
+    };
+
+    const stopRingingTimeout = () => {
+        if (ringingTimeoutRef.current) {
+            clearTimeout(ringingTimeoutRef.current);
+            ringingTimeoutRef.current = null;
+        }
+    };
+
+    const handleJoinCall = async () => {
+        try {
+            const channelName = incomingCall?.channel_name || `call_${Math.min(user.id, activeReceiver)}_${Math.max(user.id, activeReceiver)}`;
+            
+            const response = await fetch(`${API_URL}/agora/token?channelName=${channelName}`, {
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                    Accept: 'application/json'
+                }
+            });
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Token fetch failed: ${response.status} ${errorText}`);
+            }
+            const { token: agoraToken, appId, uid } = await response.json();
+            
+            await agoraCallService.init(appId);
+            await agoraCallService.join(channelName, agoraToken, uid);
+        } catch (error) {
+            console.error("Agora join failed", error);
+            endCall();
+        }
+    };
+
+    const toggleMute = () => {
+        const newMuted = !isMuted;
+        setIsMuted(newMuted);
+        agoraCallService.toggleMute(newMuted);
     };
 
     const fetchChatList = async () => {
@@ -188,7 +298,8 @@ export default function WhatsAppChat() {
     if (!user) return null;
 
     return (
-        <div className="mt-12 bg-white rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[600px] lg:h-[700px] animate-in fade-in duration-500">
+        <>
+        <div className="mt-6 md:mt-12 bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-2xl shadow-slate-200/50 border border-gray-100 overflow-hidden flex flex-col md:flex-row h-[calc(100vh-150px)] md:h-[600px] lg:h-[700px] animate-in fade-in duration-500 relative">
 
             {/* Sidebar / Chat List */}
             <div className={`w-full md:w-[350px] border-r border-gray-100 flex flex-col bg-[#f0f2f5]/30 ${view === 'chat' ? 'hidden md:flex' : 'flex'}`}>
@@ -360,6 +471,15 @@ export default function WhatsAppChat() {
                                     <p className="text-[10px] font-bold text-green-600 uppercase tracking-widest">Online</p>
                                 </div>
                             </div>
+                            <div className="flex items-center gap-2">
+                                    <button 
+                                        className="p-2 md:p-3 text-red-500 hover:bg-red-50 rounded-full transition-all active:scale-95"
+                                        onClick={handleStartCall}
+                                        title="Voice Call"
+                                    >
+                                        <Phone className="w-5 h-5 md:w-6 md:h-6" />
+                                    </button>
+                            </div>
                         </div>
 
                         {/* Messages Display */}
@@ -426,6 +546,7 @@ export default function WhatsAppChat() {
                             })}
                             <div ref={messagesEndRef} />
                         </div>
+
 
                         {/* Input Area */}
                         <div className="p-4 bg-white border-t border-gray-100 relative z-10 shadow-lg">
@@ -508,5 +629,70 @@ export default function WhatsAppChat() {
                 )}
             </div>
         </div>
-    );
+
+        {/* Full-Screen Call Modal */}
+        {(isCalling || incomingCall) && (
+            <div className="fixed inset-0 bg-slate-900/95 z-[9999] flex flex-col items-center justify-center text-white p-6 animate-in fade-in duration-500" style={{ background: 'radial-gradient(circle at top, #1c2833, #000000)', backdropFilter: 'blur(20px)' }}>
+                <div className="relative mb-12">
+                    <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(59,130,246,0.5)] border-4 border-white/10 overflow-hidden">
+                        {incomingCall?.from_user?.avatar || activeChat?.profile_photo ? (
+                            <img 
+                                src={incomingCall?.from_user?.avatar || (activeChat?.profile_photo?.startsWith('http') ? activeChat.profile_photo : `https://alinggon-ap.rangpurit.com/storage/${activeChat.profile_photo}`)} 
+                                alt="Caller" 
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <User className="w-16 h-16 md:w-20 md:h-20 text-white/90" />
+                        )}
+                    </div>
+                    {(!isCalling || incomingCall) && (
+                        <div className="absolute -inset-4 border-2 border-blue-500/30 rounded-full animate-ping pointer-events-none" />
+                    )}
+                </div>
+                
+                <h4 className="text-2xl md:text-3xl font-black mb-2 text-center uppercase tracking-tight text-white drop-shadow-lg">
+                    {incomingCall ? incomingCall.from_user.name : (activeChat?.name || 'Voice Call')}
+                </h4>
+                
+                <p className={`text-xs md:text-sm font-bold uppercase tracking-[0.3em] mb-20 ${isCalling && !incomingCall ? 'text-green-400' : 'text-blue-400 animate-pulse'}`}>
+                    {incomingCall ? 'Incoming Call...' : (isCalling && !incomingCall ? `On Call • ${formatDuration(callDuration)}` : 'Connecting...')}
+                </p>
+
+                <div className="flex items-center gap-8 md:gap-12">
+                    {incomingCall ? (
+                        <>
+                            <button 
+                                onClick={rejectCall}
+                                className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-all shadow-2xl hover:scale-110 active:scale-95 ring-4 ring-red-500/20"
+                            >
+                                <PhoneOff className="w-9 h-9" />
+                            </button>
+                            <button 
+                                onClick={acceptCall}
+                                className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-all shadow-2xl hover:scale-110 active:scale-95 ring-4 ring-green-500/20"
+                            >
+                                <Phone className="w-9 h-9" />
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button 
+                                onClick={toggleMute}
+                                className={`w-16 h-16 ${isMuted ? 'bg-orange-500 shadow-orange-500/20' : 'bg-white/10 hover:bg-white/20'} rounded-full flex items-center justify-center transition-all shadow-xl active:scale-95 border border-white/10`}
+                            >
+                                {isMuted ? <MicOff className="w-7 h-7" /> : <Mic className="w-7 h-7" />}
+                            </button>
+                            <button 
+                                onClick={endCall}
+                                className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-all shadow-2xl hover:scale-110 active:scale-95 ring-4 ring-red-500/20"
+                            >
+                                <PhoneOff className="w-10 h-10" />
+                            </button>
+                        </>
+                    )}
+                </div>
+            </div>
+        )}
+    </>
+);
 }

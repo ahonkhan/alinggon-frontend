@@ -109,9 +109,9 @@ export default function Footer() {
                             )}
                         </ul>
 
-                        <div className="space-y-1">
-                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col1_text || 'Your dream website <span class="text-red-600">available here.</span>' }}></h5>
-                        </div>
+                        <Link href="/dream-website" className="block space-y-1 group">
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter group-hover:text-red-600 transition-colors" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col1_text || 'Your dream website <span class="text-red-600">available here.</span>' }}></h5>
+                        </Link>
                     </div>
 
                     <div className="lg:col-span-2 space-y-4">
@@ -133,9 +133,9 @@ export default function Footer() {
                             )}
                         </ul>
 
-                        <div className="space-y-1">
-                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col2_text || 'We have also available <span class="text-red-600">Domain & Hosting.</span>' }}></h5>
-                        </div>
+                        <Link href="/domain-hosting" className="block space-y-1 group">
+                            <h5 className="text-[15px] font-black text-white uppercase tracking-tighter group-hover:text-red-600 transition-colors" dangerouslySetInnerHTML={{ __html: homeContent?.data?.footer_col2_text || 'We have also available <span class="text-red-600">Domain & Hosting.</span>' }}></h5>
+                        </Link>
                     </div>
 
                     {/* Newsletter & Contact */}
